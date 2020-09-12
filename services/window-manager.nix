@@ -1,19 +1,23 @@
 { config, pkgs, ... }:
 {
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbVariant = "3l";
-
-  # Enable touchpad support.
-  services.xserver.libinput = {
+  services.xserver = {
+    # Enable the X11 windowing system.
     enable = true;
-    tapping = false;
-  };
 
-  # Enable i3
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    package = pkgs.i3-gaps;
+    # Use 3l
+    layout = "us";
+    xkbVariant = "3l";
+
+    # Enable touchpad support.
+    libinput = {
+      enable = true;
+      tapping = false;
+    };
+
+    # Enable i3
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+    };
   };
 }

@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./tmux.nix
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
@@ -84,6 +88,7 @@
     ripgrep
     rofi
     scrot
+    screenfetch
     spotify
     steam
     slack
@@ -95,7 +100,6 @@
       serverSupport = true;
     })
     texlive.combined.scheme-full
-    tmux
     tree
     trickle
     unzip

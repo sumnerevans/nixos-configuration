@@ -26,5 +26,14 @@
       "class_g = 'i3-frame'"
       "_GTK_FRAME_EXTENTS@:c"
     ];
+
+    # Custom styles for various window types
+    wintypes = {
+      tooltip = { shadow = true; opacity = 0.9; focus = true; full-shadow = false; };
+      dock = { shadow = false; };
+      dnd = { shadow = false; };
+      popup_menu = { opacity = 0.9; };
+      dropdown_menu = { opacity = 0.9; };
+    };
   };
 }
