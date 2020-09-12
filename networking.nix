@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   networking = {
-    hostName = "${builtins.readFile "/etc/nixos/hostname"}";
+    hostName = lib.removeSuffix "\n" (builtins.readFile "/etc/nixos/hostname");
     networkmanager = {
       enable = true;
       enableStrongSwan = true;

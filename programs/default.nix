@@ -2,18 +2,28 @@
 {
   imports = [
     ./tmux.nix
+    ./zsh.nix
   ];
 
   # Enable the GPG agent.
   programs.gnupg.agent.enable = true;
+
+  # Enable the Network Manager applet
+  programs.nm-applet.enable = true;
+
+  # Automatically start an SSH agent.
+  programs.ssh.startAgent = true;
+
+  # Enable Docker.
+  virtualisation.docker.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     alacritty
-    arc-theme
     arc-icon-theme
+    arc-theme
     aspell
     aspellDicts.en
     bash
@@ -26,8 +36,8 @@
     direnv
     discord
     dunst
-    elinks
     element-desktop
+    elinks
     fd
     feh
     ffmpeg-full
@@ -39,33 +49,34 @@
     git
     gnumake
     google-chrome
+    htop
     i3status-rust
     iftop
     imagemagick
     inkscape
     isync
     jq
-    kitty
     kdeconnect
     khal
+    kitty
     libnotify
     libreoffice-fresh
     lxappearance
     mpv
-    mutt
     mumble
+    mutt
     neovim
-    networkmanagerapplet
     nextcloud-client
     nodejs
     ocaml
-    opam
     ocamlPackages.utop
+    opam
     openssl
     pass
     pavucontrol
     picom
     pinentry
+    poetry
     (python38.withPackages(ps: with ps; [
       dateutil
       fuzzywuzzy
@@ -82,23 +93,20 @@
       vobject
       watchdog
     ]))
-    redshift
-    wmctrl
     # csmdirsearch
-    restic
+    redshift
     remmina
+    restic
     ripgrep
     rofi
-    scrot
     screenfetch
+    scrot
+    slack
     spotify
     steam
-    slack
+    wmctrl
     (sublime-music.override {
       chromecastSupport = true;
-      keyringSupport = true;
-      networkSupport = true;
-      notifySupport = true;
       serverSupport = true;
     })
     texlive.combined.scheme-full
@@ -111,8 +119,8 @@
     wget
     wireshark
     xbindkeys
-    xorg.xprop
     xorg.xdpyinfo
+    xorg.xprop
     zathura
     zip
     zoom-us

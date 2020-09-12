@@ -3,8 +3,12 @@
   imports = [
     ./clipmenu.nix
     ./picom.nix
+    ./redshift.nix
     ./window-manager.nix
   ];
+
+  # Enable bluetooth
+  services.blueman.enable = true;
 
   # List services that you want to enable:
   services.lorri.enable = true;

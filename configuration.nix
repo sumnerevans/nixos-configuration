@@ -25,6 +25,9 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # Enable bumblebee.
+  hardware.bumblebee.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
   users.users.sumner = {
@@ -46,6 +49,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
-  # Environment
+  # Environment variables
   environment.homeBinInPath = true;
 }
