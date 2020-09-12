@@ -26,24 +26,15 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp4s0.useDHCP = true;
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
   # Set your time zone.
   time.timeZone = "America/Denver";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  #   pinentryFlavor = "gnome3";
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gnome3";
+  };
 
   # List services that you want to enable:
   services.clipmenu.enable = true;

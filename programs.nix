@@ -39,6 +39,7 @@
     inkscape
     isync
     jq
+    kitty
     kdeconnect
     khal
     libnotify
@@ -59,8 +60,6 @@
     pavucontrol
     picom
     pinentry
-    pinentry-curses
-    pinentry-gnome
     (python38.withPackages(ps: with ps; [
       dateutil
       fuzzywuzzy
