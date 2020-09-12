@@ -24,7 +24,8 @@ in
     };
   };
 
-  # Add some environment variables
+  # Add some environment variables for when things get fired up with shortcuts
+  # in i3.
   environment.variables = {
     VISUAL = "${editor}";
     EDITOR = "${editor}";

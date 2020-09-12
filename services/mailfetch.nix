@@ -26,6 +26,7 @@ in
   systemd.user.services.mailfetch = {
     description = "Fetch mail";
     serviceConfig.ExecStart = "${mailfetchScript}/bin/mailfetch";
+    path = [ pkgs.pass ];
   };
 
   systemd.user.timers.mailfetch = {

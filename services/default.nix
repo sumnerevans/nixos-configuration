@@ -6,7 +6,10 @@
     ./mailfetch.nix
     ./picom.nix
     ./redshift.nix
+    ./vdirsyncer.nix
+    ./wallpaper.nix
     ./window-manager.nix
+    ./writeping.nix
   ];
 
   # Enable bluetooth
