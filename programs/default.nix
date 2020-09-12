@@ -4,6 +4,9 @@
     ./tmux.nix
   ];
 
+  # Enable the GPG agent.
+  programs.gnupg.agent.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
@@ -35,7 +38,6 @@
     gcc
     git
     gnumake
-    gnupg
     google-chrome
     i3status-rust
     iftop

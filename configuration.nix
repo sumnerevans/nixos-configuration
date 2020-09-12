@@ -8,6 +8,7 @@
     # Other stuff
     ./fonts.nix
     ./networking.nix
+    ./tmpfs.nix
     ./programs/default.nix
     ./services/default.nix
   ];
@@ -19,13 +20,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Denver";
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "gnome3";
-  };
 
   # Enable sound.
   sound.enable = true;
@@ -52,16 +46,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
-  fileSystems."/home/sumner/tmp" =
-    {
-      fsType = "tmpfs";
-      options = [ "nosuid" "nodev" "size=32G" ];
-    };
-
-  fileSystems."/home/sumner/.cache" =
-    {
-      fsType = "tmpfs";
-      options = [ "nosuid" "nodev" "size=32G" ];
-    };
-
+  # Environment
+  environment.homeBinInPath = true;
 }

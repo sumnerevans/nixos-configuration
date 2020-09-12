@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   networking = {
-    hostName = "jedha";
+    hostName = "${builtins.readFile "/etc/nixos/hostname"}";
     networkmanager = {
       enable = true;
       enableStrongSwan = true;
