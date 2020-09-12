@@ -17,9 +17,11 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
 
+  # Allow unfree software.
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     alacritty
     arc-icon-theme
@@ -94,6 +96,8 @@
       watchdog
     ]))
     # csmdirsearch
+    ranger
+    nodePackages.bash-language-server
     redshift
     remmina
     restic
@@ -113,6 +117,7 @@
     tree
     trickle
     unzip
+    vale
     vdirsyncer
     vim
     vscode
@@ -120,7 +125,9 @@
     wireshark
     xbindkeys
     xorg.xdpyinfo
+    xorg.xmodmap
     xorg.xprop
+    yarn
     zathura
     zip
     zoom-us

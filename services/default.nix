@@ -2,6 +2,8 @@
 {
   imports = [
     ./clipmenu.nix
+    ./kdeconnect.nix
+    ./mailfetch.nix
     ./picom.nix
     ./redshift.nix
     ./window-manager.nix

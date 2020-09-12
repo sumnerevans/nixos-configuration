@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: let
+  editor = "nvim";
+  terminal = "alacritty";
+in
 {
   services.xserver = {
     # Enable the X11 windowing system.
@@ -19,5 +22,12 @@
       enable = true;
       package = pkgs.i3-gaps;
     };
+  };
+
+  # Add some environment variables
+  environment.variables = {
+    VISUAL = "${editor}";
+    EDITOR = "${editor}";
+    TERMINAL = "${terminal}";
   };
 }

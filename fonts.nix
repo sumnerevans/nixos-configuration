@@ -4,10 +4,11 @@
     fonts = with pkgs; [
       font-awesome_4
       iosevka
+      nerdfonts
       noto-fonts
       noto-fonts-emoji
-      powerline-fonts
       open-sans
+      powerline-fonts
     ];
 
     fontconfig = {
@@ -15,6 +16,7 @@
       defaultFonts = {
         monospace = [
           "Iosevka"
+          "Font Awesome"
         ];
         sansSerif = [
           "Open Sans"
