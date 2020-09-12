@@ -1,3 +1,4 @@
 [
+  ./clipmenu.nix
   ./xorg.nix
 ]

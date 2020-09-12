@@ -7,7 +7,7 @@
     # Other stuff
     ./fonts.nix
     ./programs.nix
-  ];
+  ] ++ import ./services/default.nix;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -37,7 +37,6 @@
   };
 
   # List services that you want to enable:
-  services.clipmenu.enable = true;
   services.lorri.enable = true;
   services.picom = {
     enable = true;
@@ -74,21 +73,6 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbVariant = "3l";
-
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.tapping = false;
-
-  # Enable i3
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    package = pkgs.i3-gaps;
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
