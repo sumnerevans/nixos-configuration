@@ -51,7 +51,9 @@
     git
     gnumake
     google-chrome
+    guvcview
     htop
+    huggin
     i3status-rust
     iftop
     imagemagick
@@ -59,6 +61,7 @@
     isync
     jq
     kdeconnect
+    kdenlive
     khal
     kitty
     libnotify
@@ -104,6 +107,7 @@
     ripgrep
     rofi
     screenfetch
+    screenkey
     scrot
     slack
     spotify
@@ -121,8 +125,10 @@
     vdirsyncer
     vim
     vscode
+    watchexec
     wget
     wireshark
+    xournal
     xbindkeys
     xorg.xdpyinfo
     xorg.xmodmap

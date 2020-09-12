@@ -31,4 +31,25 @@ in
     EDITOR = "${editor}";
     TERMINAL = "${terminal}";
   };
+
+  systemd.user.services.xmodmap = {
+    description = "Run xmodmap on startup.";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig.ExecStart = "${pkgs.xmodmap}/bin/xmodmap ~/.Xmodmap";
+  };
+
+  systemd.user.services.xbindkeys = {
+    description = "Run xbindkeys on startup.";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig.ExecStart = "${pkgs.xmodmap}/bin/xbindkeys ~/.xbindkeysrc";
+  };
+
+  systemd.user.services.xbanish = {
+    description = "Run xbanish on startup.";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig.ExecStart = "${pkgs.xmodmap}/bin/xbanish";
+  };
 }
