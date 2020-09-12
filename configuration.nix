@@ -38,25 +38,6 @@
 
   # List services that you want to enable:
   services.lorri.enable = true;
-  services.picom = {
-    enable = true;
-    shadow = true;
-    shadowExclude = [
-      "name = 'Notification'"
-      "class_g = 'Conky'"
-      "class_g ?= 'Notify-osd'"
-      "class_g = 'Cairo-clock'"
-      "class_g = 'i3-frame'"
-      "_GTK_FRAME_EXTENTS@:c"
-    ];
-    fade = true;
-    fadeDelta = 5;
-    inactiveOpacity = 0.8;
-    opacityRules = [
-      "100:class_g = 'obs'"
-    ];
-    vSync = true;
-  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

@@ -1,4 +1,4 @@
 [
   ./clipmenu.nix
-  ./xorg.nix
+  ./window-manager.nix
 ]
