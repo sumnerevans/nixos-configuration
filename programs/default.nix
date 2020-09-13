@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, python38Packages, fetchFromGitHub, ... }:
 {
   imports = [
     ./tmux.nix

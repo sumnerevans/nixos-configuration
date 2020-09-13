@@ -4,6 +4,8 @@
     ./clipmenu.nix
     ./kdeconnect.nix
     ./mailfetch.nix
+    ./mailnotify.nix
+    ./nextcloud.nix
     ./picom.nix
     ./redshift.nix
     ./vdirsyncer.nix
@@ -24,4 +26,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Enable the system keyring.
+  services.gnome3.gnome-keyring.enable = true;
 }
