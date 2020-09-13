@@ -53,20 +53,23 @@
     google-chrome
     guvcview
     htop
-    huggin
+    hugin
     i3status-rust
     iftop
     imagemagick
     inkscape
     isync
     jq
+    kbdlight
     kdeconnect
     kdenlive
     khal
     kitty
     libnotify
     libreoffice-fresh
+    light
     lxappearance
+    mkpasswd
     mpv
     mumble
     mutt
@@ -81,6 +84,7 @@
     pavucontrol
     picom
     pinentry
+    playerctl
     poetry
     (python38.withPackages(ps: with ps; [
       dateutil
@@ -128,11 +132,11 @@
     watchexec
     wget
     wireshark
-    xournal
-    xbindkeys
+    xclip
+    xorg.xbacklight
     xorg.xdpyinfo
-    xorg.xmodmap
     xorg.xprop
+    xournal
     yarn
     zathura
     zip

@@ -35,6 +35,7 @@ in
     timerConfig = {
       OnCalendar = "*:*:0/5";
     };
+    wantedBy = [ "timers.target" ];
   };
 }
 

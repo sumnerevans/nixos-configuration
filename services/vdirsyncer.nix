@@ -12,6 +12,7 @@
 
   systemd.user.timers.vdirsyncer = {
     description = "Run vdirsyncer sync every 5 minutes";
+    wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "*:0/5";
     };
