@@ -1,7 +1,6 @@
 { config, pkgs, ... }: let
-  writepingScript = pkgs.writeScriptBin "writeping" ''
-    #!${pkgs.stdenv.shell}
 
+  writepingScript = pkgs.writeShellScript "writeping" ''
     ${pkgs.coreutils}/bin/touch ~/tmp/rolling_ping
 
     # Append the new ping time.
@@ -38,4 +37,3 @@ in
     wantedBy = [ "timers.target" ];
   };
 }
-

@@ -4,7 +4,6 @@
     fonts = with pkgs; [
       font-awesome_4
       iosevka
-      nerdfonts
       noto-fonts
       noto-fonts-emoji
       open-sans

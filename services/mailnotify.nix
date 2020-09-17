@@ -5,6 +5,12 @@
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
     serviceConfig.ExecStart = "/home/sumner/bin/mailnotify.py";
-    path = [ pkgs.python38 ];
+    path = with pkgs; [
+      libnotify
+      (python38.withPackages(ps: with ps; [
+        notify
+        pygobject3
+      ]))
+    ];
   };
 }

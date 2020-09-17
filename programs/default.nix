@@ -89,7 +89,6 @@
     (python38.withPackages(ps: with ps; [
       dateutil
       fuzzywuzzy
-      goobook
       html2text
       icalendar
       pip
@@ -131,6 +130,7 @@
     vscode
     watchexec
     wget
+    wireguard
     wireshark
     xclip
     xorg.xbacklight
