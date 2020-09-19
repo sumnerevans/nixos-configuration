@@ -25,7 +25,7 @@ in
     description = "Write a new ping value for rolling ping average calculation";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${writepingScript}/bin/writeping";
+      ExecStart = "${writepingScript}";
     };
   };
 

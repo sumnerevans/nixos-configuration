@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  # TODO move more things from the .zshrc
+  # TODO move more things from the .zshrc?
   programs.zsh = {
     enable = true;
     autosuggestions = {

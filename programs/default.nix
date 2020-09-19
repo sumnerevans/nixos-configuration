@@ -43,6 +43,7 @@
     fd
     feh
     ffmpeg-full
+    file
     firefox
     flameshot
     fortune
