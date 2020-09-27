@@ -23,7 +23,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; let
-    offlinemsmtp = callPackage ./offlinemsmtp.nix { };
+    csmdirsearch = callPackage ../pkgs/csmdirsearch.nix { };
+    offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix { };
   in [
     alacritty
     arc-icon-theme
@@ -37,6 +38,7 @@
     brightnessctl
     chezmoi
     clang
+    csmdirsearch
     direnv
     discord
     dunst
@@ -91,6 +93,7 @@
     playerctl
     poetry
     (python38.withPackages(ps: with ps; [
+      csmdirsearch
       dateutil
       fuzzywuzzy
       html2text

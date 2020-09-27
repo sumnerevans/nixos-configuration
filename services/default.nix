@@ -6,6 +6,7 @@
     ./mailfetch.nix
     ./mailnotify.nix
     ./nextcloud.nix
+    ./offlinemsmtp.nix
     ./picom.nix
     ./redshift.nix
     ./vdirsyncer.nix
