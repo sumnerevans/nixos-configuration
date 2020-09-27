@@ -22,7 +22,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; let
+    offlinemsmtp = callPackage ./offlinemsmtp.nix { };
+  in [
     alacritty
     arc-icon-theme
     arc-theme
@@ -79,6 +81,7 @@
     nodejs
     ocaml
     ocamlPackages.utop
+    offlinemsmtp
     opam
     openssl
     pass
@@ -93,6 +96,7 @@
       html2text
       icalendar
       pip
+      pycairo
       pygobject3
       pynvim
       # python-gitlab
