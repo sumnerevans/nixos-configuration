@@ -25,6 +25,8 @@
   environment.systemPackages = with pkgs; let
     csmdirsearch = callPackage ../pkgs/csmdirsearch.nix { };
     offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix { };
+    python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix { };
+    python-gitlab = callPackage ../pkgs/python-gitlab.nix { };
     tracktime = callPackage ../pkgs/tracktime.nix { };
   in [
     alacritty
@@ -94,7 +96,7 @@
     playerctl
     poetry
     (python38.withPackages(ps: with ps; [
-      csmdirsearch
+      python-csmdirsearch
       dateutil
       fuzzywuzzy
       html2text
@@ -103,7 +105,7 @@
       pycairo
       pygobject3
       pynvim
-      # python-gitlab
+      python-gitlab
       pytz
       python-Levenshtein
       pytz

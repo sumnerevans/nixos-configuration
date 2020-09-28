@@ -16,7 +16,7 @@ python38Packages.buildPythonApplication rec {
   };
 
   meta = with lib; {
-    description = "A convinient Python interface to the Colorado School of Mines DirSearch website.";
+    description = "A convinient Python CLI interface to the Colorado School of Mines DirSearch website.";
     homepage = "https://github.com/jackrosenthal/csmdirsearch";
     license = licenses.mit;
   };
