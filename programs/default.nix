@@ -25,6 +25,7 @@
   environment.systemPackages = with pkgs; let
     csmdirsearch = callPackage ../pkgs/csmdirsearch.nix { };
     offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix { };
+    tracktime = callPackage ../pkgs/tracktime.nix { };
   in [
     alacritty
     arc-icon-theme
@@ -109,7 +110,6 @@
       vobject
       watchdog
     ]))
-    # csmdirsearch
     ranger
     nodePackages.bash-language-server
     redshift
@@ -129,6 +129,7 @@
       serverSupport = true;
     })
     texlive.combined.scheme-full
+    tracktime
     tree
     trickle
     unzip
