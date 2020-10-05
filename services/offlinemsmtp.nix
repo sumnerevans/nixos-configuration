@@ -7,12 +7,5 @@ in
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
     serviceConfig.ExecStart = "${offlinemsmtp}/bin/offlinemsmtp --daemon";
-    # path = with pkgs; [
-    #   libnotify
-    #   (python38.withPackages(ps: with ps; [
-    #     notify
-    #     pygobject3
-    #   ]))
-    # ];
   };
 }

@@ -1,7 +1,7 @@
 { lib, pkgs, fetchFromGitHub }: with pkgs;
 python38Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
-  version = "0.3.7";
+  version = "0.3.8";
 
   nativeBuildInputs = [
     gobject-introspection
@@ -14,8 +14,10 @@ python38Packages.buildPythonApplication rec {
   ];
 
   propagatedBuildInputs = with python38Packages; [
-    watchdog
+    msmtp
+    pass
     pygobject3
+    watchdog
   ];
 
   doCheck = false;
@@ -26,7 +28,7 @@ python38Packages.buildPythonApplication rec {
 
   src = python38.pkgs.fetchPypi {
     inherit pname version;
-    sha256 = "30d27a2fb3619fde310ede40f977958b5c47c97f8b2ae09d9f6ec79f7447fc06";
+    sha256 = "86a3747e51d61e08679532f24625d08f36de1084f0a6c1cec07675e6c4975b1a";
   };
 
   meta = with lib; {
