@@ -27,6 +27,7 @@
     offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix { };
     python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix { };
     python-gitlab = callPackage ../pkgs/python-gitlab.nix { };
+    sublime-music-tmp = callPackage ../pkgs/sublime-music.nix { };
     tracktime = callPackage ../pkgs/tracktime.nix { };
   in [
     alacritty
@@ -126,7 +127,7 @@
     spotify
     steam
     wmctrl
-    (sublime-music.override {
+    (sublime-music-tmp.override {
       chromecastSupport = true;
       serverSupport = true;
     })
