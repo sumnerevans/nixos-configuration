@@ -5,11 +5,12 @@ python38Packages.buildPythonApplication rec {
 
   propagatedBuildInputs = with python38Packages; [
     argcomplete
-    tabulate
-    pdfkit
     docutils
-    requests
+    pdfkit
     pyyaml
+    requests
+    selenium
+    tabulate
   ];
 
   doCheck = false;

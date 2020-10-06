@@ -63,6 +63,7 @@
     guvcview
     htop
     hugin
+    gitAndTools.hub
     i3status-rust
     iftop
     imagemagick
