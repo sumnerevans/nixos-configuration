@@ -30,6 +30,29 @@
     sublime-music-tmp = callPackage ../pkgs/sublime-music.nix { };
     tracktime = callPackage ../pkgs/tracktime.nix { };
   in [
+    (python38.withPackages(ps: with ps; [
+      dateutil
+      fuzzywuzzy
+      html2text
+      icalendar
+      pip
+      pycairo
+      pygobject3
+      pynvim
+      python-csmdirsearch
+      python-gitlab
+      python-Levenshtein
+      pytz
+      pytz
+      vobject
+      watchdog
+    ]))
+
+    (sublime-music-tmp.override {
+      chromecastSupport = true;
+      serverSupport = true;
+    })
+
     alacritty
     arc-icon-theme
     arc-theme
@@ -58,12 +81,13 @@
     fzf
     gcc
     git
+    gitAndTools.hub
+    gitAndTools.lab
     gnumake
     google-chrome
     guvcview
     htop
     hugin
-    gitAndTools.hub
     i3status-rust
     iftop
     imagemagick
@@ -86,6 +110,7 @@
     neovim
     nextcloud-client
     nodejs
+    nodePackages.bash-language-server
     ocaml
     ocamlPackages.utop
     offlinemsmtp
@@ -97,25 +122,7 @@
     pinentry
     playerctl
     poetry
-    (python38.withPackages(ps: with ps; [
-      python-csmdirsearch
-      dateutil
-      fuzzywuzzy
-      html2text
-      icalendar
-      pip
-      pycairo
-      pygobject3
-      pynvim
-      python-gitlab
-      pytz
-      python-Levenshtein
-      pytz
-      vobject
-      watchdog
-    ]))
     ranger
-    nodePackages.bash-language-server
     redshift
     remmina
     restic
@@ -127,11 +134,6 @@
     slack
     spotify
     steam
-    wmctrl
-    (sublime-music-tmp.override {
-      chromecastSupport = true;
-      serverSupport = true;
-    })
     texlive.combined.scheme-full
     tracktime
     tree
@@ -145,6 +147,7 @@
     wget
     wireguard
     wireshark
+    wmctrl
     xclip
     xorg.xbacklight
     xorg.xdpyinfo
