@@ -1,6 +1,7 @@
 { config, pkgs, lib, python38Packages, fetchFromGitHub, ... }:
 {
   imports = [
+    ./direnv.nix
     ./tmux.nix
     ./zsh.nix
   ];
@@ -66,7 +67,6 @@
     chezmoi
     clang
     csmdirsearch
-    direnv
     discord
     dunst
     element-desktop
