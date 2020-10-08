@@ -67,6 +67,7 @@
     chezmoi
     clang
     csmdirsearch
+    dfeet
     discord
     dunst
     element-desktop
