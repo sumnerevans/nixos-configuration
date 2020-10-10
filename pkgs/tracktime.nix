@@ -11,6 +11,7 @@ python38Packages.buildPythonApplication rec {
     requests
     selenium
     tabulate
+    wkhtmltopdf
   ];
 
   doCheck = false;
