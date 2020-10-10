@@ -6,6 +6,7 @@ python38Packages.buildPythonApplication rec {
   propagatedBuildInputs = with python38Packages; [
     argcomplete
     docutils
+    pass
     pdfkit
     pyyaml
     requests
