@@ -1,5 +1,7 @@
 { lib, ... }:
 {
+  # TODO: awaiting merge of https://github.com/NixOS/nixpkgs/pull/99019 to
+  # convert back to just using services.redshift with the executable option.
   config = {
     location.provider = "geoclue2";
     services.redshift = {
