@@ -21,6 +21,11 @@
   # Allow unfree software.
   nixpkgs.config.allowUnfree = true;
 
+  # Allow spidermonkey-38
+  nixpkgs.config.permittedInsecurePackages = [
+    "spidermonkey-38.8.0"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; let
