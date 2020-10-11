@@ -109,6 +109,7 @@
     mpv
     mumble
     mutt
+    neofetch
     neovim
     nextcloud-client
     nodejs
