@@ -4,8 +4,8 @@
     description = "Synchronize Calendar and Contacts";
     serviceConfig = {
       Type = "oneshot";
-      ExecStartPre = "${pkgs.vdirsyncer}/bin/vdirsyncer metasync";
       ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
+      ExecStartPost = "${pkgs.vdirsyncer}/bin/vdirsyncer metasync";
     };
     path = [ pkgs.pass ];
   };
