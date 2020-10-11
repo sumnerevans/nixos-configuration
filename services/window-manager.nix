@@ -24,6 +24,8 @@ in
     };
   };
 
+  services.xbanish.enable = true;
+
   # Add some environment variables for when things get fired up with shortcuts
   # in i3.
   environment.variables = {
@@ -52,17 +54,10 @@ in
     serviceConfig.ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys";
   };
 
-  systemd.user.services.xbanish = {
-    description = "Run xbanish on startup.";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig.ExecStart = "${pkgs.xbanish}/bin/xbanish";
-  };
-
   # Enable the Network Manager applet
   programs.nm-applet.enable = true;
   systemd.user.services.nm-applet.serviceConfig = {
     Restart = "always";
-    RestartSec = 30;
+    RestartSec = 5;
   };
 }
