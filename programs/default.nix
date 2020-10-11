@@ -9,9 +9,6 @@
   # Enable the GPG agent.
   programs.gnupg.agent.enable = true;
 
-  # Enable the Network Manager applet
-  programs.nm-applet.enable = true;
-
   # Automatically start an SSH agent.
   programs.ssh.startAgent = true;
 
@@ -48,7 +45,6 @@
       python-csmdirsearch
       python-gitlab
       python-Levenshtein
-      pytz
       pytz
       vobject
       watchdog
@@ -130,7 +126,6 @@
     poetry
     ranger
     redshift
-    remmina
     restic
     ripgrep
     rofi

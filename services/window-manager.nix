@@ -58,4 +58,11 @@ in
     partOf = [ "graphical-session.target" ];
     serviceConfig.ExecStart = "${pkgs.xbanish}/bin/xbanish";
   };
+
+  # Enable the Network Manager applet
+  programs.nm-applet.enable = true;
+  systemd.user.services.nm-applet.serviceConfig = {
+    Restart = "always";
+    RestartSec = 30;
+  };
 }

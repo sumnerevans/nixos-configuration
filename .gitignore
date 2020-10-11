@@ -1,3 +1,4 @@
+.direnv
 hardware-configuration.nix
 hostname
 result

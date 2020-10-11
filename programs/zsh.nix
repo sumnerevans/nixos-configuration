@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 {
   # TODO move more things from the .zshrc?
+  # zsh-you-should-use
+  # zsh-completions
   programs.zsh = {
     enable = true;
     autosuggestions = {
