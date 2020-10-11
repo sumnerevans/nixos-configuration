@@ -51,6 +51,9 @@ in
     description = "Run xbindkeys on startup.";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
+    environment = {
+      DISPLAY = ":0";
+    };
     serviceConfig.ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys";
   };
 
