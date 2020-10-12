@@ -23,7 +23,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.ports = [32];
+  services.openssh.ports = [ 32 ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

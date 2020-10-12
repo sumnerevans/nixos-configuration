@@ -18,7 +18,7 @@
       };
     };
 
-    systemd.user.services.redshift = {...}: {
+    systemd.user.services.redshift = { ... }: {
       options = {
         serviceConfig = lib.mkOption {
           apply = opts: opts // {

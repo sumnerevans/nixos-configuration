@@ -40,12 +40,13 @@ in
       ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
       keycode 9 = Caps_Lock Caps_Lock Caps_Lock
     '';
-  in {
-    description = "Run xmodmap on startup.";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
-  };
+  in
+    {
+      description = "Run xmodmap on startup.";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+    };
 
   systemd.user.services.xbindkeys = {
     description = "Run xbindkeys on startup.";

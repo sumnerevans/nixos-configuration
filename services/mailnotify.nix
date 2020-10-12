@@ -1,5 +1,5 @@
 { config, pkgs, ... }: let
-  mailnotify = pkgs.callPackage ../pkgs/mailnotify.nix { };
+  mailnotify = pkgs.callPackage ../pkgs/mailnotify.nix {};
 in
 {
   systemd.user.services.mailnotify = {
