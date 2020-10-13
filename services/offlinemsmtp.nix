@@ -6,6 +6,13 @@ in
     description = "offlinemsmtp daemon";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
-    serviceConfig.ExecStart = "${offlinemsmtp}/bin/offlinemsmtp --daemon";
+    serviceConfig = {
+      ExecStart = ''
+        ${offlinemsmtp}/bin/offlinemsmtp --daemon \
+          --send-mail-file /home/sumner/tmp/offlinemsmtp-sendmail
+      '';
+      Restart = "always";
+      RestartSec = 5;
+    };
   };
 }
