@@ -48,16 +48,6 @@ in
       serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
     };
 
-  systemd.user.services.xbindkeys = {
-    description = "Run xbindkeys on startup.";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    environment = {
-      DISPLAY = ":0";
-    };
-    serviceConfig.ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys";
-  };
-
   # Enable the Network Manager applet
   programs.nm-applet.enable = true;
   systemd.user.services.nm-applet.serviceConfig = {

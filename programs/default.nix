@@ -157,6 +157,7 @@
       wireguard
       wireshark
       wmctrl
+      xbindkeys
       xclip
       xorg.xbacklight
       xorg.xdpyinfo
