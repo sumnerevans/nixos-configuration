@@ -20,13 +20,22 @@
   # Set your time zone.
   time.timeZone = "America/Denver";
 
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
+
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+
+    # Use pulseaudioFull because it has Bluetooth support.
+    package = pkgs.pulseaudioFull;
+  };
 
   # Enable bumblebee.
   hardware.bumblebee.enable = true;
 
+  # Enable powertop for power management.
   powerManagement.powertop.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
