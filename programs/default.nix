@@ -32,6 +32,7 @@
     python-gitlab = callPackage ../pkgs/python-gitlab.nix {};
     sublime-music-tmp = callPackage ../pkgs/sublime-music.nix {};
     tracktime = callPackage ../pkgs/tracktime.nix {};
+    menucalc = callPackage ../pkgs/menucalc.nix {};
   in
     [
       (
@@ -112,6 +113,7 @@
       libreoffice-fresh
       light
       lxappearance
+      menucalc
       mkpasswd
       mpv
       mumble
@@ -137,6 +139,7 @@
       restic
       ripgrep
       rofi
+      rofi-pass
       screenfetch
       screenkey
       scrot
