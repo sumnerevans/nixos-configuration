@@ -15,11 +15,15 @@
     ./writeping.nix
   ];
 
-  # Enable bluetooth
-  services.blueman.enable = true;
-
   # List services that you want to enable:
   # ===========================================================================
+
+  # Enable bluetooth.
+  services.blueman.enable = true;
+
+  # Enable Flatpak.
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
