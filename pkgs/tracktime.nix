@@ -5,6 +5,7 @@ python38Packages.buildPythonApplication rec {
 
   propagatedBuildInputs = with python38Packages; [
     argcomplete
+    chromedriver
     docutils
     pass
     pdfkit
