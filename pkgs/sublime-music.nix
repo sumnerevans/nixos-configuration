@@ -9,11 +9,12 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "sublime-music";
-  version = "0.11.9";
+  version = "0.11.10";
 
+  # src = /home/sumner/projects/sublime-music/sublime-music;
   src = fetchurl {
     url = "https://gitlab.com/${pname}/${pname}/-/archive/v${version}/${pname}-v${version}.tar.gz";
-    sha256 = "dda100421401f4df71f29b5f1ae83ca6eeb71a0f12c4e59419381101a109a0f3";
+    sha256 = "90a48a4058963526dcb4b257bd13b581b43c9e1b4552dea5a750c3a1448bc26c";
   };
 
   nativeBuildInputs = [
