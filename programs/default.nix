@@ -68,6 +68,7 @@
       arc-theme
       aspell
       aspellDicts.en
+      baobab
       bash
       bat
       bitwarden
