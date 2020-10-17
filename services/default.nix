@@ -5,10 +5,10 @@
     ./kdeconnect.nix
     ./mailfetch.nix
     ./mailnotify.nix
-    ./nextcloud.nix
     ./offlinemsmtp.nix
     ./picom.nix
     ./redshift.nix
+    ./syncthing.nix
     ./vdirsyncer.nix
     ./wallpaper.nix
     ./window-manager.nix
