@@ -25,6 +25,9 @@
   services.flatpak.enable = true;
   xdg.portal.enable = true;
 
+  # Fix some bugs with various services.
+  services.gnome3.at-spi2-core.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.ports = [ 32 ];

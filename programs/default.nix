@@ -147,6 +147,7 @@
       slack
       spotify
       steam
+      syncthing-gtk
       texlive.combined.scheme-full
       tracktime
       tree
