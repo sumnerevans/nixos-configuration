@@ -28,6 +28,9 @@
   # Fix some bugs with various services.
   services.gnome3.at-spi2-core.enable = true;
 
+  # Enable the system keyring.
+  services.gnome3.gnome-keyring.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.ports = [ 32 ];
@@ -35,6 +38,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable the system keyring.
-  services.gnome3.gnome-keyring.enable = true;
+  # Thumbnailing service
+  services.tumbler.enable = true;
 }

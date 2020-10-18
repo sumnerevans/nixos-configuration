@@ -63,6 +63,15 @@
         }
       )
 
+      (
+        xfce.thunar.override {
+          thunarPlugins = [
+            xfce.thunar-archive-plugin
+            xfce.thunar-volman
+          ];
+        }
+      )
+
       alacritty
       arc-icon-theme
       arc-theme
@@ -89,6 +98,7 @@
       firefox
       flameshot
       fortune
+      fslint
       fzf
       gcc
       git
@@ -139,6 +149,7 @@
       redshift
       restic
       ripgrep
+      rmlint
       rofi
       rofi-pass
       screenfetch
