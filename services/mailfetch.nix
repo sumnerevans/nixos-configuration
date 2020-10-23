@@ -25,13 +25,6 @@ in
     description = "Fetch mail";
     serviceConfig.ExecStart = "${mailfetchScript}";
     path = [ pkgs.pass ];
-  };
-
-  systemd.user.timers.mailfetch = {
-    description = "Fetch mail every 5 minutes";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "*:0/5";
-    };
+    startAt = "*:0/5";
   };
 }

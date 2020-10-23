@@ -14,13 +14,6 @@
       imagemagick
       procps
     ];
-  };
-
-  systemd.user.timers.wallpaper = {
-    description = "Set the wallpaper every 10 minutes.";
-    timerConfig = {
-      OnCalendar = "*:0/10";
-    };
-    wantedBy = [ "timers.target" ];
+    startAt = "*:0/10";
   };
 }

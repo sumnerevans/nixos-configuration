@@ -26,13 +26,6 @@ in
       Type = "oneshot";
       ExecStart = "${writepingScript}";
     };
-  };
-
-  systemd.user.timers.writeping = {
-    description = "Run the ping writer every 5 seconds.";
-    timerConfig = {
-      OnCalendar = "*:*:0/5";
-    };
-    wantedBy = [ "timers.target" ];
+    startAt = "*:*:0/5";
   };
 }
