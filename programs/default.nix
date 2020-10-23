@@ -66,8 +66,8 @@
       (
         xfce.thunar.override {
           thunarPlugins = [
-            xfce.thunar-archive-plugin
-            xfce.thunar-volman
+            # xfce.thunar-archive-plugin
+            # xfce.thunar-volman
           ];
         }
       )

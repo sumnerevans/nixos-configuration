@@ -1,16 +1,21 @@
-{ config, pkgs, ... }: let
+{ lib, config, pkgs, ... }: with lib; let
   icsSubscriptions = [
     { uri = "https://lug.mines.edu/schedule/ical.ics"; importTo = "LUG"; }
     { uri = "https://acm.mines.edu/schedule/ical.ics"; importTo = "ACM"; }
   ];
+  vdirsyncer = "${pkgs.vdirsyncer}/bin/vdirsyncer";
+  vdirsyncerScript = pkgs.writeShellScript "mailfetch" ''
+    ${vdirsyncer} discover
+    ${vdirsyncer} sync
+    ${vdirsyncer} metasync
+  '';
 in
 {
   systemd.user.services.vdirsyncer = {
     description = "Synchronize Calendar and Contacts";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
-      ExecStartPost = "${pkgs.vdirsyncer}/bin/vdirsyncer metasync";
+      ExecStart = vdirsyncerScript;
     };
     path = [ pkgs.pass ];
     startAt = "*:0/5";
@@ -22,7 +27,7 @@ in
     icsSubscriptionImport = pkgs.writeShellScript "ics-subscription-import" ''
       set -xe
 
-      ${concatMapStringSep "\n" icsImportCurl icsSubscriptions}
+      ${concatMapStringsSep "\n" icsImportCurl icsSubscriptions}
     '';
   in
     {
