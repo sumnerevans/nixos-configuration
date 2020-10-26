@@ -1,4 +1,4 @@
-{ lib, pkgs, fetchFromGitHub }: with pkgs;
+{ fetchgit, pkgs }: with pkgs;
 python38Packages.buildPythonApplication rec {
   pname = "mailnotify";
   version = "0.0.1";
@@ -24,5 +24,9 @@ python38Packages.buildPythonApplication rec {
 
   doCheck = false;
 
-  src = /home/sumner/projects/mailnotify;
+  src = fetchgit {
+    url = "https://git.sr.ht/~sumner/mailnotify";
+    rev = "1158ee1";
+    sha256 = "1dw1vai6pnga7fkqzksis10yasjiqqsjls6g1mybyn8q9m8jxksn";
+  };
 }
