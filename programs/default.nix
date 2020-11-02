@@ -152,6 +152,7 @@
       rmlint
       rofi
       rofi-pass
+      screen
       screenfetch
       screenkey
       scrot
@@ -164,6 +165,7 @@
       tree
       trickle
       unzip
+      usbutils
       vale
       vdirsyncer
       vim
