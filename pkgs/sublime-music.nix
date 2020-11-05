@@ -1,4 +1,4 @@
-{ lib, fetchurl, python3Packages, gobject-introspection, gtk3, pango, wrapGAppsHook
+{ fetchFromGitLab, lib, python3Packages, gobject-introspection, gtk3, pango, wrapGAppsHook
 
 , chromecastSupport ? true
 , serverSupport ? true
@@ -12,9 +12,11 @@ python3Packages.buildPythonApplication rec {
   version = "0.11.10";
 
   # src = /home/sumner/projects/sublime-music/sublime-music;
-  src = fetchurl {
-    url = "https://gitlab.com/${pname}/${pname}/-/archive/v${version}/${pname}-v${version}.tar.gz";
-    sha256 = "90a48a4058963526dcb4b257bd13b581b43c9e1b4552dea5a750c3a1448bc26c";
+  src = fetchFromGitLab {
+    owner = "sublime-music";
+    repo = pname;
+    rev = "v${version}";
+    sha256 = "1g78gmiywg07kaywfc9q0yab2bzxs936vb3157ni1z0flbmcwrry";
   };
 
   nativeBuildInputs = [
