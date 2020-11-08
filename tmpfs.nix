@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
 {
   # Temporary in-RAM Filesystems.
-  fileSystems."/home/sumner/tmp" = {
+  fileSystems."${config.users.users.sumner.home}/tmp" = {
     fsType = "tmpfs";
     options = [ "nosuid" "nodev" "size=32G" ];
   };
 
-  fileSystems."/home/sumner/.cache" = {
+  fileSystems."${config.users.users.sumner.home}/.cache" = {
     fsType = "tmpfs";
     options = [ "nosuid" "nodev" "size=32G" ];
   };

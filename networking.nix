@@ -18,14 +18,20 @@
 
     wg-quick.interfaces = {
       wg0 = {
-        address = [ "192.168.69.2" ];
+        address = [
+          (
+            lib.removeSuffix
+              "\n"
+              (builtins.readFile "secrets/wireguard-${config.networking.hostName}-ip")
+          )
+        ];
         dns = [ "192.168.69.1" ];
-        privateKeyFile = "/etc/nixos/secrets/wireguard-privatekey";
+        privateKeyFile = "secrets/wireguard-${config.networking.hostName}-privatekey";
 
         peers = [
           {
             publicKey = "7FksnG2ME9XR02NVyNUsmfg87Uwk90Y4D7fgebxTJlM=";
-            presharedKeyFile = "/etc/nixos/secrets/wireguard-jedha-presharedkey";
+            presharedKeyFile = "secrets/wireguard-${config.networking.hostName}-presharedkey";
             allowedIPs = [ "0.0.0.0/0" "::/0" ];
             endpoint = "vpn.sumnerevans.com:51820";
             persistentKeepalive = 25;
