@@ -32,9 +32,6 @@
     package = pkgs.pulseaudioFull;
   };
 
-  # Enable bumblebee.
-  hardware.bumblebee.enable = true;
-
   # Enable powertop for power management.
   powerManagement.powertop.enable = true;
 

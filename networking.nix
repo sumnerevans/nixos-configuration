@@ -1,7 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: let
+  hostName = lib.removeSuffix "\n" (builtins.readFile ./hostname);
+  secretPath = secretName: "/etc/nixos/secrets/${secretName}";
+in
 {
   networking = {
-    hostName = lib.removeSuffix "\n" (builtins.readFile ./hostname);
+    hostName = hostName;
     networkmanager = {
       enable = true;
       enableStrongSwan = true;
@@ -22,16 +25,16 @@
           (
             lib.removeSuffix
               "\n"
-              (builtins.readFile "secrets/wireguard-${config.networking.hostName}-ip")
+              (builtins.readFile (secretPath "wireguard-${hostName}-ip"))
           )
         ];
         dns = [ "192.168.69.1" ];
-        privateKeyFile = "secrets/wireguard-${config.networking.hostName}-privatekey";
+        privateKeyFile = secretPath "wireguard-${hostName}-privatekey";
 
         peers = [
           {
             publicKey = "7FksnG2ME9XR02NVyNUsmfg87Uwk90Y4D7fgebxTJlM=";
-            presharedKeyFile = "secrets/wireguard-${config.networking.hostName}-presharedkey";
+            presharedKeyFile = secretPath "wireguard-${hostName}-presharedkey";
             allowedIPs = [ "0.0.0.0/0" "::/0" ];
             endpoint = "vpn.sumnerevans.com:51820";
             persistentKeepalive = 25;
