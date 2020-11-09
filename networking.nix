@@ -4,6 +4,7 @@
 in
 {
   networking = {
+    enableIPv6 = true;
     hostName = hostName;
     networkmanager = {
       enable = true;

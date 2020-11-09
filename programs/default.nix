@@ -143,6 +143,7 @@
       openssl
       pass
       pavucontrol
+      pciutils
       picom
       pinentry
       playerctl
@@ -172,6 +173,7 @@
       vdirsyncer
       vim
       vscode
+      w3m
       watchexec
       wget
       wireguard
