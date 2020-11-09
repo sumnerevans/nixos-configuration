@@ -80,6 +80,7 @@
       baobab
       bash
       bat
+      bind
       bitwarden
       bitwarden-cli
       brightnessctl
@@ -123,6 +124,7 @@
       libnotify
       libreoffice-fresh
       light
+      lsof
       lxappearance
       menucalc
       mkpasswd

@@ -1,6 +1,7 @@
 { config, pkgs, ... }: let
   editor = "nvim";
   terminal = "alacritty";
+  isMustafar = config.networking.hostName == "mustfar";
 in
 {
   services.xserver = {
@@ -9,7 +10,7 @@ in
 
     # Use 3l
     layout = "us";
-    xkbVariant = "3l";
+    xkbVariant = if isMustafar then "3l-cros" else "3l";
 
     # Enable touchpad support.
     libinput = {
@@ -32,7 +33,13 @@ in
     VISUAL = "${editor}";
     EDITOR = "${editor}";
     TERMINAL = "${terminal}";
-  };
+  } // (
+    if isMustafar then {
+      GDK_SCALE = "2";
+      GDK_DPI_SCALE = "0.5";
+      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    } else {}
+  );
 
   systemd.user.services.xmodmap = let
     xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
