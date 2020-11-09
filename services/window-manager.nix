@@ -1,7 +1,7 @@
 { config, pkgs, ... }: let
   editor = "nvim";
   terminal = "alacritty";
-  isMustafar = config.networking.hostName == "mustfar";
+  isMustafar = config.networking.hostName == "mustafar";
 in
 {
   services.xserver = {

@@ -177,6 +177,7 @@
       wireguard
       wireshark
       wmctrl
+      write_stylus
       xbindkeys
       xclip
       xorg.xbacklight
