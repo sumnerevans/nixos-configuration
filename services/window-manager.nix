@@ -33,11 +33,14 @@ in
     VISUAL = "${editor}";
     EDITOR = "${editor}";
     TERMINAL = "${terminal}";
+
+    # Enable touchscreen in Firefox
+    MOZ_USE_XINPUT2 = "1";
   } // (
     if isMustafar then {
       GDK_SCALE = "2";
       GDK_DPI_SCALE = "0.5";
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      _JAVA_OPTIONS = "-Dsun.java2d.uiScale = 2";
     } else {}
   );
 

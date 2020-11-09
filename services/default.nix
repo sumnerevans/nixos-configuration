@@ -18,6 +18,11 @@
   # List services that you want to enable:
   # ===========================================================================
 
+  # Suspend on power button press instead of shutdown.
+  services.logind.extraConfig = ''
+    HandlePowerKey=suspend
+  '';
+
   # Enable bluetooth.
   services.blueman.enable = true;
 

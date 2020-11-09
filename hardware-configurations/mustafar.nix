@@ -1,7 +1,17 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
-  boot.blacklistedKernelModules = [ "snd_hda_intel" ];
-  boot.kernelModules = [ "snd_soc_skl" ];
+  boot = {
+    blacklistedKernelModules = [ "snd_hda_intel" "snd_soc_skl" ];
+    kernelPatches = [
+      {
+        name = "kohaku-sound";
+        patch = null;
+        extraConfig = ''
+          SND_SOC_INTEL_DA7219_MAX98357A_GENERIC m
+        '';
+      }
+    ];
+  };
 
   networking = {
     useDHCP = false;
