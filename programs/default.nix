@@ -41,6 +41,7 @@
             dateutil
             fuzzywuzzy
             html2text
+            i3ipc
             icalendar
             pip
             pycairo
@@ -72,6 +73,19 @@
         }
       )
 
+      (
+        chromium.override {
+          commandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
+        }
+      )
+
+      (
+        google-chrome.override {
+          commandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
+        }
+      )
+
+      # TODO put a lot of these in to the window manager serivce
       alacritty
       arc-icon-theme
       arc-theme
@@ -105,8 +119,8 @@
       git
       gitAndTools.hub
       gitAndTools.lab
+      gnome-breeze
       gnumake
-      google-chrome
       guvcview
       htop
       hugin
@@ -125,7 +139,6 @@
       libreoffice-fresh
       light
       lsof
-      lxappearance
       menucalc
       mkpasswd
       mpv
@@ -136,8 +149,6 @@
       nextcloud-client
       nodejs
       nodePackages.bash-language-server
-      ocaml
-      ocamlPackages.utop
       offlinemsmtp
       opam
       openssl
@@ -149,7 +160,6 @@
       playerctl
       poetry
       ranger
-      redshift
       restic
       ripgrep
       rmlint
@@ -159,7 +169,6 @@
       screenfetch
       screenkey
       scrot
-      slack
       spotify
       steam
       syncthing-gtk

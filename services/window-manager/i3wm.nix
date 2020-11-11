@@ -1,9 +1,11 @@
 { config, pkgs, ... }: let
-  editor = "nvim";
-  terminal = "alacritty";
   isMustafar = config.networking.hostName == "mustafar";
 in
 {
+  environment.systemPackages = with pkgs; [
+    lxappearance
+  ];
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -27,23 +29,6 @@ in
 
   services.xbanish.enable = true;
 
-  # Add some environment variables for when things get fired up with shortcuts
-  # in i3.
-  environment.variables = {
-    VISUAL = "${editor}";
-    EDITOR = "${editor}";
-    TERMINAL = "${terminal}";
-
-    # Enable touchscreen in Firefox
-    MOZ_USE_XINPUT2 = "1";
-  } // (
-    if isMustafar then {
-      GDK_SCALE = "2";
-      GDK_DPI_SCALE = "0.5";
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale = 2";
-    } else {}
-  );
-
   systemd.user.services.xmodmap = let
     xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
       ! Reverse scrolling
@@ -57,11 +42,4 @@ in
       partOf = [ "graphical-session.target" ];
       serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
     };
-
-  # Enable the Network Manager applet
-  programs.nm-applet.enable = true;
-  systemd.user.services.nm-applet.serviceConfig = {
-    Restart = "always";
-    RestartSec = 5;
-  };
 }

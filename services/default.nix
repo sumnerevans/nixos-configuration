@@ -7,11 +7,10 @@
     ./mailnotify.nix
     ./offlinemsmtp.nix
     ./picom.nix
-    ./redshift.nix
     ./syncthing.nix
     ./vdirsyncer.nix
     ./wallpaper.nix
-    ./window-manager.nix
+    ./window-manager/default.nix
     ./writeping.nix
   ];
 

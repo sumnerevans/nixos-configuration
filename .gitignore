@@ -2,6 +2,7 @@
 hardware-configuration.nix
 hostname
 result
+services/window-manager/usesway
 
 secrets/
 secrets.tar

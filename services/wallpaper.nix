@@ -13,6 +13,7 @@
       gnused
       imagemagick
       procps
+      sway
     ];
     startAt = "*:0/10";
   };
