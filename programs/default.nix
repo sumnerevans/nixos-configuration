@@ -17,6 +17,9 @@
 
   # Allow unfree software.
   nixpkgs.config.allowUnfree = true;
+  environment.variables = {
+    NIXPKGS_ALLOW_UNFREE = "1";
+  };
 
   # Allow spidermonkey-38
   nixpkgs.config.permittedInsecurePackages = [
