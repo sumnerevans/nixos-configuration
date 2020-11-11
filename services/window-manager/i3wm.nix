@@ -3,7 +3,13 @@
 in
 {
   environment.systemPackages = with pkgs; [
+    flameshot
     lxappearance
+    xbindkeys
+    xclip
+    xorg.xbacklight
+    xorg.xdpyinfo
+    xorg.xprop
   ];
 
   services.xserver = {

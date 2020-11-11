@@ -1,11 +1,17 @@
 { config, lib, pkgs, ... }: let
-  editor = "nvim";
-  terminal = "alacritty";
+  editor = "${pkgs.neovim}/bin/nvim";
+  terminal = "${pkgs.alacritty}/bin/alacritty";
   useSway = (lib.removeSuffix "\n" (builtins.readFile ./usesway)) == "Y";
 in
 {
   # Import the correct configs.
   imports = if useSway then [ ./sway.nix ] else [ ./i3wm.nix ];
+
+  environment.systemPackages = with pkgs; [
+    i3status-rust
+    brightnessctl
+    screenkey
+  ];
 
   # Add some environment variables for when things get fired up with shortcuts
   # in i3/sway.
@@ -20,9 +26,9 @@ in
   };
 
   # For piping video capture of the screen back to a video output.
-  # boot.extraModulePackages = [
-  #   pkgs.linuxPackages.v4l2loopback
-  # ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
 
   services.pipewire = {
     enable = true;

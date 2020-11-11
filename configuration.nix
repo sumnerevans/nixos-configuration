@@ -31,13 +31,6 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-
-    # Use pulseaudioFull because it has Bluetooth support.
-    package = pkgs.pulseaudioFull;
-  };
 
   # Enable powertop for power management.
   powerManagement.powertop.enable = true;

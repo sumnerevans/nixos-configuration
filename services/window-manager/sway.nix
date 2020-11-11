@@ -19,7 +19,7 @@
       grim
       mako # notification daemon
       slurp
-      swaylock # lockscreen
+      swaylock-effects # lockscreen
       v4l-utils
       waybar # status bar
       wf-recorder
