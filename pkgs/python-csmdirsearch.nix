@@ -1,4 +1,4 @@
-{ lib, pkgs, fetchFromGitHub }: with pkgs;
+{ lib, pkgs }: with pkgs;
 pkgs.python38.pkgs.buildPythonPackage rec {
   pname = "csmdirsearch";
   version = "0.1.1";

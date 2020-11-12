@@ -5,7 +5,7 @@
 in
 {
   # Import the correct configs.
-  imports = if useSway then [ ./sway.nix ] else [ ./i3wm.nix ];
+  imports = [ ./i3wm.nix ] ++ (if useSway then [ ./sway.nix ] else []);
 
   environment.systemPackages = with pkgs; [
     i3status-rust

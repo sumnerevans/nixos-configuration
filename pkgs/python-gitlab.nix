@@ -1,4 +1,4 @@
-{ lib, pkgs, fetchFromGitHub }: with pkgs;
+{ lib, pkgs }: with pkgs;
 pkgs.python38.pkgs.buildPythonPackage rec {
   pname = "python-gitlab";
   version = "2.5.0";

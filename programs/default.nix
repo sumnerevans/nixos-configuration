@@ -1,4 +1,4 @@
-{ config, pkgs, lib, python38Packages, fetchFromGitHub, ... }:
+{ config, pkgs, lib, python38Packages, ... }:
 {
   imports = [
     ./direnv.nix
@@ -105,7 +105,6 @@
       csmdirsearch
       dfeet
       discord
-      dunst
       element-desktop
       elinks
       fd

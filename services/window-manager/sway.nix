@@ -5,6 +5,24 @@
     XDG_SESSION_TYPE = "wayland";
   };
 
+  # nixpkgs.overlays = [
+  #   (
+  #     self: super: {
+  #       mako = super.mako.overrideAttrs (
+  #         old: {
+  #           version = "1.4.2pre";
+  #           src = self.fetchFromGitHub {
+  #             owner = "emersion";
+  #             repo = "mako";
+  #             rev = "master";
+  #             sha256 = "1qcpl6kpz97h6960kh0cnc3cky07s3brmhw5pjyaayrgipk3n0iq";
+  #           };
+  #         }
+  #       );
+  #     }
+  #   )
+  # ];
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];

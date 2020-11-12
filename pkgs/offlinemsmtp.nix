@@ -1,4 +1,4 @@
-{ lib, pkgs, fetchFromGitHub }: with pkgs;
+{ lib, pkgs }: with pkgs;
 python38Packages.buildPythonApplication rec {
   pname = "offlinemsmtp";
   version = "0.3.8";

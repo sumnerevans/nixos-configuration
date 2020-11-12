@@ -1,4 +1,4 @@
-{ lib, pkgs, fetchFromGitHub }: with pkgs;
+{ lib, pkgs }: with pkgs;
 python38Packages.buildPythonApplication rec {
   pname = "tracktime";
   version = "0.9.16";
