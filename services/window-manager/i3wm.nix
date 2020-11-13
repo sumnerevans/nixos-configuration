@@ -16,7 +16,7 @@ in
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
-    displayManager.gdm.enable = true;
+    displayManager.startx.enable = true;
 
     # Use 3l
     layout = "us";

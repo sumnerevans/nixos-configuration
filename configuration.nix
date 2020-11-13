@@ -20,6 +20,7 @@
       efi.canTouchEfiVariables = true;
     };
 
+    cleanTmpDir = true;
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
@@ -43,9 +44,9 @@
     home = "/home/sumner";
     hashedPassword = "$6$p0WfA2vae4b5QahY$/qCwuUV.tVZEajIq7xcFUqcVD6iXAOK0kVPxki27flq4NXNn1XTTbH4s0RQedyKArAg1D2.Y0V0xQF.B/TME90";
     extraGroups = [
-      "wheel" # Enable 'sudo' for the user.
-      "networkmanager"
       "audio"
+      "networkmanager"
+      "wheel" # Enable 'sudo' for the user.
     ];
 
     # Allow all of my computers to SSH in.
@@ -56,6 +57,9 @@
     ];
   };
 
+  # Environment variables
+  environment.homeBinInPath = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -63,7 +67,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
-
-  # Environment variables
-  environment.homeBinInPath = true;
 }

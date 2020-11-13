@@ -8,8 +8,8 @@ in
   imports = [ ./i3wm.nix ] ++ (if useSway then [ ./sway.nix ] else []);
 
   environment.systemPackages = with pkgs; [
-    i3status-rust
     brightnessctl
+    i3status-rust
     screenkey
   ];
 
@@ -20,9 +20,8 @@ in
     EDITOR = "${editor}";
     TERMINAL = "${terminal}";
 
-    # Enable touchscreen and Wayland in Firefox
+    # Enable touchscreen in Firefox
     MOZ_USE_XINPUT2 = "1";
-    MOZ_ENABLE_WAYLAND = "1";
   };
 
   # For piping video capture of the screen back to a video output.
@@ -37,19 +36,11 @@ in
     pulse.enable = true;
   };
 
-  # hardware.pulseaudio = {
-  #   enable = true;
-  #   support32Bit = true;
-
-  #   # Use pulseaudioFull because it has Bluetooth support.
-  #   package = pkgs.pulseaudioFull;
-  # };
-
   location.provider = "geoclue2";
   services.redshift = {
     enable = true;
     package = lib.mkIf useSway pkgs.redshift-wlr;
-    extraOptions = lib.mkIf useSway [ "-m wayland" ];
+    extraOptions = lib.mkIf useSway [ "-m" "wayland" ];
 
     brightness = {
       day = "1";

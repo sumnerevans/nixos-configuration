@@ -17,14 +17,7 @@
 
   # Allow unfree software.
   nixpkgs.config.allowUnfree = true;
-  environment.variables = {
-    NIXPKGS_ALLOW_UNFREE = "1";
-  };
-
-  # Allow spidermonkey-38
-  nixpkgs.config.permittedInsecurePackages = [
-    "spidermonkey-38.8.0"
-  ];
+  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -173,7 +166,7 @@
       scrot
       spotify
       steam
-      syncthing-gtk
+      # syncthing-gtk
       texlive.combined.scheme-full
       tracktime
       tree

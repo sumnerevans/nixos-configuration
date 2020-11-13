@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   environment.variables = {
-    XDG_CURRENT_DESKTOP = "sway";
     XDG_SESSION_TYPE = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   # nixpkgs.overlays = [
@@ -27,6 +27,14 @@
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
     gtkUsePortal = true;
+  };
+
+  # Make sway the graphical-session target.
+  systemd.user.targets.sway-session = {
+    description = "sway window manager session";
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
   };
 
   programs.sway = {
