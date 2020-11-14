@@ -19,8 +19,19 @@
   nixpkgs.config.allowUnfree = true;
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Nix Package Overlays
+  nixpkgs.overlays = [
+    (
+      self: super: {
+        # Waiting for: https://github.com/NixOS/nixpkgs/issues/103723
+        zathura = super.zathura.override {
+          useMupdf = false;
+        };
+      }
+    )
+  ];
+
+  # Packages to install
   environment.systemPackages = with pkgs; let
     csmdirsearch = callPackage ../pkgs/csmdirsearch.nix {};
     offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
