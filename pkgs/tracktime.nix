@@ -1,7 +1,7 @@
 { lib, pkgs }: with pkgs;
 python38Packages.buildPythonApplication rec {
   pname = "tracktime";
-  version = "0.9.16";
+  version = "0.9.18";
 
   propagatedBuildInputs = with python38Packages; [
     argcomplete
@@ -20,7 +20,7 @@ python38Packages.buildPythonApplication rec {
 
   src = python38.pkgs.fetchPypi {
     inherit pname version;
-    sha256 = "327d2de243ead6e66699e6e1f055298d5556087650c0b6da96f3c86f70589d29";
+    sha256 = "a083b336945ce208d28173cf240b89b8e9adfceb145dfe82744c0ebef966cc99";
   };
 
   meta = with lib; {

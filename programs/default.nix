@@ -141,6 +141,7 @@
       libnotify
       libreoffice-fresh
       light
+      lm_sensors
       lsof
       menucalc
       mkpasswd
