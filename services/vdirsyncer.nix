@@ -4,7 +4,7 @@
     { uri = "https://acm.mines.edu/schedule/ical.ics"; importTo = "ACM"; }
   ];
   vdirsyncer = "${pkgs.vdirsyncer}/bin/vdirsyncer";
-  vdirsyncerScript = pkgs.writeShellScript "mailfetch" ''
+  vdirsyncerScript = pkgs.writeShellScript "vdirsyncer" ''
     ${vdirsyncer} discover
     ${vdirsyncer} sync
     ${vdirsyncer} metasync

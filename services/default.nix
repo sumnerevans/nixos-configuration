@@ -43,4 +43,20 @@
 
   # Thumbnailing service
   services.tumbler.enable = true;
+
+  # Enable Redis and PostgreSQL
+  services.redis.enable = true;
+  services.postgresql.enable = true;
+
+  # Sound
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.support32Bit = true; ## If compatibility with 32-bit applications is desired.
+  # hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
+  };
 }
