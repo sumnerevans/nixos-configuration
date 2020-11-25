@@ -36,6 +36,14 @@
   # Enable powertop for power management.
   powerManagement.powertop.enable = true;
 
+  # Keep the system up-to-date automatically.
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "monthly";
+    channel = https://nixos.org/channels/nixos-unstable;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
   users.users.sumner = {
