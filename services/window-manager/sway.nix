@@ -1,15 +1,8 @@
 { pkgs, ... }:
 {
-  environment.variables = {
-    GTK_THEME = "Arc-Dark";
-    MOZ_ENABLE_WAYLAND = "1";
-    XDG_CURRENT_DESKTOP = "sway";
-    XDG_SESSION_TYPE = "wayland";
-  };
-
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
     gtkUsePortal = true;
   };
 
@@ -22,6 +15,21 @@
   };
 
   programs.sway = {
+    wrapperFeatures = {
+      # Fixes GTK applications under Sway
+      gtk = true;
+
+      # To make Sway run the extra session commands.
+      base = true;
+    };
+
+    extraSessionCommands = ''
+      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_TYPE=wayland
+      export GTK_THEME="Arc-Dark"
+      export MOZ_ENABLE_WAYLAND=1
+    '';
+
     enable = true;
     extraPackages = with pkgs; [
       clipman

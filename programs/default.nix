@@ -154,9 +154,6 @@
       nodejs
       nodePackages.bash-language-server
       nox
-      obs-studio
-      obs-v4l2sink
-      obs-wlrobs
       offlinemsmtp
       opam
       openssl

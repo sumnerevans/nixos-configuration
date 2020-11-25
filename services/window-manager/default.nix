@@ -32,11 +32,6 @@ in
     MOZ_USE_XINPUT2 = "1";
   };
 
-  # For piping video capture of the screen back to a video output.
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
-
   location.provider = "geoclue2";
   services.redshift = {
     enable = true;
