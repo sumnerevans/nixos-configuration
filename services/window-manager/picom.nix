@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }: let
+  useSway = (lib.removeSuffix "\n" (builtins.readFile ./usesway)) == "Y";
+in
 {
   services.picom = {
-    enable = true;
+    enable = !useSway;
 
     # General
     vSync = true;

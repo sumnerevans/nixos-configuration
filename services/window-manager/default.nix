@@ -5,7 +5,15 @@
 in
 {
   # Import the correct configs.
-  imports = [ ./i3wm.nix ] ++ (if useSway then [ ./sway.nix ] else []);
+  imports = [
+    ./i3wm.nix
+  ] ++ (
+    if useSway then [
+      ./sway.nix
+    ] else [
+      ./picom.nix
+    ]
+  );
 
   environment.systemPackages = with pkgs; [
     brightnessctl

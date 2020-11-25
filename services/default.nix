@@ -6,7 +6,6 @@
     ./mailfetch.nix
     ./mailnotify.nix
     ./offlinemsmtp.nix
-    ./picom.nix
     ./syncthing.nix
     ./vdirsyncer.nix
     ./wallpaper.nix
