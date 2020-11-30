@@ -15,6 +15,9 @@ in
     ]
   );
 
+
+  services.xbanish.enable = !useSway;
+
   environment.systemPackages = with pkgs; [
     brightnessctl
     i3status-rust

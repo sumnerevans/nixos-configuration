@@ -11,11 +11,12 @@ in
     (import "${homeManagerTarball}/nixos")
 
     # Other stuff
+    ./cachix
     ./fonts.nix
     ./networking.nix
     ./tmpfs.nix
-    ./programs/default.nix
-    ./services/default.nix
+    ./programs
+    ./services
   ];
 
   # Use the systemd-boot EFI boot loader.

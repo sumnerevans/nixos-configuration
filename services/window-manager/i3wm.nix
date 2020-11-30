@@ -35,8 +35,6 @@ in
     };
   };
 
-  services.xbanish.enable = true;
-
   systemd.user.services.xmodmap = let
     xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
       ! Reverse scrolling

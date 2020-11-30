@@ -8,6 +8,7 @@
       noto-fonts-emoji
       open-sans
       powerline-fonts
+      terminus-nerdfont
     ];
 
     fontconfig = {

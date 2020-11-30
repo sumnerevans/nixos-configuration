@@ -8,6 +8,9 @@ in
   hardware.enableRedistributableFirmware = true;
   boot.blacklistedKernelModules = [ "snd_hda_intel" "snd_soc_skl" ];
 
+  # Orientation and ambient light
+  hardware.sensor.iio.enable = true;
+
   networking = {
     useDHCP = false;
     interfaces.wlp0s20f3.useDHCP = true;

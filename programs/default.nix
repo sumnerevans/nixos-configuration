@@ -20,16 +20,7 @@
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
   # Nix Package Overlays
-  nixpkgs.overlays = [
-    (
-      self: super: {
-        # Waiting for: https://github.com/NixOS/nixpkgs/issues/103723
-        zathura = super.zathura.override {
-          useMupdf = false;
-        };
-      }
-    )
-  ];
+  nixpkgs.overlays = [];
 
   # Packages to install
   environment.systemPackages = with pkgs; let
@@ -177,6 +168,7 @@
       steam
       # syncthing-gtk
       texlive.combined.scheme-full
+      tokei
       tracktime
       tree
       trickle
