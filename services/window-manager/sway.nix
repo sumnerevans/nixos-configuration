@@ -2,6 +2,7 @@
   rev = "master";
   url = "https://github.com/colemickens/nixpkgs-wayland/archive/${rev}.tar.gz";
   waylandOverlay = (import (builtins.fetchTarball url));
+  sway-accel-rotate = pkgs.callPackage ../../pkgs/sway-accel-rotate.nix {};
 in
 {
   environment.variables = {
@@ -37,6 +38,7 @@ in
       grim
       mako # notification daemon
       slurp
+      sway-accel-rotate # auto screen rotate
       swaylock-effects # lockscreen
       v4l-utils
       wf-recorder

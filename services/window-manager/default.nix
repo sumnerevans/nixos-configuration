@@ -15,7 +15,6 @@ in
     ]
   );
 
-
   services.xbanish.enable = !useSway;
 
   environment.systemPackages = with pkgs; [
