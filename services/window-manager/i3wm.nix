@@ -6,6 +6,7 @@ in
     dunst
     flameshot
     lxappearance
+    scrot
     xbindkeys
     xclip
     xorg.xbacklight

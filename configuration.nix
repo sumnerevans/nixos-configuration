@@ -11,12 +11,12 @@ in
     (import "${homeManagerTarball}/nixos")
 
     # Other stuff
-    ./cachix
+    ./cachix.nix
     ./fonts.nix
     ./networking.nix
-    ./tmpfs.nix
     ./programs
     ./services
+    ./tmpfs.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -32,9 +32,6 @@ in
 
   # Set your time zone.
   time.timeZone = "America/Denver";
-
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -70,6 +67,10 @@ in
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9J5GLv9e/k1yDFw/pWyGFcHeRaLMI3j22ihQfGKgfX9Kl3X/R2s5+4a4c98PbPeeO0WlFvu0JiwhT1MLb5Kk5iLxVf8C32kNPQ0kLpa+g/L7YSsvYMThUF8qcLhw0imDVEye4gKrKc6uQDwaCr/Rd+93elfeZ+OQj34czWV1vf4Tnpiad7WZ0IVklN5GQTdVTVPDzjiLaKgl/f3E/wv7DYibDUwwdCBWxo+4RJ9QbSwbgxQykLe3TOydPbwyIk5jmGSdNjtxhT4223lVZICBD2AYf23ERPZz/VtPZvF4qv+55C9YjoatAlW68esKTV3X2qV7K19RbeD58N8Yk16SMgs/HyLzXk4L1pPVNMZVAKX7nqNWnn12VMzHa+DJsEBvcnzwaGsBqEuf3fPzP7Isp9IKwQcBEF+mM1UgGRx8OA5tYt9vOnXtYJG+nOkupfga/fT1Zl9Imao+B0Gz1gG6ywM6bxUr5kkjvuQggc4J6pTslG11IQrnBll7k04vKDtM= sumner@mustafar"
     ];
   };
+
+  # Configure Home Manager
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
 
   # Environment variables
   environment.homeBinInPath = true;

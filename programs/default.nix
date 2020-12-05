@@ -1,7 +1,9 @@
 { config, pkgs, lib, python38Packages, ... }:
 {
   imports = [
+    ./browsers.nix
     ./direnv.nix
+    ./obs.nix
     ./tmux.nix
     ./zsh.nix
   ];
@@ -71,22 +73,8 @@
         }
       )
 
-      (
-        chromium.override {
-          commandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
-        }
-      )
-
-      (
-        google-chrome.override {
-          commandLineArgs = "-high-dpi-support=0 -force-device-scale-factor=1";
-        }
-      )
-
       # TODO put a lot of these in to the window manager serivce
       alacritty
-      arc-icon-theme
-      arc-theme
       aspell
       aspellDicts.en
       baobab
@@ -101,12 +89,10 @@
       dfeet
       discord
       element-desktop
-      elinks
       fd
       feh
       ffmpeg-full
       file
-      firefox
       fortune
       fslint
       fzf
@@ -114,7 +100,6 @@
       git
       gitAndTools.hub
       gitAndTools.lab
-      gnome-breeze
       gnumake
       guvcview
       htop
@@ -141,7 +126,6 @@
       mutt
       neofetch
       neovim
-      nextcloud-client
       nodejs
       nodePackages.bash-language-server
       nox
@@ -159,11 +143,8 @@
       restic
       ripgrep
       rmlint
-      rofi
-      rofi-pass
       screen
       screenfetch
-      scrot
       spotify
       steam
       # syncthing-gtk
@@ -178,7 +159,6 @@
       vdirsyncer
       vim
       vscode
-      w3m
       watchexec
       wget
       wireguard

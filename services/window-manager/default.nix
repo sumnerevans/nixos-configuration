@@ -18,8 +18,13 @@ in
   services.xbanish.enable = !useSway;
 
   environment.systemPackages = with pkgs; [
+    arc-icon-theme
+    arc-theme
     brightnessctl
+    gnome-breeze
     i3status-rust
+    rofi
+    rofi-pass
     screenkey
   ];
 
@@ -38,6 +43,7 @@ in
   services.redshift = {
     enable = true;
     package = lib.mkIf useSway pkgs.redshift-wlr;
+    executable = "/bin/redshift-gtk";
     extraOptions = lib.mkIf useSway [ "-m" "wayland" ];
 
     brightness = {
@@ -49,16 +55,5 @@ in
       day = 5500;
       night = 4000;
     };
-  };
-
-  systemd.user.services.redshift = { ... }: {
-    options = {
-      serviceConfig = lib.mkOption {
-        apply = opts: opts // {
-          ExecStart = builtins.replaceStrings [ "/bin/redshift" ] [ "/bin/redshift-gtk" ] opts.ExecStart;
-        };
-      };
-    };
-    config = {};
   };
 }

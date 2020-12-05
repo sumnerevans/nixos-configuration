@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: let
+{ pkgs, ... }: let
   writepingScript = pkgs.writeShellScript "writeping" ''
     ${pkgs.coreutils}/bin/touch ~/tmp/rolling_ping
 

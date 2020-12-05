@@ -14,16 +14,9 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = [
-          "Iosevka"
-          "Font Awesome"
-        ];
-        sansSerif = [
-          "Open Sans"
-        ];
-        serif = [
-          "Noto Serif"
-        ];
+        monospace = [ "Iosevka" "Font Awesome" ];
+        sansSerif = [ "Open Sans" ];
+        serif = [ "Noto Serif" ];
       };
     };
   };

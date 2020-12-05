@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }: with pkgs; let
+{ lib, pkgs, modulesPath, ... }: with pkgs; let
   sof-firmware = callPackage ./intel-sof-firmware.nix {};
 in
 {
@@ -11,6 +11,10 @@ in
   # Orientation and ambient light
   hardware.sensor.iio.enable = true;
 
+  # Enable bluetooth.
+  hardware.bluetooth.enable = true;
+
+  # Set up networking.
   networking = {
     useDHCP = false;
     interfaces.wlp0s20f3.useDHCP = true;
