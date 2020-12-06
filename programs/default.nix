@@ -2,7 +2,6 @@
 {
   imports = [
     ./browsers.nix
-    ./direnv.nix
     ./obs.nix
     ./tmux.nix
     ./zsh.nix
@@ -20,6 +19,13 @@
   # Allow unfree software.
   nixpkgs.config.allowUnfree = true;
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+
+  # https://github.com/nix-community/nix-direnv#via-configurationnix-in-nixos
+  # Persist direnv derivations across garbage collections.
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
 
   # Nix Package Overlays
   nixpkgs.overlays = [];
@@ -74,12 +80,9 @@
       )
 
       # TODO put a lot of these in to the window manager serivce
-      alacritty
       aspell
       aspellDicts.en
       baobab
-      bash
-      bat
       bind
       bitwarden
       bitwarden-cli
@@ -90,19 +93,13 @@
       discord
       element-desktop
       fd
-      feh
       ffmpeg-full
       file
       fortune
       fslint
-      fzf
       gcc
-      git
-      gitAndTools.hub
-      gitAndTools.lab
       gnumake
       guvcview
-      htop
       hugin
       iftop
       imagemagick
