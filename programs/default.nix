@@ -106,7 +106,6 @@
       inkscape
       isync
       kbdlight
-      kdeconnect
       kdenlive
       khal
       kitty
@@ -126,9 +125,7 @@
       nodePackages.bash-language-server
       nox
       offlinemsmtp
-      opam
       openssl
-      pass
       pavucontrol
       pciutils
       picom
@@ -153,8 +150,6 @@
       usbutils
       vale
       vdirsyncer
-      vim
-      vscode
       watchexec
       wget
       wireguard
@@ -163,7 +158,6 @@
       write_stylus
       xournal
       yarn
-      zathura
       zip
       zoom-us
     ];

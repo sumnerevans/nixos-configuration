@@ -34,7 +34,6 @@ in
     extraPackages = with pkgs; [
       clipman
       glib # for GTK settings
-      gnome3.networkmanagerapplet
       grim
       mako # notification daemon
       slurp

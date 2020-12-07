@@ -2,7 +2,6 @@
 {
   imports = [
     ./clipmenu.nix
-    ./kdeconnect.nix
     ./mailfetch.nix
     ./mailnotify.nix
     ./offlinemsmtp.nix
