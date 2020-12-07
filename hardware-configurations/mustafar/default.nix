@@ -4,7 +4,7 @@ in
 {
   # Get sound working
   # hardware.firmware = [ sof-firmware ];
-  hardware.enableAllFirmware = true;
+  # hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   boot.blacklistedKernelModules = [ "snd_hda_intel" "snd_soc_skl" ];
 

@@ -105,7 +105,6 @@
       imagemagick
       inkscape
       isync
-      jq
       kbdlight
       kdeconnect
       kdenlive

@@ -22,7 +22,6 @@ in
     arc-theme
     brightnessctl
     gnome-breeze
-    i3status-rust
     rofi
     rofi-pass
     screenkey
