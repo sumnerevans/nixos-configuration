@@ -37,7 +37,7 @@ in
       grim
       mako # notification daemon
       slurp
-      sway-accel-rotate # auto screen rotate
+      # sway-accel-rotate # auto screen rotate
       swaylock-effects # lockscreen
       v4l-utils
       wf-recorder

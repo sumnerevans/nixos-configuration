@@ -5,15 +5,7 @@
 in
 {
   # Import the correct configs.
-  imports = [
-    ./i3wm.nix
-  ] ++ (
-    if useSway then [
-      ./sway.nix
-    ] else [
-      ./picom.nix
-    ]
-  );
+  imports = [ ./i3wm.nix ] ++ (if useSway then [ ./sway.nix ] else [ ./picom.nix ]);
 
   services.xbanish.enable = !useSway;
 

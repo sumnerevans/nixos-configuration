@@ -4,7 +4,7 @@ in
 {
   # Get sound working
   # hardware.firmware = [ sof-firmware ];
-  # hardware.enableAllFirmware = true;
+  hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   boot.blacklistedKernelModules = [ "snd_hda_intel" "snd_soc_skl" ];
 
@@ -22,4 +22,13 @@ in
 
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
+
+  # Intel's libva driver
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver
+    vaapiVdpau
+    libvdpau-va-gl
+    intel-ocl
+  ];
+  environment.systemPackages = [ libva-utils ];
 }

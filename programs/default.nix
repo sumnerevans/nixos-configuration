@@ -27,9 +27,6 @@
     keep-derivations = true
   '';
 
-  # Nix Package Overlays
-  nixpkgs.overlays = [];
-
   # Packages to install
   environment.systemPackages = with pkgs; let
     csmdirsearch = callPackage ../pkgs/csmdirsearch.nix {};
@@ -116,7 +113,6 @@
       lsof
       menucalc
       mkpasswd
-      mpv
       mumble
       mutt
       neofetch
@@ -124,7 +120,6 @@
       nodejs
       nodePackages.bash-language-server
       nox
-      offlinemsmtp
       openssl
       pavucontrol
       pciutils
@@ -141,7 +136,6 @@
       spotify
       steam
       # syncthing-gtk
-      texlive.combined.scheme-full
       tokei
       tracktime
       tree
