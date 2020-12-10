@@ -4,7 +4,6 @@
     ./clipmenu.nix
     ./mailfetch.nix
     ./mailnotify.nix
-    # ./offlinemsmtp.nix
     ./syncthing.nix
     ./vdirsyncer.nix
     ./wallpaper.nix

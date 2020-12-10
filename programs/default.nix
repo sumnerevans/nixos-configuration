@@ -30,7 +30,6 @@
   # Packages to install
   environment.systemPackages = with pkgs; let
     csmdirsearch = callPackage ../pkgs/csmdirsearch.nix {};
-    offlinemsmtp = callPackage ../pkgs/offlinemsmtp.nix {};
     python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix {};
     python-gitlab = callPackage ../pkgs/python-gitlab.nix {};
     sublime-music-tmp = callPackage ../pkgs/sublime-music.nix {};
