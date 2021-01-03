@@ -152,6 +152,5 @@
       xournal
       yarn
       zip
-      zoom-us
     ];
 }
