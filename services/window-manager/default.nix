@@ -30,21 +30,6 @@ in
     MOZ_USE_XINPUT2 = "1";
   };
 
+  # Must have this for redshift or gammastep.
   location.provider = "geoclue2";
-  services.redshift = {
-    enable = true;
-    package = lib.mkIf useSway pkgs.redshift-wlr;
-    executable = "/bin/redshift-gtk";
-    extraOptions = lib.mkIf useSway [ "-m" "wayland" ];
-
-    brightness = {
-      day = "1";
-      night = "0.9";
-    };
-
-    temperature = {
-      day = 5500;
-      night = 4000;
-    };
-  };
 }

@@ -25,33 +25,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  nixpkgs.overlays = [
-    (
-      self: super: {
-        sof-firmware = let
-          version = "1.5.1";
-        in
-          super.sof-firmware.overrideAttrs (
-            old: {
-              inherit version;
-              src = super.fetchFromGitHub {
-                owner = "thesofproject";
-                repo = "sof-bin";
-                rev = "ae61d2778b0a0f47461a52da0d1f191f651e0763";
-                sha256 = "0j6bpwz49skvdvian46valjw4anwlrnkq703n0snkbngmq78prba";
-              };
-
-              installPhase = ''
-                mkdir -p $out/lib/firmware/intel
-                sed -i 's/ROOT=.*$/ROOT=$out/g' go.sh
-                sed -i 's/VERSION=.*$/VERSION=v${version}/g' go.sh
-                ./go.sh
-              '';
-            }
-          );
-      }
-    )
-  ];
+  nixpkgs.overlays = [];
 
   # Set your time zone.
   time.timeZone = "America/Denver";

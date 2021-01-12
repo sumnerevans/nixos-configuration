@@ -2,7 +2,6 @@
 {
   imports = [
     ./clipmenu.nix
-    ./mailfetch.nix
     ./mailnotify.nix
     ./syncthing.nix
     ./vdirsyncer.nix
