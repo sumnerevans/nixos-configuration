@@ -6,6 +6,9 @@
       Type = "oneshot";
       ExecStart = "/home/sumner/bin/set_wallpaper.sh";
     };
+    environment = {
+      DISPLAY = ":0";
+    };
     path = with pkgs; [
       bashInteractive
       coreutils
