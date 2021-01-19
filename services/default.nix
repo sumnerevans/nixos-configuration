@@ -45,6 +45,9 @@
   services.redis.enable = true;
   services.postgresql.enable = true;
 
+  # UPower
+  services.upower.enable = true;
+
   # Sound
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true; ## If compatibility with 32-bit applications is desired.
