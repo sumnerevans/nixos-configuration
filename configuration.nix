@@ -39,7 +39,6 @@
   # Keep the system up-to-date automatically.
   system.autoUpgrade = {
     enable = true;
-    allowReboot = true;
     dates = "monthly";
     channel = https://nixos.org/channels/nixos-unstable;
   };

@@ -26,7 +26,7 @@ in
     # Enable touchpad support.
     libinput = {
       enable = true;
-      tapping = false;
+      touchpad.tapping = false;
     };
 
     # Enable i3
