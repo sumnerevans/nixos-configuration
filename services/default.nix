@@ -5,7 +5,6 @@
     ./mailnotify.nix
     ./syncthing.nix
     ./vdirsyncer.nix
-    ./wallpaper.nix
     ./window-manager/default.nix
     ./writeping.nix
   ];

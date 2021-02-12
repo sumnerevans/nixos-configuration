@@ -141,7 +141,6 @@
       trickle
       unzip
       usbutils
-      vale
       vdirsyncer
       watchexec
       wget
