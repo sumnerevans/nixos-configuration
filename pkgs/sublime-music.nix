@@ -9,7 +9,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "sublime-music";
-  version = "0.11.10";
+  version = "0.11.11";
 
   # src = /home/sumner/projects/sublime-music/sublime-music;
   src = fetchFromGitLab {
