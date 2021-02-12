@@ -2,7 +2,6 @@
 {
   imports = [
     ./clipmenu.nix
-    ./mailnotify.nix
     ./syncthing.nix
     ./vdirsyncer.nix
     ./window-manager/default.nix
