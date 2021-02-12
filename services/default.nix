@@ -3,7 +3,6 @@
   imports = [
     ./clipmenu.nix
     ./syncthing.nix
-    ./vdirsyncer.nix
     ./window-manager/default.nix
   ];
 
