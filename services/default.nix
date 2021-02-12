@@ -6,7 +6,6 @@
     ./syncthing.nix
     ./vdirsyncer.nix
     ./window-manager/default.nix
-    ./writeping.nix
   ];
 
   # List services that you want to enable:
