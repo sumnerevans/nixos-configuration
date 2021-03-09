@@ -28,120 +28,54 @@
   '';
 
   # Packages to install
-  environment.systemPackages = with pkgs; let
-    csmdirsearch = callPackage ../pkgs/csmdirsearch.nix {};
-    python-csmdirsearch = callPackage ../pkgs/python-csmdirsearch.nix {};
-    python-gitlab = callPackage ../pkgs/python-gitlab.nix {};
-    tracktime = callPackage ../pkgs/tracktime.nix {};
-    menucalc = callPackage ../pkgs/menucalc.nix {};
-  in
-    [
-      (
-        python38.withPackages (
-          ps: with ps; [
-            dateutil
-            fuzzywuzzy
-            html2text
-            i3ipc
-            icalendar
-            pip
-            pycairo
-            pygobject3
-            pynvim
-            python-csmdirsearch
-            python-gitlab
-            python-Levenshtein
-            pytz
-            vobject
-            watchdog
-          ]
-        )
-      )
-
-      (
-        xfce.thunar.override {
-          thunarPlugins = [
-            # xfce.thunar-archive-plugin
-            # xfce.thunar-volman
-          ];
-        }
-      )
-
-      # TODO put a lot of these in to the window manager serivce
-      aspell
-      aspellDicts.en
-      baobab
-      bind
-      bitwarden
-      bitwarden-cli
-      chezmoi
-      clang
-      csmdirsearch
-      dfeet
-      discord
-      element-desktop
-      fd
-      ffmpeg-full
-      file
-      fortune
-      fslint
-      gcc
-      gnumake
-      guvcview
-      hugin
-      iftop
-      imagemagick
-      inkscape
-      isync
-      kbdlight
-      kdenlive
-      khal
-      kitty
-      libnotify
-      libreoffice-fresh
-      light
-      lm_sensors
-      lsof
-      menucalc
-      mkpasswd
-      mumble
-      mutt
-      neofetch
-      neovim
-      nodejs
-      nodePackages.bash-language-server
-      nox
-      openssl
-      pavucontrol
-      pciutils
-      picom
-      pinentry
-      playerctl
-      poetry
-      ranger
-      restic
-      ripgrep
-      rmlint
-      screen
-      screenfetch
-      spotify
-      steam
-      # syncthing-gtk
-      tokei
-      tracktime
-      tree
-      trickle
-      unzip
-      usbutils
-      vdirsyncer
-      watchexec
-      wget
-      wireguard
-      wireshark
-      wmctrl
-      write_stylus
-      xournal
-      yarn
-      zip
-    ];
+  environment.systemPackages = with pkgs; [
+    # TODO put a lot of these in to the window manager serivce
+    aspell
+    aspellDicts.en
+    baobab
+    bind
+    bitwarden
+    bitwarden-cli
+    chezmoi
+    clang
+    dfeet
+    ffmpeg-full
+    gcc
+    gnumake
+    guvcview
+    hugin
+    iftop
+    isync
+    kbdlight
+    kdenlive
+    khal
+    libnotify
+    libreoffice-fresh
+    light
+    lm_sensors
+    lsof
+    mutt
+    neovim
+    nodejs
+    nodePackages.bash-language-server
+    nox
+    openssl
+    pavucontrol
+    pciutils
+    picom
+    pinentry
+    playerctl
+    poetry
+    ranger
+    restic
+    screen
+    screenfetch
+    # syncthing-gtk
+    usbutils
+    vdirsyncer
+    wireguard
+    wireshark
+    wmctrl
+    yarn
+  ];
 }

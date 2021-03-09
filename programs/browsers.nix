@@ -4,8 +4,6 @@ in
 {
   environment.systemPackages = with pkgs; [
     (google-chrome.override { commandLineArgs = chromeCommandLineArgs; })
-    elinks
     firefox-bin
-    w3m
   ];
 }
