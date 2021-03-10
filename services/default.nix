@@ -23,8 +23,8 @@
   # Enable the system keyring.
   services.gnome3.gnome-keyring.enable = true;
 
-  # Gnome Crypto services
-  services.dbus.packages = [ pkgs.gcr ];
+  # Gnome services to make things work
+  services.dbus.packages = with pkgs; [ gnome3.dconf gcr ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
