@@ -24,6 +24,9 @@
   # Enable the system keyring.
   services.gnome3.gnome-keyring.enable = true;
 
+  # Gnome Crypto services
+  services.dbus.packages = [ pkgs.gcr ];
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.ports = [ 32 ];

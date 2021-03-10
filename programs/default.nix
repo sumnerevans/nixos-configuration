@@ -4,9 +4,6 @@
     ./zsh.nix
   ];
 
-  # Enable the GPG agent.
-  programs.gnupg.agent.enable = true;
-
   # Automatically start an SSH agent.
   programs.ssh.startAgent = true;
 
@@ -27,13 +24,9 @@
   # Packages to install
   environment.systemPackages = with pkgs; [
     # TODO put a lot of these in to the window manager serivce
-    bind
     lm_sensors
-    lsof
     mutt
     neovim
-    pciutils
-    pinentry
     wireguard
     wmctrl
   ];
