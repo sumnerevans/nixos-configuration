@@ -9,7 +9,7 @@ in
       default = false;
     };
 
-    xorg.xkbvariant = mkOption {
+    xorg.xkbVariant = mkOption {
       type = types.string;
       description = "The XKB variant to use";
       default = "";
