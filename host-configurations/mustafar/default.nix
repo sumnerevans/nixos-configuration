@@ -6,6 +6,7 @@ in
   networking.hostName = "mustafar";
   hardware.ramSize = 8;
   hardware.isLaptop = true;
+  wayland.enable = true;
 
   nixpkgs.overlays = [
     # sof-firmware so sleep works on Kohaku

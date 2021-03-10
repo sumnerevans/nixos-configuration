@@ -1,52 +1,70 @@
-{ config, pkgs, ... }: let
-  isMustafar = config.networking.hostName == "mustafar";
+{ config, lib, pkgs, ... }: with lib; let
+  cfg = config.xorg;
 in
 {
-  environment.systemPackages = with pkgs; [
-    dunst
-    flameshot
-    lxappearance
-    scrot
-    xbindkeys
-    xclip
-    xorg.xbacklight
-    xorg.xdpyinfo
-    xorg.xprop
-  ];
-
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-    displayManager.startx.enable = true;
-
-    # Use 3l
-    layout = "us";
-    xkbVariant = if isMustafar then "3l-cros" else "3l";
-
-    # Enable touchpad support.
-    libinput = {
-      enable = true;
-      touchpad.tapping = false;
+  options = {
+    xorg.enable = mkOption {
+      type = types.bool;
+      description = "Enable the Xorg stack";
+      default = false;
     };
 
-    # Enable i3
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
+    xorg.xkbvariant = mkOption {
+      type = types.string;
+      description = "The XKB variant to use";
+      default = "";
     };
   };
 
-  systemd.user.services.xmodmap = let
-    xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
-      ! Reverse scrolling
-      ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
-      keycode 9 = Caps_Lock Caps_Lock Caps_Lock
-    '';
-  in
-    {
-      description = "Run xmodmap on startup.";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      dunst
+      flameshot
+      lxappearance
+      scrot
+      xbindkeys
+      xclip
+      xorg.xbacklight
+      xorg.xdpyinfo
+      xorg.xprop
+    ];
+
+    services.xbanish.enable = true;
+
+    services.xserver = {
+      # Enable the X11 windowing system.
+      enable = true;
+      displayManager.startx.enable = true;
+
+      # Use 3l
+      layout = "us";
+      xkbVariant = mkIf (cfg.xkbVariant != "") cfg.xkbVariant;
+
+      # Enable touchpad support.
+      libinput = {
+        enable = true;
+        touchpad.tapping = false;
+      };
+
+      # Enable i3
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+      };
     };
+
+    systemd.user.services.xmodmap = let
+      xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
+        ! Reverse scrolling
+        ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
+        keycode 9 = Caps_Lock Caps_Lock Caps_Lock
+      '';
+    in
+      {
+        description = "Run xmodmap on startup.";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+      };
+  };
 }

@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./clipmenu.nix
     ./syncthing.nix
     ./window-manager/default.nix
   ];
