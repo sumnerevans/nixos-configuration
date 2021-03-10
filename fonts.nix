@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   fonts = {
     fonts = with pkgs; [
       font-awesome_4

@@ -1,7 +1,6 @@
 { config, pkgs, lib, python38Packages, ... }:
 {
   imports = [
-    ./tmux.nix
     ./zsh.nix
   ];
 
