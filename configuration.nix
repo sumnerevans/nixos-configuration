@@ -8,10 +8,9 @@
     # Other stuff
     ./cachix.nix
     ./fonts.nix
-    ./networking.nix
+    ./hardware-configuration
     ./programs
     ./services
-    ./tmpfs.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -25,16 +24,8 @@
     kernelPackages = pkgs.linuxPackages_5_10;
   };
 
-  nixpkgs.overlays = [];
-
   # Set your time zone.
   time.timeZone = "America/Denver";
-
-  # Enable sound.
-  sound.enable = true;
-
-  # Enable powertop for power management.
-  powerManagement.powertop.enable = true;
 
   # Keep the system up-to-date automatically.
   system.autoUpgrade = {

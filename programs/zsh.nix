@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-  # TODO move more things from the .zshrc?
   programs.zsh = {
     enable = true;
     autosuggestions = {
@@ -10,9 +9,11 @@
         ZSH_AUTOSUGGEST_USE_ASYNC = "1";
       };
     };
-    syntaxHighlighting.enable = true;
 
     interactiveShellInit = ''
+      # fast-syntax-highlighting
+      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+
       # zsh-you-should-use
       source ${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh
       export YSU_HARDCORE=1  # Force usage of aliases

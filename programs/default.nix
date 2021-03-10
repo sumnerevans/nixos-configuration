@@ -1,8 +1,6 @@
 { config, pkgs, lib, python38Packages, ... }:
 {
   imports = [
-    ./browsers.nix
-    ./obs.nix
     ./tmux.nix
     ./zsh.nix
   ];
@@ -30,52 +28,14 @@
   # Packages to install
   environment.systemPackages = with pkgs; [
     # TODO put a lot of these in to the window manager serivce
-    aspell
-    aspellDicts.en
-    baobab
     bind
-    bitwarden
-    bitwarden-cli
-    chezmoi
-    clang
-    dfeet
-    ffmpeg-full
-    gcc
-    gnumake
-    guvcview
-    hugin
-    iftop
-    isync
-    kbdlight
-    kdenlive
-    khal
-    libnotify
-    libreoffice-fresh
-    light
     lm_sensors
     lsof
     mutt
     neovim
-    nodejs
-    nodePackages.bash-language-server
-    nox
-    openssl
-    pavucontrol
     pciutils
-    picom
     pinentry
-    playerctl
-    poetry
-    ranger
-    restic
-    screen
-    screenfetch
-    # syncthing-gtk
-    usbutils
-    vdirsyncer
     wireguard
-    wireshark
     wmctrl
-    yarn
   ];
 }

@@ -2,6 +2,11 @@
   sof-firmware = callPackage ./intel-sof-firmware.nix {};
 in
 {
+  # Set the hostname
+  networking.hostName = "mustafar";
+  hardware.ramSize = 8;
+  hardware.isLaptop = true;
+
   nixpkgs.overlays = [
     # sof-firmware so sleep works on Kohaku
     (
@@ -72,14 +77,8 @@ in
   # Orientation and ambient light
   hardware.sensor.iio.enable = true;
 
-  # Enable bluetooth.
-  hardware.bluetooth.enable = true;
-
   # Set up networking.
-  networking = {
-    useDHCP = false;
-    interfaces.wlp0s20f3.useDHCP = true;
-  };
+  networking.interfaces.wlp0s20f3.useDHCP = true;
 
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
