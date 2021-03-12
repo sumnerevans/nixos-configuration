@@ -8,8 +8,7 @@
     # Other stuff
     ./cachix.nix
     ./fonts.nix
-    ./hardware-configuration
-    ./programs
+    ./hardware-configuration-modules
     ./services
   ];
 
@@ -34,6 +33,39 @@
     channel = https://nixos.org/channels/nixos-unstable;
   };
 
+  # Enable Docker.
+  virtualisation.docker.enable = true;
+
+  # Allow unfree software.
+  nixpkgs.config.allowUnfree = true;
+  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+
+  # https://github.com/nix-community/nix-direnv#via-configurationnix-in-nixos
+  # Persist direnv derivations across garbage collections.
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+
+  # Enable ZSH for the command-not-found functionality
+  programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
+
+  # Automatically start an SSH agent.
+  programs.ssh.startAgent = true;
+
+  # Packages to install
+  environment.systemPackages = with pkgs; [
+    # TODO put a lot of these in to the window manager serivce
+    lm_sensors
+    neovim
+    wireguard
+    wmctrl
+  ];
+
+  # Environment variables
+  environment.homeBinInPath = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
   users.users.sumner = {
@@ -54,9 +86,6 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9J5GLv9e/k1yDFw/pWyGFcHeRaLMI3j22ihQfGKgfX9Kl3X/R2s5+4a4c98PbPeeO0WlFvu0JiwhT1MLb5Kk5iLxVf8C32kNPQ0kLpa+g/L7YSsvYMThUF8qcLhw0imDVEye4gKrKc6uQDwaCr/Rd+93elfeZ+OQj34czWV1vf4Tnpiad7WZ0IVklN5GQTdVTVPDzjiLaKgl/f3E/wv7DYibDUwwdCBWxo+4RJ9QbSwbgxQykLe3TOydPbwyIk5jmGSdNjtxhT4223lVZICBD2AYf23ERPZz/VtPZvF4qv+55C9YjoatAlW68esKTV3X2qV7K19RbeD58N8Yk16SMgs/HyLzXk4L1pPVNMZVAKX7nqNWnn12VMzHa+DJsEBvcnzwaGsBqEuf3fPzP7Isp9IKwQcBEF+mM1UgGRx8OA5tYt9vOnXtYJG+nOkupfga/fT1Zl9Imao+B0Gz1gG6ywM6bxUr5kkjvuQggc4J6pTslG11IQrnBll7k04vKDtM= sumner@mustafar"
     ];
   };
-
-  # Environment variables
-  environment.homeBinInPath = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
