@@ -1,8 +1,7 @@
-{ config, pkgs, lib, python38Packages, ... }:
-{
-  imports = [
-    ./zsh.nix
-  ];
+{ config, pkgs, lib, python38Packages, ... }: {
+  # Enable ZSH for the command-not-found functionality
+  programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # Automatically start an SSH agent.
   programs.ssh.startAgent = true;
