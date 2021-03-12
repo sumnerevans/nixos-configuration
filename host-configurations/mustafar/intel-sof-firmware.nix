@@ -1,4 +1,4 @@
-{ stdenv, fetchurl }: with stdenv.lib;
+{ lib, fetchurl }: with lib;
 stdenv.mkDerivation rec {
   pname = "intel-sof-firmware";
   version = "1.5.0";
