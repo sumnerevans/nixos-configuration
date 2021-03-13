@@ -3,16 +3,24 @@
 in
 {
   options = {
-    xorg.enable = mkOption {
-      type = types.bool;
-      description = "Enable the Xorg stack";
-      default = false;
-    };
+    xorg = {
+      enable = mkOption {
+        type = types.bool;
+        description = "Enable the Xorg stack";
+        default = false;
+      };
 
-    xorg.xkbVariant = mkOption {
-      type = types.str;
-      description = "The XKB variant to use";
-      default = "";
+      xkbVariant = mkOption {
+        type = types.str;
+        description = "The XKB variant to use";
+        default = "";
+      };
+
+      remapEscToCaps = mkOption {
+        type = types.bool;
+        description = "Remap the physical escape key to Caps Lock";
+        default = true;
+      };
     };
   };
 
@@ -53,18 +61,20 @@ in
       };
     };
 
-    systemd.user.services.xmodmap = let
-      xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
-        ! Reverse scrolling
-        ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
-        keycode 9 = Caps_Lock Caps_Lock Caps_Lock
-      '';
-    in
-      {
-        description = "Run xmodmap on startup.";
-        wantedBy = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
-      };
+    systemd.user.services.xmodmap = mkIf (cfg.remapEscToCaps) (
+      let
+        xmodmapConfig = pkgs.writeText "Xmodmap.conf" ''
+          ! Reverse scrolling
+          ! pointer = 1 2 3 5 4 6 7 8 9 10 11 12
+          keycode 9 = Caps_Lock Caps_Lock Caps_Lock
+        '';
+      in
+        {
+          description = "Run xmodmap on startup.";
+          wantedBy = [ "graphical-session.target" ];
+          partOf = [ "graphical-session.target" ];
+          serviceConfig.ExecStart = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmapConfig}";
+        }
+    );
   };
 }

@@ -4,9 +4,6 @@
     ./window-manager/default.nix
   ];
 
-  # List services that you want to enable:
-  # ===========================================================================
-
   # Suspend on power button press instead of shutdown.
   services.logind.extraConfig = ''
     HandlePowerKey=suspend
@@ -16,14 +13,10 @@
   services.flatpak.enable = true;
   xdg.portal.enable = true;
 
-  # Fix some bugs with various services.
-  services.gnome3.at-spi2-core.enable = true;
-
-  # Enable the system keyring.
-  services.gnome3.gnome-keyring.enable = true;
-
-  # Gnome services to make things work
+  # Add some Gnome services to make things work.
   services.dbus.packages = with pkgs; [ gnome3.dconf gcr ];
+  services.gnome3.at-spi2-core.enable = true;
+  services.gnome3.gnome-keyring.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
