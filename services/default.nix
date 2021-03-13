@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./window-manager/default.nix
+    ./i3wm.nix
+    ./sway.nix
   ];
 
   # Suspend on power button press instead of shutdown.
