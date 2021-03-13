@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./syncthing.nix
     ./window-manager/default.nix
   ];
 
