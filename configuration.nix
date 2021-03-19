@@ -59,7 +59,6 @@
   environment.systemPackages = with pkgs; [
     # TODO put a lot of these in to the window manager serivce
     lm_sensors
-    neovim
     wireguard
     wmctrl
   ];
