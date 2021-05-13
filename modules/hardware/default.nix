@@ -2,7 +2,7 @@
 # Contains convenience modules for configuring the hardware.
 #
 { config, pkgs, lib, ... }: with lib; let
-  cfg = config;
+  cfg = config.hardware;
 in
 {
   imports = [
@@ -47,6 +47,11 @@ in
         jack.enable = true;
         # pulse.enable = true;
       };
+
+      # Suspend on power button press instead of shutdown.
+      services.logind.extraConfig = ''
+        HandlePowerKey=suspend
+      '';
     })
 
     (mkIf cfg.isServer { })

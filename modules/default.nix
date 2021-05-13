@@ -6,8 +6,8 @@
     ./hardware
     ./programs
     ./services
+    ./users
 
-    ./fonts.nix
     ./nix.nix
     ./time.nix
   ];

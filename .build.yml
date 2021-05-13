@@ -1,0 +1,32 @@
+image: nixos/unstable
+packages:
+  - nixos.bash
+  - nixos.git
+  - nixos.openssh
+  - nixos.openssl
+  - nixos.rsync
+sources:
+  - https://git.sr.ht/~sumner/nixos-configuration
+secrets:
+  # SSH Known Hosts
+  - 5f8876fe-b2b7-44f8-8ad5-6fa9bffbc52a
+  # SSH Deploy Key
+  - f219888a-80af-4275-a777-89e8c7d277f0
+  # Secrets Password File
+  - 2414c42a-6bbf-4f1f-a82e-cd64d661c31c
+environment:
+  SECRETS_FILE_PATH: /home/build/.secrets_password_file
+  REPO_NAME: nixos-configuration
+# triggers:
+#   - action: email
+#     condition: failure
+#     to: alerts@sumnerevans.com
+tasks:
+  # Skip everything if not on master.
+  - skip_not_master: |
+      cd $REPO_NAME
+      git branch --contains | grep master || echo "Skipping deploy since not on master"
+      git branch --contains | grep master || complete-build
+
+  - setup: |
+      echo "cd $REPO_NAME" >> ~/.buildenv
