@@ -3,11 +3,7 @@
 in
 {
   options = {
-    hardware.isLaptop = mkOption {
-      type = types.bool;
-      description = "Specify that this host is a laptop.";
-      default = false;
-    };
+    hardware.isLaptop = mkEnableOption "laptop-only configurations";
   };
 
   config = {

@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }: {
   # Set the hostname
   networking.hostName = "jedha";
+  hardware.isPC = true;
   hardware.ramSize = 32;
   hardware.isLaptop = true;
 
@@ -12,4 +13,7 @@
 
   xorg.enable = true;
   xorg.xkbVariant = "3l";
+
+  # Use systemd-boot
+  boot.loader.systemd-boot.enable = true;
 }

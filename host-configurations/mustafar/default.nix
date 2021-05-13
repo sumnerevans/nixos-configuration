@@ -1,9 +1,10 @@
 { lib, pkgs, modulesPath, ... }: with pkgs; let
-  sof-firmware = callPackage ./intel-sof-firmware.nix {};
+  sof-firmware = callPackage ./intel-sof-firmware.nix { };
 in
 {
   # Set the hostname
   networking.hostName = "mustafar";
+  hardware.isPC = true;
   hardware.ramSize = 8;
   hardware.isLaptop = true;
   wayland.enable = true;
@@ -39,6 +40,10 @@ in
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   boot.blacklistedKernelModules = [ "snd_hda_intel" "snd_soc_skl" ];
+
+  # Use systemd-boot
+  boot.loader.systemd-boot.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_5_10;
   boot.kernelPatches = [
     {
       name = "chromebook-config";
