@@ -2,7 +2,7 @@
   cfg = config.services.openssh;
 in
 {
-  config = mkIf config.enable {
+  config = mkIf cfg.enable {
     services.openssh = {
       ports = [ 32 ];
       passwordAuthentication = false;
