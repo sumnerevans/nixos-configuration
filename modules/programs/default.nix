@@ -7,7 +7,6 @@
     # TODO put a lot of these in to the window manager serivce
     lm_sensors
     wireguard
-    wmctrl
   ];
 
   # Automatically start an SSH agent.

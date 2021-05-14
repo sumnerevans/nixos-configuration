@@ -3,6 +3,9 @@
 in
 {
   config = mkIf config.enable {
-    services.openssh.ports = [ 32 ];
+    services.openssh = {
+      ports = [ 32 ];
+      passwordAuthentication = false;
+    };
   };
 }
