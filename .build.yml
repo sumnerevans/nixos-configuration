@@ -1,8 +1,5 @@
 image: nixos/unstable
 packages:
-  - nixos.bash
-  - nixos.git
-  - nixos.openssh
   - nixos.openssl
   - nixos.rsync
 sources:

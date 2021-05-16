@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
   # Set the hostname
   networking.hostName = "jedha";
   hardware.isPC = true;

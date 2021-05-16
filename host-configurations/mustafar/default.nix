@@ -1,4 +1,4 @@
-{ lib, pkgs, modulesPath, ... }: with pkgs; let
+{ lib, pkgs, ... }: with pkgs; let
   sof-firmware = callPackage ./intel-sof-firmware.nix { };
 in
 {
@@ -43,7 +43,7 @@ in
 
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_10;
+  boot.kernelPackages = linuxPackages_5_10;
   boot.kernelPatches = [
     {
       name = "chromebook-config";
@@ -87,7 +87,7 @@ in
   hardware.video.hidpi.enable = lib.mkDefault true;
 
   # Intel's libva driver
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.opengl.extraPackages = [
     intel-media-driver
     vaapiVdpau
     libvdpau-va-gl

@@ -52,8 +52,14 @@ in
       services.logind.extraConfig = ''
         HandlePowerKey=suspend
       '';
+
+      # Enable Flatpak.
+      services.flatpak.enable = true;
+      xdg.portal.enable = true;
     })
 
-    (mkIf cfg.isServer { })
+    (mkIf cfg.isServer {
+      services.healthcheck.enable = true;
+    })
   ];
 }

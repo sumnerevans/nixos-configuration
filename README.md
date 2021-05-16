@@ -46,4 +46,26 @@ To install this configuration,
 1. Clone this repository to `/etc/nixos` on a NixOS system.
 2. Create a new host configuration in the `host-configurations` folder.
 3. Source the host configuration from `hardware-configuration.nix`.
-4. Run `sudo nixos-rebuild switch`.
+4. Run `sudo nixos-rebuild switch --upgrade`.
+
+## Goals
+
+* Infrastructure as code
+* Immutable infrastructure (as much as possible)
+* Everything backed up to B2
+* Everything backed up to onsite location
+
+### Uptime
+
+* Can blow away all servers (but not data) and restore in under an hour
+* Can restore all data within one day after catastrophic failure (everything
+  goes down, including data)
+
+  * From local backup: 1 day
+  * From B2: 2 days
+
+## Backup Strategy
+
+I am using [Restic](https://github.com/restic/restic) to backup everything on my
+server, and all of my important documents are stored in Syncthing, which is
+backed up from my server.

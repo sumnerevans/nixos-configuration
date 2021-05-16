@@ -1,12 +1,36 @@
 { pkgs, ... }: {
+  imports = [
+    ./tmux.nix
+  ];
+
   # Environment variables
   environment.homeBinInPath = true;
 
-  # Packages to install
+  # Minimal package set to install on all machines.
   environment.systemPackages = with pkgs; [
-    # TODO put a lot of these in to the window manager serivce
+    bind
+    direnv
+    fd
+    git
+    gnupg
+    htop
+    iftop
+    inetutils
     lm_sensors
+    mtr
+    neovim
+    nix-direnv
+    openssl
+    restic
+    ripgrep
+    rsync
+    sysstat
+    tmux
+    tree
+    unzip
+    vim
     wireguard
+    zsh
   ];
 
   # Automatically start an SSH agent.
