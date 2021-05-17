@@ -21,7 +21,7 @@ lib.mkIf xandikosCfg.enable {
       enableACME = true;
       forceSSL = true;
       basicAuth = {
-        sumner = lib.removeSuffix "\n" (builtins.readFile ../secrets/xandikos);
+        sumner = lib.removeSuffix "\n" (builtins.readFile ../../secrets/xandikos);
       };
     };
   };

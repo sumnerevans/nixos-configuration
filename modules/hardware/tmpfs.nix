@@ -9,7 +9,7 @@ in
     };
   };
 
-  config.fileSystems = {
+  config.fileSystems = mkIf cfg.isPC {
     # Temporary in-RAM Filesystems.
     "/home/sumner/tmp" = {
       fsType = "tmpfs";

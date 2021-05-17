@@ -28,7 +28,7 @@
   ];
 
   # Websites
-  websites = [
+  nginx.websites = [
     { hostname = "the-evans.family"; }
     { hostname = "qs.${config.networking.domain}"; }
     {
@@ -60,7 +60,7 @@
   # Services
   services.airsonic.enable = true;
   services.bitwarden_rs.enable = true;
-  services.heartbeat.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
+  services.healthcheck.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
   services.isso.enable = true;
   services.logrotate.enable = true;
   services.longview.enable = true;

@@ -28,7 +28,7 @@
 
   pipeIf = condition: cmd: if condition then "| ${cmd}" else "";
 
-  goaccessWebsiteMetricsScript = { hostname, excludeTerms ? [ ], ... }:
+  goaccessWebsiteMetricsScript = { hostname, excludeTerms, ... }:
     pkgs.writeShellScript "goaccess-${hostname}" ''
       set -xef
       cd /var/log/nginx
