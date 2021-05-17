@@ -18,7 +18,7 @@ let
 
     [smtp]
     username = comments@sumnerevans.com
-    password = ${lib.removeSuffix "\n" (builtins.readFile ../secrets/isso-comments-smtp-password)}
+    password = ${lib.removeSuffix "\n" (builtins.readFile ../../secrets/isso-comments-smtp-password)}
     host = smtp.migadu.com
     port = 465
     security = starttls
@@ -38,7 +38,7 @@ let
 
     [admin]
     enabled = true
-    password = ${lib.removeSuffix "\n" (builtins.readFile ../secrets/isso-admin-password)}
+    password = ${lib.removeSuffix "\n" (builtins.readFile ../../secrets/isso-admin-password)}
   '';
   issoConfigFile = pkgs.writeTextFile {
     name = "isso.cfg";

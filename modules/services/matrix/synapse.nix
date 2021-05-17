@@ -26,7 +26,7 @@ lib.mkIf synapseCfg.enable {
   services.matrix-synapse = {
     enable_registration = false;
     registration_shared_secret = lib.removeSuffix "\n"
-      (builtins.readFile ../../secrets/matrix-registration-shared-secret);
+      (builtins.readFile ../../../secrets/matrix-registration-shared-secret);
     server_name = config.networking.domain;
     max_upload_size = "250M";
     listeners = [

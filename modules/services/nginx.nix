@@ -37,9 +37,11 @@ in
           };
           extraLocations = mkOption {
             type = with types; attrsOf anything;
+            default = { };
           };
           excludeTerms = mkOption {
             type = with types; listOf str;
+            default = [ ];
           };
         };
       };
@@ -47,11 +49,11 @@ in
     {
       nginx.websites = mkOption {
         type = with types; listOf (submodule websiteSubmodule);
-        default = [];
+        default = [ ];
       };
     };
 
-  config = mkIf (websites != []) {
+  config = mkIf (websites != [ ]) {
     # Enable nginx and add the static websites.
     services.nginx = {
       enable = true;
@@ -64,7 +66,7 @@ in
 
       virtualHosts =
         let
-          websiteConfig = { hostname, extraLocations ? { }, ... }: {
+          websiteConfig = { hostname, extraLocations, ... }: {
             name = hostname;
             value = {
               forceSSL = true;

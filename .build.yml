@@ -12,10 +12,10 @@ secrets:
 environment:
   SECRETS_FILE_PATH: /home/build/.secrets_password_file
   REPO_NAME: nixos-configuration
-# triggers:
-#   - action: email
-#     condition: failure
-#     to: alerts@sumnerevans.com
+triggers:
+  - action: email
+    condition: failure
+    to: alerts@sumnerevans.com
 tasks:
   # Skip everything if not on master.
   - skip-not-master: |
