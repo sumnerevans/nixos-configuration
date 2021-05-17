@@ -6,9 +6,6 @@
 This repository contains the NixOS configuration for my personal computers and
 servers.
 
-**NOTE:** I am currently migrating my servers to use this repository. They
-currently still use the old repo: https://git.sr.ht/~sumner/infrastructure
-
 ## Hosts
 
 * Personal Computers
