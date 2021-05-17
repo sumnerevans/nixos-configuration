@@ -5,8 +5,6 @@ packages:
 sources:
   - https://git.sr.ht/~sumner/nixos-configuration
 secrets:
-  # SSH Known Hosts
-  - 5f8876fe-b2b7-44f8-8ad5-6fa9bffbc52a
   # SSH Deploy Key
   - f219888a-80af-4275-a777-89e8c7d277f0
   # Secrets Password File
@@ -20,10 +18,25 @@ environment:
 #     to: alerts@sumnerevans.com
 tasks:
   # Skip everything if not on master.
-  - skip_not_master: |
+  - skip-not-master: |
       cd $REPO_NAME
       git branch --contains | grep master || echo "Skipping deploy since not on master"
       git branch --contains | grep master || complete-build
 
   - setup: |
       echo "cd $REPO_NAME" >> ~/.buildenv
+      ssh-keyscan bespin.sumnerevans.com >> ~/.ssh/known_hosts
+
+  - send-secrets: |
+      ./secrets_file_manager.sh extract
+      rsync -vr --delete-after secrets/ root@bespin.sumnerevans.com:/etc/nixos/secrets
+      rm -rf $SECRETS_FILE_PATH secrets
+
+  - switch-commit: |
+      ssh root@bespin.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
+
+  - remote-build: |
+      ssh root@bespin.sumnerevans.com "nixos-rebuild build --show-trace"
+
+  - switch-generation: |
+      ssh root@bespin.sumnerevans.com "nixos-rebuild switch --show-trace"
