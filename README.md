@@ -6,6 +6,9 @@
 This repository contains the NixOS configuration for my personal computers and
 servers.
 
+You can find my Home Manager Config here:
+https://git.sr.ht/~sumner/home-manager-config
+
 ## Hosts
 
 * Personal Computers
