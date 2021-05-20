@@ -5,23 +5,6 @@ let
   synapseCfg = config.services.matrix-synapse;
 in
 lib.mkIf synapseCfg.enable {
-  # For Spaces stable prefix
-  nixpkgs.overlays = [
-    (
-      self: super: {
-        matrix-synapse = super.matrix-synapse.overrideAttrs (old: rec {
-          pname = "matrix-synapse";
-          version = "1.34.0rc1";
-
-          src = self.python3.pkgs.fetchPypi {
-            inherit pname version;
-            sha256 = "0q4splcz1rby7aby2mh9cdnv6s131bjh8wmabvpn8wa0s9x9m8n2";
-          };
-        });
-      }
-    )
-  ];
-
   # Run Synapse
   services.matrix-synapse = {
     enable_registration = false;
