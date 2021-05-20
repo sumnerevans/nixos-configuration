@@ -36,7 +36,7 @@ tasks:
       ssh root@bespin.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
 
   - remote-build: |
-      ssh root@bespin.sumnerevans.com "nixos-rebuild build --show-trace"
+      ssh root@bespin.sumnerevans.com "nixos-rebuild build --verbose --show-trace"
 
   - switch-generation: |
-      ssh root@bespin.sumnerevans.com "nixos-rebuild switch --show-trace"
+      ssh root@bespin.sumnerevans.com "nixos-rebuild switch --verbose --show-trace"
