@@ -4,8 +4,9 @@ mkIf config.services.logrotate.enable {
     paths = {
       "nginx" = mkIf config.services.nginx.enable {
         user = "nginx";
+        keep = 10;
         group = "nginx";
-        path = "/var/log/nginx/*.log /var/spool/nginx/logs/*.log";
+        path = "/var/log/nginx/*.log";
         extraConfig = ''
           size 25M
           missingok
