@@ -67,9 +67,12 @@
   services.longview.enable = true;
   services.matrix-synapse.enable = true;
   services.murmur.enable = true;
-  services.postgresql.enable = true;
-  services.postgresqlBackup.enable = true;
   services.syncthing.enable = true;
   services.thelounge.enable = true;
   services.xandikos.enable = true;
+
+  # PosgreSQL
+  services.postgresql.enable = true;
+  services.postgresql.dataDir = "/mnt/postgresql-data/postgresql/11.1";
+  services.postgresqlBackup.enable = true;
 }
