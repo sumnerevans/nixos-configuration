@@ -4,10 +4,10 @@ python3Packages.buildPythonPackage rec {
   version = "unstable-2021-05-20";
 
   src = fetchFromGitHub {
-    owner = "hifi";
+    owner = "sumnerevans";
     repo = "heisenbridge";
-    rev = "2715a51737c63c34ba04177242fd92af9f7834a5";
-    sha256 = "sha256-C69QoQHbUw9XqjpsAD8HgrY7E3RTgCfkQjQhwcDLqiY=";
+    rev = "573b7f61d689715de7ff1bfdebf04686531c1793";
+    sha256 = "sha256-lI7TylNIJ9yydRvEVgm7mvKeyOJltjuQHBdlyHKsxrg=";
   };
 
   propagatedBuildInputs = with python3Packages; [
