@@ -20,7 +20,6 @@
     ./restic.nix
     ./sshd.nix
     ./syncthing.nix
-    ./thelounge.nix
     ./xandikos.nix
   ];
 }

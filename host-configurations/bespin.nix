@@ -67,7 +67,6 @@
   services.longview.enable = true;
   services.murmur.enable = true;
   services.syncthing.enable = true;
-  services.thelounge.enable = true;
   services.xandikos.enable = true;
 
   # Synapse
