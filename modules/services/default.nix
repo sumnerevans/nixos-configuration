@@ -17,6 +17,7 @@
     ./mumble.nix
     ./nginx.nix
     ./postgresql.nix
+    ./pr-tracker.nix
     ./restic.nix
     ./sshd.nix
     ./syncthing.nix

@@ -69,6 +69,13 @@
   services.syncthing.enable = true;
   services.xandikos.enable = true;
 
+  # PR Tracker
+  services.pr-tracker = {
+    enable = true;
+    githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
+    sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
+  };
+
   # Synapse
   services.matrix-synapse.enable = true;
   services.heisenbridge = {

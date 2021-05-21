@@ -7,6 +7,7 @@
 
   config = mkIf (config.xorg.enable || config.wayland.enable) {
     # Add some Gnome services to make things work.
+    programs.dconf.enable = true;
     services.dbus.packages = with pkgs; [ gnome.dconf gcr ];
     services.gnome.at-spi2-core.enable = true;
     services.gnome.gnome-keyring.enable = true;
