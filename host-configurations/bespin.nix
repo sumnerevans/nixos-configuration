@@ -65,11 +65,14 @@
   services.isso.enable = true;
   services.logrotate.enable = true;
   services.longview.enable = true;
-  services.matrix-synapse.enable = true;
   services.murmur.enable = true;
   services.syncthing.enable = true;
   services.thelounge.enable = true;
   services.xandikos.enable = true;
+
+  # Synapse
+  services.matrix-synapse.enable = true;
+  services.heisenbridge.enable = true;
 
   # PosgreSQL
   services.postgresql.enable = true;
