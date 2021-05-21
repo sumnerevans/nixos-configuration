@@ -72,7 +72,11 @@
 
   # Synapse
   services.matrix-synapse.enable = true;
-  services.heisenbridge.enable = true;
+  services.heisenbridge = {
+    enable = true;
+    appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";
+    homeserverToken = "yEHs7lthD2ZHUibJOAv1APaFhEjxN5PT";
+  };
 
   # PosgreSQL
   services.postgresql.enable = true;

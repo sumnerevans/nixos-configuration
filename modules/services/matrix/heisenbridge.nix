@@ -4,21 +4,33 @@
   heisenbridgePython = pkgs.python3.withPackages (ps: with ps; [
     heisenbridge
   ]);
-  heisenbridgeConfig = "${cfg.dataDir}/heisenbridge.yaml";
-  heisenbridgeCmd = ''
-    ${heisenbridgePython}/bin/python \
-      -m heisenbridge \
-      --config ${heisenbridgeConfig} \
-      --verbose --verbose \
-      --listen-address ${cfg.listenAddress} \
-      --listen-port ${toString cfg.listenPort} \
-      ${optionalString (cfg.ownerId != null) "--owner ${cfg.ownerId}"} \
-      ${cfg.homeserver}'';
+
+  heisenbridgeAppserviceConfig = {
+    id = "heisenbridge";
+    url = "http://${cfg.listenAddress}:${toString cfg.listenPort}";
+    as_token = cfg.appServiceToken;
+    hs_token = cfg.homeserverToken;
+    rate_limited = false;
+    sender_localpart = cfg.senderLocalpart;
+    namespaces = {
+      users = [{ regex = "@irc_.*"; exclusive = true; }];
+      aliases = [ ];
+      rooms = [ ];
+    };
+  };
+
+  heisenbridgeConfigYaml = pkgs.writeText "heisenbridge.yaml" (
+    generators.toYAML { } heisenbridgeAppserviceConfig);
 in
 {
   options = {
     services.heisenbridge = {
       enable = mkEnableOption "heisenbridge, a bouncer-style Matrix IRC bridge.";
+      useLocalSynapse = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Whether or not to use the local synapse instance.";
+      };
       homeserver = mkOption {
         type = types.str;
         default = "http://localhost:8008";
@@ -34,6 +46,11 @@ in
         default = 9898;
         description = "The port for heisenbridge to listen on.";
       };
+      senderLocalpart = mkOption {
+        type = types.str;
+        default = "heisenbridge";
+        description = "The localpart of the heisenbridge admin bot's username.";
+      };
       ownerId = mkOption {
         type = types.nullOr types.str;
         default = null;
@@ -42,12 +59,18 @@ in
           unspecified, the first talking local user will claim the bridge.
         '';
       };
-      dataDir = mkOption {
-        type = types.path;
-        default = "/var/lib/matrix-synapse";
+      appServiceToken = mkOption {
+        type = types.str;
         description = ''
-          The directory where heisenbridge places the generated app service
-          config file.
+          This is the token that the app service should use as its access_token
+          when using the Client-Server API. This can be anything you want.
+        '';
+      };
+      homeserverToken = mkOption {
+        type = types.str;
+        description = ''
+          This is the token that the homeserver will use when sending requests
+          to the app service. This can be anything you want.
         '';
       };
     };
@@ -57,41 +80,41 @@ in
     meta.maintainers = [ maintainers.sumnerevans ];
 
     assertions = [{
-      assertion = config.services.matrix-synapse.enable;
-      message = "Heisenbridge must be running on the same server as Synapse.";
+      assertion = cfg.useLocalSynapse -> config.services.matrix-synapse.enable;
+      message = ''
+        Heisenbridge must be running on the same server as Synapse if
+        'useLocalSynapse' is enabled.
+      '';
     }];
 
-    services.matrix-synapse.app_service_config_files = [ heisenbridgeConfig ];
+    services.matrix-synapse.app_service_config_files = mkIf cfg.useLocalSynapse [
+      heisenbridgeConfigYaml
+    ];
 
-    systemd.services.heisenbridge-generate = {
-      description = "Service to create the configuration for Heisenbridge.";
-      before = [ "matrix-synapse.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "matrix-synapse";
-        Group = "matrix-synapse";
-        WorkingDirectory = cfg.dataDir;
-        ExecStart = pkgs.writeShellScript "heisenbridge-create-config" ''
-          if [[ -f ${heisenbridgeConfig} ]]; then
-            exit 0
-          else
-            ${heisenbridgeCmd} --generate
-          fi
-        '';
-      };
+    # Create a user for heisenbridge.
+    users.users.heisenbridge = {
+      group = "heisenbridge";
+      isSystemUser = true;
     };
+    users.groups.heisenbridge = { };
 
     systemd.services.heisenbridge = {
       description = "Heisenbridge Matrix IRC bridge";
       after = [ "matrix-synapse.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        User = "matrix-synapse";
-        Group = "matrix-synapse";
-        WorkingDirectory = cfg.dataDir;
-        ExecStart = heisenbridgeCmd;
-        ExecReload = "${pkgs.util-linux}/bin/kill -HUP $MAINPID";
+        User = "heisenbridge";
+        Group = "heisenbridge";
+        ExecStart = ''
+          ${heisenbridgePython}/bin/python \
+            -m heisenbridge \
+            --config ${heisenbridgeConfigYaml} \
+            --verbose --verbose \
+            --listen-address ${cfg.listenAddress} \
+            --listen-port ${toString cfg.listenPort} \
+            ${optionalString (cfg.ownerId != null) "--owner ${cfg.ownerId}"} \
+            ${cfg.homeserver}
+        '';
         Restart = "on-failure";
       };
     };
