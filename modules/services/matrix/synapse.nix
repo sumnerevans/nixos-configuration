@@ -46,6 +46,29 @@ lib.mkIf synapseCfg.enable {
 
   # Set up nginx to forward requests properly.
   services.nginx.virtualHosts = {
+    ${config.networking.domain} = {
+      locations."= /.well-known/matrix/server".extraConfig =
+        let
+          server = { "m.server" = "${matrixDomain}:443"; };
+        in
+        ''
+          add_header Content-Type application/json;
+          return 200 '${builtins.toJSON server}';
+        '';
+      locations."= /.well-known/matrix/client".extraConfig =
+        let
+          client = {
+            "m.homeserver" = { "base_url" = "https://${matrixDomain}"; };
+            "m.identity_server" = { "base_url" = "https://vector.im"; };
+          };
+        in
+        ''
+          add_header Content-Type application/json;
+          add_header Access-Control-Allow-Origin *;
+          return 200 '${builtins.toJSON client}';
+        '';
+    };
+
     # Reverse proxy for Matrix client-server and server-server communication
     ${matrixDomain} = {
       enableACME = true;
