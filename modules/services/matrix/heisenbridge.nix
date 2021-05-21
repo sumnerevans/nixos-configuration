@@ -26,6 +26,9 @@ in
   options = {
     services.heisenbridge = {
       enable = mkEnableOption "heisenbridge, a bouncer-style Matrix IRC bridge.";
+      identd.enable = mkEnableOption "identd for heisenbridge" // {
+        default = true;
+      };
       useLocalSynapse = mkOption {
         type = types.bool;
         default = true;
@@ -98,13 +101,14 @@ in
     };
     users.groups.heisenbridge = { };
 
+    # Open ports for identd.
+    networking.firewall.allowedTCPPorts = mkIf cfg.identd.enable [ 113 ];
+
     systemd.services.heisenbridge = {
       description = "Heisenbridge Matrix IRC bridge";
       after = [ "matrix-synapse.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        User = "heisenbridge";
-        Group = "heisenbridge";
         ExecStart = ''
           ${heisenbridgePython}/bin/python \
             -m heisenbridge \
@@ -112,6 +116,9 @@ in
             --verbose --verbose \
             --listen-address ${cfg.listenAddress} \
             --listen-port ${toString cfg.listenPort} \
+            --uid heisenbridge \
+            --gid heisenbridge \
+            ${optionalString cfg.identd.enable "--identd"} \
             ${optionalString (cfg.ownerId != null) "--owner ${cfg.ownerId}"} \
             ${cfg.homeserver}
         '';
