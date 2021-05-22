@@ -13,8 +13,8 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromSourcehut {
     owner = "~sumner";
     repo = pname;
-    rev = "8f5bcddd8523403dc55dbb4056336369d9e497b2";
-    sha256 = "sha256-EA8IW9qbjpIzpB3xl9DW1xw2gBtUBUO0/YIGvuBQcu0=";
+    rev = "60c48d1d94ee335e8eae94a2f8e0863ebbe52b19";
+    sha256 = "sha256-xTankNu6MlBx9oBd8F4I4IoWFXNoiyuPvCJtSLpxlFI=";
   };
 
   cargoSha256 = "sha256-7i+h4Q5Gj3VD25Kz/B/gT/u5MXuE8G7Ghd7QUIyADpA=";
