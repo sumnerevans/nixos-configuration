@@ -12,6 +12,7 @@ lib.mkIf synapseCfg.enable {
       (builtins.readFile ../../../secrets/matrix-registration-shared-secret);
     server_name = config.networking.domain;
     max_upload_size = "250M";
+    url_preview_enabled = true;
     listeners = [
       {
         port = 8008;
