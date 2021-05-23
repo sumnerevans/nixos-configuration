@@ -24,11 +24,12 @@ https://git.sr.ht/~sumner/home-manager-config
     * [Isso](https://posativ.org/isso/)
     * [Syncthing](https://syncthing.net)
     * [Xandikos](https://www.xandikos.org/)
-* Praesitlyn: Linode VPS (communication services)
+* praesitlyn: Linode VPS (communication services)
     * [Murmur for Mumble](https://www.mumble.info/)
     * [Synapse](https://github.com/matrix-org/synapse)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
-* Nevarro: Linode VPS (bots and such)
+* nevarro: Linode VPS (bots and such)
+    * nevarro.space website
     * [Synapse](https://github.com/matrix-org/synapse)
 
 ## Installation Instructions

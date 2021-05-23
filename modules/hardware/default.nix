@@ -60,6 +60,12 @@ in
 
     (mkIf cfg.isServer {
       services.healthcheck.enable = true;
+      boot.loader.timeout = 10;
+      system.autoUpgrade.allowReboot = true;
+      nix.gc.automatic = true;
+
+      services.openssh.enable = true;
+      services.openssh.permitRootLogin = "prohibit-password";
     })
   ];
 }

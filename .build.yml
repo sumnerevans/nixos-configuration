@@ -26,17 +26,22 @@ tasks:
   - setup: |
       echo "cd $REPO_NAME" >> ~/.buildenv
       ssh-keyscan bespin.sumnerevans.com >> ~/.ssh/known_hosts
+      ssh-keyscan nevarro.nevarro.space >> ~/.ssh/known_hosts
 
   - send-secrets: |
       ./secrets_file_manager.sh extract
       rsync -vr --delete-after secrets/ root@bespin.sumnerevans.com:/etc/nixos/secrets
+      rsync -vr --delete-after secrets/ root@nevarro.nevarro.space:/etc/nixos/secrets
       rm -rf $SECRETS_FILE_PATH secrets
 
   - switch-commit: |
       ssh root@bespin.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
+      ssh root@nevarro.nevarro.com    "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
 
   - remote-build: |
       ssh root@bespin.sumnerevans.com "nixos-rebuild build --verbose --show-trace"
+      ssh root@nevarro.nevarro.com    "nixos-rebuild build --verbose --show-trace"
 
   - switch-generation: |
       ssh root@bespin.sumnerevans.com "nixos-rebuild switch --verbose --show-trace"
+      ssh root@nevarro.nevarro.com    "nixos-rebuild switch --verbose --show-trace"

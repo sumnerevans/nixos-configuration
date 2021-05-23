@@ -8,8 +8,6 @@ lib.mkIf synapseCfg.enable {
   # Run Synapse
   services.matrix-synapse = {
     enable_registration = false;
-    registration_shared_secret = lib.removeSuffix "\n"
-      (builtins.readFile ../../../secrets/matrix-registration-shared-secret);
     server_name = config.networking.domain;
     max_upload_size = "250M";
     url_preview_enabled = true;
@@ -36,6 +34,7 @@ lib.mkIf synapseCfg.enable {
 
   # Make sure that Postgres is setup for Synapse.
   services.postgresql = {
+    enable = true;
     ensureDatabases = [ "matrix-synapse" ];
     ensureUsers = [
       {
@@ -46,6 +45,7 @@ lib.mkIf synapseCfg.enable {
   };
 
   # Set up nginx to forward requests properly.
+  services.nginx.enable = true;
   services.nginx.virtualHosts = {
     ${config.networking.domain} = {
       locations."= /.well-known/matrix/server".extraConfig =

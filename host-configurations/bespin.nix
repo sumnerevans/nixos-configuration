@@ -1,18 +1,9 @@
-{ config, ... }: {
+{ config, lib, ... }: {
   hardware.isServer = true;
 
   # Set the hostname
   networking.hostName = "bespin";
   networking.domain = "sumnerevans.com";
-
-  # Bootloader timeout to 10 seconds.
-  boot.loader.timeout = 10;
-
-  # Allow reboots when automatically upgrading.
-  system.autoUpgrade.allowReboot = true;
-
-  # Automatically GC the nix store
-  nix.gc.automatic = true;
 
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "prohibit-password";
@@ -78,6 +69,8 @@
 
   # Synapse
   services.matrix-synapse.enable = true;
+  services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
+    (builtins.readFile ../secrets/matrix-registration-shared-secret);
   services.heisenbridge = {
     enable = true;
     appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";
