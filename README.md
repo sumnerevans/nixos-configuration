@@ -22,12 +22,10 @@ https://git.sr.ht/~sumner/home-manager-config
     * [GoAccess](https://goaccess.io/)
     * [Isso](https://posativ.org/isso/)
     * [Murmur for Mumble](https://www.mumble.info/)
-    * [Quassel](https://quassel-irc.org/)
     * [Synapse](https://github.com/matrix-org/synapse) for
       [Matrix](https://matrix.org)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
     * [Syncthing](https://syncthing.net)
-    * [Wireguard](https://www.wireguard.com/)
     * [Xandikos](https://www.xandikos.org/)
 
 ## Installation Instructions
