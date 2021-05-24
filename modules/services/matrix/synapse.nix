@@ -35,19 +35,22 @@ lib.mkIf synapseCfg.enable {
   # Make sure that Postgres is setup for Synapse.
   services.postgresql = {
     enable = true;
-    ensureDatabases = [ "matrix-synapse" ];
-    ensureUsers = [
-      {
-        name = "matrix-synapse";
-        ensurePermissions."DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
-      }
-    ];
+    initialScript = pkgs.writeText "synapse-init.sql" ''
+      CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
+      CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
+        TEMPLATE template0
+        LC_COLLATE = "C"
+        LC_CTYPE = "C";
+    '';
   };
 
   # Set up nginx to forward requests properly.
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
     ${config.networking.domain} = {
+      enableACME = true;
+      forceSSL = true;
+
       locations."= /.well-known/matrix/server".extraConfig =
         let
           server = { "m.server" = "${matrixDomain}:443"; };

@@ -61,7 +61,7 @@ in
       description = "Clone nixpkgs.";
       after = [ "network.target" ];
       serviceConfig = {
-        ExecStart = ''
+        ExecStart = pkgs.writeShellScript "clone-nixpkgs" ''
           if [[ ! -d ${nixpkgsDir} ]]; then
             ${pkgs.git}/bin/git clone \
               https://github.com/NixOS/nixpkgs.git \
