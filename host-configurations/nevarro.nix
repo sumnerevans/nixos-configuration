@@ -35,6 +35,10 @@
   services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
     (builtins.readFile ../secrets/matrix-registration-shared-secret-nevarro);
 
+  services.quotesfilebot.enable = true;
+  services.quotesfilebot.accessToken = lib.removeSuffix "\n"
+    (builtins.readFile ../secrets/quotesfilebot-access-token);
+
   # PosgreSQL
   services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";
   services.postgresqlBackup.enable = true;
