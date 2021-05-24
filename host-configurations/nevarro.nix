@@ -17,7 +17,7 @@
   ];
 
   # Websites
-  nginx.websites = [
+  services.nginx.websites = [
   ];
 
   # Services

@@ -20,7 +20,7 @@
   ];
 
   # Websites
-  nginx.websites = [
+  services.nginx.websites = [
     { hostname = "the-evans.family"; }
     { hostname = "qs.${config.networking.domain}"; }
     {

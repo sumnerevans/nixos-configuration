@@ -1,6 +1,7 @@
 { config, lib, ... }: with lib; let
   hostnameDomain = "${config.networking.hostName}.${config.networking.domain}";
-  websites = config.nginx.websites;
+  nginxCfg = config.services.nginx;
+  websites = nginxCfg.websites;
 
   permissionsPolicyDisables = [
     "accelerometer"
@@ -47,45 +48,23 @@ in
       };
     in
     {
-      nginx.websites = mkOption {
+      services.nginx.websites = mkOption {
         type = with types; listOf (submodule websiteSubmodule);
         default = [ ];
       };
     };
 
-  config = mkIf (websites != [ ]) {
-    # Enable nginx and add the static websites.
-    services.nginx = {
-      enable = true;
-      enableReload = true;
-      clientMaxBodySize = "250m";
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
+  config = mkMerge [
+    (mkIf nginxCfg.enable {
+      services.nginx = {
+        enableReload = true;
+        clientMaxBodySize = "250m";
+        recommendedGzipSettings = true;
+        recommendedOptimisation = true;
+        recommendedProxySettings = true;
+        recommendedTlsSettings = true;
 
-      virtualHosts =
-        let
-          websiteConfig = { hostname, extraLocations, ... }: {
-            name = hostname;
-            value = {
-              forceSSL = true;
-              enableACME = true;
-              locations = extraLocations // {
-                "/" = {
-                  root = "/var/www/${hostname}";
-                  extraConfig = ''
-                    # Put logs for each website in a separate log file.
-                    access_log /var/log/nginx/${hostname}.access.log;
-
-                    ${concatStringsSep "\n" securityHeaders}
-                  '';
-                };
-              };
-            };
-          };
-        in
-        (optionalAttrs (config.networking.domain != null) {
+        virtualHosts = (optionalAttrs (config.networking.domain != null) {
           ${hostnameDomain} = {
             forceSSL = true;
             enableACME = true;
@@ -96,14 +75,42 @@ in
               access_log off;
             '';
           };
-        })
-        // listToAttrs (map websiteConfig websites);
-    };
+        });
+      };
 
-    # Add metrics displays for each of the websites.
-    services.metrics.websites = websites;
+      # Open up the ports
+      networking.firewall.allowedTCPPorts = [ 80 443 ];
+    })
 
-    # Open up the ports
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
-  };
+    (mkIf (websites != [ ]) {
+      # Enable nginx and add the static websites.
+      services.nginx = {
+        virtualHosts =
+          let
+            websiteConfig = { hostname, extraLocations, ... }: {
+              name = hostname;
+              value = {
+                forceSSL = true;
+                enableACME = true;
+                locations = extraLocations // {
+                  "/" = {
+                    root = "/var/www/${hostname}";
+                    extraConfig = ''
+                      # Put logs for each website in a separate log file.
+                      access_log /var/log/nginx/${hostname}.access.log;
+
+                      ${concatStringsSep "\n" securityHeaders}
+                    '';
+                  };
+                };
+              };
+            };
+          in
+          listToAttrs (map websiteConfig websites);
+      };
+
+      # Add metrics displays for each of the websites.
+      services.metrics.websites = websites;
+    })
+  ];
 }
