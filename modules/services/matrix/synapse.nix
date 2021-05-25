@@ -5,6 +5,26 @@ let
   synapseCfg = config.services.matrix-synapse;
 in
 lib.mkIf synapseCfg.enable {
+  nixpkgs.overlays = [
+    (
+      self: super: {
+        matrix-synapse = super.matrix-synapse.overrideAttrs (old: rec {
+          pname = "matrix-synapse";
+          version = "1.35.0rc1";
+
+          src = self.python3.pkgs.fetchPypi {
+            inherit pname version;
+            sha256 = "sha256-/MMua3O2fofdTYOZZ0BsLeIfgkC2Q5SnYaY7VVjefn8=";
+          };
+
+          propagatedBuildInputs = old.propagatedBuildInputs ++ [
+            self.python3.pkgs.ijson
+          ];
+        });
+      }
+    )
+  ];
+
   # Run Synapse
   services.matrix-synapse = {
     enable_registration = false;
@@ -26,10 +46,6 @@ lib.mkIf synapseCfg.enable {
         ];
       }
     ];
-    extraConfig = ''
-      experimental_features:
-        spaces_enabled: True
-    '';
   };
 
   # Make sure that Postgres is setup for Synapse.
