@@ -16,6 +16,7 @@
 
   # Hotfixes
   # https://github.com/NixOS/nixpkgs/issues/124215
+  # https://pr-tracker.nevarro.space/?pr=124237
   nix.sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
   documentation.info.enable = false;
 }

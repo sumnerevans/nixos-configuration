@@ -49,6 +49,13 @@
     }
   ];
 
+  # PR Tracker has moved to Nevarro
+  services.nginx.virtualHosts."pr-tracker.${config.networking.domain}" = {
+    addSSL = true;
+    enableACME = true;
+    locations."/".return = "301 https://pr-tracker.nevarro.space$request_uri";
+  };
+
   # Services
   services.airsonic.enable = true;
   services.bitwarden_rs.enable = true;
@@ -59,13 +66,6 @@
   services.murmur.enable = true;
   services.syncthing.enable = true;
   services.xandikos.enable = true;
-
-  # PR Tracker
-  services.pr-tracker = {
-    enable = true;
-    githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
-    sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
-  };
 
   # Synapse
   services.matrix-synapse.enable = true;
