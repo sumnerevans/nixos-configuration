@@ -51,26 +51,29 @@ lib.mkIf synapseCfg.enable {
       enableACME = true;
       forceSSL = true;
 
-      locations."= /.well-known/matrix/server".extraConfig =
+      locations =
         let
           server = { "m.server" = "${matrixDomain}:443"; };
-        in
-        ''
-          add_header Content-Type application/json;
-          return 200 '${builtins.toJSON server}';
-        '';
-      locations."= /.well-known/matrix/client".extraConfig =
-        let
           client = {
             "m.homeserver" = { "base_url" = "https://${matrixDomain}"; };
             "m.identity_server" = { "base_url" = "https://vector.im"; };
           };
         in
-        ''
-          add_header Content-Type application/json;
-          add_header Access-Control-Allow-Origin *;
-          return 200 '${builtins.toJSON client}';
-        '';
+        {
+          "= /.well-known/matrix/server" = {
+            extraConfig = ''
+              add_header Content-Type application/json;
+            '';
+            return = "200 '${builtins.toJSON server}'";
+          };
+          "= /.well-known/matrix/client" = {
+            extraConfig = ''
+              add_header Content-Type application/json;
+              add_header Access-Control-Allow-Origin *;
+            '';
+            return = "200 '${builtins.toJSON client}'";
+          };
+        };
     };
 
     # Reverse proxy for Matrix client-server and server-server communication
@@ -80,9 +83,7 @@ lib.mkIf synapseCfg.enable {
 
       # If they access root, redirect to Element. If they access the API, then
       # forward on to Synapse.
-      locations."/".extraConfig = ''
-        return 301 https://app.element.io;
-      '';
+      locations."/".return = "301 https://app.element.io";
       locations."/_matrix" = {
         proxyPass = "http://[::1]:8008"; # without a trailing /
         extraConfig = ''
