@@ -7,6 +7,27 @@ in
 lib.mkIf synapseCfg.enable {
   # Run Synapse
   services.matrix-synapse = {
+    package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
+      pname = "matrix-synapse";
+      version = "1.35.0rc1";
+
+      src = pkgs.python3.pkgs.fetchPypi {
+        inherit pname version;
+        sha256 = "sha256-/MMua3O2fofdTYOZZ0BsLeIfgkC2Q5SnYaY7VVjefn8=";
+      };
+
+      propagatedBuildInputs = old.propagatedBuildInputs ++ [
+        pkgs.python3.pkgs.ijson
+      ];
+
+      checkPhase = ''
+        # these tests need the optional dependency 'hiredis'
+        rm -r tests/replication
+        rm -r tests/module_api
+        PYTHONPATH=".:$PYTHONPATH" ${pkgs.python3.interpreter} -m twisted.trial tests
+      '';
+    });
+
     enable_registration = false;
     server_name = config.networking.domain;
     max_upload_size = "250M";
@@ -26,10 +47,6 @@ lib.mkIf synapseCfg.enable {
         ];
       }
     ];
-    extraConfig = ''
-      experimental_features:
-        spaces_enabled: True
-    '';
   };
 
   # Make sure that Postgres is setup for Synapse.
