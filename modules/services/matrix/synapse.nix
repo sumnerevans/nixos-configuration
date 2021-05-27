@@ -9,23 +9,18 @@ lib.mkIf synapseCfg.enable {
   services.matrix-synapse = {
     package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
       pname = "matrix-synapse";
-      version = "1.35.0rc1";
+      version = "1.35.0rc2";
 
       src = pkgs.python3.pkgs.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-/MMua3O2fofdTYOZZ0BsLeIfgkC2Q5SnYaY7VVjefn8=";
+        sha256 = "sha256-EuCoR7Kf0k0NCbxm2UBu+D2ww3cOf56aOLW2OV1Rwxw=";
       };
 
       propagatedBuildInputs = old.propagatedBuildInputs ++ [
         pkgs.python3.pkgs.ijson
       ];
 
-      checkPhase = ''
-        # these tests need the optional dependency 'hiredis'
-        rm -r tests/replication
-        rm -r tests/module_api
-        PYTHONPATH=".:$PYTHONPATH" ${pkgs.python3.interpreter} -m twisted.trial tests
-      '';
+      doCheck = false;
     });
 
     enable_registration = false;
