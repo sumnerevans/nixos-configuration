@@ -13,10 +13,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
-
-  # Hotfixes
-  # https://github.com/NixOS/nixpkgs/issues/124215
-  # https://pr-tracker.nevarro.space/?pr=124237
-  nix.sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
-  documentation.info.enable = false;
 }
