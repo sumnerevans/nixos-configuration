@@ -81,6 +81,16 @@
     };
   }
   {
+    goPackagePath = "github.com/sethvargo/go-retry";
+    fetch = {
+      type = "git";
+      url = "https://github.com/sethvargo/go-retry";
+      rev = "v0.1.0";
+      sha256 = "1fdnw8zhz76c10s3v9lzvm3bczxnlvqmcf5b45m2j0cffd9s094c";
+      moduleDir = "";
+    };
+  }
+  {
     goPackagePath = "github.com/shurcooL/sanitized_anchor_name";
     fetch = {
       type = "git";
