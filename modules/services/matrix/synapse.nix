@@ -9,11 +9,11 @@ lib.mkIf synapseCfg.enable {
   services.matrix-synapse = {
     package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
       pname = "matrix-synapse";
-      version = "1.35.0rc2";
+      version = "1.35.0rc3";
 
       src = pkgs.python3.pkgs.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-EuCoR7Kf0k0NCbxm2UBu+D2ww3cOf56aOLW2OV1Rwxw=";
+        sha256 = "sha256-fax3G2dKxc+aaFDmLVAziGe6BTQZNcXcBtUJQ2JPfIk=";
       };
 
       propagatedBuildInputs = old.propagatedBuildInputs ++ [
