@@ -30,7 +30,7 @@ rustPlatform.buildRustPackage rec {
     '';
     platforms = platforms.linux;
     homepage = "https://git.qyliss.net/pr-tracker";
-    license = licenses.mit;
+    license = licenses.agpl3Plus;
     maintainers = with maintainers; [ sumnerevans ];
   };
 }

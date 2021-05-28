@@ -1,6 +1,6 @@
 # NixOS Configuration
 
-[![builds.sr.ht status](https://builds.sr.ht/~sumner/infrastructure/commits/.build.yml.svg)](https://builds.sr.ht/~sumner/infrastructure/commits/.build.yml)
+[![builds.sr.ht status](https://builds.sr.ht/~sumner/nixos-configuration/commits/.build.yml.svg)](https://builds.sr.ht/~sumner/nixos-configuration/commits/.build.yml)
 [![HealthCheck Status](https://healthchecks.io/badge/b8bf9b9d-b4bb-4c92-b546-1c69a0/BpOIMYGi.svg)](https://healthchecks.io/projects/8384107b-0803-48b3-bd99-7702d1214ca5/checks/)
 
 This repository contains the NixOS configuration for my personal computers and

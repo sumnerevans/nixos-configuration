@@ -1,5 +1,6 @@
 {
   imports = [
+    ./coturn.nix
     ./heisenbridge.nix
     ./quotesfilebot.nix
     ./synapse.nix
