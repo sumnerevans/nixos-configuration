@@ -37,7 +37,8 @@ lib.mkIf murmurCfg.enable {
   };
 
   # https://github.com/NixOS/nixpkgs/issues/106068#issuecomment-739534275
-  security.acme.certs."mumble.sumnerevans.com".group = "murmur-cert";
+  security.acme.certs.${serverName}.group = "murmur-cert";
+  security.acme.certs.${serverName}.postRun = "systemctl restart murmur.service";
   users.groups.murmur-cert.members = [ "murmur" "nginx" ];
 
   # Add a backup service.
