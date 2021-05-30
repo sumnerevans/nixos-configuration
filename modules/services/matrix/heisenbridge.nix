@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.heisenbridge;
   heisenbridge = pkgs.callPackage ../../../pkgs/heisenbridge.nix { };
-  heisenbridgePython = pkgs.python3.withPackages (ps: with ps; [
-    heisenbridge
-  ]);
 
   heisenbridgeAppserviceConfig = {
     id = "heisenbridge";
@@ -106,12 +103,11 @@ in
 
     systemd.services.heisenbridge = {
       description = "Heisenbridge Matrix IRC bridge";
-      after = [ "matrix-synapse.service" ];
+      after = optional cfg.useLocalSynapse "matrix-synapse.service";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStart = ''
-          ${heisenbridgePython}/bin/python \
-            -m heisenbridge \
+          ${heisenbridge}/bin/heisenbridge \
             --config ${heisenbridgeConfigYaml} \
             --verbose --verbose \
             --listen-address ${cfg.listenAddress} \
