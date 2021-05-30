@@ -5,7 +5,8 @@ let
   certs = config.security.acme.certs;
   staticAuthSecret = lib.removeSuffix "\n" (builtins.readFile ../../../secrets/coturn-static-auth-secret);
 in
-lib.mkIf config.services.matrix-synapse.enable {
+# TODO actually figure this out eventually
+lib.mkIf (false && config.services.matrix-synapse.enable) {
   services.coturn = rec {
     enable = true;
     no-cli = true;

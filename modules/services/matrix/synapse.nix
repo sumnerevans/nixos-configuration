@@ -7,21 +7,23 @@ in
 lib.mkIf synapseCfg.enable {
   # Run Synapse
   services.matrix-synapse = {
-    package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
-      pname = "matrix-synapse";
-      version = "1.35.0rc3";
+    package = pkgs.matrix-synapse.overridePythonAttrs (
+      old: rec {
+        pname = "matrix-synapse";
+        version = "1.35.0rc3";
 
-      src = pkgs.python3.pkgs.fetchPypi {
-        inherit pname version;
-        sha256 = "sha256-fax3G2dKxc+aaFDmLVAziGe6BTQZNcXcBtUJQ2JPfIk=";
-      };
+        src = pkgs.python3.pkgs.fetchPypi {
+          inherit pname version;
+          sha256 = "sha256-fax3G2dKxc+aaFDmLVAziGe6BTQZNcXcBtUJQ2JPfIk=";
+        };
 
-      propagatedBuildInputs = old.propagatedBuildInputs ++ [
-        pkgs.python3.pkgs.ijson
-      ];
+        propagatedBuildInputs = old.propagatedBuildInputs ++ [
+          pkgs.python3.pkgs.ijson
+        ];
 
-      doCheck = false;
-    });
+        doCheck = false;
+      }
+    );
 
     enable_registration = false;
     server_name = config.networking.domain;
@@ -42,6 +44,15 @@ lib.mkIf synapseCfg.enable {
         ];
       }
     ];
+
+    # Configure coturn to point at the matrix.org servers.
+    # TODO actually figure this out eventually
+    turn_uris = [
+      "turn:turn.matrix.org?transport=udp"
+      "turn:turn.matrix.org?transport=tcp"
+    ];
+    turn_shared_secret = "n0t4ctuAllymatr1Xd0TorgSshar3d5ecret4obvIousreAsons";
+    turn_user_lifetime = "1h";
   };
 
   # Make sure that Postgres is setup for Synapse.
@@ -71,21 +82,21 @@ lib.mkIf synapseCfg.enable {
             "m.identity_server" = { "base_url" = "https://vector.im"; };
           };
         in
-        {
-          "= /.well-known/matrix/server" = {
-            extraConfig = ''
-              add_header Content-Type application/json;
-            '';
-            return = "200 '${builtins.toJSON server}'";
+          {
+            "= /.well-known/matrix/server" = {
+              extraConfig = ''
+                add_header Content-Type application/json;
+              '';
+              return = "200 '${builtins.toJSON server}'";
+            };
+            "= /.well-known/matrix/client" = {
+              extraConfig = ''
+                add_header Content-Type application/json;
+                add_header Access-Control-Allow-Origin *;
+              '';
+              return = "200 '${builtins.toJSON client}'";
+            };
           };
-          "= /.well-known/matrix/client" = {
-            extraConfig = ''
-              add_header Content-Type application/json;
-              add_header Access-Control-Allow-Origin *;
-            '';
-            return = "200 '${builtins.toJSON client}'";
-          };
-        };
     };
 
     # Reverse proxy for Matrix client-server and server-server communication
