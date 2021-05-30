@@ -2,7 +2,7 @@
 
 buildGoPackage rec {
   pname = "quotesfilebot";
-  version = "0.1.0";
+  version = "0.1.1";
 
   buildInputs = [ olm ];
 
@@ -10,8 +10,8 @@ buildGoPackage rec {
   src = fetchFromGitLab {
     owner = "jrrobel";
     repo = "quotes-file-bot";
-    rev = "v0.1.0";
-    sha256 = "sha256-jXQYfXwkaExwmDmUIonzvYqq6Fi3sDCQO3lnPFcpboE=";
+    rev = "v${version}";
+    sha256 = "sha256-M939+UXDOXGrTEHrg/NnbjEFT2ZGVMtklonlK6gbEgo=";
   };
 
   goDeps = ./deps.nix;
