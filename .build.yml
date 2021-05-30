@@ -7,10 +7,7 @@ sources:
 secrets:
   # SSH Deploy Key
   - f219888a-80af-4275-a777-89e8c7d277f0
-  # Secrets Password File
-  - 2414c42a-6bbf-4f1f-a82e-cd64d661c31c
 environment:
-  SECRETS_FILE_PATH: /home/build/.secrets_password_file
   REPO_NAME: nixos-configuration
 # triggers:
 #   - action: email
@@ -27,12 +24,6 @@ tasks:
       echo "cd $REPO_NAME" >> ~/.buildenv
       ssh-keyscan bespin.sumnerevans.com >> ~/.ssh/known_hosts
       ssh-keyscan nevarro.nevarro.space >> ~/.ssh/known_hosts
-
-  - send-secrets: |
-      ./secrets_file_manager.sh extract
-      rsync -vr --delete-after secrets/ root@bespin.sumnerevans.com:/etc/nixos/secrets
-      rsync -vr --delete-after secrets/ root@nevarro.nevarro.space:/etc/nixos/secrets
-      rm -rf $SECRETS_FILE_PATH secrets
 
   - switch-commit: |
       ssh root@bespin.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
