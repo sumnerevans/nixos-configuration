@@ -46,9 +46,10 @@ https://git.sr.ht/~sumner/home-manager-config
 To install this configuration,
 
 1. Clone this repository to `/etc/nixos` on a NixOS system.
-2. Create a new host configuration in the `host-configurations` folder.
-3. Source the host configuration from `hardware-configuration.nix`.
-4. Run `sudo nixos-rebuild switch --upgrade`.
+2. Unlock the repo using `git-crypt unlock /path/to/git-crypt/key`.
+3. Create a new host configuration in the `host-configurations` folder.
+4. Source the host configuration from `hardware-configuration.nix`.
+5. Run `sudo nixos-rebuild switch --upgrade`.
 
 ## Goals
 
