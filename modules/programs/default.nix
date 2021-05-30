@@ -12,6 +12,7 @@
     direnv
     fd
     git
+    git-crypt
     gnupg
     htop
     iftop

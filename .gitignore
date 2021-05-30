@@ -4,8 +4,5 @@ hostname
 result
 services/window-manager/usesway
 
-secrets/
-secrets.tar
-.secrets_password_file
 .venv
 .restic_hostname

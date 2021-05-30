@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   propagatedBuildInputs = with pkgs; [
+    git-crypt
     gnutar
     nodePackages.bash-language-server
     openssl
