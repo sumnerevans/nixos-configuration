@@ -51,14 +51,14 @@ lib.mkIf config.services.matrix-synapse.enable {
   networking.firewall = {
     interfaces.enp2s0 =
       let
-        range = with config.services.coturn; [
+        ranges = with config.services.coturn; [
           { from = min-port; to = max-port; }
         ];
       in
         {
-          allowedUDPPortRanges = range;
+          allowedUDPPortRanges = ranges;
           allowedUDPPorts = [ 3478 ];
-          allowedTCPPortRanges = range;
+          allowedTCPPortRanges = ranges;
           allowedTCPPorts = [ 3478 ];
         };
   };
@@ -72,12 +72,12 @@ lib.mkIf config.services.matrix-synapse.enable {
   users.groups.turnserver.members = [ "turnserver" "nginx" ];
 
   # configure synapse to point users to coturn
-  # services.matrix-synapse = with config.services.coturn; {
-  #   turn_uris = [
-  #     "turn:${turnDomain}:3478?transport=udp"
-  #     "turn:${turnDomain}:3478?transport=tcp"
-  #   ];
-  #   turn_shared_secret = staticAuthSecret;
-  #   turn_user_lifetime = "1h";
-  # };
+  services.matrix-synapse = with config.services.coturn; {
+    turn_uris = [
+      "turn:${turnDomain}:3478?transport=udp"
+      "turn:${turnDomain}:3478?transport=tcp"
+    ];
+    turn_shared_secret = staticAuthSecret;
+    turn_user_lifetime = "1h";
+  };
 }
