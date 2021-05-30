@@ -1,16 +1,16 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.quotesfilebot;
-  quotesfilebot = pkgs.callPackage ../../../pkgs/quotesfilebot { };
+  quotesfilebot = pkgs.callPackage ../../../pkgs/quotesfilebot {};
 
   quotesfilebotConfig = {
     DefaultReactionEmoji = cfg.defaultReactionEmoji;
     Username = cfg.username;
     Homeserver = cfg.homeserver;
-    AccessToken = cfg.accessToken;
+    PasswordFile = cfg.passwordFile;
     JoinMessage = cfg.joinMessage;
   };
-  quotesfilebotConfigJson = pkgs.writeText "quotesfilebot.json" (
-    generators.toJSON { } quotesfilebotConfig);
+  format = pkgs.formats.json {};
+  quotesfilebotConfigJson = format.generate "quotesfilebot.json" quotesfilebotConfig;
 in
 {
   options = {
@@ -28,8 +28,13 @@ in
         type = types.str;
         default = "http://localhost:8008";
       };
-      accessToken = mkOption {
-        type = types.str;
+      passwordFile = mkOption {
+        type = types.path;
+        default = "/var/lib/quotesfilebot/passwordfile";
+      };
+      dataDir = mkOption {
+        type = types.path;
+        default = "/var/lib/quotesfilebot";
       };
       joinMessage = mkOption {
         type = types.str;
@@ -48,7 +53,18 @@ in
           ${quotesfilebot}/bin/quotes-file-bot --config ${quotesfilebotConfigJson}
         '';
         Restart = "on-failure";
+        User = "quotesfilebot";
       };
+    };
+
+    users = {
+      users.quotesfilebot = {
+        group = "quotesfilebot";
+        isSystemUser = true;
+        home = cfg.dataDir;
+        createHome = true;
+      };
+      groups.quotesfilebot = {};
     };
   };
 }

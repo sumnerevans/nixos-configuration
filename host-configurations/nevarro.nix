@@ -17,8 +17,7 @@
   ];
 
   # Websites
-  services.nginx.websites = [
-  ];
+  services.nginx.websites = [];
 
   # Services
   services.healthcheck.checkId = "0a1a1c13-e65d-4968-a498-c5709dcb2ae8";
@@ -36,8 +35,7 @@
     (builtins.readFile ../secrets/matrix-registration-shared-secret-nevarro);
 
   services.quotesfilebot.enable = true;
-  services.quotesfilebot.accessToken = lib.removeSuffix "\n"
-    (builtins.readFile ../secrets/quotesfilebot-access-token);
+  services.quotesfilebot.passwordFile = "/etc/nixos/secrets/quotesfilebot-password";
 
   # PosgreSQL
   services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";
