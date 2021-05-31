@@ -1,18 +1,13 @@
 image: nixos/unstable
-packages:
-  - nixos.openssl
-  - nixos.rsync
-sources:
-  - https://git.sr.ht/~sumner/nixos-configuration
 secrets:
   # SSH Deploy Key
   - f219888a-80af-4275-a777-89e8c7d277f0
 environment:
   REPO_NAME: nixos-configuration
-# triggers:
-#   - action: email
-#     condition: failure
-#     to: alerts@sumnerevans.com
+triggers:
+  - action: email
+    condition: failure
+    to: alerts@sumnerevans.com
 tasks:
   # Skip everything if not on master.
   - skip-not-master: |
