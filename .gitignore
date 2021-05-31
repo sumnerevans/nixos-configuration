@@ -1,8 +1,6 @@
 .direnv
 hardware-configuration.nix
-hostname
 result
-services/window-manager/usesway
 
 .venv
 .restic_hostname
