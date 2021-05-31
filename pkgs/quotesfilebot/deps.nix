@@ -281,6 +281,16 @@
     };
   }
   {
+    goPackagePath = "github.com/mitchellh/go-wordwrap";
+    fetch = {
+      type = "git";
+      url = "https://github.com/mitchellh/go-wordwrap";
+      rev = "v1.0.1";
+      sha256 = "12imq66hgj8q9ii2xqdy8apc0icphh6yimjb0div1pvl3s9gn83y";
+      moduleDir = "";
+    };
+  }
+  {
     goPackagePath = "github.com/onsi/ginkgo";
     fetch = {
       type = "git";
