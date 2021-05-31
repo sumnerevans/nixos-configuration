@@ -94,56 +94,64 @@ in
           extraLocations = mkOption {
             type = types.attrsOf (types.submodule options.services.nginx.virtualHosts.locations.type);
             description = "Exclude patterns for metrics.";
-            default = [ ];
+            default = [];
           };
           excludeTerms = mkOption {
             type = types.listOf types.str;
             description = "Exclude patterns for metrics.";
-            default = [ ];
+            default = [];
           };
         };
       };
     in
-    {
-      services.metrics = {
-        websites = mkOption {
-          type = with types; listOf (submodule websiteOpts);
-          description = ''
-            A list of websites to create metrics for.
-          '';
-          default = [ ];
+      {
+        services.metrics = {
+          websites = mkOption {
+            type = with types; listOf (submodule websiteOpts);
+            description = ''
+              A list of websites to create metrics for.
+            '';
+            default = [];
+          };
         };
       };
-    };
 
-  config = mkIf (cfg.websites != [ ]) {
+  config = mkIf (cfg.websites != []) {
     systemd.services =
       let
         mkGoaccessService = website: {
           name = "goaccess-${website.hostname}";
           value = {
-            description = "Goaccess web log report.";
-            wantedBy = [ "multi-user.target" ];
+            description = "Goaccess web log report for ${website.hostname}.";
             serviceConfig = {
               User = "root";
               ExecStart = "${goaccessWebsiteMetricsScript website}";
-              Restart = "always";
-              RestartSec = 600;
             };
           };
         };
       in
-      listToAttrs (map mkGoaccessService cfg.websites) // {
-        goaccess-index = {
-          description = "Generate Goaccess index.";
-          wantedBy = [ "multi-user.target" ];
-          serviceConfig = {
-            User = "root";
-            ExecStart = "${goaccessScript cfg.websites}";
-            Type = "oneshot";
+        listToAttrs (map mkGoaccessService cfg.websites) // {
+          goaccess-index = {
+            description = "Generate Goaccess index.";
+            serviceConfig = {
+              User = "root";
+              ExecStart = "${goaccessScript cfg.websites}";
+              Type = "oneshot";
+            };
           };
         };
+
+    systemd.timers = let
+      mkGoaccessTimer = website: {
+        name = "goaccess-${website.hostname}";
+        value = {
+          description = "Goaccess timer for ${website.hostname}";
+          wantedBy = [ "timers.target" ];
+          timerConfig.OnCalendar = "*:0/10";
+        };
       };
+    in
+      listToAttrs (map mkGoaccessTimer cfg.websites);
 
     # Set up nginx to forward requests properly.
     services.nginx.virtualHosts.${hostnameDomain} = {
