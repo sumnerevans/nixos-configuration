@@ -14,6 +14,9 @@
   xorg.enable = true;
   xorg.xkbVariant = "3l";
 
+  # Enable Docker.
+  virtualisation.docker.enable = true;
+
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
 }

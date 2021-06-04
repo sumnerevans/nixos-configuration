@@ -8,6 +8,7 @@
     ./airsonic.nix
     ./autoupgrade.nix
     ./bitwarden.nix
+    ./docker.nix
     ./goaccess.nix
     ./healthcheck.nix
     ./isso.nix

@@ -1,5 +1,5 @@
 { lib, pkgs, ... }: with pkgs; let
-  sof-firmware = callPackage ./intel-sof-firmware.nix { };
+  sof-firmware = callPackage ./intel-sof-firmware.nix {};
 in
 {
   # Set the hostname
@@ -8,6 +8,14 @@ in
   hardware.ramSize = 8;
   hardware.isLaptop = true;
   wayland.enable = true;
+
+  # Enable Synapse for dev.
+  services.matrix-synapse.enable = true;
+  services.matrix-synapse.isProd = false;
+  services.matrix-synapse.app_service_config_files = [
+    (writeText "registration.yaml" (builtins.readFile "/home/sumner/projects/linkedin-matrix/registration.yaml"))
+    (writeText "registration.yaml" (builtins.readFile "/home/sumner/projects/mautrix-facebook/registration.yaml"))
+  ];
 
   nixpkgs.overlays = [
     # sof-firmware so sleep works on Kohaku
