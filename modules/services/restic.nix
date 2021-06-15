@@ -37,7 +37,7 @@
     #!${pkgs.stdenv.shell}
     set -xe
 
-    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/a42858af-a9d7-4385-b02d-2679f92873ed/start
+    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckId}/start
 
     # Perfrom the backup
     ${resticCmd} backup \
@@ -48,14 +48,14 @@
     ${resticCmd} check
 
     # Ping healthcheck.io
-    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/a42858af-a9d7-4385-b02d-2679f92873ed
+    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckId}
   '';
 
   resticPruneScript = pkgs.writeScriptBin "restic-prune" ''
     #!${pkgs.stdenv.shell}
     set -xe
 
-    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/14ed7839-784f-4dee-adf2-f9e03c2b611e/start
+    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckPruneId}/start
 
     # Remove old backup sets. Keep hourly backups from the past week, daily
     # backups for the past 90 days, weekly backups for the last half year,
@@ -71,7 +71,7 @@
       --keep-yearly 20
 
     # Ping healthcheck.io
-    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/14ed7839-784f-4dee-adf2-f9e03c2b611e
+    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckPruneId}
   '';
 
   resticRestoreScript = path: pkgs.writeScriptBin "restic-restore" ''
@@ -188,6 +188,20 @@ in
           '';
           default = [ ];
           example = [ ".git/*" ];
+        };
+
+        healthcheckId = mkOption {
+          type = types.str;
+          description = ''
+            Healthcheck ID for this server's backup job.
+          '';
+        };
+
+        healthcheckPruneId = mkOption {
+          type = types.str;
+          description = ''
+            Healthcheck ID for this server's prune job.
+          '';
         };
       };
     };

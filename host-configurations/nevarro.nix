@@ -31,6 +31,10 @@
     sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
   };
 
+  # Restic backup
+  services.backup.healthcheckId = "5af26654-5ca7-405a-b8c4-e00a2fc6a5b0";
+  services.backup.healthcheckPruneId = "d58fb3c6-532b-4db2-9538-c3a5908f3d2c";
+
   # Synapse
   services.matrix-synapse.enable = true;
   services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
