@@ -10,6 +10,8 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  nix.enableRemoteBuildOnCoruscant = false;
+
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
 
