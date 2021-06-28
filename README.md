@@ -16,7 +16,7 @@ https://git.sr.ht/~sumner/home-manager-config
   * jedha: ThinkPad T580
   * mustafar: Samsung Galaxy Chromebook
 * Servers
-  * bespin: Linode VPS (random infra)
+  * bespin: Linode VPS (non-realtime critical infrastructure)
     * Personal Websites
     * [Airsonic](https://airsonic.github.io)
     * [Bitwarden RS](https://github.com/dani-garcia/bitwarden_rs)
@@ -24,13 +24,15 @@ https://git.sr.ht/~sumner/home-manager-config
     * [Isso](https://posativ.org/isso/)
     * [Syncthing](https://syncthing.net)
     * [Xandikos](https://www.xandikos.org/)
+    * [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
   * praesitlyn: Linode VPS (communication services)
     * [Murmur for Mumble](https://www.mumble.info/)
     * [Synapse](https://github.com/matrix-org/synapse)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
-  * nevarro: Linode VPS (bots and such)
+  * nevarro: Linode VPS (realtime infrastructure)
     * nevarro.space website
     * [Synapse](https://github.com/matrix-org/synapse)
+    * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
 
 ## Installation Instructions
 
