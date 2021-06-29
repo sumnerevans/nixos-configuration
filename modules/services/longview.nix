@@ -5,7 +5,6 @@ let
 in
 lib.mkIf longviewCfg.enable {
   services.longview = {
-    apiKeyFile = ../../secrets/longview-api-key;
     nginxStatusUrl = "https://${hostnameDomain}/status";
   };
 }
