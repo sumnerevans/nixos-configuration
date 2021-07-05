@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
   serverName = "bitwarden.${config.networking.domain}";
-  bitwardenCfg = config.services.bitwarden_rs;
+  bitwardenCfg = config.services.vaultwarden;
 in
 lib.mkIf bitwardenCfg.enable {
-  services.bitwarden_rs = {
+  services.vaultwarden = {
     config = {
       domain = "https://${serverName}";
       rocketAddress = "0.0.0.0";

@@ -58,13 +58,13 @@
 
   # Services
   services.airsonic.enable = true;
-  services.bitwarden_rs.enable = true;
   services.healthcheck.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
   services.isso.enable = true;
   services.logrotate.enable = true;
   services.longview.enable = true;
   services.murmur.enable = true;
   services.syncthing.enable = true;
+  services.vaultwarden.enable = true;
   services.xandikos.enable = true;
 
   # Longview
