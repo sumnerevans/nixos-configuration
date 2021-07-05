@@ -22,50 +22,56 @@ in
 
   config = mkMerge [
     {
-      assertions = [{
-        assertion = cfg.isPC -> !cfg.isServer;
-        message = "isPC and isServer are mutually exclusive";
-      }];
+      assertions = [
+        {
+          assertion = cfg.isPC -> !cfg.isServer;
+          message = "isPC and isServer are mutually exclusive";
+        }
+      ];
     }
 
-    (mkIf cfg.isPC {
-      boot.loader.systemd-boot.enable = true;
-      hardware.bluetooth.enable = true;
-      networking.networkmanager.enable = true;
+    (
+      mkIf cfg.isPC {
+        boot.loader.systemd-boot.enable = true;
+        hardware.bluetooth.enable = true;
+        networking.networkmanager.enable = true;
 
-      # TODO fix this
-      networking.firewall.enable = false;
+        # TODO fix this
+        networking.firewall.enable = false;
 
-      # Enable sound.
-      hardware.pulseaudio.enable = true;
-      hardware.pulseaudio.support32Bit = true;
+        # Enable sound.
+        hardware.pulseaudio.enable = true;
+        hardware.pulseaudio.support32Bit = true;
 
-      # Pipewire
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        jack.enable = true;
-        # pulse.enable = true;
-      };
+        # Pipewire
+        services.pipewire = {
+          enable = true;
+          alsa.enable = true;
+          jack.enable = true;
+          # pulse.enable = true;
+        };
 
-      # Suspend on power button press instead of shutdown.
-      services.logind.extraConfig = ''
-        HandlePowerKey=suspend
-      '';
+        # Suspend on power button press instead of shutdown.
+        services.logind.extraConfig = ''
+          HandlePowerKey=suspend
+        '';
 
-      # Enable Flatpak.
-      services.flatpak.enable = true;
-      xdg.portal.enable = true;
-    })
+        # Enable Flatpak.
+        services.flatpak.enable = true;
+        xdg.portal.enable = true;
+      }
+    )
 
-    (mkIf cfg.isServer {
-      services.healthcheck.enable = true;
-      boot.loader.timeout = 10;
-      system.autoUpgrade.allowReboot = true;
-      nix.gc.automatic = true;
+    (
+      mkIf cfg.isServer {
+        services.healthcheck.enable = true;
+        boot.loader.timeout = 10;
+        system.autoUpgrade.allowReboot = true;
+        nix.gc.automatic = true;
 
-      services.openssh.enable = true;
-      services.openssh.permitRootLogin = "prohibit-password";
-    })
+        services.openssh.enable = true;
+        services.openssh.permitRootLogin = "prohibit-password";
+      }
+    )
   ];
 }
