@@ -24,30 +24,27 @@
   # Services
   services.healthcheck.checkId = "0a1a1c13-e65d-4968-a498-c5709dcb2ae8";
 
-  # PR Tracker
-  services.pr-tracker = {
-    enable = true;
-    githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
-    sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
-  };
+  # Longview
+  services.longview.enable = true;
+  services.longview.apiKeyFile = ../secrets/nevarro-longview-api-key;
+
+  # Murmur
+  services.murmur.enable = true;
+
+  # PosgreSQL
+  services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";
+  services.postgresqlBackup.enable = true;
+
+  # Quotesfilebot
+  services.quotesfilebot.enable = true;
+  services.quotesfilebot.passwordFile = "/etc/nixos/secrets/quotesfilebot-password";
 
   # Restic backup
   services.backup.healthcheckId = "5af26654-5ca7-405a-b8c4-e00a2fc6a5b0";
   services.backup.healthcheckPruneId = "d58fb3c6-532b-4db2-9538-c3a5908f3d2c";
 
-  # Longview
-  services.longview.enable = true;
-  services.longview.apiKeyFile = ../secrets/nevarro-longview-api-key;
-
   # Synapse
   services.matrix-synapse.enable = true;
   services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
     (builtins.readFile ../secrets/matrix-registration-shared-secret-nevarro);
-
-  services.quotesfilebot.enable = true;
-  services.quotesfilebot.passwordFile = "/etc/nixos/secrets/quotesfilebot-password";
-
-  # PosgreSQL
-  services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";
-  services.postgresqlBackup.enable = true;
 }

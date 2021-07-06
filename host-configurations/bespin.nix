@@ -56,19 +56,27 @@
     locations."/".return = "301 https://pr-tracker.nevarro.space$request_uri";
   };
 
-  # Services
+  ############
+  # Services #
+  ############
   services.airsonic.enable = true;
   services.healthcheck.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
   services.isso.enable = true;
   services.logrotate.enable = true;
-  services.longview.enable = true;
-  services.murmur.enable = true;
   services.syncthing.enable = true;
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;
 
   # Longview
+  services.longview.enable = true;
   services.longview.apiKeyFile = ../secrets/bespin-longview-api-key;
+
+  # PR Tracker
+  services.pr-tracker = {
+    enable = true;
+    githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
+    sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
+  };
 
   # Restic backup
   services.backup.healthcheckId = "a42858af-a9d7-4385-b02d-2679f92873ed";

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.pr-tracker;
-  serverName = "pr-tracker.${config.networking.domain}";
+  serverName = "pr-tracker.nevarro.space";
   pr-tracker = pkgs.callPackage ../../pkgs/pr-tracker.nix { };
   nixpkgsDir = "${cfg.homeDir}/nixpkgs";
 in
