@@ -21,15 +21,15 @@
     { hostname = "nevarro.space"; }
   ];
 
-  # Services
+  ############
+  # Services #
+  ############
   services.healthcheck.checkId = "0a1a1c13-e65d-4968-a498-c5709dcb2ae8";
+  services.murmur.enable = true;
 
   # Longview
   services.longview.enable = true;
   services.longview.apiKeyFile = ../secrets/nevarro-longview-api-key;
-
-  # Murmur
-  services.murmur.enable = true;
 
   # PosgreSQL
   services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";

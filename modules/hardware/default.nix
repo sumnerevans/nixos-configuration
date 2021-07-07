@@ -40,15 +40,15 @@ in
         networking.firewall.enable = false;
 
         # Enable sound.
-        # hardware.pulseaudio.enable = true;
-        # hardware.pulseaudio.support32Bit = true;
+        hardware.pulseaudio.enable = true;
+        hardware.pulseaudio.support32Bit = true;
 
         # Pipewire
         services.pipewire = {
           enable = true;
           alsa.enable = true;
           jack.enable = true;
-          pulse.enable = true;
+          # pulse.enable = true;
         };
 
         # Suspend on power button press instead of shutdown.
