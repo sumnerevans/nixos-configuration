@@ -27,6 +27,12 @@
         min_wal_size = "1GB";
         max_wal_size = "4GB";
       };
+
+      systemd.services.postgresql = {
+        serviceConfig = {
+          TimeoutSec = mkForce 0;
+        };
+      };
     }
   )
 

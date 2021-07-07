@@ -91,6 +91,7 @@
     appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";
     homeserverToken = "yEHs7lthD2ZHUibJOAv1APaFhEjxN5PT";
   };
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/bespin-cleanup-synapse-environment";
 
   # PosgreSQL
   services.postgresql.enable = true;

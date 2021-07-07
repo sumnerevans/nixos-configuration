@@ -47,4 +47,5 @@
   services.matrix-synapse.enable = true;
   services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
     (builtins.readFile ../secrets/matrix-registration-shared-secret-nevarro);
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/nevarro-cleanup-synapse-environment";
 }
