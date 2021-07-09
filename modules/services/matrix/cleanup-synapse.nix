@@ -34,25 +34,25 @@ let
     done < $to_purge
   '';
 
-  # Delete all non-local room history that is from before 90 days ago.
-  cleanupHistory = writeShellScriptBin "cleanup-history" ''
-    set -xe
-    roomlist=$(mktemp)
+  # # Delete all non-local room history that is from before 90 days ago.
+  # cleanupHistory = writeShellScriptBin "cleanup-history" ''
+  #   set -xe
+  #   roomlist=$(mktemp)
 
-    ${adminCurl} '${adminUrl}/rooms?limit=1000' |
-      ${jq}/bin/jq -r '.rooms[] | .room_id' > $roomlist
+  #   ${adminCurl} '${adminUrl}/rooms?limit=1000' |
+  #     ${jq}/bin/jq -r '.rooms[] | .room_id' > $roomlist
 
-    now=$(${coreutils}/bin/date +%s%N | ${coreutils}/bin/cut -b1-13)
-    nintey_days_ago=$(( now - 7776000000 ))
+  #   now=$(${coreutils}/bin/date +%s%N | ${coreutils}/bin/cut -b1-13)
+  #   nintey_days_ago=$(( now - 7776000000 ))
 
-    while read room_id; do 
-      echo "purging history for $room_id..."
+  #   while read room_id; do 
+  #     echo "purging history for $room_id..."
 
-      ${adminCurl} -X POST -H "Content-Type: application/json" \
-        -d "{ \"delete_local_events\": false, \"purge_up_to_ts\": $nintey_days_ago }" \
-        "${adminUrl}/purge_history/$room_id"
-    done < $roomlist
-  '';
+  #     ${adminCurl} -X POST -H "Content-Type: application/json" \
+  #       -d "{ \"delete_local_events\": false, \"purge_up_to_ts\": $nintey_days_ago }" \
+  #       "${adminUrl}/purge_history/$room_id"
+  #   done < $roomlist
+  # '';
 
   largeStateRoomsQuery = "SELECT room_id FROM state_groups_state GROUP BY room_id HAVING count(*) > 100000";
   compressState = writeShellScriptBin "compress-state" ''
@@ -96,7 +96,6 @@ let
   cleanupSynapseScript = writeShellScriptBin "cleanup-synapse" ''
     set -xe
     ${cleanupForgottenRooms}/bin/cleanup-forgotten
-    # ${cleanupHistory}/bin/cleanup-history
     ${compressState}/bin/compress-state
     ${reindexAndVaccum}/bin/reindex-and-vaccum
   '';
