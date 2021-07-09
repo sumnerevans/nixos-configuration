@@ -3,15 +3,8 @@
 let
   matrixDomain = "matrix.${config.networking.domain}";
   synapseCfg = config.services.matrix-synapse;
-  prodSynapse = synapseCfg.isProd;
 in
 {
-  options = {
-    services.matrix-synapse.isProd = mkEnableOption "configuring Synapse for a production environment" // {
-      default = true;
-    };
-  };
-
   config = mkIf synapseCfg.enable {
     # Run Synapse
     services.matrix-synapse = {
@@ -29,9 +22,8 @@ in
         }
       );
 
-      database_type = mkIf (!prodSynapse) "sqlite3";
-      enable_registration = !prodSynapse;
-      server_name = if prodSynapse then config.networking.domain else "localhost";
+      enable_registration = false;
+      server_name = config.networking.domain;
       max_upload_size = "250M";
       url_preview_enabled = true;
       listeners = [
@@ -61,7 +53,7 @@ in
     };
 
     # Make sure that Postgres is setup for Synapse.
-    services.postgresql = mkIf prodSynapse {
+    services.postgresql = {
       enable = true;
       initialScript = pkgs.writeText "synapse-init.sql" ''
         CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
@@ -73,7 +65,7 @@ in
     };
 
     # Set up nginx to forward requests properly.
-    services.nginx = mkIf prodSynapse {
+    services.nginx = {
       enable = true;
       virtualHosts = {
         ${config.networking.domain} = {
@@ -124,7 +116,7 @@ in
     };
 
     # Add a backup service.
-    services.backup.backups.matrix = mkIf prodSynapse {
+    services.backup.backups.matrix = {
       path = config.services.matrix-synapse.dataDir;
     };
   };

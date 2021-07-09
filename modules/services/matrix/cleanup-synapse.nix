@@ -7,7 +7,6 @@ with lib;
 let
   cfg = config.services.cleanup-synapse;
   synapseCfg = config.services.matrix-synapse;
-  prodSynapse = synapseCfg.isProd;
 
   adminUrl = "http://localhost:8008/_synapse/admin/v1";
   adminCurl = ''${curl}/bin/curl --header "Authorization: Bearer $CLEANUP_ACCESS_TOKEN" '';
@@ -108,7 +107,7 @@ in
     };
   };
 
-  config = mkIf (synapseCfg.enable && prodSynapse) {
+  config = mkIf synapseCfg.enable {
     systemd.services.cleanup-synapse = {
       description = "Cleanup synapse";
       startAt = "*-10"; # Cleanup everything on the 10th of each month.
