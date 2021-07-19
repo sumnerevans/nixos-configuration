@@ -19,4 +19,10 @@
 
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
+
+  # Enable VirtualBox
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
 }
