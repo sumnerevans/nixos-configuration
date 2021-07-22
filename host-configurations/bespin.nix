@@ -86,12 +86,47 @@
   services.matrix-synapse.enable = true;
   services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
     (builtins.readFile ../secrets/matrix-registration-shared-secret);
+
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/bespin-cleanup-synapse-environment";
+
   services.heisenbridge = {
     enable = true;
     appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";
     homeserverToken = "yEHs7lthD2ZHUibJOAv1APaFhEjxN5PT";
   };
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/bespin-cleanup-synapse-environment";
+
+  services.mx-puppet-slack = {
+    enable = true;
+    appServiceToken = "7d41cf7f-48f2-4049-b10c-aa3212970252";
+    homeserverToken = "ccc42ba6-b9be-4531-b493-00bde4a7de18";
+    settings = {
+      bridge = {
+        domain = "localhost";
+        homeserverUrl = "http://localhost:8008";
+      };
+      oauth = {
+        enabled = true;
+        clientId = "14071139778.2289586013335";
+        clientSecret = "b7b33ebb49aa9af7cbb88de4a86d95f3";
+        redirectPath = "/oauth";
+        redirectUri = "https://slack.sumnerevans.com/oauth";
+      };
+      backfill = {
+        initialLimit = 100;
+        missedLimit = 100;
+      };
+    };
+  };
+  services.nginx.virtualHosts."slack.${config.networking.domain}" = {
+    addSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://[::1]:8432";
+      extraConfig = ''
+        access_log /var/log/nginx/matrix.access.log;
+      '';
+    };
+  };
 
   # PosgreSQL
   services.postgresql.enable = true;
