@@ -23,22 +23,30 @@ in
       );
 
       enable_registration = false;
+      enable_metrics = true;
       server_name = config.networking.domain;
       max_upload_size = "250M";
       url_preview_enabled = true;
       listeners = [
+        # CS API and Federation
         {
           port = 8008;
           bind_address = "::1";
-          type = "http";
           tls = false;
           x_forwarded = true;
           resources = [
-            {
-              names = [ "client" "federation" ];
-              compress = false;
-            }
+            { names = [ "client" ]; compress = true; }
+            { names = [ "federation" ]; compress = false; }
           ];
+        }
+
+        # Metrics
+        {
+          port = 9009;
+          bind_address = "0.0.0.0";
+          tls = false;
+          type = "metrics";
+          resources = []; # need to specify because the module is stupid
         }
       ];
 
@@ -113,6 +121,19 @@ in
           };
         };
       };
+    };
+
+    # Make sure that Prometheus is setup for Synapse.
+    services.prometheus = {
+      enable = true;
+      scrapeConfigs = [
+        {
+          job_name = "synapse";
+          scrape_interval = "15s";
+          metrics_path = "/_synapse/metrics";
+          static_configs = [ { targets = [ "0.0.0.0:9009" ]; } ];
+        }
+      ];
     };
 
     # Add a backup service.

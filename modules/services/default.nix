@@ -10,6 +10,7 @@
     ./bitwarden.nix
     ./docker.nix
     ./goaccess.nix
+    ./grafana.nix
     ./healthcheck.nix
     ./isso.nix
     ./logrotate.nix
