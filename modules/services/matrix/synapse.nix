@@ -36,7 +36,6 @@ in
           SYSLOG_IDENTIFIER = "synapse";
         };
         root = { level = "INFO"; handlers = [ "journal" ]; };
-        "synapse.state.metrics" = { level = "DEBUG"; handlers = [ "journal" ]; };
         disable_existing_loggers = false;
       };
 
