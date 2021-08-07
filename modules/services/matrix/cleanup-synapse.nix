@@ -1,6 +1,7 @@
 # See:
 # - https://levans.fr/shrink-synapse-database.html
 # - https://foss-notes.blog.nomagic.uk/2021/03/matrix-database-house-cleaning/
+# - https://git.envs.net/envs/matrix-conf/src/branch/master/usr/local/bin
 { config, lib, pkgs, ... }:
 with pkgs;
 with lib;
@@ -53,12 +54,16 @@ let
   #   done < $roomlist
   # '';
 
-  largeStateRoomsQuery = "SELECT room_id FROM state_groups_state GROUP BY room_id HAVING count(*) > 100000";
+  largeStateRoomsQuery = "SELECT room_id FROM state_groups GROUP BY room_id ORDER BY count(*)";
   compressState = writeShellScriptBin "compress-state" ''
     set -xe
     bigrooms=$(mktemp)
     echo "\\copy (${largeStateRoomsQuery}) to '$bigrooms' with CSV" |
       ${postgresql}/bin/psql -d matrix-synapse
+
+    echo 'Disabling autovacuum on state_groups_state'
+    echo 'ALTER TABLE state_groups_state SET (AUTOVACUUM_ENABLED = FALSE);' |
+      /run/wrappers/bin/sudo -u postgres ${postgresql}/bin/psql -d matrix-synapse
 
     while read room_id; do
       echo "compressing state for $room_id"
@@ -68,13 +73,27 @@ let
       ${matrix-synapse-tools.rust-synapse-compress-state}/bin/synapse-compress-state \
         -t \
         -o $state_compressor \
+        -m 1000 \
         -p "host=localhost user=matrix-synapse password=synapse dbname=matrix-synapse" \
         -r $room_id
 
-      ${postgresql}/bin/psql -d matrix-synapse < $state_compressor
+      if test -s "$state_compressor"
+      then
+        ${postgresql}/bin/psql -d matrix-synapse -c '\set ON_ERROR_STOP on' -f $state_compressor
+      fi
+
+      echo "done compressing state for $room_id"
 
       rm $state_compressor
     done <$bigrooms
+
+    echo 'Enabling autovacuum on state_groups_state'
+    echo 'ALTER TABLE state_groups_state SET (AUTOVACUUM_ENABLED = TRUE);' |
+      /run/wrappers/bin/sudo -u postgres ${postgresql}/bin/psql -d matrix-synapse
+
+    echo 'Running VACUUM and ANALYZE for state_groups_state ...'
+    echo 'VACUUM FULL ANALYZE state_groups_state' |
+      /run/wrappers/bin/sudo -u postgres ${postgresql}/bin/psql -d matrix-synapse
 
     rm $bigrooms
   '';
