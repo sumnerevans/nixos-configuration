@@ -9,7 +9,7 @@ pkgs.mkShell {
     rnix-lsp
 
     (
-      python38.withPackages (
+      python3.withPackages (
         ps: with ps; [
           digital-ocean
           flake8
