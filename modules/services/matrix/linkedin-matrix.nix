@@ -52,6 +52,12 @@
       bot_avatar = "mxc://sumnerevans.com/XMtwdeUBnxYvWNFFrfeTSHqB";
       as_token = cfg.appServiceToken;
       hs_token = cfg.homeserverToken;
+
+      provisioning = {
+        enabled = true;
+        prefix = "/provision";
+        shared_secret = "supersecrettoken"; # provisioning API is not public
+      };
     };
 
     bridge = {
