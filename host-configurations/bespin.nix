@@ -60,6 +60,7 @@
   # Services #
   ############
   services.airsonic.enable = true;
+  services.grafana.enable = true;
   services.healthcheck.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
   services.isso.enable = true;
   services.logrotate.enable = true;
