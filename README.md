@@ -32,6 +32,7 @@ https://git.sr.ht/~sumner/home-manager-config
     * nevarro.space website
     * [Synapse](https://github.com/matrix-org/synapse)
     * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
+    * [standupbot](https://sr.ht/~sumner/standupbot)
 
 ## Installation Instructions
 

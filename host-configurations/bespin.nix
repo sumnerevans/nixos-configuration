@@ -92,6 +92,11 @@
     appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";
     homeserverToken = "yEHs7lthD2ZHUibJOAv1APaFhEjxN5PT";
   };
+  services.linkedin-matrix = {
+    enable = true;
+    appServiceToken = "c82e53eb-8d5e-4459-9a97-a4bd4956005b";
+    homeserverToken = "913a0862-9f30-4214-a706-a649ef7e2dc0";
+  };
   services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/bespin-cleanup-synapse-environment";
 
   # PosgreSQL
