@@ -1,0 +1,52 @@
+diff --git a/linkedin_messaging/linkedin.py b/linkedin_messaging/linkedin.py
+index b127054..62e4ab5 100644
+--- a/linkedin_messaging/linkedin.py
++++ b/linkedin_messaging/linkedin.py
+@@ -136,7 +136,11 @@ class LinkedInMessaging:
+         await self.session.close()
+ 
+     async def _get(self, relative_url: str, **kwargs: Any) -> aiohttp.ClientResponse:
+-        return await self.session.get(API_BASE_URL + relative_url, **kwargs)
++        logging.info(f"REQUEST TO {API_BASE_URL + relative_url} WITH {kwargs}")
++        resp = await self.session.get(API_BASE_URL + relative_url, **kwargs)
++        logging.info(f"REQUEST TO {API_BASE_URL + relative_url} WITH {kwargs} DONE")
++        logging.info(await resp.text())
++        return resp
+ 
+     async def _post(self, relative_url: str, **kwargs: Any) -> aiohttp.ClientResponse:
+         return await self.session.post(API_BASE_URL + relative_url, **kwargs)
+@@ -523,6 +527,9 @@ class LinkedInMessaging:
+     async def _listen_to_event_stream(self):
+         logging.info("Starting event stream listener")
+ 
++        logging.info(REALTIME_CONNECT_URL)
++        logging.info(REQUEST_HEADERS)
++
+         async with self.session.get(
+             REALTIME_CONNECT_URL,
+             headers={"content-type": "text/event-stream", **REQUEST_HEADERS},
+@@ -531,13 +538,16 @@ class LinkedInMessaging:
+             # state where it's not receiving any data, but simultaneously isn't closed.
+             timeout=120,
+         ) as resp:
++            logging.info("INSIDE")
+             if resp.status != 200:
+                 raise Exception(f"Failed to connect. Status {resp.status}.")
+ 
+             while True:
++                logging.info("WAITING")
+                 line = await resp.content.readline()
+                 if resp.content.at_eof():
+                     break
++                logging.debug(line)
+ 
+                 if not line.startswith(b"data:"):
+                     continue
+@@ -570,6 +580,7 @@ class LinkedInMessaging:
+             try:
+                 await self._listen_to_event_stream()
+             except asyncio.exceptions.TimeoutError as te:
++                logging.exception("TIMEOUT")
+                 # Special handling for TIMEOUT handler.
+                 if all_events_handlers := self.event_listeners.get("TIMEOUT"):
+                     for handler in all_events_handlers:

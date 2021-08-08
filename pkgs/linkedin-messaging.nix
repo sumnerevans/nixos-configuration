@@ -24,6 +24,10 @@ buildPythonPackage rec {
     dataclasses-json
   ];
 
+  patches = [
+    ./0001-add-super-verbose-logs.patch
+  ];
+
   pythonImportsCheck = [ "linkedin_messaging" ];
 
   meta = with lib; {
