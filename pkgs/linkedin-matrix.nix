@@ -11,8 +11,8 @@ buildPythonPackage rec {
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "linkedin";
-    rev = "400118adc35886bf1d9af6567e61a74fd0fc272f";
-    sha256 = "sha256-t9anyBT+B1Xm7zPjjTEWb1vB33lRpm7cwDUETYE/xmE=";
+    rev = "7f96d284b3ce110bdbd26565004c215f7b410c28";
+    sha256 = "sha256-z5rZUTvUWC79EeGAyNGdCea6gCQfTShLVHHhb0XlZZg=";
   };
 
   nativeBuildInputs = [
