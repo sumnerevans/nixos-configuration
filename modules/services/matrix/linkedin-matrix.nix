@@ -217,5 +217,17 @@ in
         Restart = "on-failure";
       };
     };
+
+    services.prometheus = {
+      enable = true;
+      scrapeConfigs = [
+        {
+          job_name = "linkedinmatirx";
+          scrape_interval = "15s";
+          metrics_path = "/";
+          static_configs = [ { targets = [ "0.0.0.0:9010" ]; } ];
+        }
+      ];
+    };
   };
 }
