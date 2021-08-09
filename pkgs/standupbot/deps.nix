@@ -121,6 +121,16 @@
     };
   }
   {
+    goPackagePath = "github.com/google/uuid";
+    fetch = {
+      type = "git";
+      url = "https://github.com/google/uuid";
+      rev = "v1.3.0";
+      sha256 = "0imkw52m7fzrwsdj2rfrk3zbplqfbwncyv6hv89xw0vdw3jpk122";
+      moduleDir = "";
+    };
+  }
+  {
     goPackagePath = "github.com/gorilla/mux";
     fetch = {
       type = "git";
@@ -257,16 +267,6 @@
       url = "https://github.com/sethvargo/go-retry";
       rev = "v0.1.0";
       sha256 = "1fdnw8zhz76c10s3v9lzvm3bczxnlvqmcf5b45m2j0cffd9s094c";
-      moduleDir = "";
-    };
-  }
-  {
-    goPackagePath = "github.com/siddontang/go";
-    fetch = {
-      type = "git";
-      url = "https://github.com/siddontang/go";
-      rev = "bdc77568d726";
-      sha256 = "0qx28xwqby3pl2r62y700x7j7aplmfm4hrq0y49p4ar8927mpxl6";
       moduleDir = "";
     };
   }
@@ -474,7 +474,7 @@
     goPackagePath = "maunium.net/go/mautrix";
     fetch = {
       type = "git";
-      url = "https://github.com/tulir/mautrix-go.git";
+      url = "https://github.com/mautrix/go.git";
       rev = "v0.9.14";
       sha256 = "0jdhwqflx4nz2jy4n4m3bav3vs6cj4s06z9jf93c8159y3g4qjz6";
       moduleDir = "";
