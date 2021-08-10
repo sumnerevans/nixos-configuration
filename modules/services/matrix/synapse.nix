@@ -48,7 +48,7 @@ in
         # CS API and Federation
         {
           port = 8008;
-          bind_address = "::1";
+          bind_address = "0.0.0.0";
           tls = false;
           x_forwarded = true;
           resources = [
@@ -131,7 +131,7 @@ in
           # forward on to Synapse.
           locations."/".return = "301 https://app.element.io";
           locations."/_matrix" = {
-            proxyPass = "http://[::1]:8008"; # without a trailing /
+            proxyPass = "http://0.0.0.0:8008"; # without a trailing /
             extraConfig = ''
               access_log /var/log/nginx/matrix.access.log;
             '';

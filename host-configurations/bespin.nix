@@ -8,6 +8,7 @@
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "prohibit-password";
 
+  networking.enableIPv6 = false;
   networking.interfaces.eth0.useDHCP = true;
 
   # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
