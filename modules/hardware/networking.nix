@@ -7,11 +7,24 @@
   }
 
   # If NetworkManager is enabled, then also enable strong swan integration.
-  (mkIf config.networking.networkmanager.enable {
-    networking.networkmanager.enableStrongSwan = true;
-  })
+  (
+    mkIf config.networking.networkmanager.enable {
+      networking.networkmanager.enableStrongSwan = true;
+    }
+  )
 
-  (mkIf (!config.networking.networkmanager.enable) {
-    networking.usePredictableInterfaceNames = false;
-  })
+  (
+    mkIf (!config.networking.networkmanager.enable) {
+      networking.usePredictableInterfaceNames = false;
+
+      services.unbound = {
+        enable = true;
+        settings = {
+          server = {
+            do-ip6 = "no";
+          };
+        };
+      };
+    }
+  )
 ]
