@@ -1,22 +1,21 @@
 { lib, fetchFromGitLab, python3 }: with python3.pkgs;
 let
-  mautrix = callPackage ./mautrix.nix {};
   linkedin-messaging = callPackage ./linkedin-messaging.nix {};
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
-  version = "unstable-2021-08-10";
+  version = "0.5.0";
   format = "pyproject";
 
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "linkedin";
-    rev = "f2937a9e4ff25712bcd8e8b3c7b8c2be46ee5d1a";
-    sha256 = "sha256-hXFTgsyyp8oVxY1vIWYFyEcZf0trIFx9sRZED+znfzw=";
+    rev = "v${version}";
+    sha256 = "sha256-hV28s5GlCNB5H6010nGMaz4261HjPkpyUgS0WfzQK4s=";
   };
 
   nativeBuildInputs = [
-    python3.pkgs.poetry
+    poetry
   ];
 
   propagatedBuildInputs = [
