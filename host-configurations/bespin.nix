@@ -57,6 +57,21 @@
     locations."/".return = "301 https://pr-tracker.nevarro.space$request_uri";
   };
 
+  # Host reverse proxy services
+  services.nginx.virtualHosts."tunnel.${config.networking.domain}" = {
+    addSSL = true;
+    enableACME = true;
+
+    extraConfig = ''
+      error_page 502 /50x.html;
+    '';
+
+    locations = {
+      "/50x.html".root = "/usr/share/nginx/html";
+      "/".proxyPass = "http://localhost:1337/";
+    };
+  };
+
   ############
   # Services #
   ############
