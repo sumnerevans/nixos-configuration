@@ -475,8 +475,8 @@
     fetch = {
       type = "git";
       url = "https://github.com/mautrix/go.git";
-      rev = "v0.9.14";
-      sha256 = "0jdhwqflx4nz2jy4n4m3bav3vs6cj4s06z9jf93c8159y3g4qjz6";
+      rev = "v0.9.23";
+      sha256 = "1dcyvkwh2diwsv61cib8zm4pah31lmvyjn8d34l0al99ypsqfrf3";
       moduleDir = "";
     };
   }
