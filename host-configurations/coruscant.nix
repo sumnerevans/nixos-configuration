@@ -5,6 +5,8 @@
   hardware.ramSize = 32;
   xorg.enable = true;
 
+  programs.steam.enable = true;
+
   networking.interfaces.enp37s0.useDHCP = true;
   networking.interfaces.wlp35s0.useDHCP = true;
 
