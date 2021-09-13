@@ -35,6 +35,8 @@ in
     )
   ];
 
+  virtualisation.docker.enable = true;
+
   # Get sound working
   # hardware.firmware = [ sof-firmware ];
   hardware.enableAllFirmware = true;

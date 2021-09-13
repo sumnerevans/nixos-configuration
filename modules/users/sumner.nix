@@ -6,6 +6,7 @@
     hashedPassword = "$6$p0WfA2vae4b5QahY$/qCwuUV.tVZEajIq7xcFUqcVD6iXAOK0kVPxki27flq4NXNn1XTTbH4s0RQedyKArAg1D2.Y0V0xQF.B/TME90";
     extraGroups = [
       "audio"
+      "docker"
       "networkmanager"
       "wheel" # Enable 'sudo' for the user.
     ];
