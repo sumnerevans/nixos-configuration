@@ -14,7 +14,7 @@ in
     nixpkgs.overlays =
       let
         rev = "master";
-        url = "https://github.com/colemickens/nixpkgs-wayland/archive/${rev}.tar.gz";
+        url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz";
         waylandOverlay = (import (builtins.fetchTarball url));
       in
       [ waylandOverlay ];
