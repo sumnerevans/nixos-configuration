@@ -59,6 +59,9 @@ in
         # Enable Flatpak.
         services.flatpak.enable = true;
         xdg.portal.enable = true;
+
+        # Enable YubiKey smart card mode.
+        services.pcscd.enable = true;
       }
     )
 
