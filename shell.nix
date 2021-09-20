@@ -11,7 +11,6 @@ pkgs.mkShell {
     (
       python3.withPackages (
         ps: with ps; [
-          digital-ocean
           flake8
           jedi
           pynvim
