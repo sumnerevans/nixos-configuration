@@ -2,7 +2,7 @@
 
 buildGoPackage rec {
   pname = "standupbot";
-  version = "0.3.1rc1";
+  version = "0.3.1rc2";
 
   buildInputs = [ olm ];
 
@@ -10,8 +10,8 @@ buildGoPackage rec {
   src = fetchFromSourcehut {
     owner = "~sumner";
     repo = "standupbot";
-    rev = "7236338e5f0cc9fe56730b89d299dddd688f977a";
-    sha256 = "sha256-w1aqBTlin3aS2feiNPlN1riZU+cBJGDXsfR6suVx9vg=";
+    rev = "bfd423d948608489a8c538083a70550fd82834d1";
+    sha256 = "sha256-a7sFFIAfYSkmoZm8i8w/x24+jq3RtaHoMP+YjIxlUDw=";
   };
 
   goDeps = ./deps.nix;
