@@ -18,6 +18,15 @@ in
             sha256 = "sha256-t3ZXtEq/sHYymta4gYfmdBzpExyxepGQ4lzvZii2Q70=";
           };
 
+          patches = (old.patches or []) ++ [
+            (
+              pkgs.fetchpatch {
+                url = "https://patch-diff.githubusercontent.com/raw/matrix-org/synapse/pull/10875.patch";
+                sha256 = "sha256-uZ+fGMSihsEz6YkdcTRjif0mrKHpJEcNRgVxZl8hfYc=";
+              }
+            )
+          ];
+
           doCheck = false;
         }
       );
