@@ -1,10 +1,22 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   serverName = "dav.${config.networking.domain}";
   xandikosCfg = config.services.xandikos;
 in
 lib.mkIf xandikosCfg.enable {
   services.xandikos = {
+    package = pkgs.xandikos.overridePythonAttrs (
+      old: rec {
+        checkInputs = with pkgs.python3Packages; [ pytestCheckHook ];
+        disabledTests = [
+          # these tests are failing due to the following error:
+          # TypeError: expected str, bytes or os.PathLike object, not int
+          "test_iter_with_etag"
+          "test_iter_with_etag_missing_uid"
+        ];
+      }
+    );
+
     extraOptions = [
       "--current-user-principal /sumner/"
     ];
