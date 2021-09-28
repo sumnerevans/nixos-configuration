@@ -4,14 +4,14 @@ with python3.pkgs;
 
 buildPythonPackage rec {
   pname = "linkedin-messaging";
-  version = "0.4.3";
+  version = "0.5.0";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = "linkedin-messaging-api";
     rev = "v${version}";
-    sha256 = "sha256-o5MNb3lVTEVLQY2s3oyh0cqnXwnei703if5C+o+QYBQ=";
+    sha256 = "sha256-Jjhaua9zUDX+dMaaFNKVf2cojRIfiVjHZvNlmJHw8rc=";
   };
 
   nativeBuildInputs = [

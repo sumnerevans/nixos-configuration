@@ -4,14 +4,14 @@ let
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
-  version = "unstable-2021-09-07";
+  version = "unstable-2021-09-27";
   format = "pyproject";
 
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "linkedin";
-    rev = "9c3b1acde17585f50182240d4c043904bfc83534";
-    sha256 = "sha256-SWZMoY4VFNti1P2sblFTznF23AyjKFlNgrhSLElW2nM=";
+    rev = "86911582208fcbbfe081ff6e8a86bd16d7c251b0";
+    sha256 = "sha256-ObJzFrJUmGp+TYLZUf0vZXU3I0jB8JnDFdrROSGfhx8=";
   };
 
   nativeBuildInputs = [
