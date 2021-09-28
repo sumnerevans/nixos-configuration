@@ -14,6 +14,8 @@
   xorg.enable = true;
   xorg.xkbVariant = "3l";
 
+  programs.steam.enable = true;
+
   # Enable Docker.
   virtualisation.docker.enable = true;
 
