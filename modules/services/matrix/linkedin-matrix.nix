@@ -108,9 +108,10 @@
         };
       };
       loggers = {
+        aiohttp.level = "DEBUG";
         mau.level = "DEBUG";
         paho.level = "DEBUG";
-        aiohttp.level = "DEBUG";
+        root.level = "DEBUG";
       };
       root = { level = "DEBUG"; handlers = [ "journal" ]; };
     };

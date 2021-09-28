@@ -1,6 +1,6 @@
 { lib, fetchFromGitLab, python3 }: with python3.pkgs;
 let
-  linkedin-messaging = callPackage ./linkedin-messaging.nix {};
+  linkedin-messaging = callPackage ./linkedin-messaging.nix { };
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
@@ -19,12 +19,15 @@ buildPythonPackage rec {
   ];
 
   propagatedBuildInputs = [
+    aiohttp
     asyncpg
+    cffi
     CommonMark
     linkedin-messaging
     mautrix
     pillow
     prometheus_client
+    pycryptodome
     python-olm
     python_magic
     ruamel-yaml
