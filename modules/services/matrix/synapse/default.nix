@@ -27,7 +27,7 @@ let
 
   yamlFormat = pkgs.formats.yaml { };
 
-  logConfigYaml = {
+  logConfig = {
     version = 1;
     formatters.journal_fmt.format = "%(name)s: [%(request)s] %(message)s";
     filters.context = {
@@ -46,7 +46,7 @@ let
 
   # This is organized to match the sections in
   # https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
-  yamlConfig = {
+  sharedConfig = {
     # Server
     server_name = config.networking.domain;
     pid_file = "/run/matrix-synapse.pid";
@@ -71,7 +71,13 @@ let
         type = "metrics";
       }
 
-      # TODO add replication
+      # Replication
+      {
+        type = "http";
+        port = 9093;
+        bind_address = "127.0.0.1";
+        resources = [{ names = [ "replication" ]; }];
+      }
     ];
 
     # Caching
@@ -85,7 +91,7 @@ let
     };
 
     # Logging
-    log_config = yamlFormat.generate "matrix-synapse-log-config.yaml" logConfigYaml;
+    log_config = yamlFormat.generate "matrix-synapse-log-config.yaml" logConfig;
 
     # Media store
     media_store_path = "${cfg.dataDir}/media";
@@ -125,9 +131,14 @@ let
     signing_key_path = "${cfg.dataDir}/homeserver.signing.key";
 
     # TODO email
+
+    # Redis
+    redis = {
+      enabled = true;
+    };
   };
 
-  configFile = yamlFormat.generate "matrix-synapse-config.yaml" yamlConfig;
+  configFile = yamlFormat.generate "matrix-synapse-config.yaml" sharedConfig;
 in
 {
   imports = [
@@ -222,6 +233,9 @@ in
           LC_CTYPE = "C";
       '';
     };
+
+    # Ensure that Redis is setup for Synapse.
+    services.redis.enable = true;
 
     # Set up nginx to forward requests properly.
     services.nginx = {
