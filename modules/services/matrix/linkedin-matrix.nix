@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.linkedin-matrix;
-  synapseCfg = config.services.matrix-synapse;
+  synapseCfg = config.services.matrix-synapse-custom;
 
   linkedin-matrix = pkgs.callPackage ../../../pkgs/linkedin-matrix.nix {};
 
@@ -172,7 +172,7 @@ in
 
     assertions = [
       {
-        assertion = cfg.useLocalSynapse -> config.services.matrix-synapse.enable;
+        assertion = cfg.useLocalSynapse -> config.services.matrix-synapse-custom.enable;
         message = ''
           LinkedIn must be running on the same server as Synapse if
           'useLocalSynapse' is enabled.
@@ -180,7 +180,7 @@ in
       }
     ];
 
-    services.matrix-synapse.app_service_config_files = mkIf cfg.useLocalSynapse [
+    services.matrix-synapse-custom.appServiceConfigFiles = mkIf cfg.useLocalSynapse [
       linkedinMatrixAppserviceConfigYaml
     ];
 

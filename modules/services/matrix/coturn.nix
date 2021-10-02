@@ -6,6 +6,7 @@ let
   staticAuthSecret = lib.removeSuffix "\n" (builtins.readFile ../../../secrets/coturn-static-auth-secret);
 in
 # TODO actually figure this out eventually
+# TODO will need to convert to use matrix-synapse-custom
 lib.mkIf (false && config.services.matrix-synapse.enable) {
   services.coturn = rec {
     enable = true;

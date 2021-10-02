@@ -100,9 +100,8 @@
   services.backup.healthcheckPruneId = "14ed7839-784f-4dee-adf2-f9e03c2b611e";
 
   # Synapse
-  services.matrix-synapse.enable = true;
-  services.matrix-synapse.registration_shared_secret = lib.removeSuffix "\n"
-    (builtins.readFile ../secrets/matrix-registration-shared-secret);
+  services.matrix-synapse-custom.enable = true;
+  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix-registration-shared-secret;
   services.heisenbridge = {
     enable = true;
     appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";

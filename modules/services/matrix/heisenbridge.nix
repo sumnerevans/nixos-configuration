@@ -80,14 +80,14 @@ in
     meta.maintainers = [ maintainers.sumnerevans ];
 
     assertions = [{
-      assertion = cfg.useLocalSynapse -> config.services.matrix-synapse.enable;
+      assertion = cfg.useLocalSynapse -> config.services.matrix-synapse-custom.enable;
       message = ''
         Heisenbridge must be running on the same server as Synapse if
         'useLocalSynapse' is enabled.
       '';
     }];
 
-    services.matrix-synapse.app_service_config_files = mkIf cfg.useLocalSynapse [
+    services.matrix-synapse-custom.appServiceConfigFiles = mkIf cfg.useLocalSynapse [
       heisenbridgeConfigYaml
     ];
 
