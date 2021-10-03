@@ -16,8 +16,8 @@
     };
   };
 
-  heisenbridgeConfigYaml = pkgs.writeText "heisenbridge.yaml" (
-    generators.toYAML { } heisenbridgeAppserviceConfig);
+  yamlFormat = pkgs.formats.yaml { };
+  heisenbridgeConfigYaml = yamlFormat.generate "heisenbridge.yaml" heisenbridgeAppserviceConfig;
 in
 {
   options = {
