@@ -2,7 +2,7 @@
   cfg = config.services.linkedin-matrix;
   synapseCfg = config.services.matrix-synapse-custom;
 
-  linkedin-matrix = pkgs.callPackage ../../../pkgs/linkedin-matrix.nix {};
+  linkedin-matrix = pkgs.callPackage ../../../pkgs/linkedin-matrix.nix { };
 
   linkedinMatrixAppserviceConfig = {
     id = "linkedin";
@@ -16,14 +16,14 @@
         { regex = "@li_.*:sumnerevans.com"; exclusive = true; }
         { regex = "@linkedinbot:sumnerevans.com"; exclusive = true; }
       ];
-      aliases = [];
-      rooms = [];
+      aliases = [ ];
+      rooms = [ ];
     };
   };
 
-  linkedinMatrixAppserviceConfigYaml = pkgs.writeText "linkedin-matrix-registration.yaml" (
-    generators.toYAML {} linkedinMatrixAppserviceConfig
-  );
+  yamlFormat = pkgs.formats.yaml { };
+
+  linkedinMatrixAppserviceConfigYaml = yamlFormat.generate "linkedin-matrix-registration.yaml" linkedinMatrixAppserviceConfig;
 
   linkedinMatrixConfig = {
     homeserver = {
@@ -117,9 +117,7 @@
     };
   };
 
-  linkedinMatrixConfigYaml = pkgs.writeText "linkedin-config.yaml" (
-    generators.toYAML {} linkedinMatrixConfig
-  );
+  linkedinMatrixConfigYaml = yamlFormat.generate "linkedin-config.yaml" linkedinMatrixConfig;
 in
 {
   options = {
@@ -189,7 +187,7 @@ in
       group = "linkedinmatrix";
       isSystemUser = true;
     };
-    users.groups.linkedinmatrix = {};
+    users.groups.linkedinmatrix = { };
 
     # Create a database user for linkedin-matrix
     services.postgresql.ensureDatabases = [ "linkedin-matrix" ];
@@ -226,7 +224,7 @@ in
           job_name = "linkedinmatirx";
           scrape_interval = "15s";
           metrics_path = "/";
-          static_configs = [ { targets = [ "0.0.0.0:9010" ]; } ];
+          static_configs = [{ targets = [ "0.0.0.0:9010" ]; }];
         }
       ];
     };
