@@ -7,7 +7,7 @@ with pkgs;
 with lib;
 let
   cfg = config.services.cleanup-synapse;
-  synapseCfg = config.services.matrix-synapse;
+  synapseCfg = config.services.matrix-synapse-custom;
 
   adminUrl = "http://localhost:8008/_synapse/admin/v1";
   adminCurl = ''${curl}/bin/curl --header "Authorization: Bearer $CLEANUP_ACCESS_TOKEN" '';
