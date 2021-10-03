@@ -132,16 +132,61 @@ let
 
     # Signing Keys
     signing_key_path = "${cfg.dataDir}/homeserver.signing.key";
+    trusted_key_servers = [
+      { server_name = "matrix.org"; }
+    ];
+    suppress_key_server_warning = true;
 
-    # TODO email
+    # TODO email?
 
-    # Redis
+    # Workers
+    send_federation = false;
+    federation_sender_instances = [ "federation_sender1" ];
     redis = {
       enabled = true;
     };
   };
 
-  configFile = yamlFormat.generate "matrix-synapse-config.yaml" sharedConfig;
+  sharedConfigFile = yamlFormat.generate
+    "matrix-synapse-config.yaml"
+    sharedConfig;
+
+  mkSynapseWorkerService = config: mkMerge [
+    config
+    {
+      after = [ "matrix-synapse.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "notify";
+        User = "matrix-synapse";
+        Group = "matrix-synapse";
+        WorkingDirectory = cfg.dataDir;
+        ExecReload = "${pkgs.util-linux}/bin/kill -HUP $MAINPID";
+        Restart = "on-failure";
+        UMask = "0077";
+      };
+    }
+  ];
+
+  mkSynapseWorkerConfig = port: config: config // {
+    # The replication listener on the main synapse process.
+    worker_replication_host = "127.0.0.1";
+    worker_replication_http_port = 9093;
+    worker_listeners = [
+      {
+        type = "metrics";
+        bind_address = "";
+        port = port;
+      }
+    ];
+  };
+
+  federationSender1ConfigFile = yamlFormat.generate
+    "federation-sender-1.yaml"
+    (mkSynapseWorkerConfig 9101 {
+      worker_app = "synapse.app.federation_sender";
+      worker_name = "federation_sender1";
+    });
 in
 {
   imports = [
@@ -192,14 +237,14 @@ in
       gid = config.ids.gids.matrix-synapse;
     };
 
-    # Run Synapse
+    # Run the main Synapse process
     systemd.services.matrix-synapse = {
       description = "Synapse Matrix homeserver";
       after = [ "network.target" "postgresql.service" ];
       wantedBy = [ "multi-user.target" ];
       preStart = ''
         ${package}/bin/homeserver \
-          --config-path ${configFile} \
+          --config-path ${sharedConfigFile} \
           --keys-directory ${cfg.dataDir} \
           --generate-keys
       '';
@@ -216,13 +261,24 @@ in
         ];
         ExecStart = ''
           ${package}/bin/homeserver \
-            --config-path ${configFile} \
+            --config-path ${sharedConfigFile} \
             --keys-directory ${cfg.dataDir}
         '';
         ExecReload = "${pkgs.util-linux}/bin/kill -HUP $MAINPID";
         Restart = "on-failure";
         UMask = "0077";
       };
+    };
+
+    # Run the federation sender worker
+    systemd.services.matrix-synapse-federation-sender1 = mkSynapseWorkerService {
+      description = "Synapse Matrix federation sender 1";
+      serviceConfig.ExecStart = ''
+        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.federation_sender \
+          --config-path ${sharedConfigFile} \
+          --config-path ${federationSender1ConfigFile} \
+          --keys-directory ${cfg.dataDir}
+      '';
     };
 
     # Make sure that Postgres is setup for Synapse.
@@ -299,7 +355,17 @@ in
           job_name = "synapse";
           scrape_interval = "15s";
           metrics_path = "/_synapse/metrics";
-          static_configs = [{ targets = [ "0.0.0.0:9009" ]; }];
+          static_configs = [
+            {
+              targets = [ "0.0.0.0:9009" ];
+              labels = { instance = matrixDomain; job = "master"; index = "1"; };
+            }
+            {
+            # Federation sender 1
+              targets = [ "0.0.0.0:9101" ];
+              labels = { instance = matrixDomain; job = "federation_sender"; index = "1"; };
+            }
+          ];
         }
       ];
     };
