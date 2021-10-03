@@ -22,7 +22,7 @@ in
         username = "comments@sumnerevans.com";
         password = lib.removeSuffix "\n" (builtins.readFile ../../secrets/isso-comments-smtp-password);
         host = "smtp.migadu.com";
-        port = 465;
+        port = 587;
         security = "starttls";
         to = "admin@sumnerevans.com";
         from = "comments@sumnerevans.com";
