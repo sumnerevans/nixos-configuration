@@ -127,6 +127,9 @@ let
     enable_metrics = true;
     report_stats = true;
 
+    # API Configuration
+    app_service_config_files = cfg.appServiceConfigFiles;
+
     # Signing Keys
     signing_key_path = "${cfg.dataDir}/homeserver.signing.key";
 
