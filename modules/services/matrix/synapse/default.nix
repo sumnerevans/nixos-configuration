@@ -165,15 +165,22 @@ let
     }
   ];
 
-  mkSynapseWorkerConfig = config: config // {
+  mkSynapseWorkerConfig = port: config: config // {
     # The replication listener on the main synapse process.
     worker_replication_host = "127.0.0.1";
     worker_replication_http_port = 9093;
+    worker_listeners = [
+      {
+        type = "metrics";
+        bind_address = "";
+        port = port;
+      }
+    ];
   };
 
   federationSender1ConfigFile = yamlFormat.generate
     "federation-sender-1.yaml"
-    (mkSynapseWorkerConfig {
+    (mkSynapseWorkerConfig 9101 {
       worker_app = "synapse.app.federation_sender";
       worker_name = "federation_sender1";
     });
@@ -345,7 +352,17 @@ in
           job_name = "synapse";
           scrape_interval = "15s";
           metrics_path = "/_synapse/metrics";
-          static_configs = [{ targets = [ "0.0.0.0:9009" ]; }];
+          static_configs = [
+            {
+              targets = [ "0.0.0.0:9009" ];
+              labels = { instance = matrixDomain; job = "master"; index = "1"; };
+            }
+            {
+            # Federation sender 1
+              targets = [ "0.0.0.0:9101" ];
+              labels = { instance = matrixDomain; job = "federation_sender"; index = "1"; };
+            }
+          ];
         }
       ];
     };
