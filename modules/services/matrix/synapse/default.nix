@@ -8,11 +8,11 @@ let
   package = pkgs.matrix-synapse.overridePythonAttrs (
     old: rec {
       pname = "matrix-synapse";
-      version = "1.44.0rc2";
+      version = "1.44.0";
 
       src = pkgs.python3.pkgs.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-kX68TYMv8WH3qFSCDQY0HkLQ/CEEIAYoQTJy/zUzsFg=";
+        sha256 = "sha256-oH8FXHSa120/Fys21UJfAAFPehJxEbQ8Op98PYkK8dE=";
       };
 
       # Enable Redis support
