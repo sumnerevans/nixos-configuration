@@ -85,7 +85,7 @@
 
   # Longview
   services.longview.enable = true;
-  services.longview.apiKeyFile = ../secrets/bespin-longview-api-key;
+  services.longview.apiKeyFile = ../secrets/longview/bespin;
 
   # PR Tracker
   services.pr-tracker = {
@@ -100,18 +100,14 @@
 
   # Synapse
   services.matrix-synapse-custom.enable = true;
-  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix-registration-shared-secret;
+  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/praesitlyn;
   services.heisenbridge = {
     enable = true;
-    appServiceToken = "wyujLh8kjpmk2bfKeEE3sZ2gWOEUBKK5";
-    homeserverToken = "yEHs7lthD2ZHUibJOAv1APaFhEjxN5PT";
-  };
+  } // (import ../secrets/matrix/appservices/heisenbridge.nix);
   services.linkedin-matrix = {
     enable = true;
-    appServiceToken = "c82e53eb-8d5e-4459-9a97-a4bd4956005b";
-    homeserverToken = "913a0862-9f30-4214-a706-a649ef7e2dc0";
-  };
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/bespin-cleanup-synapse-environment";
+  } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/praesitlyn";
 
   # PosgreSQL
   services.postgresql.enable = true;

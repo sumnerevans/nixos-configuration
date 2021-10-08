@@ -19,7 +19,7 @@ https://git.sr.ht/~sumner/home-manager-config
   * bespin: Linode VPS (non-realtime critical infrastructure)
     * Personal Websites
     * [Airsonic](https://airsonic.github.io)
-    * [Bitwarden RS](https://github.com/dani-garcia/bitwarden_rs)
+    * [vaultwarden](https://github.com/dani-garcia/vaultwarden)
     * [GoAccess](https://goaccess.io/)
     * [Isso](https://posativ.org/isso/)
     * [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
@@ -28,11 +28,16 @@ https://git.sr.ht/~sumner/home-manager-config
     * [Murmur for Mumble](https://www.mumble.info/)
     * [Synapse](https://github.com/matrix-org/synapse)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
-  * nevarro: Linode VPS (Synapse infrastructure)
+  * nevarro: Linode VPS (secondary Synapse infrastructure)
     * nevarro.space website
     * [Synapse](https://github.com/matrix-org/synapse)
     * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
     * [standupbot](https://sr.ht/~sumner/standupbot)
+
+Future:
+
+* praesitlyn: Linode VPS (realtime infrastructure)
+  my main synapse instance will move here
 
 ## Installation Instructions
 

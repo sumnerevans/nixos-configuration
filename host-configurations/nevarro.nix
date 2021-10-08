@@ -30,7 +30,7 @@
 
   # Longview
   services.longview.enable = true;
-  services.longview.apiKeyFile = ../secrets/nevarro-longview-api-key;
+  services.longview.apiKeyFile = ../secrets/longview/nevarro;
 
   # PosgreSQL
   services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";
@@ -38,7 +38,7 @@
 
   # Quotesfilebot
   services.quotesfilebot.enable = true;
-  services.quotesfilebot.passwordFile = "/etc/nixos/secrets/quotesfilebot-password";
+  services.quotesfilebot.passwordFile = "/etc/nixos/secrets/matrix/bots/quotesfilebot";
 
   # Restic backup
   services.backup.healthcheckId = "5af26654-5ca7-405a-b8c4-e00a2fc6a5b0";
@@ -46,10 +46,10 @@
 
   # Standupbot
   services.standupbot.enable = true;
-  services.standupbot.passwordFile = "/etc/nixos/secrets/standupbot-password";
+  services.standupbot.passwordFile = "/etc/nixos/secrets/matrix/bots/standupbot";
 
   # Synapse
   services.matrix-synapse-custom.enable = true;
-  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix-registration-shared-secret-nevarro;
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/nevarro-cleanup-synapse-environment";
+  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/nevarro;
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/praesitlyn";
 }
