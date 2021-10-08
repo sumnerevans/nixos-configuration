@@ -74,6 +74,9 @@ in
 
         services.openssh.enable = true;
         services.openssh.permitRootLogin = "prohibit-password";
+
+        # IPv6 is just bad and doesn't work.
+        networking.enableIPv6 = false;
       }
     )
   ];

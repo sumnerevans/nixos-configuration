@@ -33,6 +33,7 @@
   services.longview.apiKeyFile = ../secrets/longview/nevarro;
 
   # PosgreSQL
+  services.postgresql.enable = true;
   services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";
   services.postgresqlBackup.enable = true;
 
