@@ -26,11 +26,18 @@
   ############
   services.grafana.enable = true;
   services.healthcheck.checkId = "0a1a1c13-e65d-4968-a498-c5709dcb2ae8";
-  services.murmur.enable = true;
+
+  # Heisenbridge
+  services.heisenbridge = {
+    enable = true;
+  } // (import ../secrets/matrix/appservices/heisenbridge.nix);
 
   # Longview
   services.longview.enable = true;
   services.longview.apiKeyFile = ../secrets/longview/nevarro;
+
+  # Mumble
+  services.murmur.enable = true;
 
   # PosgreSQL
   services.postgresql.enable = true;

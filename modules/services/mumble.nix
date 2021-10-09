@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   certs = config.security.acme.certs;
-  serverName = "voip.${config.networking.domain}";
+  serverName = "voip.nevarro.space";
   certDirectory = "${certs.${serverName}.directory}";
   port = config.services.murmur.port;
 
@@ -10,9 +10,9 @@ in
 lib.mkIf murmurCfg.enable {
   services.murmur = {
     registerHostname = serverName;
-    registerName = "Sumner's Mumble Server";
+    registerName = "Nevarro";
     welcometext = ''
-      Welcome to Sumner's Mumble Server.
+      Welcome to the Nevarro Mumble Server.
 
       If you are here for office hours, join the "Office Hours" channel. I will
       manually move you to a breakout room if necessary.

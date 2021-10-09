@@ -25,14 +25,16 @@ https://git.sr.ht/~sumner/home-manager-config
     * [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
     * [Syncthing](https://syncthing.net)
     * [Xandikos](https://www.xandikos.org/)
-    * [Murmur for Mumble](https://www.mumble.info/)
     * [Synapse](https://github.com/matrix-org/synapse)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
+      * [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
   * nevarro: Linode VPS (secondary Synapse infrastructure)
     * nevarro.space website
     * [Synapse](https://github.com/matrix-org/synapse)
+      * [Heisenbridge](https://github.com/hifi/heisenbridge)
     * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
     * [standupbot](https://sr.ht/~sumner/standupbot)
+    * [Murmur for Mumble](https://www.mumble.info/)
 
 Future:
 

@@ -101,9 +101,6 @@
   # Synapse
   services.matrix-synapse-custom.enable = true;
   services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/praesitlyn;
-  services.heisenbridge = {
-    enable = true;
-  } // (import ../secrets/matrix/appservices/heisenbridge.nix);
   services.linkedin-matrix = {
     enable = true;
   } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
