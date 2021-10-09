@@ -100,11 +100,11 @@
 
   # Synapse
   services.matrix-synapse-custom.enable = true;
-  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/praesitlyn;
+  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/bespin;
   services.linkedin-matrix = {
     enable = true;
   } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/praesitlyn";
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/bespin";
 
   # PosgreSQL
   services.postgresql.enable = true;

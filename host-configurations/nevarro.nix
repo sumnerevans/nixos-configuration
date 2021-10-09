@@ -26,6 +26,7 @@
   ############
   services.grafana.enable = true;
   services.healthcheck.checkId = "0a1a1c13-e65d-4968-a498-c5709dcb2ae8";
+  services.logrotate.enable = true;
 
   # Heisenbridge
   services.heisenbridge = {
@@ -59,5 +60,5 @@
   # Synapse
   services.matrix-synapse-custom.enable = true;
   services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/nevarro;
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/praesitlyn";
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/bespin";
 }

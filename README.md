@@ -26,7 +26,6 @@ https://git.sr.ht/~sumner/home-manager-config
     * [Syncthing](https://syncthing.net)
     * [Xandikos](https://www.xandikos.org/)
     * [Synapse](https://github.com/matrix-org/synapse)
-      * [Heisenbridge](https://github.com/hifi/heisenbridge)
       * [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
   * nevarro: Linode VPS (secondary Synapse infrastructure)
     * nevarro.space website
@@ -35,11 +34,6 @@ https://git.sr.ht/~sumner/home-manager-config
     * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
     * [standupbot](https://sr.ht/~sumner/standupbot)
     * [Murmur for Mumble](https://www.mumble.info/)
-
-Future:
-
-* praesitlyn: Linode VPS (realtime infrastructure)
-  my main synapse instance will move here
 
 ## Installation Instructions
 
