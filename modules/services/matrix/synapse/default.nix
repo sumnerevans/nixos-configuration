@@ -414,7 +414,7 @@ in
               access_log /var/log/nginx/matrix.access.log;
             '';
           };
-          locations."/_matrix/federation/v1/send/" = {
+          locations."/_matrix/federation/" = {
             proxyPass = "http://0.0.0.0:8009"; # without a trailing /
             extraConfig = ''
               access_log /var/log/nginx/matrix-federation.access.log;
