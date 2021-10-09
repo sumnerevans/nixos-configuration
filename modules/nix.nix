@@ -4,7 +4,7 @@ in
 {
   options = {
     nix.enableRemoteBuildOnCoruscant = mkEnableOption "Enable remote builds on coruscant" // {
-      default = true;
+      default = false;
     };
   };
 

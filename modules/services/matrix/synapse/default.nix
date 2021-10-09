@@ -59,7 +59,7 @@ let
         tls = false;
         x_forwarded = true;
         resources = [
-          { names = [ "client" "federation" ]; compress = false; }
+          { names = [ "federation" "client" ]; compress = false; }
         ];
       }
 
@@ -142,6 +142,18 @@ let
     # Workers
     send_federation = false;
     federation_sender_instances = [ "federation_sender1" ];
+    instance_map = {
+      event_persister1 = {
+        host = "localhost";
+        port = 9091;
+      };
+    };
+
+    stream_writers = {
+      events = "event_persister1";
+      typing = "event_persister1";
+    };
+
     redis = {
       enabled = true;
     };
@@ -151,41 +163,78 @@ let
     "matrix-synapse-config.yaml"
     sharedConfig;
 
-  mkSynapseWorkerService = config: mkMerge [
-    config
-    {
-      after = [ "matrix-synapse.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "notify";
-        User = "matrix-synapse";
-        Group = "matrix-synapse";
-        WorkingDirectory = cfg.dataDir;
-        ExecReload = "${pkgs.util-linux}/bin/kill -HUP $MAINPID";
-        Restart = "on-failure";
-        UMask = "0077";
-      };
-    }
-  ];
-
-  mkSynapseWorkerConfig = port: config: config // {
-    # The replication listener on the main synapse process.
-    worker_replication_host = "127.0.0.1";
-    worker_replication_http_port = 9093;
-    worker_listeners = [
-      {
-        type = "metrics";
-        bind_address = "";
-        port = port;
-      }
-    ];
+  mkSynapseWorkerService = config: recursiveUpdate config {
+    after = [ "matrix-synapse.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "notify";
+      User = "matrix-synapse";
+      Group = "matrix-synapse";
+      WorkingDirectory = cfg.dataDir;
+      ExecReload = "${pkgs.util-linux}/bin/kill -HUP $MAINPID";
+      Restart = "on-failure";
+      UMask = "0077";
+    };
   };
+
+  mkSynapseWorkerConfig = port: config:
+    let
+      newConfig = config // {
+        # The replication listener on the main synapse process.
+        worker_replication_host = "127.0.0.1";
+        worker_replication_http_port = 9093;
+      };
+      newWorkerListeners = (config.worker_listeners or [ ]) ++ [
+        {
+          type = "metrics";
+          bind_address = "";
+          port = port;
+        }
+      ];
+    in
+    newConfig // { worker_listeners = newWorkerListeners; };
 
   federationSender1ConfigFile = yamlFormat.generate
     "federation-sender-1.yaml"
     (mkSynapseWorkerConfig 9101 {
       worker_app = "synapse.app.federation_sender";
       worker_name = "federation_sender1";
+    });
+
+  federationReader1ConfigFile = yamlFormat.generate
+    "federation-reader-1.yaml"
+    (mkSynapseWorkerConfig 9102 {
+      worker_app = "synapse.app.generic_worker";
+      worker_name = "federation_reader1";
+      worker_listeners = [
+        # Federation
+        {
+          type = "http";
+          port = 8009;
+          bind_address = "0.0.0.0";
+          tls = false;
+          x_forwarded = true;
+          resources = [
+            { names = [ "federation" ]; compress = false; }
+          ];
+        }
+      ];
+    });
+
+  eventPersister1ConfigFile = yamlFormat.generate
+    "event-persister-1.yaml"
+    (mkSynapseWorkerConfig 9103 {
+      worker_app = "synapse.app.generic_worker";
+      worker_name = "event_persister1";
+      # The event persister needs a replication listener
+      worker_listeners = [
+        {
+          type = "http";
+          port = 9091;
+          bind_address = "127.0.0.1";
+          resources = [{ names = [ "replication" ]; }];
+        }
+      ];
     });
 in
 {
@@ -281,6 +330,28 @@ in
       '';
     };
 
+    # Run the federation sender worker
+    systemd.services.matrix-synapse-federation-reader1 = mkSynapseWorkerService {
+      description = "Synapse Matrix federation reader 1";
+      serviceConfig.ExecStart = ''
+        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
+          --config-path ${sharedConfigFile} \
+          --config-path ${federationReader1ConfigFile} \
+          --keys-directory ${cfg.dataDir}
+      '';
+    };
+
+    # Run the federation sender worker
+    systemd.services.matrix-synapse-event-persister1 = mkSynapseWorkerService {
+      description = "Synapse Matrix event persister 1";
+      serviceConfig.ExecStart = ''
+        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
+          --config-path ${sharedConfigFile} \
+          --config-path ${eventPersister1ConfigFile} \
+          --keys-directory ${cfg.dataDir}
+      '';
+    };
+
     # Make sure that Postgres is setup for Synapse.
     services.postgresql = {
       enable = true;
@@ -343,6 +414,12 @@ in
               access_log /var/log/nginx/matrix.access.log;
             '';
           };
+          locations."/_matrix/federation/v1/send/" = {
+            proxyPass = "http://0.0.0.0:8009"; # without a trailing /
+            extraConfig = ''
+              access_log /var/log/nginx/matrix-federation.access.log;
+            '';
+          };
         };
       };
     };
@@ -361,9 +438,19 @@ in
               labels = { instance = matrixDomain; job = "master"; index = "1"; };
             }
             {
-            # Federation sender 1
+              # Federation sender 1
               targets = [ "0.0.0.0:9101" ];
               labels = { instance = matrixDomain; job = "federation_sender"; index = "1"; };
+            }
+            {
+              # Federation reader 1
+              targets = [ "0.0.0.0:9102" ];
+              labels = { instance = matrixDomain; job = "federation_reader"; index = "1"; };
+            }
+            {
+              # Event persister 1
+              targets = [ "0.0.0.0:9103" ];
+              labels = { instance = matrixDomain; job = "event_persister"; index = "1"; };
             }
           ];
         }
