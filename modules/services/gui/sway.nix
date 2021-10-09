@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.wayland;
+
+  rev = "master"; # 'rev' could be a git rev, to pin the overlay.
+  url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz";
+  waylandOverlay = (import "${builtins.fetchTarball url}/overlay.nix");
 in
 {
   options = {
@@ -11,13 +15,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays =
-      let
-        rev = "master";
-        url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz";
-        waylandOverlay = (import (builtins.fetchTarball url));
-      in
-      [ waylandOverlay ];
+    nixpkgs.overlays = [ waylandOverlay ];
 
     xdg.portal = {
       enable = true;
