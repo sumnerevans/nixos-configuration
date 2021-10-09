@@ -151,7 +151,6 @@ let
 
     stream_writers = {
       events = "event_persister1";
-      typing = "event_persister1";
     };
 
     redis = {
