@@ -236,6 +236,22 @@ let
         }
       ];
     });
+
+  synchotron1ConfigFile = yamlFormat.generate
+    "synchotron-1.yaml"
+    (mkSynapseWorkerConfig 9104 {
+      worker_app = "synapse.app.generic_worker";
+      worker_name = "synchotron1";
+      # The event persister needs a replication listener
+      worker_listeners = [
+        {
+          type = "http";
+          port = 8010;
+          bind_address = "127.0.0.1";
+          resources = [{ names = [ "client" ]; }];
+        }
+      ];
+    });
 in
 {
   imports = [
@@ -330,7 +346,7 @@ in
       '';
     };
 
-    # Run the federation sender worker
+    # Run the federation reader worker
     systemd.services.matrix-synapse-federation-reader1 = mkSynapseWorkerService {
       description = "Synapse Matrix federation reader 1";
       serviceConfig.ExecStart = ''
@@ -341,13 +357,24 @@ in
       '';
     };
 
-    # Run the federation sender worker
+    # Run the event persister worker
     systemd.services.matrix-synapse-event-persister1 = mkSynapseWorkerService {
       description = "Synapse Matrix event persister 1";
       serviceConfig.ExecStart = ''
         ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
           --config-path ${sharedConfigFile} \
           --config-path ${eventPersister1ConfigFile} \
+          --keys-directory ${cfg.dataDir}
+      '';
+    };
+
+    # Run the synchotron worker
+    systemd.services.matrix-synapse-synchotron1 = mkSynapseWorkerService {
+      description = "Synapse Matrix synchotron 1";
+      serviceConfig.ExecStart = ''
+        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
+          --config-path ${sharedConfigFile} \
+          --config-path ${synchotron1ConfigFile} \
           --keys-directory ${cfg.dataDir}
       '';
     };
@@ -420,6 +447,12 @@ in
               access_log /var/log/nginx/matrix-federation.access.log;
             '';
           };
+          locations."~ ^/_matrix/client/.*/(sync|events|initialSync)" = {
+            proxyPass = "http://0.0.0.0:8010"; # without a trailing /
+            extraConfig = ''
+              access_log /var/log/nginx/matrix-synchotron.access.log;
+            '';
+          };
         };
       };
     };
@@ -451,6 +484,11 @@ in
               # Event persister 1
               targets = [ "0.0.0.0:9103" ];
               labels = { instance = matrixDomain; job = "event_persister"; index = "1"; };
+            }
+            {
+              # Synchotron 1
+              targets = [ "0.0.0.0:9104" ];
+              labels = { instance = matrixDomain; job = "synchotron"; index = "1"; };
             }
           ];
         }
