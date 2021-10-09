@@ -13,8 +13,8 @@
     sender_localpart = "XDUsekmAmWcmL1FWrgZ8E7ih-p0vffI3kMiezV43Sw29GLBQAQ-0_GRJXMQXlVb0";
     namespaces = {
       users = [
-        { regex = "@li_.*:sumnerevans.com"; exclusive = true; }
-        { regex = "@linkedinbot:sumnerevans.com"; exclusive = true; }
+        { regex = "@li_.*:nevarro.space"; exclusive = true; }
+        { regex = "@linkedinbot:nevarro.space"; exclusive = true; }
       ];
       aliases = [ ];
       rooms = [ ];
@@ -93,6 +93,7 @@
       permissions = {
         "nevarro.space" = "user";
         "@sumner:sumnerevans.com" = "admin";
+        "@sumner:nevarro.space" = "admin";
       };
     };
 

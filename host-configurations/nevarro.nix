@@ -33,6 +33,11 @@
     enable = true;
   } // (import ../secrets/matrix/appservices/heisenbridge.nix);
 
+  # LinkedIn <-> Matrix Bridge
+  services.linkedin-matrix = {
+    enable = true;
+  } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
+
   # Longview
   services.longview.enable = true;
   services.longview.apiKeyFile = ../secrets/longview/nevarro;
