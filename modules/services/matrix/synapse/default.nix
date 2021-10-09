@@ -109,6 +109,14 @@ let
       "fc00::/7"
     ];
 
+    url_preview_url_blacklist = [
+      # blacklist any URL with a username in its URI
+      { username = "*"; }
+
+      # Don't try previews for Linear.
+      { netloc = "linear.app"; }
+    ];
+
     # TURN
     # Configure coturn to point at the matrix.org servers.
     # TODO actually figure this out eventually
