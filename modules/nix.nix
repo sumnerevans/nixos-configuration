@@ -3,9 +3,7 @@
 in
 {
   options = {
-    nix.enableRemoteBuildOnCoruscant = mkEnableOption "Enable remote builds on coruscant" // {
-      default = false;
-    };
+    nix.enableRemoteBuildOnCoruscant = mkEnableOption "Enable remote builds on coruscant";
   };
 
   config = mkMerge [
