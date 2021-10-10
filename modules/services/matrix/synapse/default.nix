@@ -27,145 +27,7 @@ let
 
   yamlFormat = pkgs.formats.yaml { };
 
-  logConfig = {
-    version = 1;
-    formatters.journal_fmt.format = "%(name)s: [%(request)s] %(message)s";
-    filters.context = {
-      "()" = "synapse.util.logcontext.LoggingContextFilter";
-      request = "";
-    };
-    handlers.journal = {
-      class = "systemd.journal.JournalHandler";
-      formatter = "journal_fmt";
-      filters = [ "context" ];
-      SYSLOG_IDENTIFIER = "synapse";
-    };
-    root = { level = "INFO"; handlers = [ "journal" ]; };
-    disable_existing_loggers = false;
-  };
-
-  # This is organized to match the sections in
-  # https://github.com/matrix-org/synapse/blob/develop/docs/sample_config.yaml
-  sharedConfig = {
-    # Server
-    server_name = config.networking.domain;
-    pid_file = "/run/matrix-synapse.pid";
-    listeners = [
-      # CS API and Federation
-      {
-        type = "http";
-        port = 8008;
-        bind_address = "0.0.0.0";
-        tls = false;
-        x_forwarded = true;
-        resources = [
-          { names = [ "federation" "client" ]; compress = false; }
-        ];
-      }
-
-      # Metrics
-      {
-        port = 9009;
-        bind_address = "0.0.0.0";
-        tls = false;
-        type = "metrics";
-      }
-
-      # Replication
-      {
-        type = "http";
-        port = 9093;
-        bind_address = "127.0.0.1";
-        resources = [{ names = [ "replication" ]; }];
-      }
-    ];
-
-    # Caching
-    event_cache_size = "25K";
-    caches.global_factor = 1.0;
-
-    # Database
-    database = {
-      name = "psycopg2";
-      args = { user = "matrix-synapse"; database = "matrix-synapse"; };
-    };
-
-    # Logging
-    log_config = yamlFormat.generate "matrix-synapse-log-config.yaml" logConfig;
-
-    # Media store
-    media_store_path = "${cfg.dataDir}/media";
-    max_upload_size = "250M";
-    url_preview_enabled = true;
-    url_preview_ip_range_blacklist = [
-      "127.0.0.0/8"
-      "10.0.0.0/8"
-      "172.16.0.0/12"
-      "192.168.0.0/16"
-      "100.64.0.0/10"
-      "169.254.0.0/16"
-      "::1/128"
-      "fe80::/64"
-      "fc00::/7"
-    ];
-
-    url_preview_url_blacklist = [
-      # blacklist any URL with a username in its URI
-      { username = "*"; }
-
-      # Don't try previews for Linear.
-      { netloc = "linear.app"; }
-    ];
-
-    # TURN
-    # Configure coturn to point at the matrix.org servers.
-    # TODO actually figure this out eventually
-    turn_uris = [
-      "turn:turn.matrix.org?transport=udp"
-      "turn:turn.matrix.org?transport=tcp"
-    ];
-    turn_shared_secret = "n0t4ctuAllymatr1Xd0TorgSshar3d5ecret4obvIousreAsons";
-    turn_user_lifetime = "1h";
-
-    # Registration
-    enable_registration = false;
-    registration_shared_secret = removeSuffix "\n" (readFile cfg.registrationSharedSecretFile);
-
-    # Metrics
-    enable_metrics = true;
-    report_stats = true;
-
-    # API Configuration
-    app_service_config_files = cfg.appServiceConfigFiles;
-
-    # Signing Keys
-    signing_key_path = "${cfg.dataDir}/homeserver.signing.key";
-    trusted_key_servers = [
-      { server_name = "matrix.org"; }
-    ];
-    suppress_key_server_warning = true;
-
-    # TODO email?
-
-    # Workers
-    send_federation = false;
-    federation_sender_instances = [ "federation_sender1" ];
-    instance_map = {
-      event_persister1 = {
-        host = "localhost";
-        port = 9091;
-      };
-    };
-
-    stream_writers = {
-      events = "event_persister1";
-    };
-
-    redis = {
-      enabled = true;
-    };
-  };
-
+  sharedConfig = (import ./configs/shared-config.nix ({ inherit config lib pkgs; }));
   sharedConfigFile = yamlFormat.generate
     "matrix-synapse-config.yaml"
     sharedConfig;
@@ -186,11 +48,14 @@ let
 
   mkSynapseWorkerConfig = port: config:
     let
-      newConfig = config // {
+      newConfig = {
         # The replication listener on the main synapse process.
         worker_replication_host = "127.0.0.1";
         worker_replication_http_port = 9093;
-      };
+
+        # Default to generic worker.
+        worker_app = "synapse.app.generic_worker";
+      } // config;
       newWorkerListeners = (config.worker_listeners or [ ]) ++ [
         {
           type = "metrics";
@@ -211,7 +76,6 @@ let
   federationReader1ConfigFile = yamlFormat.generate
     "federation-reader-1.yaml"
     (mkSynapseWorkerConfig 9102 {
-      worker_app = "synapse.app.generic_worker";
       worker_name = "federation_reader1";
       worker_listeners = [
         # Federation
@@ -231,7 +95,6 @@ let
   eventPersister1ConfigFile = yamlFormat.generate
     "event-persister-1.yaml"
     (mkSynapseWorkerConfig 9103 {
-      worker_app = "synapse.app.generic_worker";
       worker_name = "event_persister1";
       # The event persister needs a replication listener
       worker_listeners = [
@@ -247,7 +110,6 @@ let
   synchotron1ConfigFile = yamlFormat.generate
     "synchotron-1.yaml"
     (mkSynapseWorkerConfig 9104 {
-      worker_app = "synapse.app.generic_worker";
       worker_name = "synchotron1";
       # The event persister needs a replication listener
       worker_listeners = [
@@ -256,6 +118,22 @@ let
           port = 8010;
           bind_address = "127.0.0.1";
           resources = [{ names = [ "client" ]; }];
+        }
+      ];
+    });
+
+  mediaRepo1ConfigFile = yamlFormat.generate
+    "media-repo-1.yaml"
+    (mkSynapseWorkerConfig 9105 {
+      worker_name = "media_repo1";
+      worker_app = "synapse.app.media_repository";
+      # The event persister needs a replication listener
+      worker_listeners = [
+        {
+          type = "http";
+          port = 8011;
+          bind_address = "127.0.0.1";
+          resources = [{ names = [ "media" ]; }];
         }
       ];
     });
@@ -386,6 +264,17 @@ in
       '';
     };
 
+    # Run the media repo worker
+    systemd.services.matrix-synapse-media-repo1 = mkSynapseWorkerService {
+      description = "Synapse Matrix media repo 1";
+      serviceConfig.ExecStart = ''
+        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.media_repository \
+          --config-path ${sharedConfigFile} \
+          --config-path ${mediaRepo1ConfigFile} \
+          --keys-directory ${cfg.dataDir}
+      '';
+    };
+
     # Make sure that Postgres is setup for Synapse.
     services.postgresql = {
       enable = true;
@@ -460,6 +349,12 @@ in
               access_log /var/log/nginx/matrix-synchotron.access.log;
             '';
           };
+          locations."~ ^/_matrix/media" = {
+            proxyPass = "http://0.0.0.0:8011"; # without a trailing /
+            extraConfig = ''
+              access_log /var/log/nginx/matrix-media-repo.access.log;
+            '';
+          };
         };
       };
     };
@@ -496,6 +391,11 @@ in
               # Synchotron 1
               targets = [ "0.0.0.0:9104" ];
               labels = { instance = matrixDomain; job = "synchotron"; index = "1"; };
+            }
+            {
+              # Media repo 1
+              targets = [ "0.0.0.0:9105" ];
+              labels = { instance = matrixDomain; job = "media_repo"; index = "1"; };
             }
           ];
         }
