@@ -42,6 +42,9 @@
   services.longview.enable = true;
   services.longview.apiKeyFile = ../secrets/longview/nevarro;
 
+  # Mjolnir
+  services.mjolnir.enable = true;
+
   # Mumble
   services.murmur.enable = true;
 
