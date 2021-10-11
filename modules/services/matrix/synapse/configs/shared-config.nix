@@ -27,6 +27,7 @@ in
   # Server
   server_name = config.networking.domain;
   pid_file = "/run/matrix-synapse.pid";
+  default_room_version = "9";
   listeners = [
     # CS API and Federation
     {
