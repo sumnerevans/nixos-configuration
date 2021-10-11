@@ -64,6 +64,13 @@ in
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
 
+        appendConfig = ''
+          worker_processes auto;
+        '';
+        eventsConfig = ''
+          worker_connections 8192;
+        '';
+
         virtualHosts = (optionalAttrs (config.networking.domain != null) {
           ${hostnameDomain} = {
             forceSSL = true;
