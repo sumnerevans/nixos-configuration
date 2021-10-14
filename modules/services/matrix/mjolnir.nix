@@ -29,12 +29,12 @@ in
   ];
 
   services.mjolnir = {
-    homeserverUrl = "https://matrix.nevarro.space:443";
+    homeserverUrl = "http://localhost:8008";
 
     pantalaimon = {
       enable = true;
-      username = "mjolnir";
-      passwordFile = "/etc/nixos/secrets/matrix/bots/mjolnir";
+      username = "marshal";
+      passwordFile = "/etc/nixos/secrets/matrix/bots/marshal";
       options.listenPort = 8100;
     };
 
