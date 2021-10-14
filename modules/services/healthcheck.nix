@@ -14,9 +14,18 @@ in
   config = mkIf healthcheckCfg.enable {
     systemd.services.healthcheck = {
       description = "Healthcheck service";
-      startAt = "*:0/1"; # Run a ping every minute to ensure that the server is up.
+      startAt = "*:*:0/30"; # Send a healthcheck ping every 30 seconds.
       serviceConfig = {
-        ExecStart = "${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${healthcheckCfg.checkId}";
+        ExecStart = ''
+          ${pkgs.curl}/bin/curl \
+            --verbose \
+            -fsS \
+            --retry 2 \
+            --max-time 5 \
+            --ipv4 \
+            https://hc-ping.com/${healthcheckCfg.checkId}
+        '';
+        TimeoutSec = 10;
       };
     };
   };
