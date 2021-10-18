@@ -19,6 +19,10 @@
     }
   ];
 
+  fileSystems = {
+    "/mnt/syncthing-data" = { device = "/dev/disk/by-id/scsi-0Linode_Volume_syncthing-data"; fsType = "ext4"; };
+  };
+
   # Websites
   services.nginx.websites = [
     { hostname = "the-evans.family"; }
@@ -105,6 +109,5 @@
 
   # PosgreSQL
   services.postgresql.enable = true;
-  services.postgresql.dataDir = "/mnt/postgresql-data/postgresql/11.1";
   services.postgresqlBackup.enable = true;
 }

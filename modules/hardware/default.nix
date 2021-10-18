@@ -24,7 +24,7 @@ in
     {
       assertions = [
         {
-          assertion = cfg.isPC -> !cfg.isServer;
+          assertion = cfg.isPC -> !cfg.isServer && cfg.isServer -> !cfg.isPC;
           message = "isPC and isServer are mutually exclusive";
         }
       ];
@@ -77,6 +77,18 @@ in
 
         # IPv6 is just bad and doesn't work.
         networking.enableIPv6 = false;
+
+        fileSystems = {
+          "/" = { device = "/dev/sda"; fsType = "ext4"; };
+        };
+
+        # Enable LISH
+        boot.kernelParams = [ "console=ttyS0,19200n8" ];
+        boot.loader.grub.extraConfig = ''
+          serial --speed=19200 --unit=0 --word=8 --party=no --stop=1;
+          terminal_input serial;
+          terminal_output serial;
+        '';
       }
     )
   ];
