@@ -10,7 +10,22 @@ let
   synapseCfg = config.services.matrix-synapse-custom;
 
   adminUrl = "http://localhost:8008/_synapse/admin/v1";
+  adminMediaRepoUrl = "http://localhost:8011/_synapse/admin/v1";
   adminCurl = ''${curl}/bin/curl --header "Authorization: Bearer $CLEANUP_ACCESS_TOKEN" '';
+
+  # Delete old cached remote media
+  purgeRemoteMedia = writeShellScriptBin "purge-remote-media" ''
+    set -xe
+
+    now=$(${coreutils}/bin/date +%s%N | ${coreutils}/bin/cut -b1-13)
+    nintey_days_ago=$(( now - 7776000000 ))
+
+    ${adminCurl} \
+      -X POST \
+      -H "Content-Type: application/json" \
+      -d "{}" \
+      "${adminMediaRepoUrl}/purge_media_cache?before_ts=$nintey_days_ago"
+  '';
 
   # Get rid of any rooms that aren't joined by anyone from the homeserver.
   cleanupForgottenRooms = writeShellScriptBin "cleanup-forgotten" ''
@@ -113,6 +128,7 @@ let
 
   cleanupSynapseScript = writeShellScriptBin "cleanup-synapse" ''
     set -xe
+    ${purgeRemoteMedia}/bin/purge-remote-media
     ${cleanupForgottenRooms}/bin/cleanup-forgotten
     ${compressState}/bin/compress-state
     ${reindexAndVaccum}/bin/reindex-and-vaccum
