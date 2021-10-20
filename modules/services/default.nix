@@ -13,6 +13,7 @@
     ./grafana.nix
     ./healthcheck.nix
     ./isso.nix
+    ./journald.nix
     ./logrotate.nix
     ./longview.nix
     ./matrix/default.nix
