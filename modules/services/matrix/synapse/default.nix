@@ -349,7 +349,7 @@ in
               access_log /var/log/nginx/matrix-synchotron.access.log;
             '';
           };
-          locations."~ ^/_matrix/media" = {
+          locations."~ ^/(_matrix/media|_synapse/admin/v1/(purge_media_cache|(room|user)/.*/media.*|media/.*|quarantine_media/.*|users/.*/media))" = {
             proxyPass = "http://0.0.0.0:8011"; # without a trailing /
             extraConfig = ''
               access_log /var/log/nginx/matrix-media-repo.access.log;
