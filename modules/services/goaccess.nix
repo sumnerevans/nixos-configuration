@@ -54,7 +54,7 @@
       ${concatMapStringsSep "\n" (goaccessWebsiteMetricsForDayScriptPart "$logtmp" hostname) (range 0 7)}
 
       # Clean-up days older than a month.
-      # TODO
+      ${pkgs.findutils}/bin/find ${goaccessDir}/${hostname}/days -mtime +30 -delete
     '';
 
   hostListItem = { hostname, ... }: ''
@@ -147,7 +147,7 @@ in
         value = {
           description = "Goaccess timer for ${website.hostname}";
           wantedBy = [ "timers.target" ];
-          timerConfig.OnCalendar = "*:0/10";
+          timerConfig.OnCalendar = "*:0/15";
         };
       };
     in
