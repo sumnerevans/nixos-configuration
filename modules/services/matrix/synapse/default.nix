@@ -34,7 +34,8 @@ let
 
   mkSynapseWorkerService = config: recursiveUpdate config {
     after = [ "matrix-synapse.service" ];
-    wantedBy = [ "multi-user.target" ];
+    partOf = [ "matrix-synapse.target" ];
+    wantedBy = [ "matrix-synapse.target" ];
     serviceConfig = {
       Type = "notify";
       User = "matrix-synapse";
@@ -187,11 +188,17 @@ in
       gid = config.ids.gids.matrix-synapse;
     };
 
+    systemd.targets.matrix-synapse = {
+      description = "Synapse processes";
+      after = [ "network.target" "postgresql.service" ];
+      wantedBy = [ "multi-user.target" ];
+    };
+
     # Run the main Synapse process
     systemd.services.matrix-synapse = {
       description = "Synapse Matrix homeserver";
-      after = [ "network.target" "postgresql.service" ];
-      wantedBy = [ "multi-user.target" ];
+      partOf = [ "matrix-synapse.target" ];
+      wantedBy = [ "matrix-synapse.target" ];
       preStart = ''
         ${package}/bin/homeserver \
           --config-path ${sharedConfigFile} \

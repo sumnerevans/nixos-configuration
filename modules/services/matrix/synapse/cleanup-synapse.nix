@@ -115,7 +115,7 @@ let
 
   reindexAndVaccum = writeShellScriptBin "reindex-and-vaccum" ''
     set -xe
-    systemctl stop matrix-synapse.service
+    systemctl stop matrix-synapse.target
 
     echo 'REINDEX (VERBOSE) DATABASE "matrix-synapse"' |
       /run/wrappers/bin/sudo -u postgres ${postgresql}/bin/psql -d matrix-synapse
@@ -123,7 +123,7 @@ let
     echo "VACUUM FULL VERBOSE" |
       /run/wrappers/bin/sudo -u postgres ${postgresql}/bin/psql -d matrix-synapse
 
-    systemctl start matrix-synapse.service
+    systemctl start matrix-synapse.target
   '';
 
   cleanupSynapseScript = writeShellScriptBin "cleanup-synapse" ''
