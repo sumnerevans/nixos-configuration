@@ -27,7 +27,7 @@ let
 
   yamlFormat = pkgs.formats.yaml { };
 
-  sharedConfig = (import ./configs/shared-config.nix ({ inherit config lib pkgs; }));
+  sharedConfig = (import ./shared-config.nix ({ inherit config lib pkgs; }));
   sharedConfigFile = yamlFormat.generate
     "matrix-synapse-config.yaml"
     sharedConfig;
