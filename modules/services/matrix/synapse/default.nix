@@ -171,6 +171,12 @@ in
           The path to a file that contains the shared registration secret.
         '';
       };
+
+      emailCfg = mkOption {
+        type = with types; attrsOf anything;
+        default = { };
+        description = "The email configuration.";
+      };
     };
   };
 

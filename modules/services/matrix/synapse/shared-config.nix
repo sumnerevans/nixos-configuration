@@ -21,13 +21,13 @@ let
     root = { level = "INFO"; handlers = [ "journal" ]; };
     disable_existing_loggers = false;
   };
-
 in
 {
   # Server
   server_name = config.networking.domain;
   pid_file = "/run/matrix-synapse.pid";
   default_room_version = "9";
+  public_baseurl = "https://matrix.${config.networking.domain}";
   listeners = [
     # CS API and Federation
     {
@@ -124,7 +124,8 @@ in
   ];
   suppress_key_server_warning = true;
 
-  # TODO email?
+  # Email
+  email = cfg.emailCfg;
 
   # Workers
   send_federation = false;

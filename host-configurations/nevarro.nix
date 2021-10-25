@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, ... }: with lib; {
   hardware.isServer = true;
 
   # Set the hostname
@@ -70,7 +70,23 @@
   services.standupbot.passwordFile = "/etc/nixos/secrets/matrix/bots/standupbot";
 
   # Synapse
-  services.matrix-synapse-custom.enable = true;
-  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/nevarro;
+  services.matrix-synapse-custom = {
+    enable = true;
+    registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/nevarro;
+    emailCfg = {
+      smtp_host = "smtp.migadu.com";
+      smtp_port = 587;
+      require_transport_security = true;
+
+      smtp_user = "matrix@nevarro.space";
+      smtp_pass = removeSuffix "\n" (readFile ../secrets/matrix/nevarro-smtp-pass);
+
+      notif_from = "Nevarro %(app)s Admin <matrix@nevarro.space>";
+      app_name = "Matrix";
+      enable_notifs = true;
+      notif_for_new_users = false;
+      invite_client_location = "https://app.element.io";
+    };
+  };
   services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/bespin";
 }
