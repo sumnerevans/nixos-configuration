@@ -106,6 +106,10 @@
   services.matrix-synapse-custom.enable = true;
   services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/bespin;
   services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/bespin";
+  services.matrix-vacation-responder = {
+    enable = true;
+    username = "@sumner:sumnerevans.com";
+  };
 
   # PosgreSQL
   services.postgresql.enable = true;
