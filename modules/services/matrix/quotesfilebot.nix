@@ -46,7 +46,7 @@ in
   config = mkIf cfg.enable {
     systemd.services.quotesfilebot = {
       description = "Quotesfilebot";
-      after = [ "matrix-synapse.service" ];
+      after = [ "matrix-synapse.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStart = ''

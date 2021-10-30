@@ -16,7 +16,6 @@
     ./journald.nix
     ./logrotate.nix
     ./longview.nix
-    ./matrix/default.nix
     ./mumble.nix
     ./nginx.nix
     ./postgresql.nix

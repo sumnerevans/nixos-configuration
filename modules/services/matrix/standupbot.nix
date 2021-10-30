@@ -36,7 +36,7 @@ in
   config = mkIf cfg.enable {
     systemd.services.standupbot = {
       description = "Standupbot";
-      after = [ "matrix-synapse.service" ];
+      after = [ "matrix-synapse.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStart = ''

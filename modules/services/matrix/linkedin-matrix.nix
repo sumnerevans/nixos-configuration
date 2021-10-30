@@ -204,7 +204,7 @@ in
 
     systemd.services.linkedin-matrix = {
       description = "LinkedIn Messaging <-> Matrix Bridge";
-      after = optional cfg.useLocalSynapse "matrix-synapse.service";
+      after = optional cfg.useLocalSynapse "matrix-synapse.target";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         User = "linkedinmatrix";

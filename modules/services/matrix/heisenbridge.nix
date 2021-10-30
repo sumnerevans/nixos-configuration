@@ -103,7 +103,7 @@ in
 
     systemd.services.heisenbridge = {
       description = "Heisenbridge Matrix IRC bridge";
-      after = optional cfg.useLocalSynapse "matrix-synapse.service";
+      after = optional cfg.useLocalSynapse "matrix-synapse.target";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStart = ''
