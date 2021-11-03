@@ -1,0 +1,3 @@
+[submodule "nixos-install-scripts"]
+	path = nixos-install-scripts
+	url = git@github.com:sumnerevans/nixos-install-scripts.git
