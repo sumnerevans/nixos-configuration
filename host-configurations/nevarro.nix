@@ -1,5 +1,9 @@
 { config, lib, ... }: with lib; {
   hardware.isServer = true;
+  boot.loader.grub = {
+    forceInstall = true;
+    device = "nodev";
+  };
 
   # Set the hostname
   networking.hostName = "nevarro";
