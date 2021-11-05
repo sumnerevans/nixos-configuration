@@ -11,12 +11,12 @@ https://git.sr.ht/~sumner/home-manager-config
 
 ## Hosts
 
-* Personal Computers
-  * coruscant: custom desktop
-  * jedha: ThinkPad T580
-  * mustafar: Samsung Galaxy Chromebook
-* Servers
-  * bespin: Linode VPS (non-realtime critical infrastructure)
+* **Personal Computers**
+  * **coruscant**: custom desktop
+  * **jedha**: ThinkPad T580
+  * **mustafar**: Samsung Galaxy Chromebook
+* **Servers**
+  * **bespin**: Linode VPS (non-realtime critical infrastructure)
     * Personal Websites
     * [Airsonic](https://airsonic.github.io)
     * [vaultwarden](https://github.com/dani-garcia/vaultwarden)
@@ -27,7 +27,10 @@ https://git.sr.ht/~sumner/home-manager-config
     * [Xandikos](https://www.xandikos.org/)
     * [Synapse](https://github.com/matrix-org/synapse)
       * [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
-  * nevarro: Linode VPS (secondary Synapse infrastructure)
+
+  * **morak**: Hetzner Cloud VPS (CPX11)
+
+  * **nevarro**: Linode VPS (primary Synapse infrastructure)
     * nevarro.space website
     * [Synapse](https://github.com/matrix-org/synapse)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
