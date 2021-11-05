@@ -117,7 +117,7 @@ let
         {
           type = "http";
           port = 8010;
-          bind_address = "127.0.0.1";
+          bind_address = "0.0.0.0";
           resources = [{ names = [ "client" ]; }];
         }
       ];
@@ -133,7 +133,7 @@ let
         {
           type = "http";
           port = 8011;
-          bind_address = "127.0.0.1";
+          bind_address = "0.0.0.0";
           resources = [{ names = [ "media" ]; }];
         }
       ];
