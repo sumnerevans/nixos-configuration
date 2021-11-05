@@ -78,10 +78,6 @@ in
         # IPv6 is just bad and doesn't work.
         networking.enableIPv6 = false;
 
-        fileSystems = {
-          "/" = { device = "/dev/sda"; fsType = "ext4"; };
-        };
-
         # Enable LISH
         boot.kernelParams = [ "console=ttyS0,19200n8" ];
         boot.loader.grub.extraConfig = ''

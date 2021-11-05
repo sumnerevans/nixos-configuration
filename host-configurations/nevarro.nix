@@ -21,6 +21,7 @@
   ];
 
   fileSystems = {
+    "/" = { device = "/dev/sda"; fsType = "ext4"; };
     "/mnt/nevarro-postgresql-data" = { device = "/dev/disk/by-id/scsi-0Linode_Volume_nevarro-postgresql-data"; fsType = "ext4"; };
   };
 
