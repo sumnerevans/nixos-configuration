@@ -36,7 +36,7 @@
           root = "/var/www";
           priority = 0;
           extraConfig = ''
-            access_log /var/log/nginx/${config.networking.domain}.access.log;
+            access_log /var/log/nginx/sumnerevans.com.access.log;
             autoindex on;
           '';
         };
@@ -53,6 +53,21 @@
       ];
     }
   ];
+
+  # Host reverse proxy services
+  services.nginx.virtualHosts."tunnel.sumnerevans.com" = {
+    addSSL = true;
+    enableACME = true;
+
+    extraConfig = ''
+      error_page 502 /50x.html;
+    '';
+
+    locations = {
+      "/50x.html".root = "/usr/share/nginx/html";
+      "/".proxyPass = "http://localhost:1337/";
+    };
+  };
 
   ############
   # Services #

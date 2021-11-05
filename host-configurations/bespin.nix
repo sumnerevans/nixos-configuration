@@ -58,25 +58,10 @@
   ];
 
   # PR Tracker has moved to Nevarro
-  services.nginx.virtualHosts."pr-tracker.${config.networking.domain}" = {
+  services.nginx.virtualHosts."pr-tracker.sumnerevans.com" = {
     addSSL = true;
     enableACME = true;
     locations."/".return = "301 https://pr-tracker.nevarro.space$request_uri";
-  };
-
-  # Host reverse proxy services
-  services.nginx.virtualHosts."tunnel.${config.networking.domain}" = {
-    addSSL = true;
-    enableACME = true;
-
-    extraConfig = ''
-      error_page 502 /50x.html;
-    '';
-
-    locations = {
-      "/50x.html".root = "/usr/share/nginx/html";
-      "/".proxyPass = "http://localhost:1337/";
-    };
   };
 
   ############
