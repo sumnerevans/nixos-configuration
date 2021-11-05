@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  serverName = "dav.${config.networking.domain}";
+  serverName = "dav.sumnerevans.com";
   xandikosCfg = config.services.xandikos;
 in
 lib.mkIf xandikosCfg.enable {
