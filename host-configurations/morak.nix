@@ -18,7 +18,7 @@
 
   fileSystems = {
     "/" = { device = "/dev/sda1"; fsType = "ext4"; };
-    # "/mnt/syncthing-data" = { device = "/dev/disk/by-id/scsi-0Linode_Volume_syncthing-data"; fsType = "ext4"; };
+    "/mnt/syncthing-data" = { device = "/dev/sdb"; fsType = "ext4"; };
   };
 
   ############
@@ -58,6 +58,7 @@
   # Services #
   ############
   services.healthcheck.checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
+  services.syncthing.enable = true;
 
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
