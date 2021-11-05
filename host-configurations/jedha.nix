@@ -6,13 +6,14 @@
   hardware.isLaptop = true;
 
   # Enable bumblebee.
-  hardware.bumblebee.enable = true;
+  # hardware.bumblebee.enable = true;
 
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp4s0.useDHCP = true;
 
-  xorg.enable = true;
-  xorg.xkbVariant = "3l";
+  wayland.enable = true;
+  # xorg.enable = true;
+  # xorg.xkbVariant = "3l";
 
   programs.steam.enable = true;
 
