@@ -20,6 +20,7 @@
   ];
 
   fileSystems = {
+    "/" = { device = "/dev/sda"; fsType = "ext4"; };
     "/mnt/syncthing-data" = { device = "/dev/disk/by-id/scsi-0Linode_Volume_syncthing-data"; fsType = "ext4"; };
   };
 
@@ -93,8 +94,8 @@
     virtualHost = "gonic.sumnerevans.com";
   };
   services.nginx.virtualHosts."gonic.sumnerevans.com" = {
-      forceSSL = true;
-      enableACME = true;
+    forceSSL = true;
+    enableACME = true;
   };
 
   # Longview
