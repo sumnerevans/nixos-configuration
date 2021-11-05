@@ -123,8 +123,8 @@
   services.matrix-synapse-custom.enable = true;
   services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/morak;
   services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/morak";
-  # services.matrix-vacation-responder = {
-  #   enable = true;
-  #   username = "@sumner:sumnerevans.com";
-  # };
+  services.matrix-vacation-responder = {
+    enable = true;
+    username = "@sumner:sumnerevans.com";
+  };
 }
