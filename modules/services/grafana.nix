@@ -1,5 +1,5 @@
 { config, lib, options, pkgs, ... }: with lib; let
-  serverName = "grafana.${config.networking.domain}";
+  serverName = "grafana.${config.networking.hostName}.${config.networking.domain}";
 in
 mkIf config.services.grafana.enable {
   services.grafana.domain = serverName;
