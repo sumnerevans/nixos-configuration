@@ -10,6 +10,10 @@ lib.mkIf airsonicCfg.enable {
     virtualHost = serverName;
   };
 
+  users.groups.music = { };
+  systemd.services.airsonic.serviceConfig.Group = "music";
+  users.users.airsonic.extraGroups = [ "music" ];
+
   services.nginx.virtualHosts = {
     ${serverName} = {
       forceSSL = true;
