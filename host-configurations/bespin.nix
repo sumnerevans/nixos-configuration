@@ -43,12 +43,44 @@
       enableACME = true;
       locations."/".proxyPass = "http://5.161.43.204:8080";
     };
+
+    "matrix.sumnerevans.com" = {
+      enableACME = true;
+      forceSSL = true;
+
+      # If they access root, redirect to Element. If they access the API, then
+      # forward on to Synapse.
+      locations."/".return = "301 https://app.element.io";
+      locations."/_matrix" = {
+        proxyPass = "http://5.161.43.204:8008"; # without a trailing /
+        extraConfig = ''
+          access_log /var/log/nginx/matrix.access.log;
+        '';
+      };
+      locations."/_matrix/federation/" = {
+        proxyPass = "http://5.161.43.204:8009"; # without a trailing /
+        extraConfig = ''
+          access_log /var/log/nginx/matrix-federation.access.log;
+        '';
+      };
+      locations."~ ^/_matrix/client/.*/(sync|events|initialSync)" = {
+        proxyPass = "http://5.161.43.204:8010"; # without a trailing /
+        extraConfig = ''
+          access_log /var/log/nginx/matrix-synchotron.access.log;
+        '';
+      };
+      locations."~ ^/(_matrix/media|_synapse/admin/v1/(purge_media_cache|(room|user)/.*/media.*|media/.*|quarantine_media/.*|users/.*/media))" = {
+        proxyPass = "http://5.161.43.204:8011"; # without a trailing /
+        extraConfig = ''
+          access_log /var/log/nginx/matrix-media-repo.access.log;
+        '';
+      };
+    };
   };
 
   ############
   # Services #
   ############
-  services.airsonic.enable = true;
   services.grafana.enable = true;
   services.healthcheck.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
   services.logrotate.enable = true;
@@ -61,15 +93,6 @@
   # Restic backup
   services.backup.healthcheckId = "a42858af-a9d7-4385-b02d-2679f92873ed";
   services.backup.healthcheckPruneId = "14ed7839-784f-4dee-adf2-f9e03c2b611e";
-
-  # Synapse
-  services.matrix-synapse-custom.enable = true;
-  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/bespin;
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/bespin";
-  services.matrix-vacation-responder = {
-    enable = true;
-    username = "@sumner:sumnerevans.com";
-  };
 
   # PosgreSQL
   services.postgresql.enable = true;

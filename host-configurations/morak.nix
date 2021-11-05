@@ -24,6 +24,9 @@
 
   # Allow temporary redirects directly to the reverse proxy.
   networking.firewall.allowedTCPPorts = [ 8222 8080 ];
+  networking.firewall.allowedTCPPortRanges = [
+    { from = 8008; to = 8015; }
+  ];
 
   ############
   # Websites #
@@ -100,6 +103,11 @@
   # Mumble
   services.murmur.enable = true;
 
+  # PosgreSQL
+  services.postgresql.enable = true;
+  services.postgresql.dataDir = "/mnt/postgresql-data/${config.services.postgresql.package.psqlSchema}";
+  services.postgresqlBackup.enable = true;
+
   # PR Tracker
   services.pr-tracker = {
     enable = true;
@@ -111,8 +119,12 @@
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
 
-  # PosgreSQL
-  services.postgresql.enable = true;
-  services.postgresql.dataDir = "/mnt/postgresql-data/${config.services.postgresql.package.psqlSchema}";
-  services.postgresqlBackup.enable = true;
+  # Synapse
+  services.matrix-synapse-custom.enable = true;
+  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/morak;
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/morak";
+  # services.matrix-vacation-responder = {
+  #   enable = true;
+  #   username = "@sumner:sumnerevans.com";
+  # };
 }
