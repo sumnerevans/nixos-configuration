@@ -26,6 +26,7 @@
   };
 
   # Websites
+  services.nginx.enable = true;
   services.nginx.websites = [
     { hostname = "nevarro.space"; }
   ];

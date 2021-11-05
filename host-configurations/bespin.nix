@@ -29,6 +29,7 @@
   };
 
   # Websites
+  services.nginx.enable = true;
   services.nginx.websites = [
     {
       # sumnerevans.com
