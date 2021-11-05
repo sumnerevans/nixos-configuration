@@ -91,6 +91,7 @@ in
         TimeoutSec = 10;
         Restart = "always";
         User = "gonic";
+        Group = "music";
       };
     };
 
@@ -104,12 +105,12 @@ in
 
     users.users.gonic = {
       description = "Gonic service user";
-      group = "gonic";
+      group = "music";
       name = "gonic";
       home = cfg.home;
       createHome = true;
       isSystemUser = true;
     };
-    users.groups.gonic = { };
+    users.groups.music = { };
   };
 }

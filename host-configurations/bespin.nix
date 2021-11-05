@@ -91,16 +91,6 @@
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;
 
-  services.gonic = {
-    enable = true;
-    scanInterval = 1;
-    virtualHost = "gonic.sumnerevans.com";
-  };
-  services.nginx.virtualHosts."gonic.sumnerevans.com" = {
-    forceSSL = true;
-    enableACME = true;
-  };
-
   # Longview
   services.longview.enable = true;
   services.longview.apiKeyFile = ../secrets/longview/bespin;

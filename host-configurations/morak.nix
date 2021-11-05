@@ -60,6 +60,18 @@
   services.healthcheck.checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
   services.syncthing.enable = true;
 
+  # Gonic
+  services.gonic = {
+    enable = true;
+    scanInterval = 1;
+    virtualHost = "music.sumnerevans.com";
+    musicDir = "/mnt/syncthing-data/Music";
+  };
+  services.nginx.virtualHosts."music.sumnerevans.com" = {
+    forceSSL = true;
+    enableACME = true;
+  };
+
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
