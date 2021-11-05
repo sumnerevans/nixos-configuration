@@ -55,9 +55,6 @@
   # Mjolnir
   services.mjolnir.enable = true;
 
-  # Mumble
-  services.murmur.enable = true;
-
   # PosgreSQL
   services.postgresql.enable = true;
   services.postgresql.dataDir = "/mnt/nevarro-postgresql-data/postgresql/11.1";

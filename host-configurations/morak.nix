@@ -92,6 +92,9 @@
     enableACME = true;
   };
 
+  # Mumble
+  services.murmur.enable = true;
+
   # PR Tracker
   services.pr-tracker = {
     enable = true;
