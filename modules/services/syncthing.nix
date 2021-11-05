@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   certs = config.security.acme.certs;
-  hostnameDomain = "${config.networking.hostName}.${config.networking.domain}";
+  hostnameDomain = "syncthing.${config.networking.hostName}.${config.networking.domain}";
   syncthingCfg = config.services.syncthing;
 in
 lib.mkIf syncthingCfg.enable {
@@ -12,7 +12,12 @@ lib.mkIf syncthingCfg.enable {
 
   # Use nginx to expose Syncthing via reverse proxy.
   services.nginx.virtualHosts."${hostnameDomain}" = {
-    locations."/syncthing/".proxyPass = "http://localhost:8384/";
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8384/";
+      proxyWebsockets = true;
+    };
   };
 
   # Add a backup service for the config.
