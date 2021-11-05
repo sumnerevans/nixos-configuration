@@ -30,39 +30,6 @@
 
   # Websites
   services.nginx.enable = true;
-  services.nginx.websites = [
-    {
-      # sumnerevans.com
-      hostname = config.networking.domain;
-      extraLocations = {
-        "/teaching" = {
-          root = "/var/www";
-          priority = 0;
-          extraConfig = ''
-            access_log /var/log/nginx/${config.networking.domain}.access.log;
-            autoindex on;
-          '';
-        };
-      };
-      excludeTerms = [
-        "/.well-known/"
-        "/dark-theme.min.js"
-        "/favicon.ico"
-        "/js/isso.min.js"
-        "/profile.jpg"
-        "/robots.txt"
-        "/style.css"
-        "/teaching/csci564-s21/_static/"
-      ];
-    }
-  ];
-
-  # PR Tracker has moved to Nevarro
-  services.nginx.virtualHosts."pr-tracker.sumnerevans.com" = {
-    addSSL = true;
-    enableACME = true;
-    locations."/".return = "301 https://pr-tracker.nevarro.space$request_uri";
-  };
 
   ############
   # Services #
