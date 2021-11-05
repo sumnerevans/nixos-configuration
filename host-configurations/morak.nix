@@ -74,6 +74,7 @@
   # Services #
   ############
   services.healthcheck.checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
+  services.logrotate.enable = true;
   services.syncthing.enable = true;
 
   # Gonic
