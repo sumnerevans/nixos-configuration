@@ -25,6 +25,36 @@
   };
 
   ############
+  # Websites #
+  ############
+  services.nginx.websites = [
+    {
+      # sumnerevans.com
+      hostname = "sumnerevans.com";
+      extraLocations = {
+        "/teaching" = {
+          root = "/var/www";
+          priority = 0;
+          extraConfig = ''
+            access_log /var/log/nginx/${config.networking.domain}.access.log;
+            autoindex on;
+          '';
+        };
+      };
+      excludeTerms = [
+        "/.well-known/"
+        "/dark-theme.min.js"
+        "/favicon.ico"
+        "/js/isso.min.js"
+        "/profile.jpg"
+        "/robots.txt"
+        "/style.css"
+        "/teaching/csci564-s21/_static/"
+      ];
+    }
+  ];
+
+  ############
   # Services #
   ############
   services.healthcheck.checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
