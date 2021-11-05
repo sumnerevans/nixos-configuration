@@ -30,8 +30,6 @@
 
   # Websites
   services.nginx.websites = [
-    { hostname = "the-evans.family"; }
-    { hostname = "qs.${config.networking.domain}"; }
     {
       # sumnerevans.com
       hostname = config.networking.domain;
