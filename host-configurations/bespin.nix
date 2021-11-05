@@ -31,6 +31,20 @@
   # Websites
   services.nginx.enable = true;
 
+  # Transitional redirects
+  services.nginx.virtualHosts = {
+    "bitwarden.sumnerevans.com" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "http://5.161.43.204:8222";
+    };
+    "dav.sumnerevans.com" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "http://5.161.43.204:8080";
+    };
+  };
+
   ############
   # Services #
   ############

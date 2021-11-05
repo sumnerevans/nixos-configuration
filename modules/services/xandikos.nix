@@ -17,6 +17,8 @@ lib.mkIf xandikosCfg.enable {
       }
     );
 
+    address = "0.0.0.0";
+
     extraOptions = [
       "--current-user-principal /sumner/"
     ];

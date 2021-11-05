@@ -22,6 +22,9 @@
     "/mnt/postgresql-data" = { device = "/dev/disk/by-uuid/3d8eb9ca-e8ea-4231-b2a6-4fc5367ccb8a"; fsType = "ext4"; };
   };
 
+  # Allow temporary redirects directly to the reverse proxy.
+  networking.firewall.allowedTCPPorts = [ 8222 8080 ];
+
   ############
   # Websites #
   ############
