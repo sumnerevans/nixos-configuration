@@ -9,6 +9,9 @@
   networking.hostName = "bespin";
   networking.domain = "sumnerevans.com";
 
+  # IPv6 on Linode is just bad and doesn't work.
+  networking.enableIPv6 = false;
+
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "prohibit-password";
 

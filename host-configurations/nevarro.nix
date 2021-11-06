@@ -9,6 +9,9 @@
   networking.hostName = "nevarro";
   networking.domain = "nevarro.space";
 
+  # IPv6 on Linode is just bad and doesn't work.
+  networking.enableIPv6 = false;
+
   networking.interfaces.eth0.useDHCP = true;
 
   # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
