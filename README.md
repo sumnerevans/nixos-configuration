@@ -12,31 +12,37 @@ https://git.sr.ht/~sumner/home-manager-config
 ## Hosts
 
 * **Personal Computers**
+
   * **coruscant**: custom desktop
   * **jedha**: ThinkPad T580
   * **mustafar**: Samsung Galaxy Chromebook
+
 * **Servers**
+
   * **bespin**: Linode VPS (non-realtime critical infrastructure)
+    * [Syncthing](https://syncthing.net)
+
+  * **morak**: Hetzner Cloud VPS (CPX11)
     * Personal Websites
     * [Airsonic](https://airsonic.github.io)
-    * [vaultwarden](https://github.com/dani-garcia/vaultwarden)
     * [GoAccess](https://goaccess.io/)
     * [Isso](https://posativ.org/isso/)
     * [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
+    * [Synapse](https://github.com/matrix-org/synapse) (sumnerevans.com)
     * [Syncthing](https://syncthing.net)
+    * [vaultwarden](https://github.com/dani-garcia/vaultwarden)
     * [Xandikos](https://www.xandikos.org/)
-    * [Synapse](https://github.com/matrix-org/synapse)
-      * [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
-
-  * **morak**: Hetzner Cloud VPS (CPX11)
 
   * **nevarro**: Linode VPS (primary Synapse infrastructure)
-    * nevarro.space website
-    * [Synapse](https://github.com/matrix-org/synapse)
+    * [Synapse](https://github.com/matrix-org/synapse) (nevarro.space)
       * [Heisenbridge](https://github.com/hifi/heisenbridge)
+      * [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
     * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
     * [standupbot](https://sr.ht/~sumner/standupbot)
     * [Murmur for Mumble](https://www.mumble.info/)
+
+  * **kessel**: Hetzner Cloud VPS (CCX12)
+    * nevarro.space website
 
 ## Installation Instructions
 

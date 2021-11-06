@@ -91,5 +91,5 @@
       invite_client_location = "https://app.element.io";
     };
   };
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/bespin";
+  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/nevarro";
 }

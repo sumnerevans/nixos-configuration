@@ -17,10 +17,7 @@
   # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
   # memory, it won't crash the box.
   swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 4096;
-    }
+    { device = "/var/swapfile"; size = 4096; }
   ];
 
   fileSystems = {
