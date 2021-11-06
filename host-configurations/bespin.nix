@@ -91,8 +91,4 @@
   # Restic backup
   services.backup.healthcheckId = "a42858af-a9d7-4385-b02d-2679f92873ed";
   services.backup.healthcheckPruneId = "14ed7839-784f-4dee-adf2-f9e03c2b611e";
-
-  # PosgreSQL
-  services.postgresql.enable = true;
-  services.postgresqlBackup.enable = true;
 }
