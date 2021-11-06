@@ -11,38 +11,41 @@ https://git.sr.ht/~sumner/home-manager-config
 
 ## Hosts
 
-* **Personal Computers**
+- **Personal Computers**
 
-  * **coruscant**: custom desktop
-  * **jedha**: ThinkPad T580
-  * **mustafar**: Samsung Galaxy Chromebook
+  - **coruscant**: custom desktop
+  - **jedha**: ThinkPad T580
+  - **mustafar**: Samsung Galaxy Chromebook
 
-* **Servers**
+- **Servers**
 
-  * **bespin**: Linode VPS (non-realtime critical infrastructure)
-    * [Syncthing](https://syncthing.net)
+  - **bespin**: Linode VPS (non-realtime critical infrastructure)
 
-  * **morak**: Hetzner Cloud VPS (CPX11)
-    * Personal Websites
-    * [Airsonic](https://airsonic.github.io)
-    * [GoAccess](https://goaccess.io/)
-    * [Isso](https://posativ.org/isso/)
-    * [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
-    * [Synapse](https://github.com/matrix-org/synapse) (sumnerevans.com)
-    * [Syncthing](https://syncthing.net)
-    * [vaultwarden](https://github.com/dani-garcia/vaultwarden)
-    * [Xandikos](https://www.xandikos.org/)
+    - [Syncthing](https://syncthing.net)
 
-  * **nevarro**: Linode VPS (primary Synapse infrastructure)
-    * [Synapse](https://github.com/matrix-org/synapse) (nevarro.space)
-      * [Heisenbridge](https://github.com/hifi/heisenbridge)
-      * [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
-    * [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
-    * [standupbot](https://sr.ht/~sumner/standupbot)
-    * [Murmur for Mumble](https://www.mumble.info/)
+  - **morak**: Hetzner Cloud VPS (CPX11)
 
-  * **kessel**: Hetzner Cloud VPS (CCX12)
-    * nevarro.space website
+    - Personal Websites
+    - [Airsonic](https://airsonic.github.io)
+    - [GoAccess](https://goaccess.io/)
+    - [Isso](https://posativ.org/isso/)
+    - [Murmur for Mumble](https://www.mumble.info/)
+    - [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
+    - [Synapse](https://github.com/matrix-org/synapse) (sumnerevans.com)
+    - [Syncthing](https://syncthing.net)
+    - [vaultwarden](https://github.com/dani-garcia/vaultwarden)
+    - [Xandikos](https://www.xandikos.org/)
+
+  - **nevarro**: Linode VPS (primary Synapse infrastructure)
+
+  - **kessel**: Hetzner Cloud VPS (CCX12, primary Synapse infrastructure)
+
+    - nevarro.space website
+    - [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
+    - [standupbot](https://sr.ht/~sumner/standupbot)
+    - [Synapse](https://github.com/matrix-org/synapse) (nevarro.space)
+      - [Heisenbridge](https://github.com/hifi/heisenbridge)
+      - [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
 
 ## Installation Instructions
 
@@ -65,19 +68,19 @@ To install this configuration,
 
 ## Goals
 
-* Infrastructure as code
-* Immutable infrastructure (as much as possible)
-* Everything backed up to B2
-* Everything backed up to onsite location
+- Infrastructure as code
+- Immutable infrastructure (as much as possible)
+- Everything backed up to B2
+- Everything backed up to onsite location
 
 ### Uptime
 
-* Can blow away all servers (but not data) and restore in under an hour
-* Can restore all data within one day after catastrophic failure (everything
+- Can blow away all servers (but not data) and restore in under an hour
+- Can restore all data within one day after catastrophic failure (everything
   goes down, including data)
 
-  * From local backup: 1 day
-  * From B2: 2 days
+  - From local backup: 1 day
+  - From B2: 2 days
 
 ## Backup Strategy
 
