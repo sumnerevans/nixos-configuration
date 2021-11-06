@@ -14,24 +14,15 @@
   # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
   # memory, it won't crash the box.
   swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 4096;
-    }
+    { device = "/var/swapfile"; size = 4096; }
   ];
 
   fileSystems = {
     "/" = { device = "/dev/sda"; fsType = "ext4"; };
-    "/mnt/nevarro-postgresql-data" = { device = "/dev/disk/by-id/scsi-0Linode_Volume_nevarro-postgresql-data"; fsType = "ext4"; };
   };
 
-  # Websites
-  services.nginx.enable = true;
-  services.nginx.websites = [
-    { hostname = "nevarro.space"; }
-  ];
-
   # Transitional redirects
+  services.nginx.enable = true;
   services.nginx.virtualHosts = {
     "matrix.nevarro.space" = {
       enableACME = true;
