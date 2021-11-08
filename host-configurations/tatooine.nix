@@ -32,4 +32,7 @@
       proxyWebsockets = true;
     };
   };
+
+  # Enable mosh
+  programs.mosh.enable = true;
 }
