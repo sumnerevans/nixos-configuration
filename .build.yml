@@ -18,24 +18,20 @@ tasks:
   - setup: |
       echo "cd $REPO_NAME" >> ~/.buildenv
       time ssh-keyscan kessel.nevarro.space >> ~/.ssh/known_hosts
-      time ssh-keyscan nevarro.nevarro.space >> ~/.ssh/known_hosts
       time ssh-keyscan morak.sumnerevans.com >> ~/.ssh/known_hosts
       time ssh-keyscan bespin.sumnerevans.com >> ~/.ssh/known_hosts
 
   - switch-commit: |
       ssh root@kessel.nevarro.space  "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
-      ssh root@nevarro.nevarro.space  "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
       ssh root@morak.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
       ssh root@bespin.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
 
   - remote-build: |
       ssh root@kessel.nevarro.space  "time nixos-rebuild build --show-trace"
-      ssh root@nevarro.nevarro.space  "time nixos-rebuild build --show-trace"
       ssh root@morak.sumnerevans.com "time nixos-rebuild build --show-trace"
       ssh root@bespin.sumnerevans.com "time nixos-rebuild build --show-trace"
 
   - switch-generation: |
       ssh root@kessel.nevarro.space  "time nixos-rebuild switch --show-trace"
-      ssh root@nevarro.nevarro.space  "time nixos-rebuild switch --show-trace"
       ssh root@morak.sumnerevans.com "time nixos-rebuild switch --show-trace"
       ssh root@bespin.sumnerevans.com "time nixos-rebuild switch --show-trace"

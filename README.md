@@ -36,8 +36,6 @@ https://git.sr.ht/~sumner/home-manager-config
     - [vaultwarden](https://github.com/dani-garcia/vaultwarden)
     - [Xandikos](https://www.xandikos.org/)
 
-  - **nevarro**: Linode VPS (primary Synapse infrastructure)
-
   - **kessel**: Hetzner Cloud VPS (CCX12, primary Synapse infrastructure)
 
     - nevarro.space website
