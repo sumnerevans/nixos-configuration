@@ -20,4 +20,16 @@
 
   # Enable Docker.
   virtualisation.docker.enable = true;
+
+  # Allow the Syncthing GUI through
+  networking.firewall.allowedTCPPorts = [ 8384 ];
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."syncthing.tatooine.sumnerevans.com" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8384/";
+      proxyWebsockets = true;
+    };
+  };
 }
