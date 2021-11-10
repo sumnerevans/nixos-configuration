@@ -19,11 +19,6 @@
 
       services.unbound = {
         enable = true;
-        settings = {
-          server = {
-            do-ip6 = "no";
-          };
-        };
       };
     }
   )
