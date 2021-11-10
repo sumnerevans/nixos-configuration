@@ -22,17 +22,10 @@
   virtualisation.docker.enable = true;
 
   # Allow the Syncthing GUI through
-  networking.firewall.allowedTCPPorts = [ 8384 ];
-  services.nginx.enable = true;
-  services.nginx.virtualHosts."syncthing.tatooine.sumnerevans.com" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://localhost:8384/";
-      proxyWebsockets = true;
-    };
-  };
+  networking.firewall.allowedTCPPorts = [ 8384 2022 ];
+  networking.firewall.allowedUDPPorts = [ 8384 2022 ];
 
-  # Enable mosh
+  # Enable mosh and et
   programs.mosh.enable = true;
+  services.eternal-terminal.enable = true;
 }
