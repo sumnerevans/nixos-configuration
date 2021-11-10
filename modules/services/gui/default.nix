@@ -18,10 +18,6 @@
     # Thumbnailing service
     services.tumbler.enable = true;
 
-    # Enable Redis and PostgreSQL
-    services.redis.enable = true;
-    services.postgresql.enable = true;
-
     # Use geoclue2 as the location provider for things like redshift/gammastep.
     location.provider = "geoclue2";
     services.geoclue2.appConfig.redshift = {

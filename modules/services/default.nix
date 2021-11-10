@@ -26,4 +26,8 @@
     ./syncthing.nix
     ./xandikos.nix
   ];
+
+  # Enable Redis and PostgreSQL
+  services.redis.enable = true;
+  services.postgresql.enable = true;
 }
