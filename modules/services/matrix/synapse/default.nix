@@ -15,12 +15,6 @@ let
         sha256 = "sha256-RcB+RSb/LZE8Q+UunyrYh28S7c7VsTmqg4mJIDVCX5U=";
       };
 
-      # Enable Redis support
-      propagatedBuildInputs = with pkgs.python3Packages; old.propagatedBuildInputs ++ [
-        hiredis
-        txredisapi
-      ];
-
       doCheck = false;
     }
   );
