@@ -2,32 +2,6 @@
   mjolnirCfg = config.services.mjolnir;
 in
 {
-  imports = [
-    ./mjolnir-pr-123896/modules/matrix/mjolnir.nix
-    ./mjolnir-pr-123896/modules/matrix/pantalaimon.nix
-  ];
-
-  nixpkgs.overlays = [
-    (self: super: {
-      mjolnir = self.callPackage ./mjolnir-pr-123896/pkgs/mjolnir { };
-      pantalaimon-headless = self.pantalaimon.overridePythonAttrs {
-        propagatedBuildInputs = with pkgs.python3Packages; [
-          aiohttp
-          appdirs
-          attrs
-          click
-          janus
-          keyring
-          Logbook
-          matrix-nio
-          peewee
-          prompt-toolkit
-          setuptools
-        ];
-      };
-    })
-  ];
-
   services.mjolnir = {
     homeserverUrl = "http://localhost:8008";
 
@@ -44,4 +18,5 @@ in
       protectAllJoinedRooms = true;
     };
   };
+  services.pantalaimon-headless.instances.mjolnir.listenPort = 8100;
 }
