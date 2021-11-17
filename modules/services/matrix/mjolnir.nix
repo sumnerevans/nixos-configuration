@@ -18,5 +18,7 @@ in
       protectAllJoinedRooms = true;
     };
   };
-  services.pantalaimon-headless.instances.mjolnir.listenPort = 8100;
+  services.pantalaimon-headless.instances = mkIf mjolnirCfg.enable {
+    mjolnir.listenPort = 8100;
+  };
 }
