@@ -3,7 +3,7 @@
 in
 {
   services.mjolnir = {
-    homeserverUrl = "http://localhost:8008";
+    homeserverUrl = "https://matrix.nevarro.space";
 
     pantalaimon = {
       enable = true;

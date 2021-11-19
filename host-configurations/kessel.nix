@@ -44,6 +44,7 @@
   # Heisenbridge
   services.heisenbridge = {
     enable = true;
+    homeserver = "https://matrix.nevarro.space";
   } // (import ../secrets/matrix/appservices/heisenbridge.nix);
 
   # LinkedIn <-> Matrix Bridge
@@ -61,16 +62,22 @@
   services.postgresqlBackup.enable = true;
 
   # Quotesfilebot
-  services.quotesfilebot.enable = true;
-  services.quotesfilebot.passwordFile = "/etc/nixos/secrets/matrix/bots/quotesfilebot";
+  services.quotesfilebot = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+    passwordFile = "/etc/nixos/secrets/matrix/bots/quotesfilebot";
+  };
 
   # Restic backup
   services.backup.healthcheckId = "efe08f4f-c0bb-4901-967d-b33774c18d80";
   services.backup.healthcheckPruneId = "7215d3b4-24d4-4ecf-9785-6b4161b3af28";
 
   # Standupbot
-  services.standupbot.enable = true;
-  services.standupbot.passwordFile = "/etc/nixos/secrets/matrix/bots/standupbot";
+  services.standupbot = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+    passwordFile = "/etc/nixos/secrets/matrix/bots/standupbot";
+  };
 
   # Synapse
   services.matrix-synapse-custom = {

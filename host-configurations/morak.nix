@@ -126,5 +126,6 @@
   services.matrix-vacation-responder = {
     enable = true;
     username = "@sumner:sumnerevans.com";
+    homeserver = "https://matrix.sumnerevans.com";
   };
 }
