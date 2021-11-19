@@ -27,7 +27,7 @@
 
   linkedinMatrixConfig = {
     homeserver = {
-      address = "http://localhost:8008";
+      address = cfg.homeserver;
       domain = config.networking.domain;
       verify_ssl = false;
       asmux = false;

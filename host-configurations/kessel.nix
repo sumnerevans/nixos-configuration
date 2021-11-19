@@ -49,6 +49,7 @@
   # LinkedIn <-> Matrix Bridge
   services.linkedin-matrix = {
     enable = true;
+    homeserver = "https://matrix.nevarro.space";
   } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
 
   # Mjolnir
