@@ -8,11 +8,11 @@ let
   package = pkgs.matrix-synapse.overridePythonAttrs (
     old: rec {
       pname = "matrix-synapse";
-      version = "1.47.0";
+      version = "1.47.1";
 
       src = pkgs.python3.pkgs.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-SS7ETkYQ3XBihOA6TQp+6f0PNhhlUvMBR6fEYmiLT3k=";
+        sha256 = "sha256-ldk14yMaFZ1uegiTwB6txomGJTV1Gf/LqJyWJARmhJ4=";
       };
 
       doCheck = false;
