@@ -69,7 +69,12 @@ in
       mkIf cfg.isServer {
         services.healthcheck.enable = true;
         boot.loader.timeout = 10;
-        system.autoUpgrade.allowReboot = true;
+        system.autoUpgrade = {
+          enable = true;
+          dates = "monthly";
+          channel = https://nixos.org/channels/nixos-unstable;
+          allowReboot = true;
+        };
         nix.gc.automatic = true;
 
         services.openssh.enable = true;

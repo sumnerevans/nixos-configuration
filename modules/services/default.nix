@@ -6,7 +6,6 @@
 
     ./acme.nix
     ./airsonic.nix
-    ./autoupgrade.nix
     ./bitwarden.nix
     ./docker.nix
     ./goaccess.nix
