@@ -1,6 +1,46 @@
 { config, lib, pkgs, ... }: with lib;
 let
   healthcheckCfg = config.services.healthcheck;
+  threshold = 95;
+
+  healthcheckCurl = fail: ''
+    ${pkgs.curl}/bin/curl \
+      --verbose \
+      -fsS \
+      --retry 2 \
+      --max-time 5 \
+      --ipv4 \
+      https://hc-ping.com/${healthcheckCfg.checkId}${optionalString fail "/fail"}
+  '';
+
+  diskCheckScript = disk: pkgs.writeShellScriptBin "diskcheck" ''
+    CURRENT=$(df ${disk} | grep ${disk} | awk '{ print $5}' | sed 's/%//g')
+
+    if [ "$CURRENT" -gt "${toString threshold}" ] ; then
+      echo "Used space on ${disk} is over ${toString threshold}%"
+      ${healthcheckCurl true}
+      exit 1
+    fi
+  '';
+
+  systemdFailedCheckScript = pkgs.writeShellScriptBin "systemdfailedcheck" ''
+    FAILED=$(systemd --failed | grep failed)
+    if [[ "$FAILED" != "" ]]; then
+      echo "There are failed systemd services!"
+      echo $FAILED
+      ${healthcheckCurl true}
+      exit 1
+    fi
+  '';
+
+  healthcheckScript = pkgs.writeShellScriptBin "healthcheck" ''
+    set -xe
+
+    ${concatMapStringsSep "\n" (disk: "${diskCheckScript disk}/bin/diskcheck") healthcheckCfg.disks}
+
+    # Everything worked, so success.
+    ${healthcheckCurl false}
+  '';
 in
 {
   options.services.healthcheck = {
@@ -9,6 +49,11 @@ in
       type = types.str;
       description = "The healthchecks.io check ID.";
     };
+    disks = mkOption {
+      type = with types; listOf str;
+      default = [ ];
+      description = "List of paths to disks to check for usage thresholds";
+    };
   };
 
   config = mkIf healthcheckCfg.enable {
@@ -16,15 +61,7 @@ in
       description = "Healthcheck service";
       startAt = "*:*:0/30"; # Send a healthcheck ping every 30 seconds.
       serviceConfig = {
-        ExecStart = ''
-          ${pkgs.curl}/bin/curl \
-            --verbose \
-            -fsS \
-            --retry 2 \
-            --max-time 5 \
-            --ipv4 \
-            https://hc-ping.com/${healthcheckCfg.checkId}
-        '';
+        ExecStart = "${healthcheckScript}/bin/healthcheck";
         TimeoutSec = 10;
       };
     };

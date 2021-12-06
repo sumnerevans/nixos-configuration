@@ -38,8 +38,13 @@
   # Services #
   ############
   services.grafana.enable = true;
-  services.healthcheck.checkId = "ac320939-f60f-4675-a284-76e318080eda";
   services.logrotate.enable = true;
+
+  # Healthcheck
+  services.healthcheck = {
+    checkId = "ac320939-f60f-4675-a284-76e318080eda";
+    disks = [ "/" "/mnt/postgresql-data" ];
+  };
 
   # Heisenbridge
   services.heisenbridge = {
