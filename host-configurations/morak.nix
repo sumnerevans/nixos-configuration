@@ -81,7 +81,6 @@
   ############
   services.airsonic.enable = true;
   services.grafana.enable = true;
-  services.healthcheck.checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
   services.isso.enable = true;
   services.logrotate.enable = true;
   services.syncthing.enable = true;
@@ -98,6 +97,11 @@
   services.nginx.virtualHosts."music.sumnerevans.com" = {
     forceSSL = true;
     enableACME = true;
+  };
+
+  services.healthcheck = {
+    checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
+    disks = [ "/" "/mnt/syncthing-data" "/mnt/postgresql-data" ];
   };
 
   # Mumble

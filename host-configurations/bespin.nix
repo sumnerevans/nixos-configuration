@@ -82,10 +82,14 @@
   # Services #
   ############
   services.grafana.enable = true;
-  services.healthcheck.checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
   services.logrotate.enable = true;
   services.prometheus.enable = true;
   services.syncthing.enable = true;
+
+  services.healthcheck = {
+    checkId = "43c45999-cc22-430f-a767-31a1a17c6d1b";
+    disks = [ "/" "/mnt/syncthing-data" ];
+  };
 
   # Longview
   services.longview.enable = true;
