@@ -8,12 +8,14 @@ let
   package = pkgs.matrix-synapse.overridePythonAttrs (
     old: rec {
       pname = "matrix-synapse";
-      version = "1.48.0";
+      version = "1.49.0rc1";
 
       src = pkgs.python3.pkgs.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-G09VbfC9mZ0+shLHRNutR91URewvLW4l4lQaVrsZYaQ=";
+        sha256 = "sha256-MG/myMWuBBS1zEVoDuTFmxKdNi3CX/wz0d2nT//GXO4=";
       };
+
+      patches = [];
 
       doCheck = false;
     }
@@ -200,7 +202,7 @@ in
       partOf = [ "matrix-synapse.target" ];
       wantedBy = [ "matrix-synapse.target" ];
       preStart = ''
-        ${package}/bin/homeserver \
+        ${package}/bin/synapse_homeserver \
           --config-path ${sharedConfigFile} \
           --keys-directory ${cfg.dataDir} \
           --generate-keys
@@ -217,7 +219,7 @@ in
           ''))
         ];
         ExecStart = ''
-          ${package}/bin/homeserver \
+          ${package}/bin/synapse_homeserver \
             --config-path ${sharedConfigFile} \
             --keys-directory ${cfg.dataDir}
         '';
