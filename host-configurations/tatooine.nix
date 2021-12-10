@@ -25,11 +25,6 @@
   networking.firewall.allowedTCPPorts = [ 8384 2022 ];
   networking.firewall.allowedUDPPorts = [ 8384 2022 ];
 
-  # Add the Beeper stack cert to the list of certs
-  security.pki.certificateFiles = [
-    ../secrets/beeper-localenv-root-ca.pem
-  ];
-
   # Enable mosh and et
   programs.mosh.enable = true;
   services.eternal-terminal.enable = true;

@@ -8,6 +8,7 @@
     ./services
     ./users
 
+    ./beeper.nix
     ./nix.nix
     ./time.nix
   ];
