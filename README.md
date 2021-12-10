@@ -29,6 +29,7 @@ https://github.com/sumnerevans/home-manager-config/
     - [Airsonic](https://airsonic.github.io)
     - [GoAccess](https://goaccess.io/)
     - [Isso](https://posativ.org/isso/)
+    - [Matrix Vacation Responder](https://gitlab.com/beeper/matrix-vacation-responder)
     - [Murmur for Mumble](https://www.mumble.info/)
     - [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
     - [Synapse](https://github.com/matrix-org/synapse) (sumnerevans.com)
