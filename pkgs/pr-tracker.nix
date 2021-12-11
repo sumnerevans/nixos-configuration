@@ -1,6 +1,6 @@
 { rustPlatform
 , lib
-, fetchFromSourcehut
+, fetchFromGitHub
 , openssl
 , pkg-config
 , systemd
@@ -8,16 +8,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "pr-tracker";
-  version = "unstable-2021-05-21";
+  version = "unstable-2021-12-11";
 
-  src = fetchFromSourcehut {
-    owner = "~sumner";
+  src = fetchFromGitHub {
+    owner = "sumnerevans";
     repo = pname;
-    rev = "60c48d1d94ee335e8eae94a2f8e0863ebbe52b19";
-    sha256 = "sha256-xTankNu6MlBx9oBd8F4I4IoWFXNoiyuPvCJtSLpxlFI=";
+    rev = "8fb42eecc5b6f6c5400340d70a35125a8b898217";
+    sha256 = "sha256-Bqa+DubU57Qj1boaazL97V7kWdmViY6OtYmlnSNusBw=";
   };
 
-  cargoSha256 = "sha256-7i+h4Q5Gj3VD25Kz/B/gT/u5MXuE8G7Ghd7QUIyADpA=";
+  cargoSha256 = "sha256-HeZKjn5okHQumZcUXVevb/YpDEkqAUzD1ApnSgdWReE=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl systemd ];
