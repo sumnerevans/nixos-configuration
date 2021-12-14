@@ -113,11 +113,11 @@
   services.postgresqlBackup.enable = true;
 
   # PR Tracker
-  services.pr-tracker = {
-    enable = true;
-    githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
-    sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
-  };
+  # services.pr-tracker = {
+  #   enable = true;
+  #   githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
+  #   sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
+  # };
 
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
