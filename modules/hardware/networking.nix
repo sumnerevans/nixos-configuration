@@ -10,6 +10,14 @@
   (
     mkIf config.networking.networkmanager.enable {
       networking.networkmanager.enableStrongSwan = true;
+
+      services.globalprotect = {
+        enable = true;
+        # if you need a Host Integrity Protection report
+        csdWrapper = "${pkgs.openconnect}/libexec/openconnect/hipreport.sh";
+      };
+
+      environment.systemPackages = [ pkgs.globalprotect-openconnect ];
     }
   )
 
