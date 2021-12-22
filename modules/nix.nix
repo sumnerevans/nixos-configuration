@@ -11,6 +11,11 @@ in
     {
       nixpkgs.config.allowUnfree = true;
       environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+
+      nix.trustedBinaryCaches = [
+        "https://sumnerevans.cachix.org"
+        "https://nixpkgs-wayland.cachix.org"
+      ];
     }
 
     # If automatic garbage collection is enabled, delete 30 days.
@@ -28,21 +33,6 @@ in
         experimental-features = nix-command flakes
       '';
       nix.package = pkgs.nixUnstable;
-    }
-
-    # Cachix
-    {
-      nix.binaryCaches = [
-        "https://cache.nixos.org"
-        "https://nixpkgs-wayland.cachix.org"
-        "https://sumnerevans.cachix.org"
-      ];
-
-      nix.binaryCachePublicKeys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-        "sumnerevans.cachix.org-1:z6/iKao2dNGnmPNsnlsOCsn12LgeAVv3XneaLdyeve0="
-      ];
     }
 
     # nix-direnv
