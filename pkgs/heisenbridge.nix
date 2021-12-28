@@ -2,13 +2,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "heisenbridge";
-  version = "1.8.2";
+  version = "1.8.3rc1";
 
   src = fetchFromGitHub {
     owner = "hifi";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "173prcd56rwlxjxlw67arnm12k1l317xi5s6m7jhmp8zbbrj5vwr";
+    rev = "caf122a0f064b8bc2cd9fbd0f9ae703d323b7d04";
+    sha256 = "sha256-JGb3Q5y24njPkyGnxxcoaBGPamNk3yJTkCcmrqgf610=";
   };
 
   postPatch = ''
