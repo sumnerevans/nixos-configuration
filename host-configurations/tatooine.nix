@@ -21,39 +21,11 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
 
-  networking.firewall.allowedTCPPorts = [
-    # Allow the Syncthing GUI through
-    8384
-    2022
-    # Allow nginx through
-    80
-    443
-  ];
+  # Allow the Syncthing GUI through
+  networking.firewall.allowedTCPPorts = [ 8384 2022 ];
   networking.firewall.allowedUDPPorts = [ 8384 2022 ];
 
   # Enable mosh and et
   programs.mosh.enable = true;
   services.eternal-terminal.enable = true;
-
-  # Expose Synapse through the firewall
-  services.nginx = {
-    enable = true;
-    virtualHosts = {
-      # Reverse proxy for Matrix client-server and server-server communication
-      "matrix.tatooine.sumnerevans.com" = {
-        enableACME = true;
-        forceSSL = true;
-
-        # If they access root, redirect to Element. If they access the API, then
-        # forward on to Synapse.
-        locations."/".return = "301 https://app.element.io";
-        locations."/_matrix" = {
-          proxyPass = "http://0.0.0.0:8008"; # without a trailing /
-          extraConfig = ''
-            access_log /var/log/nginx/matrix.access.log;
-          '';
-        };
-      };
-    };
-  };
 }
