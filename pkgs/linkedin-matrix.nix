@@ -4,11 +4,11 @@ let
   mautrix = pkgs.python3Packages.mautrix.overridePythonAttrs (
     old: rec {
       pname = "mautrix";
-      version = "0.11.3";
+      version = "0.14.0";
 
       src = pkgs.python3.pkgs.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-eZ8fWemS808Hz6KoQWfMsk5WfaO+vj0kTyInhtE20Qk=";
+        sha256 = "sha256-WtBOh7zzHrNHn908q9UIKyVwE+XAD2s2lTmitYSvra8=";
       };
 
       doCheck = false;
@@ -17,14 +17,14 @@ let
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
-  version = "unstable-2021-11-14";
+  version = "0.5.2";
   format = "pyproject";
 
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "linkedin";
-    rev = "af01ac5217439dc91d8d9d4ec6eb9fd1b1acb34f";
-    sha256 = "sha256-BuYVmTKj6saSkMZkSFQ6S542ptcAucL5I+a1xGxCMUc=";
+    rev = "v${version}";
+    sha256 = "sha256-BG0QJgpxZpdJ67cIO+AK+0Jt2bZcmAnUEy8wAPP2cac=";
   };
 
   nativeBuildInputs = [
