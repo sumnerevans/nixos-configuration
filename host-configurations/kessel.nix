@@ -1,4 +1,4 @@
-{ config, lib, ... }: with lib; {
+{ config, lib, pkgs, ... }: with lib; {
   hardware.isServer = true;
 
   # Set the hostname
@@ -50,7 +50,9 @@
   services.heisenbridge = {
     enable = true;
     homeserver = "https://matrix.nevarro.space";
-  } // (import ../secrets/matrix/appservices/heisenbridge.nix);
+    identd.enable = true;
+    package = pkgs.callPackage ../pkgs/heisenbridge.nix { };
+  };
 
   # LinkedIn <-> Matrix Bridge
   services.linkedin-matrix = {
