@@ -56,6 +56,12 @@
     identd.enable = true;
     package = pkgs.callPackage ../pkgs/heisenbridge.nix { };
   };
+  systemd.services.heisenbridge = {
+    before = [ "matrix-synapse.target" ]; # So the registration file can be used by Synapse
+  };
+  services.matrix-synapse-custom.appServiceConfigFiles = [
+    "/var/lib/heisenbridge/registration.yml"
+  ];
 
   # LinkedIn <-> Matrix Bridge
   services.linkedin-matrix = {
