@@ -72,7 +72,7 @@ in
         system.autoUpgrade = {
           enable = true;
           dates = "monthly";
-          channel = https://nixos.org/channels/nixos-unstable;
+          channel = https://nixos.org/channels/nixos-unstable-small;
           allowReboot = true;
         };
         nix.gc.automatic = true;
