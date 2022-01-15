@@ -35,6 +35,7 @@ in
     )
   ];
   nix.enableRemoteBuildOnCoruscant = true;
+  nix.enableRemoteBuildOnTatooine = true;
 
   virtualisation.docker.enable = true;
 

@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }: with lib; {
   hardware.isServer = true;
 
+  nix.enableRemoteBuildOnCoruscant = true;
+  nix.enableRemoteBuildOnTatooine = true;
+
   # Set the hostname
   networking.hostName = "kessel";
   networking.domain = "nevarro.space";

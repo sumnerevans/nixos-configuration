@@ -1,6 +1,9 @@
 { config, lib, ... }: {
   hardware.isServer = true;
 
+  nix.enableRemoteBuildOnCoruscant = true;
+  nix.enableRemoteBuildOnTatooine = true;
+
   # Set the hostname
   networking.hostName = "morak";
   networking.domain = "sumnerevans.com";

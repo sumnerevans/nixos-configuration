@@ -4,6 +4,7 @@ in
 {
   options = {
     nix.enableRemoteBuildOnCoruscant = mkEnableOption "Enable remote builds on coruscant";
+    nix.enableRemoteBuildOnTatooine = mkEnableOption "Enable remote builds on tatooine";
   };
 
   config = mkMerge [
@@ -67,6 +68,20 @@ in
               supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
               mandatoryFeatures = [ ];
             }
+          ];
+          distributedBuilds = true;
+          extraOptions = ''
+            builders-use-substitutes = true
+          '';
+        };
+      }
+    )
+
+    # Allow builds to happen on tatooine
+    (
+      mkIf nixCfg.enableRemoteBuildOnTatooine {
+        nix = {
+          buildMachines = [
             {
               hostName = "tatooine";
               system = "x86_64-linux";
@@ -81,7 +96,11 @@ in
             builders-use-substitutes = true
           '';
         };
+      }
+    )
 
+    (
+      {
         programs.ssh =
           let
             coruscantPublicIp = lib.removeSuffix "\n" (builtins.readFile ../secrets/coruscant-ip);
