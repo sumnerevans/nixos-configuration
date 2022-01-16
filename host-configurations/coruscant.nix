@@ -12,8 +12,6 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  nix.enableRemoteBuildOnTatooine = true;
-
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
 
