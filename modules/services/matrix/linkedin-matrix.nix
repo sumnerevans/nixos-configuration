@@ -52,6 +52,7 @@
       bot_avatar = "mxc://sumnerevans.com/XMtwdeUBnxYvWNFFrfeTSHqB";
       as_token = cfg.appServiceToken;
       hs_token = cfg.homeserverToken;
+      ephemeral_events = true;
 
       provisioning = {
         enabled = true;
@@ -68,7 +69,7 @@
       command_prefix = "!li";
       initial_chat_sync = 20;
       invite_own_puppet_to_pm = true;
-      sync_with_custom_puppets = true;
+      sync_with_custom_puppets = false;
       sync_direct_chat_list = true;
       presence = false;
       update_avatar_initial_sync = true;
