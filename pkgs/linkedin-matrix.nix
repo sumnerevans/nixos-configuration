@@ -1,19 +1,6 @@
 { lib, fetchFromGitLab, python3 }: with python3.pkgs;
 let
   linkedin-messaging = callPackage ./linkedin-messaging.nix { };
-  mautrix = pkgs.python3Packages.mautrix.overridePythonAttrs (
-    old: rec {
-      pname = "mautrix";
-      version = "0.14.0";
-
-      src = pkgs.python3.pkgs.fetchPypi {
-        inherit pname version;
-        sha256 = "sha256-WtBOh7zzHrNHn908q9UIKyVwE+XAD2s2lTmitYSvra8=";
-      };
-
-      doCheck = false;
-    }
-  );
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
@@ -23,8 +10,8 @@ buildPythonPackage rec {
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "linkedin";
-    rev = "v${version}";
-    sha256 = "sha256-BG0QJgpxZpdJ67cIO+AK+0Jt2bZcmAnUEy8wAPP2cac=";
+    rev = "c2923ef60824d0f58857e68f600d7f3af73b4b34";
+    sha256 = "sha256-L+FrnYtjM0ep8G/FqZDJhWB7vRZl77MKFselbTdfEOk=";
   };
 
   nativeBuildInputs = [
