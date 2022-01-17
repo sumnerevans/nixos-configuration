@@ -73,6 +73,9 @@
       sync_direct_chat_list = true;
       presence = false;
       update_avatar_initial_sync = true;
+      login_shared_secret_map = {
+        "nevarro.space" = removeSuffix "\n" (readFile synapseCfg.sharedSecretAuthFile);
+      };
       encryption = {
         allow = true;
         default = true;

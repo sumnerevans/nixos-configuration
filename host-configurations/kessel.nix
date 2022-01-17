@@ -99,6 +99,7 @@
   services.matrix-synapse-custom = {
     enable = true;
     registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/kessel;
+    sharedSecretAuthFile = ../secrets/matrix/shared-secret-auth/nevarro.space;
     emailCfg = {
       smtp_host = "smtp.migadu.com";
       smtp_port = 587;

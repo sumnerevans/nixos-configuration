@@ -43,6 +43,21 @@ let
       doCheck = false;
     }
   );
+  packageWithModules = package.python.withPackages (ps: [
+    (package.python.pkgs.toPythonModule package)
+    (pkgs.matrix-synapse-plugins.matrix-synapse-shared-secret-auth.overridePythonAttrs (old: rec {
+      pname = "matrix-synapse-shared-secret-auth";
+      version = "2.0.1";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "devture";
+        repo = "matrix-synapse-shared-secret-auth";
+        rev = version;
+        sha256 = "sha256-kaok5IwKx97FYDrVIGAtUJfExqDln5vxEKrZda2RdzE=";
+      };
+      buildInputs = [ pkgs.matrix-synapse ];
+    }))
+  ]);
 
   yamlFormat = pkgs.formats.yaml { };
 
@@ -191,6 +206,14 @@ in
         '';
       };
 
+      sharedSecretAuthFile = mkOption {
+        type = with types; nullOr path;
+        default = null;
+        description = ''
+          The path to a file that contains the shared secret auth secret.
+        '';
+      };
+
       emailCfg = mkOption {
         type = with types; attrsOf anything;
         default = { };
@@ -225,7 +248,7 @@ in
       partOf = [ "matrix-synapse.target" ];
       wantedBy = [ "matrix-synapse.target" ];
       preStart = ''
-        ${package}/bin/synapse_homeserver \
+        ${packageWithModules}/bin/synapse_homeserver \
           --config-path ${sharedConfigFile} \
           --keys-directory ${cfg.dataDir} \
           --generate-keys
@@ -242,7 +265,7 @@ in
           ''))
         ];
         ExecStart = ''
-          ${package}/bin/synapse_homeserver \
+          ${packageWithModules}/bin/synapse_homeserver \
             --config-path ${sharedConfigFile} \
             --keys-directory ${cfg.dataDir}
         '';
@@ -256,7 +279,7 @@ in
     systemd.services.matrix-synapse-federation-sender1 = mkSynapseWorkerService {
       description = "Synapse Matrix federation sender 1";
       serviceConfig.ExecStart = ''
-        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.federation_sender \
+        ${packageWithModules}/bin/python -m synapse.app.federation_sender \
           --config-path ${sharedConfigFile} \
           --config-path ${federationSender1ConfigFile} \
           --keys-directory ${cfg.dataDir}
@@ -267,7 +290,7 @@ in
     systemd.services.matrix-synapse-federation-reader1 = mkSynapseWorkerService {
       description = "Synapse Matrix federation reader 1";
       serviceConfig.ExecStart = ''
-        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
+        ${packageWithModules}/bin/python -m synapse.app.generic_worker \
           --config-path ${sharedConfigFile} \
           --config-path ${federationReader1ConfigFile} \
           --keys-directory ${cfg.dataDir}
@@ -278,7 +301,7 @@ in
     systemd.services.matrix-synapse-event-persister1 = mkSynapseWorkerService {
       description = "Synapse Matrix event persister 1";
       serviceConfig.ExecStart = ''
-        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
+        ${packageWithModules}/bin/python -m synapse.app.generic_worker \
           --config-path ${sharedConfigFile} \
           --config-path ${eventPersister1ConfigFile} \
           --keys-directory ${cfg.dataDir}
@@ -289,7 +312,7 @@ in
     systemd.services.matrix-synapse-synchotron1 = mkSynapseWorkerService {
       description = "Synapse Matrix synchotron 1";
       serviceConfig.ExecStart = ''
-        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.generic_worker \
+        ${packageWithModules}/bin/python -m synapse.app.generic_worker \
           --config-path ${sharedConfigFile} \
           --config-path ${synchotron1ConfigFile} \
           --keys-directory ${cfg.dataDir}
@@ -300,7 +323,7 @@ in
     systemd.services.matrix-synapse-media-repo1 = mkSynapseWorkerService {
       description = "Synapse Matrix media repo 1";
       serviceConfig.ExecStart = ''
-        ${package.python.withPackages (ps: [(package.python.pkgs.toPythonModule package)])}/bin/python -m synapse.app.media_repository \
+        ${packageWithModules}/bin/python -m synapse.app.media_repository \
           --config-path ${sharedConfigFile} \
           --config-path ${mediaRepo1ConfigFile} \
           --keys-directory ${cfg.dataDir}

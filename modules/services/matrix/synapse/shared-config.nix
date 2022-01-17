@@ -19,10 +19,24 @@ let
       SYSLOG_IDENTIFIER = "synapse";
     };
     root = { level = "INFO"; handlers = [ "journal" ]; };
+    loggers = {
+      shared_secret_authenticator = { level = "INFO"; handlers = [ "journal" ]; };
+    };
     disable_existing_loggers = false;
   };
 in
 {
+  # Modules
+  modules =
+    if (cfg.sharedSecretAuthFile == null) then [ ] else [
+      {
+        module = "shared_secret_authenticator.SharedSecretAuthProvider";
+        config = {
+          shared_secret = removeSuffix "\n" (readFile cfg.sharedSecretAuthFile);
+        };
+      }
+    ];
+
   # Server
   server_name = config.networking.domain;
   pid_file = "/run/matrix-synapse.pid";
