@@ -29,11 +29,11 @@ let
   package = pkgs.matrix-synapse.overridePythonAttrs (
     old: rec {
       pname = "matrix-synapse";
-      version = "1.50.0rc2";
+      version = "1.50.1";
 
       src = pkgs.python3Packages.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-EjTvYsTUNhdfGHnLGJzaWCOXTOsSU3Vkf54ZFak/n+A=";
+        sha256 = "sha256-fdO+HJ1+fk+s65jLkPDiG+Ei89x5Fbkh9BUUFQ3NJ3M=";
       };
 
       propagatedBuildInputs = old.propagatedBuildInputs ++ [
