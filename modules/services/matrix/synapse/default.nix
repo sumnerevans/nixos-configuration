@@ -4,41 +4,16 @@ let
   matrixDomain = "matrix.${config.networking.domain}";
   cfg = config.services.matrix-synapse-custom;
 
-  matrix-common = pkgs.python3Packages.buildPythonPackage rec {
-    pname = "matrix_common";
-    version = "1.0.0";
-    format = "pyproject";
-
-    src = pkgs.python3Packages.fetchPypi {
-      inherit pname version;
-      sha256 = "sha256-ZmiKRoJ8hv1USuJBDzV2U1uIFt2lRxmT+iAOqOShJK4=";
-    };
-
-    propagatedBuildInputs = with pkgs.python3Packages; [ attrs ];
-    pythonImportsCheck = [ "matrix_common" ];
-
-    meta = with lib; {
-      description = "Common utilities for Synapse, Sydent and Sygnal";
-      homepage = "https://github.com/matrix-org/matrix-python-common";
-      license = licenses.asl20;
-      maintainers = with maintainers; [ sumnerevans ];
-    };
-  };
-
   # Custom package that tracks with the latest release of Synapse.
   package = pkgs.matrix-synapse.overridePythonAttrs (
     old: rec {
       pname = "matrix-synapse";
-      version = "1.50.1";
+      version = "1.50.2";
 
       src = pkgs.python3Packages.fetchPypi {
         inherit pname version;
-        sha256 = "sha256-fdO+HJ1+fk+s65jLkPDiG+Ei89x5Fbkh9BUUFQ3NJ3M=";
+        sha256 = "sha256-dy5VCrrmZjWAAkcyfCzUaPLDGSyA0zlP6n8vhS0V8N0=";
       };
-
-      propagatedBuildInputs = old.propagatedBuildInputs ++ [
-        matrix-common
-      ];
 
       doCheck = false;
     }
