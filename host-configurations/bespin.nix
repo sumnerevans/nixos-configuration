@@ -5,9 +5,6 @@
     device = "nodev";
   };
 
-  nix.enableRemoteBuildOnCoruscant = true;
-  nix.enableRemoteBuildOnTatooine = true;
-
   # Set the hostname
   networking.hostName = "bespin";
   networking.domain = "sumnerevans.com";

@@ -5,9 +5,6 @@
   hardware.ramSize = 32;
   hardware.isLaptop = true;
 
-  nix.enableRemoteBuildOnCoruscant = true;
-  nix.enableRemoteBuildOnTatooine = true;
-
   # Enable bumblebee.
   # hardware.bumblebee.enable = true;
 
