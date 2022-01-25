@@ -123,11 +123,11 @@ in
             '';
             knownHosts = {
               tatooine = {
-                hostNames = [ "tatooine.sumnerevans.com" ];
+                extraHostNames = [ "tatooine.sumnerevans.com" ];
                 publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3oHcGiwPtWbee1x+6rKdovw4/CNIyE6MbBqC+irqZnyBLchboLKF+n9Vw9XRZxBPHppcb57oUTjh4gFA8N2vKqjVIacMNHSGFhRXBfUYtaTnmhzNj8sFWPwWpYAneTEe0hFdDKhL63nHZsi3XySh7R+BEIFZrDeyvKH86/GRpQwepVpQV3giqtqDA4GVgla/Zcea5ES1uxEolgDQKszXv8Z8iRUnrohrSAgsanjw6B+41X4qrwVnsStYhVN42tT8I7BM6kko9bdsLf4bg/WqdYDwPA4cbg1RkppqI0k7eBXPNfyaUKquiWz6tmrX5IMeIejjV+2BHgu0Q0iweMtPy41DGX6MaaKawWx5hoLds8fszVK02GUoCee26B8oEX+3TGKF9gj62gDcBOEmjLaGjxFrnk/DEkm3zSahwaIjxsbLK0/tFLh5B9Bha5mNF7tU88JwwJl+Zh3R7vGzHTqfZ7XVvSVSfpOPpVm0q3RSHMvVPSulOI+pTbA6GAQn0dT8= sumner@tatooine";
               };
               coruscant = {
-                hostNames = [ "192.168.0.14" coruscantPublicIp ];
+                extraHostNames = [ "192.168.0.14" coruscantPublicIp ];
                 publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDcO1lMaMPbL2cr4XdKc6bQJIbQylIXaYfX0S+NN3z0AMw3HCfsNCwlWoxyjIbZBlP3aSrdTITq3eB0gw3l25029h3Q4Dve+I2hf6jpltaGVlpsyhMN8xu9yoqadd0cG71kn6Wn5/BlpaWZtrJy7Px9luCyeuDx+vkC05CLb28sjwYVdTzbuePygUONL7cH6Xd2ulLDW+dFoZIHwraEsqHk9AQRV3f2hokxG/VpbxbVAY7XNOkIrsfmX6y4IccUddffgs8uqsObHEWniPdWOcEocRJ4exORBoyS5SXvcHzUtGi8Q0jGPfKkSFPEYUNcgw0QlU4dzrT/xqm0COcOoXKK58+tZH/YMu0bshp+vIK3HDCCfcRtuv1ZMF/AFbHdY3fglUu3YK2Jpm5Vr8KzljqQXW3ekboILxZpuP2LA3YErS1lpaj3sbOlsfxNQhG7V8/gqo1PBQ4w//7wlav0TOY5GZD1Tw2lduaSAFuFHxVGBOy4Xu31mxa2Qej5YKc71VU= sumner@coruscant-nixos";
               };
             };
