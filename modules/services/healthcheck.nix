@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: with lib;
 let
   healthcheckCfg = config.services.healthcheck;
-  threshold = 95;
+  threshold = 97;
 
   healthcheckCurl = fail: ''
     ${pkgs.curl}/bin/curl \
