@@ -13,7 +13,7 @@ in
       nixpkgs.config.allowUnfree = true;
       environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
-      nix.trustedBinaryCaches = [
+      nix.settings.trusted-substituters = [
         "https://sumnerevans.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
       ];
