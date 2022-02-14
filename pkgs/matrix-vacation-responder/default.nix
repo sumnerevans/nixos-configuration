@@ -10,8 +10,8 @@ buildGoPackage rec {
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "matrix-vacation-responder";
-    rev = "bf85b81a3e9f7011229b7ee1ff7f1152ccb9be77";
-    sha256 = "sha256-+jKVYMSUGiHug473OgS75zpEYEfas73S23VbUyaVOBU=";
+    rev = "7bfa0d8ed6f2e88e6b7d0a76464063c400256293";
+    sha256 = "sha256-1C+1uMq16DpqsTMZu3/QHqtSLi6rEMW4hCepA5vuvAc=";
   };
 
   goDeps = ./deps.nix;

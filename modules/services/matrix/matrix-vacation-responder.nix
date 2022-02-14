@@ -12,6 +12,7 @@
       Please send your messages to [@sumner:nevarro.space](https://matrix.to/#/@sumner:nevarro.space)
     '';
     vacation_message_min_interval = 1440;
+    respond_to_groups = true;
   };
   format = pkgs.formats.yaml { };
   matrixVacationResponderConfigYaml = format.generate "matrix-vacation-responder.config.yaml" vacationResponderConfig;
