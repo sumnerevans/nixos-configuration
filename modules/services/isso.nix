@@ -4,14 +4,6 @@ let
 in
 {
   config = mkIf issoCfg.enable {
-    # https://github.com/NixOS/nixpkgs/pull/153872
-    nixpkgs.overlays = [
-      (self: super: {
-        isso = super.isso.override { nodejs = pkgs.nodejs-14_x; };
-      })
-    ];
-
-
     services.isso.settings = {
       general = {
         host = "https://sumnerevans.com";
