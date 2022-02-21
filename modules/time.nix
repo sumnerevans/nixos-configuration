@@ -1,4 +1,4 @@
 {
   # Set your time zone.
-  time.timeZone = "America/Cancun";
+  time.timeZone = "America/Denver";
 }
