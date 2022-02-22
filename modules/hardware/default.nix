@@ -28,6 +28,9 @@ in
           message = "isPC and isServer are mutually exclusive";
         }
       ];
+
+      boot.kernel.sysctl."fs.inotify.max_user_instances" = mkDefault 524288;
+      boot.kernel.sysctl."fs.inotify.max_user_watches" = mkDefault 524288;
     }
 
     (
