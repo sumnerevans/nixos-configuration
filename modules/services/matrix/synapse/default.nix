@@ -8,11 +8,11 @@ let
   package = pkgs.matrix-synapse.overridePythonAttrs (
     old: rec {
       pname = "matrix-synapse";
-      version = "1.52.0";
+      version = "1.53.0";
 
       src = pkgs.python3Packages.fetchPypi {
         inherit pname version;
-        sha256 = "091z3rwd10n59andfy1pfjrf6q3n3yrjqrws13lqc02w23aaxzin";
+        sha256 = "sha256-40tkK2R1GWdCNWqsA//xJqEIb9Ch2tlojOnlkMKg6V4=";
       };
 
       doCheck = false;
@@ -198,6 +198,24 @@ in
   };
 
   config = mkIf cfg.enable {
+    nixpkgs.overlays = [
+      (
+        self: super: {
+          matrix_common = super.matrix_common.overrideAttrs (
+            old: rec {
+              pname = "matrix_common";
+              version = "1.1.0";
+
+              src = pkgs.python3Packages.fetchPypi {
+                inherit pname version;
+                sha256 = "sha256-qCOHSK/Cs3B5gYNn/tUVbzVXcbB8j/ChdZNPR+D/MnY=";
+              };
+            }
+          );
+        }
+      )
+    ];
+
     # Create a user and group for Synapse
     users.users.matrix-synapse = {
       group = "matrix-synapse";
