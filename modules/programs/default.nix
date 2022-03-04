@@ -30,7 +30,7 @@
     tree
     unzip
     vim
-    wireguard
+    wireguard-tools
     zsh
   ];
 
