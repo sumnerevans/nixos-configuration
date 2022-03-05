@@ -1,5 +1,6 @@
 { lib, pkgs, ... }: with pkgs; let
-  sof-firmware = callPackage ./intel-sof-firmware.nix {};
+  sof-firmware = callPackage ./intel-sof-firmware.nix { };
+  logrotateLib = import ../../lib/logrotate.nix;
 in
 {
   # Set the hostname

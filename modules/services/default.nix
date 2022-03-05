@@ -14,7 +14,6 @@
     ./healthcheck.nix
     ./isso.nix
     ./journald.nix
-    ./logrotate.nix
     ./longview.nix
     ./mumble.nix
     ./nginx.nix
