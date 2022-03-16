@@ -1,4 +1,4 @@
-{ lib, fetchFromSourcehut, buildGoPackage, olm }:
+{ lib, fetchFromGitLab, buildGoPackage, olm }:
 
 buildGoPackage rec {
   pname = "standupbot";
@@ -6,12 +6,12 @@ buildGoPackage rec {
 
   buildInputs = [ olm ];
 
-  goPackagePath = "git.sr.ht/~sumner/standupbot";
-  src = fetchFromSourcehut {
-    owner = "~sumner";
+  goPackagePath = "gitlab.com/beeper/standupbot";
+  src = fetchFromGitLab {
+    owner = "beeper";
     repo = "standupbot";
-    rev = "8a49a24814806d3bf56120c5207abf5f48a18543";
-    sha256 = "sha256-+YWNQ+K5ATWP/zofNEG0aCMtbQTQWJu/vH29HfLP7xk=";
+    rev = "a6b1e4e175ca12fc1f801475b8e470e9537590f3";
+    sha256 = "sha256-TzjIjf82tfThMEXRefeOLhYrS7JXjHH2AI4nQWU7lI4=";
   };
 
   goDeps = ./deps.nix;
