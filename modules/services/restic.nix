@@ -44,6 +44,9 @@
       ${concatStringsSep " " paths} \
       ${concatMapStringsSep " " (e: "-e \"${e}\"") exclude}
 
+    # Make sure that the backup has time to settle before running the check.
+    sleep 10
+
     # Check the validity of the repository.
     ${resticCmd} check
 
