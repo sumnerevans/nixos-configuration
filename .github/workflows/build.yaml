@@ -14,7 +14,6 @@ jobs:
         host:
           - kessel.nevarro.space
           - morak.sumnerevans.com
-          - bespin.sumnerevans.com
 
     steps:
       - uses: actions/checkout@v2
@@ -38,7 +37,6 @@ jobs:
         host:
           - kessel.nevarro.space
           - morak.sumnerevans.com
-          - bespin.sumnerevans.com
 
     steps:
       - uses: actions/checkout@v2
@@ -62,7 +60,6 @@ jobs:
         host:
           - kessel.nevarro.space
           - morak.sumnerevans.com
-          - bespin.sumnerevans.com
 
     steps:
       - uses: actions/checkout@v2

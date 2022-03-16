@@ -19,10 +19,6 @@ https://github.com/sumnerevans/home-manager-config/
 
 - **Servers**
 
-  - **bespin**: Linode VPS (non-realtime critical infrastructure)
-
-    - [Syncthing](https://syncthing.net)
-
   - **morak**: Hetzner Cloud VPS (CPX11)
 
     - Personal Websites
