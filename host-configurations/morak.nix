@@ -113,13 +113,6 @@
   services.postgresql.dataDir = "/mnt/postgresql-data/${config.services.postgresql.package.psqlSchema}";
   services.postgresqlBackup.enable = true;
 
-  # PR Tracker
-  # services.pr-tracker = {
-  #   enable = true;
-  #   githubApiTokenFile = "/etc/nixos/secrets/pr-tracker-github-token";
-  #   sourceUrl = "https://git.sr.ht/~sumner/pr-tracker";
-  # };
-
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";

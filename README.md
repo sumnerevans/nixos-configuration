@@ -1,6 +1,6 @@
 # NixOS Configuration
 
-[![builds.sr.ht status](https://builds.sr.ht/~sumner/nixos-configuration/commits/.build.yml.svg)](https://builds.sr.ht/~sumner/nixos-configuration/commits/.build.yml)
+[![Deploy Latest Generation](https://github.com/sumnerevans/nixos-configuration/actions/workflows/build.yaml/badge.svg?branch=master)](https://github.com/sumnerevans/nixos-configuration/actions/workflows/build.yaml)
 [![HealthCheck Status](https://healthchecks.io/badge/b8bf9b9d-b4bb-4c92-b546-1c69a0/BpOIMYGi.svg)](https://healthchecks.io/projects/8384107b-0803-48b3-bd99-7702d1214ca5/checks/)
 
 This repository contains the NixOS configuration for my personal computers and
@@ -31,7 +31,6 @@ https://github.com/sumnerevans/home-manager-config/
     - [Isso](https://posativ.org/isso/)
     - [Matrix Vacation Responder](https://gitlab.com/beeper/matrix-vacation-responder)
     - [Murmur for Mumble](https://www.mumble.info/)
-    - [pr-tracker](https://git.sr.ht/~sumner/pr-tracker)
     - [Synapse](https://github.com/matrix-org/synapse) (sumnerevans.com)
     - [Syncthing](https://syncthing.net)
     - [vaultwarden](https://github.com/dani-garcia/vaultwarden)
@@ -41,7 +40,7 @@ https://github.com/sumnerevans/home-manager-config/
 
     - nevarro.space website
     - [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
-    - [standupbot](https://sr.ht/~sumner/standupbot)
+    - [standupbot](https://gitlab.com/beeper/standupbot)
     - [Synapse](https://github.com/matrix-org/synapse) (nevarro.space)
       - [Heisenbridge](https://github.com/hifi/heisenbridge)
       - [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
