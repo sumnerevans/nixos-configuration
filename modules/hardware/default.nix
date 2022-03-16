@@ -74,7 +74,9 @@ in
         boot.loader.timeout = 10;
         system.autoUpgrade = {
           enable = true;
-          dates = "monthly";
+          # Run on the first of every month at 03:00 so that it doesn't
+          # interfere with backups.
+          dates = "*-1 03:00";
           channel = https://nixos.org/channels/nixos-unstable-small;
           allowReboot = true;
         };
