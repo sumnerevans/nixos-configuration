@@ -102,7 +102,12 @@
 
   services.healthcheck = {
     checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
-    disks = [ "/" "/mnt/syncthing-data" "/mnt/postgresql-data" ];
+    disks = [
+      "/"
+      "/mnt/syncthing-data"
+      "/mnt/postgresql-data"
+      "/mnt/syncthing-pictures-tmp"
+    ];
   };
 
   # Mumble
@@ -116,6 +121,11 @@
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
+
+  # Add a backup service for the actual config.
+  services.backup.backups.syncthing-pictures-tmp-data = {
+    path = "/mnt/syncthing-pictures-tmp";
+  };
 
   # Synapse
   services.matrix-synapse-custom.enable = true;

@@ -43,7 +43,10 @@
   # Healthcheck
   services.healthcheck = {
     checkId = "ac320939-f60f-4675-a284-76e318080eda";
-    disks = [ "/" "/mnt/postgresql-data" ];
+    disks = [
+      "/"
+      "/mnt/postgresql-data"
+    ];
   };
 
   # Heisenbridge
