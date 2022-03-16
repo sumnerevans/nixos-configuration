@@ -20,6 +20,7 @@
     "/" = { device = "/dev/disk/by-uuid/78831675-9f80-462b-b9fc-75a0efa368e5"; fsType = "ext4"; };
     "/mnt/syncthing-data" = { device = "/dev/disk/by-uuid/930c8bdb-7b71-4bdf-b478-6e85218cad37"; fsType = "ext4"; };
     "/mnt/postgresql-data" = { device = "/dev/disk/by-uuid/3d8eb9ca-e8ea-4231-b2a6-4fc5367ccb8a"; fsType = "ext4"; };
+    "/mnt/syncthing-pictures-tmp" = { device = "/dev/disk/by-uuid/bfc8d39f-31e0-4261-9447-91bc7e39bb2f"; fsType = "ext4"; };
   };
 
   # Allow temporary redirects directly to the reverse proxy.
