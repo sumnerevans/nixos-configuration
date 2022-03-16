@@ -1,0 +1,42 @@
+name: Lint and Build
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: |
+            kessel.nevarro.space ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7N3cW4wFewiWg4NdQ3AaFEWW8xKRhQcCgBwjkhtB4W62HVVMjoFeT+qYtpG15kTfJ+lZeZ11OX7/RHwKa4Tau71ofa34trH4t3oE5Fk+K6enXGlHmtA6vvHXxeNodruEnTg4ySfYjQ7b7DEZETwwd7fDE+h+tUEvtDlVI2DKqSmEydfh8Ul5esOYDbw/fioW8u+ZY4WJ7qaxwfJBK3qQZPawaqhUSNgWqEK5xHEA5aYokMWyueN+8VDsmx0OJ7dsbOnqDM2K2/Wi6TeA5ITnYQ5f8ZkHQ3nib3lfCaEermCaOKKXKcjvksMjcr81nyzgenh6FyveBRvNK0HjEB48vTl1cc6KYaOGDOScRYhsaglhCRPlaHFC1Kr2Elb/dOiiRIhros1RbJagDmlq6K1TE5nOXxZ+F5BdRd2+FyhC5nGV5TKNd630KS9xeWhxTOap60eiISqUqznUSy/RljwYc28Kx0+Yc8ObMuX/Mc7u8SN8Q9O+HkVzvxFilxGzR9hLRTrxnb5lHZKLaw2ewkLGYD6Mn2WKgvyQyq5R/EN+k4b/Fy1+LpNtNZq5y1f7/Pr9Y2jdiopc4GoHltZfL3E/nW5UL/clzRTKbEXMud/PmlJpQABSVtdc9TUXUEmoA92wZbM14kk2/PUnYGt6CmD7YBKMoVhM78lFmSN3KE6J3cQ==
+            kessel.nevarro.space ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICOkkTJzBUY4GP7y03rNf8pZGgkpIB6JGCfxUZZvGqKq
+            morak.sumnerevans.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD3t813tMOXSGzjTno5vJITBjpGMUV21WzMuAti0cmSiwERjLDGWyqGxug4f2MegOQuRTp+sLaw3oAlO++fnEcJt0HQgaAqSs110nfI4MTUUC8uUTTAy/tbSchEYG9q6laE0CkYyxgHQ8+d3o+J8xYHuAx8rqPH+oC8Y5aW9hVQ9Ez6zcNche33llYb9IKrfmydUWP6JRYqgZ/WbYH13JsrLNzf2zeiqw+I0p2oYMoQizt3emHmv2L9z+UnGfMFJhJsU/Rty3BPjzdoh2VcIN33MaVQpYMxSlaGEqkgWyeKBvdYI9Uc8uT8NN1XWfLiMRKp3gRMAND9gQdRUd7f6O0lxnQlldmTIppE8DpcWvt7DKybeuH1bDwvj5SZpwJalZQsoXLoShqZCY4JPgh/QoeUi5GLUDThqZuwt7Vd3Hc//bOK6CapcxI6zI8jhXGiS+0zq5e3zmLkWpwfJD9Lu/5THRWjI0Fhmk+mQv8RPnxnlFR/ajSdM+meJj1bNKGQCMHodV8UKNwij4FpIkC3lrxyVOkdan7srmxEgK2lES9NoejTbRDI8jb7zlzJNMV/UzvW8bYyXuK8D+QeTfAb0y6Bd4JOKUS81wsQXWRMKRNS7hFvrzz8jwjXjqRrw5Q3anuJfLcLSCtGBZQlPWFhog7ARimabtAcBGy+OOG4p9uLUw==
+            morak.sumnerevans.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgHnT4MtYjnp2df5IGpb0GppJh4ydrBql3Tl8B8OQsd
+            bespin.sumnerevans.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCmuxxFmu+HHrj87kIYkFDEElTuncyxsP00ui6WnRO2beXsyaMDXXtEkeJM3cRoexjszgKMEHmjFyOdLrIN7l3LFIp1agZcg/ttIcZ7reR+R6ZbUuVP3z07LlRCM0odO5SuIAVggIqFGNfhLoMBInooaguB6YJssS06aMeVBx/UvLt7021W+v2SzLR3GxGfZl2JkDFESbOVZq/8nSAgcbcD7kE5OzNKdPZE3twkFe9l79qwN/j73XWgBFB+Kd0fNS+OOdwBD1jWfeK0Vx7+tlKCNg6VH1yjqU/Cd8p5wFN2Ul3f4fUUn+YENgG1sF/fmjw5c8yFIDdXzl7W9kUh4WSFzmza2kqvUJGXELJ8B8WmtsWz2xZ0pEsy/vsFz5E+CL+sgxY+DOaJMdTPwdtlihLJhcg06+ErNG2MlVf1bagcTEEPrQaod3jWT0KGZmGal5tqfbO1pk9V64MWuHio67enxlvJnS6NOhkPrqLT6aF6gFlf0Zb9oZmEgrUh4auiegYKxQt7ZMjg+PNmTS9hA6Tz5P72FdwDcV5BbWICrwN0LrtpBewOKt6B/fwRr2zeI2oMdEJYu+qbT2W/D+kFEITbsK+j1u/Ho+U5+sp3nx4ROifkkDTU13ws6cmOvdcDG9/yeT15K//2UosQxCsMADA4bpYV9iYmkiQs2L8LjQsL4w==
+            bespin.sumnerevans.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIItcNh2SllnPWEhVHseb8E8hCIt+6PwwOxqHCnzx+jK1
+
+      - name: Switch commit
+        run: |
+          ssh root@kessel.nevarro.space  "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
+          ssh root@morak.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
+          ssh root@bespin.sumnerevans.com "cd /etc/nixos && git fetch && git reset --hard $(git rev-parse HEAD)"
+
+      - name: Remote build
+        run: |
+          ssh root@kessel.nevarro.space  "time nixos-rebuild build --show-trace"
+          ssh root@morak.sumnerevans.com "time nixos-rebuild build --show-trace"
+          ssh root@bespin.sumnerevans.com "time nixos-rebuild build --show-trace"
+
+      - name: Switch generation
+        run: |
+          ssh root@kessel.nevarro.space  "time nixos-rebuild switch --show-trace"
+          ssh root@morak.sumnerevans.com "time nixos-rebuild switch --show-trace"
+          ssh root@bespin.sumnerevans.com "time nixos-rebuild switch --show-trace"
