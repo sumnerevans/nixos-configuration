@@ -17,7 +17,7 @@
   bucket = "test-scarif-backup";
   repoPath = config.networking.hostName;
   frequency = "0/6:0"; # Run backup every six hours
-  pruneFrequency = "*-15 02:00"; # Run prune on the fifteenth day of every month.
+  pruneFrequency = "Sun *-*-* 02:00"; # Run prune every Sunday at 02:00
   resticPasswordFile = "/etc/nixos/secrets/restic-password";
   resticEnvironmentFile = "/etc/nixos/secrets/restic-environment-variables";
   resticRepository = "b2:${bucket}:${repoPath}";
