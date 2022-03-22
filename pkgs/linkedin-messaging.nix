@@ -33,4 +33,3 @@ buildPythonPackage rec {
     maintainers = [ maintainers.sumnerevans ];
   };
 }
-

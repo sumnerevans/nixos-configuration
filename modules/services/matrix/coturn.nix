@@ -6,7 +6,7 @@ let
   staticAuthSecret = lib.removeSuffix "\n" (builtins.readFile ../../../secrets/coturn-static-auth-secret);
 in
 # TODO actually figure this out eventually
-# TODO will need to convert to use matrix-synapse-custom
+  # TODO will need to convert to use matrix-synapse-custom
 lib.mkIf (false && config.services.matrix-synapse.enable) {
   services.coturn = rec {
     enable = true;
@@ -57,12 +57,12 @@ lib.mkIf (false && config.services.matrix-synapse.enable) {
           { from = min-port; to = max-port; }
         ];
       in
-        {
-          allowedUDPPortRanges = ranges;
-          allowedUDPPorts = [ 3478 ];
-          allowedTCPPortRanges = ranges;
-          allowedTCPPorts = [ 3478 ];
-        };
+      {
+        allowedUDPPortRanges = ranges;
+        allowedUDPPorts = [ 3478 ];
+        allowedTCPPortRanges = ranges;
+        allowedTCPPorts = [ 3478 ];
+      };
   };
 
   # get a certificate

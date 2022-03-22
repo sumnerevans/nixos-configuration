@@ -39,7 +39,7 @@ let
     # Find all of the rooms that have no local users.
     ${jq}/bin/jq -r '.rooms[] | select(.joined_local_members == 0) | .room_id' < $roomlist > $to_purge
 
-    while read room_id; do 
+    while read room_id; do
       echo "deleting $room_id..."
       ${adminCurl} \
         -X DELETE \
@@ -60,7 +60,7 @@ let
   #   now=$(${coreutils}/bin/date +%s%N | ${coreutils}/bin/cut -b1-13)
   #   nintey_days_ago=$(( now - 7776000000 ))
 
-  #   while read room_id; do 
+  #   while read room_id; do
   #     echo "purging history for $room_id..."
 
   #     ${adminCurl} -X POST -H "Content-Type: application/json" \

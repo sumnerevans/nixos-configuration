@@ -1,13 +1,13 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.standupbot;
-  standupbot = pkgs.callPackage ../../../pkgs/standupbot {};
+  standupbot = pkgs.callPackage ../../../pkgs/standupbot { };
 
   standupbotConfig = {
     Username = cfg.username;
     Homeserver = cfg.homeserver;
     PasswordFile = cfg.passwordFile;
   };
-  format = pkgs.formats.json {};
+  format = pkgs.formats.json { };
   standupbotConfigJson = format.generate "standupbot.config.json" standupbotConfig;
 in
 {
@@ -54,7 +54,7 @@ in
         home = cfg.dataDir;
         createHome = true;
       };
-      groups.standupbot = {};
+      groups.standupbot = { };
     };
   };
 }

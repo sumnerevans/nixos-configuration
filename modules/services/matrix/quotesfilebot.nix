@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.quotesfilebot;
-  quotesfilebot = pkgs.callPackage ../../../pkgs/quotesfilebot {};
+  quotesfilebot = pkgs.callPackage ../../../pkgs/quotesfilebot { };
 
   quotesfilebotConfig = {
     DefaultReactionEmoji = cfg.defaultReactionEmoji;
@@ -9,7 +9,7 @@
     PasswordFile = cfg.passwordFile;
     JoinMessage = cfg.joinMessage;
   };
-  format = pkgs.formats.json {};
+  format = pkgs.formats.json { };
   quotesfilebotConfigJson = format.generate "quotesfilebot.json" quotesfilebotConfig;
 in
 {
@@ -64,7 +64,7 @@ in
         home = cfg.dataDir;
         createHome = true;
       };
-      groups.quotesfilebot = {};
+      groups.quotesfilebot = { };
     };
   };
 }
