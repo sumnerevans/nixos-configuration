@@ -40,7 +40,7 @@
       # sumnerevans.com
       hostname = "sumnerevans.com";
       extraLocations = {
-        "/teaching" = {
+        "/teaching/csci564-s21" = {
           root = "/var/www";
           priority = 0;
           extraConfig = ''
