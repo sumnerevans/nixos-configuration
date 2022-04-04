@@ -6,6 +6,6 @@ in
     services.blueman.enable = true;
 
     # Use the full pulseaudio that includes Bluetooth support.
-    hardware.pulseaudio.package = pkgs.pulseaudioFull;
+    # hardware.pulseaudio.package = pkgs.pulseaudioFull;
   };
 }
