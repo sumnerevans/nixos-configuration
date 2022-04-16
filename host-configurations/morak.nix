@@ -36,6 +36,7 @@
   services.nginx.websites = [
     { hostname = "the-evans.family"; }
     { hostname = "qs.sumnerevans.com"; }
+    { hostname = "mineshspc.com"; }
     {
       # sumnerevans.com
       hostname = "sumnerevans.com";

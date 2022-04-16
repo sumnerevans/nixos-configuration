@@ -12,6 +12,9 @@
 
         # GitHub nixos-configuration deploy
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDH6br5D4RKQGkzhpLLrhDf7YsvjOeWlIx0YIfHeQZu+1vLhH3dJn2P6QvOdqbVE8Tpk7uPCdBNY6sxDFgkDbVvGd0Zs4uh1YrImJAaqwCNw3X9K1R8taQ3kV3KRrMDw1C8+H3h62TtmYDZUjNDMrTA6C3A9FTHYmlUs5HwDZ3pnH2OgVX4k/UiOcJwtKDAhQtXklXpB9V8MqrmejBeNFdpwgexsU+cRr6VpqPNutkMbZTrizEAmQ7oU2LkrvFCD1Qo+nUB5h5v50dTyVc0aRHlIsAt3ZPUPl9XvxGBwNUAAIIyKtzhWOw1mWQuOCwBYnx1u2qExqd+3P4OLielrFHeIOeY2PdWLRzMJ9m5AkobZSxCUho0QCSt8gpl7ITjB14jDFoHGNC/y5pLWu60vLuPA+fZ07MgyzTjf9ZwsXP4upBG3e+NjY+pL1vubXAtJqe6YAo6iahAZyB0xmfTCAlPw4vbu21VYSmpK2/ugonms7Xk1qDsYkHAwsqay02xs8= sumner@github-actions"
+
+        # mineshspc.com deploy
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9kjJuJewAaG1NS36lBxnTcGnzfTgj3HpEsqBWAxptyWumH3J/TGRPcLdJHqYH2H65E+O+aBwfKgFj5JaI75UpzFMowmnqtsBjMwRQCrnoY41LA0lbi8Skx0Omrjq+/qGpKNRJmpSxryCqEwipsP+NkB6wnSb9hU+T1TzU0RhCXiLXPwBXrJjOl/cBIjKWDJRLWfmlsq3LH67JZlq307t1fl+aSLSSeTqj3+hXJAHkbx6ccxHLuHRfmXO0/LXh0CmukFqndW20J9oX4ch4hMQhRUP8MCOAlha1S+br0cOHRX59Yi/vfpfa8uzHXtVI52lZ4jk2sABnPWt+SoMo4B76JhuFUI8buf9VYEmZZQA/Gv0bct3MSBM9DubDrKkuIlAxlU8fcx4Sfv+Qmj76ytgPTuJc8OBury9RKAnT3V0XC4D3yGBTXLdPwp9xbk0Wp0QsGL+R/UrYs72Px/9O+MFhAX7mkObSfQQpTKlwG+7zPYpaJ4rZh2dTkTD6YGeTA1k= mineshspc.com"
       ];
   };
 }
