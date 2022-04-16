@@ -131,6 +131,9 @@
   # Synapse
   services.matrix-synapse-custom.enable = true;
   services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/morak;
+  services.matrix-synapse-custom.extraConfig = {
+    database.allow_unsafe_locale = true;
+  };
   services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/morak";
   services.matrix-vacation-responder = {
     enable = true;

@@ -37,7 +37,7 @@ let
 
   yamlFormat = pkgs.formats.yaml { };
 
-  sharedConfig = (import ./shared-config.nix ({ inherit config lib pkgs; }));
+  sharedConfig = recursiveUpdate (import ./shared-config.nix ({ inherit config lib pkgs; })) cfg.extraConfig;
   sharedConfigFile = yamlFormat.generate
     "matrix-synapse-config.yaml"
     sharedConfig;
@@ -194,6 +194,11 @@ in
         type = with types; attrsOf anything;
         default = { };
         description = "The email configuration.";
+      };
+
+      extraConfig = mkOption {
+        type = yamlFormat.type;
+        default = { };
       };
     };
   };
