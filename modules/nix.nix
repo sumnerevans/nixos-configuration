@@ -56,7 +56,6 @@ in
               hostName = "coruscant";
               system = "x86_64-linux";
               maxJobs = 1;
-              speedFactor = 2;
               supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
               mandatoryFeatures = [ ];
             }
@@ -64,7 +63,6 @@ in
               hostName = "coruscant-lan";
               system = "x86_64-linux";
               maxJobs = 1;
-              speedFactor = 2;
               supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
               mandatoryFeatures = [ ];
             }
@@ -86,7 +84,6 @@ in
               hostName = "tatooine";
               system = "x86_64-linux";
               maxJobs = 4;
-              speedFactor = 2;
               supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
               mandatoryFeatures = [ ];
             }
