@@ -36,17 +36,6 @@ in
       nix.package = pkgs.nixUnstable;
     }
 
-    # nix-direnv
-    {
-      # https://github.com/nix-community/nix-direnv#via-configurationnix-in-nixos
-      # Persist direnv derivations across garbage collections.
-      nix.extraOptions = ''
-        keep-outputs = true
-        keep-derivations = true
-      '';
-      environment.pathsToLink = [ "/share/nix-direnv" ];
-    }
-
     # Allow builds to happen on coruscant
     (
       mkIf nixCfg.enableRemoteBuildOnCoruscant {
