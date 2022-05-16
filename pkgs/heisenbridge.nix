@@ -1,4 +1,4 @@
-{ lib, fetchFromGitHub, fetchpatch, python3 }:
+{ lib, fetchFromGitHub, python3 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "heisenbridge";
   version = "1.10.1";

@@ -5,19 +5,24 @@ let
   cfg = config.services.matrix-synapse-custom;
 
   # Custom package that tracks with the latest release of Synapse.
-  package = pkgs.matrix-synapse.overridePythonAttrs (
-    old: rec {
-      pname = "matrix-synapse";
-      version = "1.58.0";
+  package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
+    pname = "matrix-synapse";
+    version = "1.58.0";
 
-      src = pkgs.python3Packages.fetchPypi {
-        inherit pname version;
-        sha256 = "sha256-cY3rtmaaAimEQPU4wcMEy/QysPNCdk7yptrkctnLfDA=";
-      };
+    src = pkgs.python3Packages.fetchPypi {
+      inherit pname version;
+      sha256 = "sha256-cY3rtmaaAimEQPU4wcMEy/QysPNCdk7yptrkctnLfDA=";
+    };
 
-      doCheck = false;
-    }
-  );
+    patches = (old.patches or [ ]) ++ [
+      (pkgs.fetchpatch {
+        url = "https://patch-diff.githubusercontent.com/raw/matrix-org/synapse/pull/12721.patch";
+        sha256 = "sha256-WrditgBHhsyFrixHG0Lc2Ea9Pab6gAeyCOb+dIjaSOw=";
+      })
+    ];
+
+    doCheck = false;
+  });
 
   packageWithModules = package.python.withPackages (ps: [
     (package.python.pkgs.toPythonModule package)
