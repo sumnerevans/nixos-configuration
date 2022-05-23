@@ -49,6 +49,14 @@
             autoindex on;
           '';
         };
+        "/teaching/csci400-s19" = {
+          root = "/var/www";
+          priority = 0;
+          extraConfig = ''
+            access_log /var/log/nginx/sumnerevans.com.access.log;
+            autoindex on;
+          '';
+        };
       };
       excludeTerms = [
         "/.well-known/"
@@ -59,6 +67,7 @@
         "/robots.txt"
         "/style.css"
         "/teaching/csci564-s21/_static/"
+        "/teaching/csci400-s19/_static/"
       ];
     }
   ];
