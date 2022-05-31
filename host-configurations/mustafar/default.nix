@@ -17,7 +17,9 @@ in
 
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = linuxPackages_5_10;
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+  ];
 
   # Orientation and ambient light
   hardware.sensor.iio.enable = true;
