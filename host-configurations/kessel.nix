@@ -40,6 +40,13 @@
   services.grafana.enable = true;
   services.logrotate.enable = true;
 
+  # Chessbot
+  services.matrix-chessbot = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+    passwordFile = "/etc/nixos/secrets/matrix/bots/matrix-chessbot";
+  };
+
   # Healthcheck
   services.healthcheck = {
     checkId = "ac320939-f60f-4675-a284-76e318080eda";
