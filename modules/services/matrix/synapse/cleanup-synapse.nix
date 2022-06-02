@@ -11,7 +11,7 @@ let
 
   adminUrl = "http://localhost:8008/_synapse/admin/v1";
   adminMediaRepoUrl = "http://localhost:8011/_synapse/admin/v1";
-  adminCurl = ''${curl}/bin/curl --header "Authorization: Bearer $CLEANUP_ACCESS_TOKEN" '';
+  adminCurl = ''${curl}/bin/curl --header "Authorization: Bearer $CLEANUP_ACCESS_TOKEN"'';
 
   # Delete old cached remote media
   purgeRemoteMedia = writeShellScriptBin "purge-remote-media" ''
