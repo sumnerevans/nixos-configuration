@@ -42,10 +42,6 @@ in
         # TODO fix this
         networking.firewall.enable = false;
 
-        # Enable sound.
-        # hardware.pulseaudio.enable = true;
-        # hardware.pulseaudio.support32Bit = true;
-
         # Pipewire
         services.pipewire = {
           enable = true;
@@ -65,6 +61,9 @@ in
 
         # Enable YubiKey smart card mode.
         services.pcscd.enable = true;
+
+        # Enable firmware updating
+        services.fwupd.enable = true;
       }
     )
 
