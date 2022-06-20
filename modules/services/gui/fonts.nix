@@ -2,7 +2,7 @@
   fonts = lib.mkIf (config.xorg.enable || config.wayland.enable) {
     fonts = with pkgs; [
       font-awesome_4
-      iosevka
+      iosevka-bin
       noto-fonts
       noto-fonts-emoji
       open-sans
