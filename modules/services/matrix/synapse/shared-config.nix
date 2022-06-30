@@ -33,6 +33,7 @@ in
         module = "shared_secret_authenticator.SharedSecretAuthProvider";
         config = {
           shared_secret = removeSuffix "\n" (readFile cfg.sharedSecretAuthFile);
+          m_login_password_support_enabled = true;
         };
       }
     ];
