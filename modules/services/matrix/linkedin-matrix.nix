@@ -68,7 +68,7 @@
       set_topic_on_dms = true;
       command_prefix = "!li";
       initial_chat_sync = 20;
-      invite_own_puppet_to_pm = true;
+      invite_own_puppet_to_pm = false;
       sync_with_custom_puppets = false;
       sync_direct_chat_list = true;
       presence = false;
@@ -76,6 +76,7 @@
       login_shared_secret_map = {
         "nevarro.space" = removeSuffix "\n" (readFile synapseCfg.sharedSecretAuthFile);
       };
+      federate_rooms = false;
       encryption = {
         allow = true;
         default = true;
