@@ -83,7 +83,7 @@
         key_sharing = {
           allow = true;
           require_cross_signing = false;
-          require_verification = true;
+          require_verification = false;
         };
       };
       delivery_receipts = true;

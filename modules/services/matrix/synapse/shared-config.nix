@@ -103,6 +103,10 @@ in
     "fc00::/7"
   ];
 
+  media_retention = {
+    remote_media_lifetime = "90d";
+  };
+
   url_preview_url_blacklist = [
     # blacklist any URL with a username in its URI
     { username = "*"; }
