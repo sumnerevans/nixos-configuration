@@ -16,6 +16,9 @@ https://github.com/sumnerevans/home-manager-config/
   - **coruscant**: custom desktop
   - **jedha**: ThinkPad T580
   - **mustafar**: Samsung Galaxy Chromebook
+  - **tatooine**: Hetzner Cloud VPS dev box (CPX41) that I use
+    [eternalterminal](https://eternalterminal.dev/) to connect to a tmux
+    session.
 
 - **Servers**
 
