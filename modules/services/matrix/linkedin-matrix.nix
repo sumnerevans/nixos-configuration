@@ -80,10 +80,12 @@
       encryption = {
         allow = true;
         default = true;
-        key_sharing = {
-          allow = true;
-          require_cross_signing = false;
-          require_verification = false;
+        require = true;
+        allow_key_sharing = true;
+        verification_levels = {
+          receive = "unverified";
+          send = "cross-signed-tofu";
+          share = "unverified";
         };
       };
       delivery_receipts = true;

@@ -10,8 +10,8 @@ buildPythonPackage rec {
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "linkedin";
-    rev = "bb7449e424aaf0c541bc5d616c0d61fbba7ae5ff";
-    sha256 = "sha256-vQiZ/hbL/Uig9fFBu9AxwQlpwy7qf71vx46rgvTc7pw=";
+    rev = "79e6dd458561a87575559a435aac58d164b4672a";
+    sha256 = "sha256-boG99dwM+LaGxyRBXsatrvPZrnz3Fprsk3QYwFoDE4E=";
   };
 
   nativeBuildInputs = [
@@ -27,11 +27,11 @@ buildPythonPackage rec {
     (mautrix.overridePythonAttrs (
       old: rec {
         pname = "mautrix";
-        version = "0.16.10";
+        version = "0.17.1";
 
         src = fetchPypi {
           inherit pname version;
-          sha256 = "sha256-TctTY5nq4JFj1Nhi8DCiIqRMEqJpxZOF6usS/lTKYSM=";
+          sha256 = "sha256-diWd75CUc4Cz9HRD+l3RsIshNxfMo7jDEYGK2j168R4=";
         };
       }
     ))
