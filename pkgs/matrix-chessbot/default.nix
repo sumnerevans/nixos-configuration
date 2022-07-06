@@ -16,8 +16,8 @@ buildGoPackage rec {
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = "matrix-chessbot";
-    rev = "4e17302c457ef02aa655876039cdd8b870c807d4";
-    sha256 = "sha256-i7xyUg7m28xO0OzQhqx9TZNytTxUTS3av8tfto4NKOQ=";
+    rev = "f9a8e247f47da1b5fd51e76816d36302fbd46a89";
+    sha256 = "sha256-lg3lw9PhvcNWGYEEaVJwwIt80QR3DvDcy4RXdLeuvh4=";
   };
 
   goDeps = ./deps.nix;
