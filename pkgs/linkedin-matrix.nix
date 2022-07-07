@@ -11,7 +11,7 @@ buildPythonPackage rec {
     owner = "beeper";
     repo = "linkedin";
     rev = "79e6dd458561a87575559a435aac58d164b4672a";
-    sha256 = "sha256-boG99dwM+LaGxyRBXsatrvPZrnz3Fprsk3QYwFoDE4E=";
+    sha256 = "sha256-3t7Zkn3vNL8ejgG+M8gr9R1YkFMxQ4B7OcQTY3WTwLM=";
   };
 
   nativeBuildInputs = [
@@ -31,7 +31,7 @@ buildPythonPackage rec {
 
         src = fetchPypi {
           inherit pname version;
-          sha256 = "sha256-diWd75CUc4Cz9HRD+l3RsIshNxfMo7jDEYGK2j168R4=";
+          sha256 = "sha256-boG99dwM+LaGxyRBXsatrvPZrnz3Fprsk3QYwFoDE4E=";
         };
       }
     ))
