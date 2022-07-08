@@ -28,6 +28,14 @@ let
       ))
     ];
 
+    patches = [
+      # https://github.com/matrix-org/synapse/pull/13223
+      (pkgs.fetchpatch {
+        url = "https://patch-diff.githubusercontent.com/raw/matrix-org/synapse/pull/13223.patch";
+        sha256 = "sha256-qLnzmoGpbKB5Iedrd2a1nwsJs/UvGgkAu9JbteqIYfQ=";
+      })
+    ];
+
     doCheck = false;
   });
 
