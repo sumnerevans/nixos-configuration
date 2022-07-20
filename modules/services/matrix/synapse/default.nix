@@ -7,11 +7,11 @@ let
   # Custom package that tracks with the latest release of Synapse.
   package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
     pname = "matrix-synapse";
-    version = "1.63.0";
+    version = "1.63.1";
 
     src = pkgs.python3Packages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-RiW2D3nkEK4EUiNoYGhkHqtWZfUfXMqFKakTNNmSp3A=";
+      sha256 = "sha256-AjxvZye3bRjGT355eAnwuP2lvTU/RSnOPxxKqaUxN9g=";
     };
 
     propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
