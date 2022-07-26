@@ -2,7 +2,7 @@
 
 buildGoPackage rec {
   pname = "standupbot";
-  version = "0.4.1rc5";
+  version = "0.4.1rc6";
 
   buildInputs = [ olm ];
 
@@ -10,8 +10,8 @@ buildGoPackage rec {
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "standupbot";
-    rev = "75d45d5b508559918f53a398e5f0763aa80481f4";
-    sha256 = "sha256-w1OTNye/0jMV0hjr3ogfJN8gSRsHwwQNikxpXzzVx+Q=";
+    rev = "e9291ef6dbf668668a883675a07ef85584c3fe65";
+    sha256 = "sha256-MUQ18xa2d+NasiDFkwPnkQdmGi47GBFI6923zRnlugI=";
   };
 
   goDeps = ./deps.nix;
