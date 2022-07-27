@@ -85,7 +85,7 @@ let
 
       state_compressor=$(mktemp)
 
-      ${matrix-synapse-tools.rust-synapse-compress-state}/bin/synapse-compress-state \
+      ${matrix-synapse-tools.rust-synapse-compress-state}/bin/synapse_compress_state \
         -t \
         -o $state_compressor \
         -m 1000 \
