@@ -13,4 +13,11 @@
 
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
+
+  fileSystems = {
+    "/".options = [ "compress=zstd" ];
+    "/home".options = [ "compress=zstd" ];
+    "/nix".options = [ "compress=zstd" "noatime" ];
+    "/var/tmp".options = [ "compress=zstd" "noatime" ];
+  };
 }
