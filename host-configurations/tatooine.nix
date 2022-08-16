@@ -28,4 +28,23 @@
   # Enable mosh and et
   programs.mosh.enable = true;
   services.eternal-terminal.enable = true;
+
+  # Enable prometheus and grafana for debugging hungryserv
+  services.prometheus = {
+    enable = true;
+    scrapeConfigs = [
+      # Hungryserv
+      {
+        job_name = "hungryserv-dev";
+        scrape_interval = "15s";
+        static_configs = [
+          {
+            targets = [ "0.0.0.0:8001" ];
+            labels = { instance = "hungryserv-dev"; };
+          }
+        ];
+      }
+    ];
+  };
+  services.grafana.enable = true;
 }

@@ -1,7 +1,7 @@
 { config, lib, options, pkgs, ... }: with lib; let
   serverName = "grafana.${config.networking.hostName}.${config.networking.domain}";
 in
-mkIf config.services.grafana.enable {
+mkIf (config.services.grafana.enable && config.hardware.isServer) {
   services.grafana.domain = serverName;
 
   services.nginx.virtualHosts.${config.services.grafana.domain} = {
