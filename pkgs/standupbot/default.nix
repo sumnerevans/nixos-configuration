@@ -10,8 +10,8 @@ buildGoPackage rec {
   src = fetchFromGitLab {
     owner = "beeper";
     repo = "standupbot";
-    rev = "e9291ef6dbf668668a883675a07ef85584c3fe65";
-    sha256 = "sha256-MUQ18xa2d+NasiDFkwPnkQdmGi47GBFI6923zRnlugI=";
+    rev = "491d6451b448f821a1bb0e0bb62ceeaf20a7ccf8";
+    sha256 = "sha256-xHB5euBeNmvF1igSR+9FUYuucX8JKZaI6xgU5ZDjXnc=";
   };
 
   goDeps = ./deps.nix;
