@@ -5,6 +5,8 @@
   hardware.ramSize = 32;
   hardware.isLaptop = true;
 
+  services.thinkfan.enable = true;
+
   # Kernel 5.19 makes the wifi work, but the trackpad is broken.
   boot.kernelPackages = pkgs.linuxPackages_5_18;
 
