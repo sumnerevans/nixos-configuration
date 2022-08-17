@@ -17,7 +17,17 @@ python3.pkgs.buildPythonApplication rec {
   propagatedBuildInputs = with python3.pkgs; [
     aiohttp
     irc
-    mautrix
+    (mautrix.overridePythonAttrs (
+      old: rec {
+        pname = "mautrix";
+        version = "0.16.10";
+
+        src = fetchPypi {
+          inherit pname version;
+          sha256 = "sha256-TctTY5nq4JFj1Nhi8DCiIqRMEqJpxZOF6usS/lTKYSM=";
+        };
+      }
+    ))
     python-socks
     pyyaml
   ];
