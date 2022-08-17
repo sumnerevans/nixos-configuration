@@ -7,26 +7,26 @@ let
   # Custom package that tracks with the latest release of Synapse.
   package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
     pname = "matrix-synapse";
-    version = "1.64.0";
+    version = "1.65.0";
 
     src = pkgs.python3Packages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-hybl63hbhuUYnMi03z0Yp7L4n0x01z5uR8r5ZwHzgfI=";
+      sha256 = "sha256-Kn5o6RKR3mMHvACPiMvIGKmjkAwdjcw6EY6MJXKKeAE=";
     };
 
-    propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
-      (pkgs.python3Packages.matrix-common.overridePythonAttrs (
-        old: rec {
-          pname = "matrix_common";
-          version = "1.2.1";
+    # propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
+    #   (pkgs.python3Packages.matrix-common.overridePythonAttrs (
+    #     old: rec {
+    #       pname = "matrix_common";
+    #       version = "1.2.1";
 
-          src = pkgs.python3Packages.fetchPypi {
-            inherit pname version;
-            sha256 = "sha256-qZ3PAqa9lbJKWmGzVIiKKskr8rS4OccnuN2dos36OFM=";
-          };
-        }
-      ))
-    ];
+    #       src = pkgs.python3Packages.fetchPypi {
+    #         inherit pname version;
+    #         sha256 = "sha256-qZ3PAqa9lbJKWmGzVIiKKskr8rS4OccnuN2dos36OFM=";
+    #       };
+    #     }
+    #   ))
+    # ];
 
     doCheck = false;
   });
