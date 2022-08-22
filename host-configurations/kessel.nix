@@ -76,6 +76,20 @@
     homeserver = "https://matrix.nevarro.space";
   } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
 
+  services.maubot = {
+    enable = true;
+    public_url = "https://matrix.nevarro.space";
+    homeservers = {
+      "nevarro.space" = {
+        url = "http://localhost:8008";
+        secret = removeSuffix "\n" (readFile ../secrets/matrix/registration-shared-secret/kessel);
+      };
+    };
+    admins = {
+      "sumner" = removeSuffix "\n" (readFile ../secrets/matrix/maubot-nevarro-space);
+    };
+  };
+
   # Mjolnir
   services.mjolnir.enable = true;
 
