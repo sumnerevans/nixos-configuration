@@ -126,7 +126,8 @@ in
   turn_user_lifetime = "1h";
 
   # Registration
-  enable_registration = false;
+  enable_registration = true;
+  registration_requires_token = true;
   registration_shared_secret = removeSuffix "\n" (readFile cfg.registrationSharedSecretFile);
 
   # Metrics
