@@ -90,6 +90,29 @@ in
       };
     };
 
+    services.nginx = {
+      virtualHosts = {
+        ${matrixDomain} = {
+          locations."~ ^/_matrix/maubot" = {
+            proxyPass = "http://0.0.0.0:29316"; # without a trailing /
+            extraConfig = ''
+              access_log /var/log/nginx/maubot.access.log;
+            '';
+          };
+          locations."~ ^/_matrix/maubot/v1/logs" = {
+            proxyPass = "http://localhost:29316";
+            extraConfig = ''
+              access_log /var/log/nginx/maubot.access.log;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "Upgrade";
+              proxy_set_header X-Forwarded-For $remote_addr;
+            '';
+          };
+        };
+      };
+    };
+
     users = {
       users.maubot = {
         group = "maubot";

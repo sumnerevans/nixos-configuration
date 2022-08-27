@@ -420,12 +420,6 @@ in
               access_log /var/log/nginx/matrix-media-repo.access.log;
             '';
           };
-          locations."~ ^/_matrix/maubot" = {
-            proxyPass = "http://0.0.0.0:29316"; # without a trailing /
-            extraConfig = ''
-              access_log /var/log/nginx/maubot.access.log;
-            '';
-          };
         };
       };
     };
