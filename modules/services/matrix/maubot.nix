@@ -24,12 +24,12 @@
         };
       };
       loggers = {
-        maubot = { level = "DEBUG"; };
-        mau = { level = "DEBUG"; };
+        maubot = { level = "TRACE"; };
+        mau = { level = "TRACE"; };
         aiohttp = { level = "DEBUG"; };
       };
       root = {
-        level = "DEBUG";
+        level = "TRACE";
         handlers = [ "console" ];
       };
     };
