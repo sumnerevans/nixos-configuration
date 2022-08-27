@@ -148,7 +148,10 @@ in
 
   # Workers
   send_federation = false;
-  federation_sender_instances = [ "federation_sender1" ];
+  federation_sender_instances = [
+    "federation_sender1"
+    "federation_sender2"
+  ];
   instance_map = {
     event_persister1 = {
       host = "localhost";

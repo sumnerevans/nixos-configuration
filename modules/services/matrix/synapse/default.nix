@@ -96,6 +96,13 @@ let
       worker_name = "federation_sender1";
     });
 
+  federationSender2ConfigFile = yamlFormat.generate
+    "federation-sender-2.yaml"
+    (mkSynapseWorkerConfig 9106 {
+      worker_app = "synapse.app.federation_sender";
+      worker_name = "federation_sender2";
+    });
+
   federationReader1ConfigFile = yamlFormat.generate
     "federation-reader-1.yaml"
     (mkSynapseWorkerConfig 9102 {
@@ -279,6 +286,16 @@ in
       '';
     };
 
+    systemd.services.matrix-synapse-federation-sender2 = mkSynapseWorkerService {
+      description = "Synapse Matrix federation sender 2";
+      serviceConfig.ExecStart = ''
+        ${packageWithModules}/bin/python -m synapse.app.federation_sender \
+          --config-path ${sharedConfigFile} \
+          --config-path ${federationSender2ConfigFile} \
+          --keys-directory ${cfg.dataDir}
+      '';
+    };
+
     # Run the federation reader worker
     systemd.services.matrix-synapse-federation-reader1 = mkSynapseWorkerService {
       description = "Synapse Matrix federation reader 1";
@@ -424,6 +441,11 @@ in
               # Federation sender 1
               targets = [ "0.0.0.0:9101" ];
               labels = { instance = matrixDomain; job = "federation_sender"; index = "1"; };
+            }
+            {
+              # Federation sender 2
+              targets = [ "0.0.0.0:9106" ];
+              labels = { instance = matrixDomain; job = "federation_sender"; index = "2"; };
             }
             {
               # Federation reader 1

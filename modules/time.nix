@@ -1,4 +1,4 @@
 {
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "Europe/Berlin";
 }
