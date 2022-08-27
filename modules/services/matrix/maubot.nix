@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: with lib; let
   cfg = config.services.maubot;
   maubot = pkgs.callPackage ../../../pkgs/maubot.nix { };
+  matrixDomain = "matrix.${config.networking.domain}";
 
   maubotConfig = {
     database = "postgresql://maubot:maubot@localhost/maubot";

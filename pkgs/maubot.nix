@@ -41,6 +41,9 @@ python3.pkgs.buildPythonPackage rec {
     questionary
     ruamel-yaml
     sqlalchemy
+    python-olm
+    pycryptodome
+    unpaddedbase64
   ];
 
   nativeBuildInputs = [ fixup_yarn_lock yarn nodejs ];
