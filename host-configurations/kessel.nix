@@ -81,7 +81,7 @@
     public_url = "https://matrix.nevarro.space";
     homeservers = {
       "nevarro.space" = {
-        url = "http://localhost:8008";
+        url = "https://matrix.nevarro.space";
         secret = removeSuffix "\n" (readFile ../secrets/matrix/registration-shared-secret/kessel);
       };
     };
