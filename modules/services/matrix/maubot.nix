@@ -94,13 +94,13 @@ in
     services.nginx = {
       virtualHosts = {
         ${matrixDomain} = {
-          locations."~ ^/_matrix/maubot" = {
+          locations."/_matrix/maubot" = {
             proxyPass = "http://0.0.0.0:29316"; # without a trailing /
             extraConfig = ''
               access_log /var/log/nginx/maubot.access.log;
             '';
           };
-          locations."~ ^/_matrix/maubot/v1/logs" = {
+          locations."/_matrix/maubot/v1/logs" = {
             proxyPass = "http://localhost:29316";
             extraConfig = ''
               access_log /var/log/nginx/maubot.access.log;
