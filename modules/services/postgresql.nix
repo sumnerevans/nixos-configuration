@@ -1,31 +1,19 @@
 { config, lib, pkgs, ... }: with lib; mkMerge [
   (
     mkIf config.services.postgresql.enable {
-      systemd.services.mkPostgresDataDir = {
-        description = "Make sure the postgres data directory exists before booting the service.";
-        wantedBy = [ "multi-user.target" ];
-        before = [ "postgresql.service" ];
-        serviceConfig = {
-          ExecStart = pkgs.writeShellScript "ensure-dirs" ''
-            mkdir -p ${config.services.postgresql.dataDir}
-            chown -R postgres:postgres ${config.services.postgresql.dataDir}
-          '';
-        };
-      };
-
       services.postgresql.settings = {
         max_connections = 500;
-        shared_buffers = "512MB";
-        effective_cache_size = "1536MB";
-        maintenance_work_mem = "128MB";
+        shared_buffers = "2GB";
+        effective_cache_size = "6GB";
+        maintenance_work_mem = "512MB";
         checkpoint_completion_target = 0.9;
         wal_buffers = "16MB";
         default_statistics_target = 100;
         random_page_cost = 1.1;
         effective_io_concurrency = 200;
-        work_mem = "1048kB";
-        min_wal_size = "1GB";
-        max_wal_size = "4GB";
+        work_mem = "10485kB";
+        min_wal_size = "2GB";
+        max_wal_size = "8GB";
         max_worker_processes = 2;
         max_parallel_workers_per_gather = 1;
         max_parallel_workers = 2;
