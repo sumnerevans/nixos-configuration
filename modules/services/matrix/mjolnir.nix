@@ -9,7 +9,10 @@ in
       enable = true;
       username = "marshal";
       passwordFile = "/etc/nixos/secrets/matrix/bots/marshal";
-      options.listenPort = 8100;
+      options = {
+        listenAddress = "127.0.0.1";
+        listenPort = 8100;
+      };
     };
 
     managementRoom = "#mjolnir:nevarro.space";
@@ -19,6 +22,9 @@ in
     };
   };
   services.pantalaimon-headless.instances = mkIf mjolnirCfg.enable {
-    mjolnir.listenPort = 8100;
+    mjolnir = {
+      listenAddress = "127.0.0.1";
+      listenPort = 8100;
+    };
   };
 }
