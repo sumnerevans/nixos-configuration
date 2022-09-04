@@ -7,8 +7,7 @@
 
   services.thinkfan.enable = true;
 
-  # Kernel 5.19 makes the wifi work, but the trackpad is broken.
-  boot.kernelPackages = pkgs.linuxPackages_5_18;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set up networking.
   networking.interfaces.wlp1s0.useDHCP = true;
