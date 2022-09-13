@@ -1,17 +1,17 @@
-{ lib, fetchFromGitLab, python3 }: with python3.pkgs;
+{ lib, fetchFromGitHub, python3 }: with python3.pkgs;
 let
   linkedin-messaging = callPackage ./linkedin-messaging.nix { };
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
-  version = "unstable-2022-07-06";
+  version = "unstable-2022-09-13";
   format = "pyproject";
 
-  src = fetchFromGitLab {
+  src = fetchFromGitHub {
     owner = "beeper";
     repo = "linkedin";
-    rev = "79e6dd458561a87575559a435aac58d164b4672a";
-    sha256 = "sha256-3t7Zkn3vNL8ejgG+M8gr9R1YkFMxQ4B7OcQTY3WTwLM=";
+    rev = "1497327c96daa6ee8173d25ecdb4d553fc259112";
+    sha256 = "sha256-zdq+2UzdTkZs1gq/fohYKzfGRavO8cDZRogTuT6wmyU=";
   };
 
   nativeBuildInputs = [
@@ -27,11 +27,11 @@ buildPythonPackage rec {
     (mautrix.overridePythonAttrs (
       old: rec {
         pname = "mautrix";
-        version = "0.17.1";
+        version = "0.17.8";
 
         src = fetchPypi {
           inherit pname version;
-          sha256 = "sha256-boG99dwM+LaGxyRBXsatrvPZrnz3Fprsk3QYwFoDE4E=";
+          sha256 = "sha256-DFajAD5mnXLQmJGRv4j2mWhtIj77nZNSQhbesX4qMys=";
         };
       }
     ))
@@ -63,7 +63,7 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "A LinkedIn Messaging <-> Matrix bridge.";
-    homepage = "https://gitlab.com/beeper/linkedin";
+    homepage = "https://github.com/beeper/linkedin";
     license = licenses.asl20;
     maintainers = [ maintainers.sumnerevans ];
   };

@@ -71,6 +71,10 @@
       invite_own_puppet_to_pm = false;
       sync_with_custom_puppets = false;
       sync_direct_chat_list = true;
+      space_support = {
+        enable = true;
+        name = "LinkedIn";
+      };
       presence = false;
       update_avatar_initial_sync = true;
       login_shared_secret_map = {
