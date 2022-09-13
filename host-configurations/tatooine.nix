@@ -1,6 +1,7 @@
 {
   # Set the hostname
   networking.hostName = "tatooine";
+  networking.domain = "sumnerevans.com";
   hardware.ramSize = 8;
 
   networking.interfaces.eth0.useDHCP = true;
@@ -47,4 +48,23 @@
     ];
   };
   services.grafana.enable = true;
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."matrix.tatooine.sumnerevans.com" = {
+      addSSL = true;
+      enableACME = true;
+
+      extraConfig = ''
+        error_page 502 /50x.html;
+      '';
+
+      locations = {
+        "/50x.html".root = "/usr/share/nginx/html";
+
+        # Roomserv
+        "/".proxyPass = "http://localhost:8007/";
+      };
+    };
+  };
 }
