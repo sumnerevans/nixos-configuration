@@ -14,23 +14,20 @@ let
       sha256 = "sha256-86KVu1wUkVy1/mONVbDM1g+Y+Kh90y1rpf58Kc2VtBY=";
     };
 
-    propagatedBuildInputs = old.propagatedBuildInputs ++ [
+    propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
+      (pkgs.python3Packages.matrix-common.overridePythonAttrs (
+        old: rec {
+          pname = "matrix_common";
+          version = "1.3.0";
+
+          src = pkgs.python3Packages.fetchPypi {
+            inherit pname version;
+            sha256 = "sha256-YuEhzM2fJDQXtX7DenbcRK6xmKelxnr9a4J1mS/yq9E=";
+          };
+        }
+      ))
       pkgs.python3Packages.pydantic
     ];
-
-    # propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
-    #   (pkgs.python3Packages.matrix-common.overridePythonAttrs (
-    #     old: rec {
-    #       pname = "matrix_common";
-    #       version = "1.2.1";
-
-    #       src = pkgs.python3Packages.fetchPypi {
-    #         inherit pname version;
-    #         sha256 = "sha256-qZ3PAqa9lbJKWmGzVIiKKskr8rS4OccnuN2dos36OFM=";
-    #       };
-    #     }
-    #   ))
-    # ];
 
     doCheck = false;
   });
