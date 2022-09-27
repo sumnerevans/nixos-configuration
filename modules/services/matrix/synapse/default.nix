@@ -7,12 +7,34 @@ let
   # Custom package that tracks with the latest release of Synapse.
   package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
     pname = "matrix-synapse";
-    version = "1.67.0";
+    version = "1.68.0";
+    format = "pyproject";
 
     src = pkgs.python3Packages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-86KVu1wUkVy1/mONVbDM1g+Y+Kh90y1rpf58Kc2VtBY=";
+      hash = "sha256-jQcprvKEbLuLWth0aWeh5mi/v8z83GIrjCsm3JdJcUM=";
     };
+
+    cargoDeps = pkgs.rustPackages.rustPlatform.fetchCargoTarball {
+      inherit src;
+      name = "${pname}-${version}";
+      hash = "sha256-k8iAYRgFCuv6QYAUW5kSEwFSEXVNAEGpPya7biS1Vlo=";
+    };
+
+    postPatch = ''
+      # Remove setuptools_rust from runtime dependencies
+      # https://github.com/matrix-org/synapse/blob/v1.68.0/pyproject.toml#L177-L185
+      sed -i '/^setuptools_rust =/d' pyproject.toml
+    '';
+
+    nativeBuildInputs = with pkgs; [
+      python3Packages.poetry-core
+      rustPackages.rustPlatform.cargoSetupHook
+      python3Packages.setuptools-rust
+    ] ++ (with rustPackages.rustPlatform.rust; [
+      cargo
+      rustc
+    ]);
 
     propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
       (pkgs.python3Packages.matrix-common.overridePythonAttrs (
