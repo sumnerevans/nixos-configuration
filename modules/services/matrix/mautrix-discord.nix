@@ -1,20 +1,20 @@
 { config, lib, pkgs, ... }: with lib; let
-  cfg = config.services.linkedin-matrix;
+  cfg = config.services.mautrix-discord;
   synapseCfg = config.services.matrix-synapse-custom;
 
-  linkedin-matrix = pkgs.callPackage ../../../pkgs/linkedin-matrix.nix { };
+  mautrix-discord = pkgs.callPackage ../../../pkgs/mautrix-discord.nix { };
 
-  linkedinMatrixAppserviceConfig = {
-    id = "linkedin";
+  mautrixDiscordAppserviceConfig = {
+    id = "discord";
     url = "http://${cfg.listenAddress}:${toString cfg.listenPort}";
     as_token = cfg.appServiceToken;
     hs_token = cfg.homeserverToken;
     rate_limited = false;
-    sender_localpart = "XDUsekmAmWcmL1FWrgZ8E7ih-p0vffI3kMiezV43Sw29GLBQAQ-0_GRJXMQXlVb0";
+    sender_localpart = "LI6W2mH43X68rSiZ1YLAQCSLtuSZlPBt";
     namespaces = {
       users = [
-        { regex = "@li_.*:nevarro.space"; exclusive = true; }
-        { regex = "@linkedinbot:nevarro.space"; exclusive = true; }
+        { regex = "^@discord_[0-9]+:nevarro.space$"; exclusive = true; }
+        { regex = "^@discordbot:nevarro.space$"; exclusive = true; }
       ];
       aliases = [ ];
       rooms = [ ];
@@ -23,20 +23,17 @@
 
   yamlFormat = pkgs.formats.yaml { };
 
-  linkedinMatrixAppserviceConfigYaml = yamlFormat.generate "linkedin-matrix-registration.yaml" linkedinMatrixAppserviceConfig;
+  mautrixDiscordAppserviceConfigYaml = yamlFormat.generate "mautrix-discord-registration.yaml" mautrixDiscordAppserviceConfig;
 
-  linkedinMatrixConfig = {
+  mautrixDiscordConfig = {
     homeserver = {
       address = cfg.homeserver;
       domain = config.networking.domain;
-      verify_ssl = false;
-      asmux = false;
-      http_retry_count = 4;
     };
 
     metrics = {
       enabled = true;
-      listen_port = 9010;
+      listen_port = 9011;
     };
 
     appservice = {
@@ -44,19 +41,19 @@
       hostname = cfg.listenAddress;
       port = cfg.listenPort;
       max_body_size = 1;
-      database = "postgresql://linkedinmatrix:linkedinmatrix@localhost/linkedin-matrix";
+      database = "postgresql://mautrixdiscord:mautrixdiscord@localhost/mautrix-disocrd";
       database_opts = { min_size = 5; max_size = 10; };
-      id = "linkedin";
+      id = "discord";
       bot_username = cfg.botUsername;
-      bot_displayname = "LinkedIn bridge bot";
-      bot_avatar = "mxc://sumnerevans.com/XMtwdeUBnxYvWNFFrfeTSHqB";
+      bot_displayname = "Discord bridge bot";
+      bot_avatar = "mxc://nevarro.space/LWsPMGFektATJpgbSyfULDKR";
       as_token = cfg.appServiceToken;
       hs_token = cfg.homeserverToken;
       ephemeral_events = true;
     };
 
     bridge = {
-      username_template = "li_{userid}";
+      username_template = "discord_{{.}}";
       displayname_template = "{displayname}";
       displayname_preference = [ "name" "first_name" ];
       set_topic_on_dms = true;
