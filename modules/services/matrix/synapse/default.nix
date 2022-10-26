@@ -7,23 +7,26 @@ let
   # Custom package that tracks with the latest release of Synapse.
   package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
     pname = "matrix-synapse";
-    version = "1.68.0";
+    version = "1.70.0";
     format = "pyproject";
 
-    src = pkgs.python3Packages.fetchPypi {
-      inherit pname version;
-      hash = "sha256-jQcprvKEbLuLWth0aWeh5mi/v8z83GIrjCsm3JdJcUM=";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "matrix-org";
+      repo = "synapse";
+      rev = "v${version}";
+      hash = "sha256-SkPQPkSF6cppCS58e7wtkBh4nIFekt1O7qbpA6T0lEk=";
     };
 
     cargoDeps = pkgs.rustPackages.rustPlatform.fetchCargoTarball {
       inherit src;
       name = "${pname}-${version}";
-      hash = "sha256-k8iAYRgFCuv6QYAUW5kSEwFSEXVNAEGpPya7biS1Vlo=";
+      hash = "sha256-ucfk2rWU4k9kDIBgbOgp+3ORog/66FgZ90qxF33IuC4=";
     };
 
     postPatch = ''
       # Remove setuptools_rust from runtime dependencies
-      # https://github.com/matrix-org/synapse/blob/v1.68.0/pyproject.toml#L177-L185
+      # https://github.com/matrix-org/synapse/blob/v1.69.0/pyproject.toml#L177-L185
       sed -i '/^setuptools_rust =/d' pyproject.toml
     '';
 
