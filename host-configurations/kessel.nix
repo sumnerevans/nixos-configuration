@@ -76,6 +76,13 @@
     homeserver = "https://matrix.nevarro.space";
   } // (import ../secrets/matrix/appservices/linkedin-matrix.nix);
 
+  # Discord <-> Matrix Bridge
+  services.mautrix-discord = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+  } // (import ../secrets/matrix/appservices/mautrix-discord.nix);
+
+  # Maubot
   services.maubot = {
     enable = true;
     public_url = "https://matrix.nevarro.space";

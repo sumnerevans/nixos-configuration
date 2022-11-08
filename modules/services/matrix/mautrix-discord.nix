@@ -2,7 +2,7 @@
   cfg = config.services.mautrix-discord;
   synapseCfg = config.services.matrix-synapse-custom;
 
-  mautrix-discord = pkgs.callPackage ../../../pkgs/mautrix-discord.nix { };
+  mautrix-discord = pkgs.callPackage ../../../pkgs/mautrix-discord { };
 
   mautrixDiscordAppserviceConfig = {
     id = "discord";
@@ -41,8 +41,12 @@
       hostname = cfg.listenAddress;
       port = cfg.listenPort;
       max_body_size = 1;
-      database = "postgresql://mautrixdiscord:mautrixdiscord@localhost/mautrix-disocrd";
-      database_opts = { min_size = 5; max_size = 10; };
+      database = {
+        type = "sqlite3-fk-wal";
+        uri = "file:${cfg.dataDir}/mautrix-discord.db?_txlock=immediate";
+        max_open_conns = 20;
+        max_idle_cons = 2;
+      };
       id = "discord";
       bot_username = cfg.botUsername;
       bot_displayname = "Discord bridge bot";
@@ -54,24 +58,21 @@
 
     bridge = {
       username_template = "discord_{{.}}";
-      displayname_template = "{displayname}";
-      displayname_preference = [ "name" "first_name" ];
-      set_topic_on_dms = true;
-      command_prefix = "!li";
-      initial_chat_sync = 20;
-      invite_own_puppet_to_pm = false;
-      sync_with_custom_puppets = false;
-      sync_direct_chat_list = true;
-      space_support = {
-        enable = true;
-        name = "LinkedIn";
-      };
-      presence = false;
-      update_avatar_initial_sync = true;
+      displayname_template = "{{.Username}}#{{.Discriminator}} (D){{if .Bot}} (bot){{end}}";
+      channel_name_template = "{{if or (eq .Type 3) (eq .Type 4)}}{{.Name}}{{else}}#{{.Name}}{{end}}";
+      guild_name_template = "{{.Name}}";
+      private_chat_portal_meta = false;
+      portal_message_buffer = 128;
+      startup_private_channel_create_limit = 5;
+      delivery_receipts = true;
+      message_error_notices = true;
+      restricted_rooms = true;
+      delete_portal_on_channel_delete = true;
+      federate_rooms = false;
       login_shared_secret_map = {
         "nevarro.space" = removeSuffix "\n" (readFile synapseCfg.sharedSecretAuthFile);
       };
-      federate_rooms = false;
+      command_prefix = "!dis";
       encryption = {
         allow = true;
         default = true;
@@ -83,15 +84,6 @@
           share = "unverified";
         };
       };
-      delivery_receipts = true;
-      backfill = {
-        invite_own_puppet = true;
-        initial_limit = 20;
-        missed_limit = 20;
-        disable_notifications = true;
-      };
-      temporary_disconnect_notices = true;
-      mute_bridging = true;
       permissions = {
         "nevarro.space" = "user";
         "@sumner:sumnerevans.com" = "admin";
@@ -100,32 +92,23 @@
     };
 
     logging = {
-      version = 1;
-
-      formatters.journal_fmt.format = "[%(name)s] %(message)s";
-      handlers = {
-        journal = {
-          class = "systemd.journal.JournalHandler";
-          formatter = "journal_fmt";
-          SYSLOG_IDENTIFIER = "linkedin-matrix";
-        };
-      };
-      loggers = {
-        aiohttp.level = "DEBUG";
-        mau.level = "DEBUG";
-        paho.level = "DEBUG";
-        root.level = "DEBUG";
-      };
-      root = { level = "DEBUG"; handlers = [ "journal" ]; };
+      directory = "./logs";
+      file_name_format = "{{.Date}}-{{.Index}}.log";
+      file_date_format = "2006-01-02";
+      file_mode = 384;
+      timestamp_format = "Jan _2, 2006 15:04:05";
+      print_level = "debug";
+      print_json = false;
+      file_json = false;
     };
   };
 
-  linkedinMatrixConfigYaml = yamlFormat.generate "linkedin-config.yaml" linkedinMatrixConfig;
+  mautrixDiscordConfigYaml = yamlFormat.generate "mautrix-discord-config.yaml" mautrixDiscordConfig;
 in
 {
   options = {
-    services.linkedin-matrix = {
-      enable = mkEnableOption "linkedin-matrix, a LinkedIn Messaging <-> Matrix bridge.";
+    services.mautrix-discord = {
+      enable = mkEnableOption "mautrix-discord, a Discord <-> Matrix bridge.";
       useLocalSynapse = mkOption {
         type = types.bool;
         default = true;
@@ -139,17 +122,17 @@ in
       listenAddress = mkOption {
         type = types.str;
         default = "127.0.0.1";
-        description = "The address for linkedin-matrix to listen on.";
+        description = "The address for mautrix-discord to listen on.";
       };
       listenPort = mkOption {
         type = types.int;
-        default = 9899;
-        description = "The port for linkedin-matrix to listen on.";
+        default = 9890;
+        description = "The port for mautrix-discord to listen on.";
       };
       botUsername = mkOption {
         type = types.str;
-        default = "linkedinbot";
-        description = "The localpart of the linkedin-matrix admin bot's username.";
+        default = "discordbot";
+        description = "The localpart of the mautrix-discord admin bot's username.";
       };
       appServiceToken = mkOption {
         type = types.str;
@@ -165,6 +148,10 @@ in
           to the app service. This can be anything you want.
         '';
       };
+      dataDir = mkOption {
+        type = types.path;
+        default = "/var/lib/mautrix-discord";
+      };
     };
   };
 
@@ -175,47 +162,43 @@ in
       {
         assertion = cfg.useLocalSynapse -> config.services.matrix-synapse-custom.enable;
         message = ''
-          LinkedIn must be running on the same server as Synapse if
+          Mautrix-Discord must be running on the same server as Synapse if
           'useLocalSynapse' is enabled.
         '';
       }
     ];
 
     services.matrix-synapse-custom.appServiceConfigFiles = mkIf cfg.useLocalSynapse [
-      linkedinMatrixAppserviceConfigYaml
+      mautrixDiscordAppserviceConfigYaml
     ];
 
-    # Create a user for linkedin-matrix.
-    users.users.linkedinmatrix = {
-      group = "linkedinmatrix";
-      isSystemUser = true;
+    # Create a user for mautrix-discord.
+    users = {
+      users.mautrixdiscord = {
+        group = "mautrixdiscord";
+        isSystemUser = true;
+        home = cfg.dataDir;
+        createHome = true;
+      };
+      groups.mautrixdiscord = { };
     };
-    users.groups.linkedinmatrix = { };
 
-    # Create a database user for linkedin-matrix
-    services.postgresql.ensureDatabases = [ "linkedin-matrix" ];
-    services.postgresql.ensureUsers = [
-      {
-        name = "linkedinmatrix";
-        ensurePermissions = {
-          "DATABASE \"linkedin-matrix\"" = "ALL PRIVILEGES";
-          "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
-        };
-      }
-    ];
-
-    systemd.services.linkedin-matrix = {
-      description = "LinkedIn Messaging <-> Matrix Bridge";
+    systemd.services.mautrix-discord = {
+      description = "Discord <-> Matrix Bridge";
       after = optional cfg.useLocalSynapse "matrix-synapse.target";
       wantedBy = [ "multi-user.target" ];
+      preStart = ''
+        ${pkgs.coreutils}/bin/mkdir -p ${cfg.dataDir}/logs
+      '';
       serviceConfig = {
-        User = "linkedinmatrix";
-        Group = "linkedinmatrix";
+        User = "mautrixdiscord";
+        Group = "mautrixdiscord";
         ExecStart = ''
-          ${linkedin-matrix}/bin/linkedin-matrix \
-            --config ${linkedinMatrixConfigYaml} \
+          ${mautrix-discord}/bin/mautrix-discord \
+            --config ${mautrixDiscordConfigYaml} \
             --no-update
         '';
+        WorkingDirectory = cfg.dataDir;
         Restart = "on-failure";
       };
     };
@@ -224,10 +207,10 @@ in
       enable = true;
       scrapeConfigs = [
         {
-          job_name = "linkedinmatirx";
+          job_name = "mautrixdiscord";
           scrape_interval = "15s";
           metrics_path = "/";
-          static_configs = [{ targets = [ "0.0.0.0:9010" ]; }];
+          static_configs = [{ targets = [ "0.0.0.0:9011" ]; }];
         }
       ];
     };
