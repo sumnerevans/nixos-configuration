@@ -49,6 +49,12 @@
   };
   services.grafana.enable = true;
 
+  # Discord <-> Matrix Bridge
+  services.mautrix-discord = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+  } // (import ../secrets/matrix/appservices/mautrix-discord.nix);
+
   services.nginx = {
     enable = true;
     virtualHosts."matrix.tatooine.sumnerevans.com" = {
