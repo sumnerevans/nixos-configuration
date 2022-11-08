@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: with lib; {
   hardware.isServer = true;
 
   # Set the hostname
@@ -97,6 +97,33 @@
   services.syncthing.enable = true;
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;
+
+  services.plausible = {
+    enable = true;
+    releaseCookiePath = pkgs.writeText "release-cookie" (removeSuffix "\n" (readFile ../secrets/plausible/release-cookie));
+    server = {
+      port = 12345;
+      baseUrl = "https://plausible.nevarro.space/";
+      secretKeybaseFile = pkgs.writeText "secret-keybase" (removeSuffix "\n" (readFile ../secrets/plausible/secret-keybase));
+    };
+    adminUser = {
+      activate = true;
+      email = "admin@nevarro.space";
+      passwordFile = pkgs.writeText "password" (removeSuffix "\n" (readFile ../secrets/plausible/password));
+    };
+  };
+
+  services.nginx.virtualHosts."plausible.nevarro.space" = {
+    enableACME = true;
+    forceSSL = true;
+
+    locations."/" = {
+      proxyPass = "http://0.0.0.0:12345"; # without a trailing /
+      extraConfig = ''
+        access_log /var/log/nginx/plausible.access.log;
+      '';
+    };
+  };
 
   # Gonic
   services.gonic = {
