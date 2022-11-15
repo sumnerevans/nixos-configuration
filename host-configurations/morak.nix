@@ -36,7 +36,6 @@
   services.nginx.websites = [
     { hostname = "the-evans.family"; }
     { hostname = "qs.sumnerevans.com"; }
-    { hostname = "mineshspc.com"; }
     {
       # sumnerevans.com
       hostname = "sumnerevans.com";
@@ -94,6 +93,7 @@
   services.grafana.enable = true;
   services.isso.enable = true;
   services.logrotate.enable = true;
+  services.mineshspc.enable = true;
   services.syncthing.enable = true;
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;
