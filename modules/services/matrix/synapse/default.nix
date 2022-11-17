@@ -39,20 +39,19 @@ let
       rustc
     ]);
 
-    propagatedBuildInputs = (filter (i: i.pname != "matrix_common") old.propagatedBuildInputs) ++ [
-      (pkgs.python3Packages.matrix-common.overridePythonAttrs (
-        old: rec {
-          pname = "matrix_common";
-          version = "1.3.0";
+    # propagatedBuildInputs = (filter (i: i.pname != "matrix-common") old.propagatedBuildInputs) ++ [
+    #   (pkgs.python3Packages.matrix-common.overridePythonAttrs (
+    #     old: rec {
+    #       pname = "matrix-common";
+    #       version = "1.3.0";
 
-          src = pkgs.python3Packages.fetchPypi {
-            inherit pname version;
-            sha256 = "sha256-YuEhzM2fJDQXtX7DenbcRK6xmKelxnr9a4J1mS/yq9E=";
-          };
-        }
-      ))
-      pkgs.python3Packages.pydantic
-    ];
+    #       src = pkgs.python3Packages.fetchPypi {
+    #         inherit pname version;
+    #         sha256 = "sha256-YuEhzM2fJDQXtX7DenbcRK6xmKelxnr9a4J1mS/yq9E=";
+    #       };
+    #     }
+    #   ))
+    # ];
 
     doCheck = false;
   });
