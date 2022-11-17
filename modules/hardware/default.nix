@@ -64,6 +64,19 @@ in
 
         # Enable firmware updating
         services.fwupd.enable = true;
+
+        # Enable VirtualBox on GUI-enabled computers
+        virtualisation.virtualbox = mkIf (config.xorg.enable || config.wayland.enable) {
+          host = {
+            enable = true;
+            enableExtensionPack = true;
+          };
+          guest = {
+            enable = true;
+            x11 = true;
+          };
+        };
+        users.extraGroups.vboxusers.members = [ "sumner" ];
       }
     )
 
