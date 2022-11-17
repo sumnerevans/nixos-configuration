@@ -1,18 +1,20 @@
 { config, lib, options, pkgs, ... }: with lib; let
   serverName = "grafana.${config.networking.hostName}.${config.networking.domain}";
+  cfg = config.services.grafana;
 in
-mkIf config.services.grafana.enable {
+mkIf cfg.enable {
   services.grafana = {
-    domain = serverName;
-    settings = { };
+    settings = {
+      server = mkIf config.hardware.isServer { domain = serverName; };
+    };
   };
 
   services.nginx.virtualHosts = mkIf config.hardware.isServer {
-    ${config.services.grafana.domain} = {
+    ${cfg.domain} = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}";
+        proxyPass = "http://127.0.0.1:${toString cfg.settings.server.http_port}";
         proxyWebsockets = true;
       };
     };

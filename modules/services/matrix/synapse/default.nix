@@ -379,7 +379,7 @@ in
     };
 
     # Ensure that Redis is setup for Synapse.
-    services.redis.enable = true;
+    services.redis.servers."".enable = true;
 
     # Set up nginx to forward requests properly.
     services.nginx = {
