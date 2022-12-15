@@ -11,6 +11,8 @@
     hs_token = cfg.homeserverToken;
     rate_limited = false;
     sender_localpart = "XDUsekmAmWcmL1FWrgZ8E7ih-p0vffI3kMiezV43Sw29GLBQAQ-0_GRJXMQXlVb0";
+    "de.sorunome.msc2409.push_ephemeral" = true;
+    push_ephemeral = true;
     namespaces = {
       users = [
         { regex = "@li_.*:nevarro.space"; exclusive = true; }

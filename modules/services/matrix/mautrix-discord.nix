@@ -11,6 +11,8 @@
     hs_token = cfg.homeserverToken;
     rate_limited = false;
     sender_localpart = "LI6W2mH43X68rSiZ1YLAQCSLtuSZlPBt";
+    "de.sorunome.msc2409.push_ephemeral" = true;
+    push_ephemeral = true;
     namespaces = {
       users = [
         { regex = "^@discord_[0-9]+:nevarro.space$"; exclusive = true; }
