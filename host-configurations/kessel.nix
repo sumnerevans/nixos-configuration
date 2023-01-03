@@ -82,6 +82,12 @@
     homeserver = "https://matrix.nevarro.space";
   } // (import ../secrets/matrix/appservices/mautrix-discord.nix);
 
+  # Slack <-> Matrix Bridge
+  services.mautrix-slack = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+  } // (import ../secrets/matrix/appservices/mautrix-slack.nix);
+
   # Maubot
   services.maubot = {
     enable = true;
