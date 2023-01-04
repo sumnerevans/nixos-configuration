@@ -15,6 +15,10 @@
     tod.enable = true;
     tod.driver = pkgs.libfprint-2-tod1-vfs0090;
   };
+  security.pam.services = {
+    # The fingerprint auth doesn't work correctly after waking from sleep
+    swaylock.fprintAuth = false;
+  };
   security.polkit.extraConfig = ''
     polkit.addRule(function (action, subject) {
       if (action.id == "net.reactivated.fprint.device.enroll") {
