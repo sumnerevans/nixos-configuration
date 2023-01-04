@@ -3,14 +3,13 @@
   networking.hostName = "coruscant";
   hardware.isPC = true;
   hardware.ramSize = 32;
-  xorg.enable = true;
+
+  wayland.enable = true;
 
   programs.steam.enable = true;
 
   networking.interfaces.enp37s0.useDHCP = true;
   networking.interfaces.wlp35s0.useDHCP = true;
-
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
