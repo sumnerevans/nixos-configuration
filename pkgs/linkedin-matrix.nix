@@ -4,14 +4,14 @@ let
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
-  version = "unstable-2022-09-13";
-  format = "pyproject";
+  version = "0.5.4-p1";
+  format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "beeper";
     repo = "linkedin";
-    rev = "1497327c96daa6ee8173d25ecdb4d553fc259112";
-    sha256 = "sha256-zdq+2UzdTkZs1gq/fohYKzfGRavO8cDZRogTuT6wmyU=";
+    rev = "66ffb180272c2e17cc7b65840a9c8f9071680fd8";
+    sha256 = "sha256-f52jA155Mcmu9ktXRXYW2314p0k/7zIKuSBC5F2FbEI=";
   };
 
   nativeBuildInputs = [
@@ -21,20 +21,9 @@ buildPythonPackage rec {
   propagatedBuildInputs = [
     aiohttp
     asyncpg
-    cffi
     CommonMark
     linkedin-messaging
-    (mautrix.overridePythonAttrs (
-      old: rec {
-        pname = "mautrix";
-        version = "0.17.8";
-
-        src = fetchPypi {
-          inherit pname version;
-          sha256 = "sha256-DFajAD5mnXLQmJGRv4j2mWhtIj77nZNSQhbesX4qMys=";
-        };
-      }
-    ))
+    mautrix
     pillow
     prometheus_client
     pycryptodome
