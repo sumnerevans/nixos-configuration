@@ -25,7 +25,7 @@ in
 
     virtualisation.oci-containers.containers = {
       "mineshspc.com" = {
-        image = "ghcr.io/coloradoschoolofmines/mineshspc.com:e9137b7f8be31864e21572de1431d368406129bb";
+        image = "ghcr.io/coloradoschoolofmines/mineshspc.com:509ca1a87c288f4f028f014811779af82e0edb03";
         volumes = [ "${cfg.dataDir}:/data" ];
         ports = [ "8090:8090" ];
       };
