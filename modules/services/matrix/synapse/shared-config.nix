@@ -38,6 +38,12 @@ in
       }
     ];
 
+  # Experimental features
+  experimental = {
+    # Enable support for the suppressing edit notifications.
+    msc3958_supress_edit_notifs = true;
+  };
+
   # Server
   server_name = config.networking.domain;
   pid_file = "/run/matrix-synapse.pid";
