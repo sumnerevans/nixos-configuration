@@ -1,10 +1,12 @@
-{
+{ pkgs, ... }: {
   # Set the hostname
   networking.hostName = "coruscant";
   hardware.isPC = true;
   hardware.ramSize = 32;
 
   wayland.enable = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   programs.steam.enable = true;
 
