@@ -7,20 +7,20 @@ let
   # Custom package that tracks with the latest release of Synapse.
   package = pkgs.matrix-synapse.overridePythonAttrs (old: rec {
     pname = "matrix-synapse";
-    version = "1.77.0rc2";
+    version = "1.77.0";
     format = "pyproject";
 
     src = pkgs.fetchFromGitHub {
       owner = "matrix-org";
       repo = "synapse";
       rev = "v${version}";
-      hash = "sha256-lrOKeYJxobpMziwg0bZIcvPxKYeGyKRPKgTmvma/p+E=";
+      hash = "sha256-//1BTiNH3n2eNjwOADb1OB7xp5QsH6arV5Pg3B7y3r0=";
     };
 
     cargoDeps = pkgs.rustPackages.rustPlatform.fetchCargoTarball {
       inherit src;
       name = "${pname}-${version}";
-      hash = "sha256-ftoBXOaqZ2Vl1/Tj/u5aAchzGcYPNq1hxqLTVS7YDM4=";
+      hash = "sha256-B9Z+7VtbbX/S01aaMFHgXH60sg8Lmwku2XPRnpMpwjo=";
     };
 
     postPatch = ''
@@ -28,15 +28,6 @@ let
       # https://github.com/matrix-org/synapse/blob/v1.69.0/pyproject.toml#L177-L185
       sed -i '/^setuptools_rust =/d' pyproject.toml
     '';
-
-    nativeBuildInputs = with pkgs; [
-      python3Packages.poetry-core
-      rustPackages.rustPlatform.cargoSetupHook
-      python3Packages.setuptools-rust
-    ] ++ (with rustPackages.rustPlatform.rust; [
-      cargo
-      rustc
-    ]);
 
     # propagatedBuildInputs = (filter (i: i.pname != "matrix-common") old.propagatedBuildInputs) ++ [
     #   (pkgs.python3Packages.matrix-common.overridePythonAttrs (
