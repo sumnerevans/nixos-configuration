@@ -42,6 +42,7 @@ in
   experimental = {
     # Enable support for the suppressing edit notifications.
     msc3958_supress_edit_notifs = true;
+    msc3952_intentional_mentions = true;
   };
 
   # Server
