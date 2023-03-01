@@ -115,9 +115,6 @@ in
           in
           listToAttrs (map websiteConfig websites);
       };
-
-      # Add metrics displays for each of the websites.
-      services.metrics.websites = websites;
     })
   ];
 }
