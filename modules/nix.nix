@@ -22,7 +22,10 @@ in
     # If automatic garbage collection is enabled, delete 30 days.
     (
       mkIf nixCfg.gc.automatic {
-        nix.gc.options = "--delete-older-than 30d";
+        nix.gc = {
+          randomizedDelaySec = "45min";
+          options = "--delete-older-than 30d";
+        };
       }
     )
 
