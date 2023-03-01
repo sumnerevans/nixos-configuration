@@ -93,7 +93,6 @@
   services.grafana.enable = true;
   services.isso.enable = true;
   services.logrotate.enable = true;
-  services.mineshspc.enable = true;
   services.syncthing.enable = true;
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;

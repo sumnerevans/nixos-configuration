@@ -14,7 +14,6 @@
     ./isso.nix
     ./journald.nix
     ./longview.nix
-    ./mineshspc.com.nix
     ./mumble.nix
     ./nginx.nix
     ./postgresql.nix
