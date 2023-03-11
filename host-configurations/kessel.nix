@@ -27,14 +27,6 @@
   ];
 
   ############
-  # Websites #
-  ############
-  services.nginx.enable = true;
-  services.nginx.websites = [
-    { hostname = "nevarro.space"; }
-  ];
-
-  ############
   # Services #
   ############
   services.grafana.enable = true;
