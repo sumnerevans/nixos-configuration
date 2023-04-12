@@ -2,7 +2,7 @@
   cfg = config.services.mautrix-slack;
   synapseCfg = config.services.matrix-synapse-custom;
 
-  mautrix-slack = pkgs.callPackage ../../../pkgs/mautrix-slack { };
+  mautrix-slack = pkgs.callPackage ../../../pkgs/mautrix-slack.nix { };
 
   mautrixSlackAppserviceConfig = {
     id = "slack";
