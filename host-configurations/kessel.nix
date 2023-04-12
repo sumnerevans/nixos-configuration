@@ -101,7 +101,7 @@
   # PosgreSQL
   services.postgresql.enable = true;
   services.postgresql.dataDir = "/mnt/postgresql-data/${config.services.postgresql.package.psqlSchema}";
-  services.postgresqlBackup.enable = true;
+  # services.postgresqlBackup.enable = true;
 
   # Quotesfilebot
   services.quotesfilebot = {
