@@ -2,13 +2,13 @@
 
 buildGoModule rec {
   pname = "mautrix-discord";
-  version = "unstable-2022-01-28";
+  version = "unstable-2022-04-12";
 
   src = fetchFromGitHub {
     owner = "mautrix";
     repo = "discord";
-    rev = "69268f8d927b11c40ca6784a880d6a6c3a6d59f2";
-    sha256 = "sha256-gHhEhtyLGaSnFOiFupI1otO+B+0FYrVvUD9yDks0Pgg=";
+    rev = "a7095b1bd45d54c57ac3b57104dd5933f9b91e19";
+    sha256 = "sha256-8BXQhDkynIL29O4hn7/G8ueiW1WO+sYoqtWXXYL9Aow=";
   };
 
   buildInputs = [ olm ];

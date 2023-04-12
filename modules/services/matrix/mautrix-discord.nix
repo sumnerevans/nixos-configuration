@@ -2,7 +2,7 @@
   cfg = config.services.mautrix-discord;
   synapseCfg = config.services.matrix-synapse-custom;
 
-  mautrix-discord = pkgs.callPackage ../../../pkgs/mautrix-discord { };
+  mautrix-discord = pkgs.callPackage ../../../pkgs/mautrix-discord.nix { };
 
   mautrixDiscordAppserviceConfig = {
     id = "discord";
