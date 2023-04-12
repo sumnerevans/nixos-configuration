@@ -10,7 +10,7 @@ mkIf cfg.enable {
   };
 
   services.nginx.virtualHosts = mkIf config.hardware.isServer {
-    ${cfg.domain} = {
+    ${cfg.settings.server.domain} = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {
