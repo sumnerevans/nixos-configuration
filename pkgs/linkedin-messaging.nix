@@ -15,7 +15,7 @@ buildPythonPackage rec {
   };
 
   nativeBuildInputs = [
-    python3.pkgs.poetry
+    python3.pkgs.poetry-core
   ];
 
   propagatedBuildInputs = [

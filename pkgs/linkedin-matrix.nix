@@ -15,7 +15,7 @@ buildPythonPackage rec {
   };
 
   nativeBuildInputs = [
-    poetry
+    poetry-core
   ];
 
   propagatedBuildInputs = [
