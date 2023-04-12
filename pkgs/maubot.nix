@@ -9,33 +9,37 @@
 }:
 python3.pkgs.buildPythonPackage rec {
   pname = "maubot";
-  version = "unstable-2022-11-17";
+  version = "unstable-2023-04-12";
 
   src = fetchFromGitHub {
     owner = "maubot";
     repo = pname;
-    rev = "a21b106c71e1bcf61f7e28e1eaeba3f2cb8281d2";
-    sha256 = "sha256-ewi54DtcK2a7JmDKfcbbLs4uQx6W0dZPf60kwvEigqk=";
+    rev = "184d6b8eedf4710fc3ded28039264ed997e6336c";
+    sha256 = "sha256-5DY9qFPXg+rF4Nczx0wd4uKckGWWETqlmtbNtiYQDn4=";
   };
 
   propagatedBuildInputs = with python3.pkgs; [
     aiohttp
-    (asyncpg.overridePythonAttrs (old: rec {
-      pname = "asyncpg";
-      version = "0.26.0";
-
-      src = fetchPypi {
-        inherit pname version;
-        sha256 = "sha256-d+aEok/uF7o+SHypgtAlntF7rhr2gAb0zyhLI7og6iw=";
-      };
-    }))
+    asyncpg
     attrs
     bcrypt
     click
     colorama
     CommonMark
     jinja2
-    mautrix
+    (mautrix.overridePythonAttrs (
+      old: rec {
+        pname = "mautrix";
+        version = "0.19.9";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "mautrix";
+          repo = "python";
+          rev = "refs/tags/v${version}";
+          hash = "sha256-GyviaWFPiT0ka0IUFU53DLPT8R8kRhTztvKTG9b7ads=";
+        };
+      }
+    ))
     packaging
     python-socks
     questionary
