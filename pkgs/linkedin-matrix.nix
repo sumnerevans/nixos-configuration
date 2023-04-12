@@ -4,19 +4,15 @@ let
 in
 buildPythonPackage rec {
   pname = "linkedin-matrix";
-  version = "0.5.4-p1";
+  version = "0.5.4-p2";
   format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "beeper";
     repo = "linkedin";
-    rev = "66ffb180272c2e17cc7b65840a9c8f9071680fd8";
-    sha256 = "sha256-f52jA155Mcmu9ktXRXYW2314p0k/7zIKuSBC5F2FbEI=";
+    rev = "63aac713f8ebd0ebec2d28d1f276be6ee0c7d8bb";
+    sha256 = "sha256-YXDtoXeVz6e8WhB8Zv9OFr6QOmVqef7UrxXDNTyejHI=";
   };
-
-  nativeBuildInputs = [
-    poetry-core
-  ];
 
   propagatedBuildInputs = [
     aiohttp

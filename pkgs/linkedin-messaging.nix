@@ -4,18 +4,18 @@ with python3.pkgs;
 
 buildPythonPackage rec {
   pname = "linkedin-messaging";
-  version = "0.5.3";
-  format = "pyproject";
+  version = "0.5.5";
+  format = "flit";
 
   src = fetchFromGitHub {
     owner = "sumnerevans";
     repo = "linkedin-messaging-api";
     rev = "v${version}";
-    sha256 = "sha256-Eb94hkSSgLPu6P4GM3N38loOjEgaULMiC3EcELDJBkc=";
+    sha256 = "sha256-yOxSXCsJWtxHfU16ney2/lZRPOhhN95/xesC0SgajUU=";
   };
 
   nativeBuildInputs = [
-    python3.pkgs.poetry-core
+    python3.pkgs.flit
   ];
 
   propagatedBuildInputs = [
