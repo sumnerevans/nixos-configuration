@@ -6,7 +6,6 @@
 in
 {
   imports = [
-    ./bluetooth.nix
     ./bootloader.nix
     ./firewall.nix
     ./laptop.nix
@@ -39,8 +38,10 @@ in
     (
       mkIf cfg.isPC {
         boot.loader.systemd-boot.enable = true;
-        hardware.bluetooth.enable = true;
         networking.networkmanager.enable = true;
+
+        hardware.bluetooth.enable = true;
+        services.blueman.enable = true;
 
         # TODO fix this
         networking.firewall.enable = false;
