@@ -15,23 +15,7 @@
       search = [ "sumnerevans.github.beta.tailscale.net" ];
     };
     environment.systemPackages = [ pkgs.tailscale ];
-
   }
-
-  # If NetworkManager is enabled, then also enable strong swan integration.
-  (
-    mkIf config.networking.networkmanager.enable {
-      networking.networkmanager.enableStrongSwan = true;
-
-      services.globalprotect = {
-        enable = true;
-        # if you need a Host Integrity Protection report
-        csdWrapper = "${pkgs.openconnect}/libexec/openconnect/hipreport.sh";
-      };
-
-      environment.systemPackages = [ pkgs.globalprotect-openconnect ];
-    }
-  )
 
   (
     mkIf (!config.networking.networkmanager.enable) {

@@ -70,7 +70,7 @@ in
         services.fwupd.enable = true;
 
         # Enable VirtualBox on GUI-enabled computers
-        virtualisation.virtualbox = mkIf (config.xorg.enable || config.wayland.enable) {
+        virtualisation.virtualbox = mkIf config.programs.sway.enable {
           host = {
             enable = true;
             enableExtensionPack = true;

@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  fonts = lib.mkIf (config.xorg.enable || config.wayland.enable) {
+  fonts = lib.mkIf config.programs.sway.enable {
     fonts = with pkgs; [
       font-awesome_4
       iosevka-bin

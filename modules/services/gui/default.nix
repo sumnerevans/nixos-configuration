@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }: with lib; {
   imports = [
     ./fonts.nix
-    ./i3wm.nix
     ./sway.nix
   ];
 
-  config = mkIf (config.xorg.enable || config.wayland.enable) {
+  config = mkIf config.programs.sway.enable {
     # Add some Gnome services to make things work.
     programs.dconf.enable = true;
     services.dbus.packages = with pkgs; [ dconf gcr ];

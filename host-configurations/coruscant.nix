@@ -4,7 +4,7 @@
   hardware.isPC = true;
   hardware.ramSize = 32;
 
-  wayland.enable = true;
+  programs.sway.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

@@ -7,7 +7,7 @@ in
   hardware.isPC = true;
   hardware.ramSize = 8;
   hardware.isLaptop = true;
-  wayland.enable = true;
+  programs.sway.enable = true;
 
   virtualisation.docker.enable = true;
 

@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./matrix
     ./gui
+    ./matrix
 
     ./acme.nix
     ./airsonic.nix

@@ -30,7 +30,7 @@
   # Set up networking.
   networking.interfaces.wlp1s0.useDHCP = true;
 
-  wayland.enable = true;
+  programs.sway.enable = true;
   programs.steam.enable = true;
 
   # Enable Docker.
