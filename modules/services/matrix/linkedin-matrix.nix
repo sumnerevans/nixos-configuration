@@ -130,7 +130,7 @@ in
 {
   options = {
     services.linkedin-matrix = {
-      enable = mkEnableOption "linkedin-matrix, a LinkedIn Messaging <-> Matrix bridge.";
+      enable = mkEnableOption "linkedin-matrix, a LinkedIn Messaging <-> Matrix bridge";
       useLocalSynapse = mkOption {
         type = types.bool;
         default = true;
