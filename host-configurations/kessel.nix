@@ -107,6 +107,13 @@
     passwordFile = "/etc/nixos/secrets/matrix/bots/standupbot";
   };
 
+  # MSC Link Bot
+  services.msclinkbot = {
+    enable = true;
+    homeserver = "https://matrix.nevarro.space";
+    passwordFile = "/etc/nixos/secrets/matrix/bots/msclinkbot";
+  };
+
   # Synapse
   services.matrix-synapse-custom = {
     enable = true;

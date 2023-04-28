@@ -8,6 +8,7 @@
     ./mautrix-discord.nix
     ./mautrix-slack.nix
     ./mjolnir.nix
+    ./msclinkbot.nix
     ./quotesfilebot.nix
     ./standupbot.nix
     ./synapse
