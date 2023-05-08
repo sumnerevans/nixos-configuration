@@ -25,7 +25,7 @@ lib.mkIf syncthingCfg.enable {
     path = config.services.syncthing.dataDir;
   };
 
-  # Add a backup service for the actual config.
+  # Add a backup service for the actual data.
   services.backup.backups.syncthing-data = {
     path = "/mnt/syncthing-data";
   };
