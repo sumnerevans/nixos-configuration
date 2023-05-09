@@ -1,7 +1,7 @@
 exclude: "secrets/.*"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace
         exclude_types: [markdown]
@@ -10,6 +10,6 @@ repos:
       - id: check-added-large-files
 
   - repo: https://github.com/nix-community/nixpkgs-fmt/
-    rev: f4c3f141c2821589198bffe07f2f45681540504f
+    rev: v1.3.0
     hooks:
       - id: nixpkgs-fmt
