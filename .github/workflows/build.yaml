@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         host:
-          - kessel.nevarro.space
           - morak.sumnerevans.com
 
     steps:
@@ -35,7 +34,6 @@ jobs:
       fail-fast: false
       matrix:
         host:
-          - kessel.nevarro.space
           - morak.sumnerevans.com
 
     steps:
@@ -57,7 +55,6 @@ jobs:
       fail-fast: false
       matrix:
         host:
-          - kessel.nevarro.space
           - morak.sumnerevans.com
 
     steps:

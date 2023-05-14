@@ -1,7 +1,7 @@
 Stop all matrix services:
 
 ```
-systemctl stop mjolnir pantalaimon-mjolnir quotesfilebot standupbot matrix-synapse.target heisenbridge linkedin-matrix
+systemctl stop mjolnir pantalaimon-mjolnir quotesfilebot standupbot matrix-synapse.target heisenbridge linkedin-matrix mautrix-discord mautrix-slack
 ```
 
 Run the postgres backup service:

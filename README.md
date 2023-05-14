@@ -34,15 +34,6 @@ https://github.com/sumnerevans/home-manager-config/
     - [vaultwarden](https://github.com/dani-garcia/vaultwarden)
     - [Xandikos](https://www.xandikos.org/)
 
-  - **kessel**: Hetzner Cloud VPS (CCX12, primary Synapse infrastructure)
-
-    - nevarro.space website
-    - [quotesfilebot](https://gitlab.com/jrrobel/quotes-file-bot)
-    - [standupbot](https://gitlab.com/beeper/standupbot)
-    - [Synapse](https://github.com/matrix-org/synapse) (nevarro.space)
-      - [Heisenbridge](https://github.com/hifi/heisenbridge)
-      - [LinkedIn Matrix](https://gitlab.com/beeper/linkedin)
-
 ## Installation Instructions
 
 ```
