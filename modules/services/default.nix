@@ -2,7 +2,6 @@
 {
   imports = [
     ./gui
-    ./matrix
 
     ./acme.nix
     ./airsonic.nix

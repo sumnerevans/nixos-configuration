@@ -19,7 +19,6 @@
   fileSystems = {
     "/" = { device = "/dev/disk/by-uuid/78831675-9f80-462b-b9fc-75a0efa368e5"; fsType = "ext4"; };
     "/mnt/syncthing-data" = { device = "/dev/disk/by-uuid/930c8bdb-7b71-4bdf-b478-6e85218cad37"; fsType = "ext4"; };
-    "/mnt/postgresql-data" = { device = "/dev/disk/by-uuid/3d8eb9ca-e8ea-4231-b2a6-4fc5367ccb8a"; fsType = "ext4"; };
     "/mnt/syncthing-pictures-tmp" = { device = "/dev/disk/by-uuid/bfc8d39f-31e0-4261-9447-91bc7e39bb2f"; fsType = "ext4"; };
   };
 
@@ -122,11 +121,6 @@
   # Mumble
   services.murmur.enable = true;
 
-  # PosgreSQL
-  services.postgresql.enable = true;
-  services.postgresql.dataDir = "/mnt/postgresql-data/${config.services.postgresql.package.psqlSchema}";
-  services.postgresqlBackup.enable = true;
-
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
@@ -134,18 +128,5 @@
   # Add a backup service for the actual config.
   services.backup.backups.syncthing-pictures-tmp-data = {
     path = "/mnt/syncthing-pictures-tmp";
-  };
-
-  # Synapse
-  services.matrix-synapse-custom.enable = true;
-  services.matrix-synapse-custom.registrationSharedSecretFile = ../secrets/matrix/registration-shared-secret/morak;
-  services.matrix-synapse-custom.extraConfig = {
-    database.allow_unsafe_locale = true;
-  };
-  services.cleanup-synapse.environmentFile = "/etc/nixos/secrets/matrix/cleanup-synapse/morak";
-  services.matrix-vacation-responder = {
-    enable = true;
-    username = "@sumner:sumnerevans.com";
-    homeserver = "https://matrix.sumnerevans.com";
   };
 }
