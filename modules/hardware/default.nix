@@ -69,14 +69,10 @@ in
         # Enable firmware updating
         services.fwupd.enable = true;
 
-        # Enable VirtualBox on GUI-enabled computers
-        virtualisation.virtualbox = mkIf config.programs.sway.enable {
-          host = {
-            enable = true;
-            enableExtensionPack = true;
-          };
-        };
-        users.extraGroups.vboxusers.members = [ "sumner" ];
+        # Enable libvirtd and virt-manager on GUI-enabled computers
+        virtualisation.libvirtd.enable = true;
+        environment.systemPackages = [ pkgs.virt-manager ];
+        users.users.sumner.extraGroups = [ "libvirtd" ];
       }
     )
 
