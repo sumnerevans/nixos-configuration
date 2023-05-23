@@ -6,13 +6,39 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }@inputs: {
-    nixosConfigurations.tatooine = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        ./host-configurations/tatooine.nix
-      ];
+    nixosConfigurations = {
+      tatooine = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          ./host-configurations/tatooine.nix
+        ];
+      };
+      coruscant = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          ./host-configurations/coruscant.nix
+        ];
+      };
+      scarif = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          ./host-configurations/scarif.nix
+        ];
+      };
+      morak = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          ./host-configurations/morak.nix
+        ];
+      };
     };
   } // (flake-utils.lib.eachDefaultSystem
     (system:
