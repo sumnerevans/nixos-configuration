@@ -3,7 +3,8 @@ let
   cfg = config.services.gonic;
 in
 {
-  options.services.gonic = {
+  # TODO convert this to just use the upstream Gonic module
+  options.services.gonic2 = {
     enable = mkEnableOption "gonic, a Subsonic compatible music streaming server";
     home = mkOption {
       type = types.path;

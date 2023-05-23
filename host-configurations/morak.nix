@@ -82,7 +82,7 @@
   services.xandikos.enable = true;
 
   # Gonic
-  services.gonic = {
+  services.gonic2 = {
     enable = true;
     scanInterval = 1;
     virtualHost = "music.sumnerevans.com";
