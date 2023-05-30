@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: with lib;
 let
-  cfg = config.services.gonic;
+  cfg = config.services.gonic2;
 in
 {
   # TODO convert this to just use the upstream Gonic module
