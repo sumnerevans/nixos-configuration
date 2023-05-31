@@ -1,4 +1,15 @@
-{ config, lib, pkgs, ... }: with lib; {
+{ config, lib, pkgs, modulesPath, ... }: with lib; {
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+
+  boot = {
+    initrd = {
+      availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+      kernelModules = [ ];
+    };
+    kernelModules = [ ];
+    extraModulePackages = [ ];
+  };
+
   hardware.isServer = true;
 
   # Set the hostname
