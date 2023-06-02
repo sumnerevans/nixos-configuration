@@ -55,6 +55,6 @@ in
     };
 
     # Add a backup service.
-    services.backup.backups.isso.path = "/var/lib/isso";
+    services.backup.backups.isso.path = "/var/lib/private/isso";
   };
 }
