@@ -73,5 +73,23 @@
         "/".proxyPass = "http://localhost:8007/";
       };
     };
+    virtualHosts."hungryserv.tatooine.sumnerevans.com" = {
+      addSSL = true;
+      enableACME = true;
+
+      extraConfig = ''
+        error_page 502 /50x.html;
+      '';
+
+      locations = {
+        "/50x.html".root = "/usr/share/nginx/html";
+
+        # Hungryserv
+        "/" = {
+          proxyPass = "http://localhost:8009/";
+          proxyWebsockets = true;
+        };
+      };
+    };
   };
 }
