@@ -2,7 +2,7 @@
   bootloaderCfg = config.boot.loader;
 in
 {
-  # boot.tmp.cleanOnBoot = true;
+  boot.tmp.useTmpfs = true;
   boot.loader.grub.devices = [ "/dev/sda" ];
 
   boot.loader.grub.configurationLimit = 25;
