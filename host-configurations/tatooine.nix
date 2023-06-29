@@ -58,6 +58,7 @@
 
   services.nginx = {
     enable = true;
+    proxyTimeout = "1h";
     virtualHosts."matrix.tatooine.sumnerevans.com" = {
       addSSL = true;
       enableACME = true;
@@ -70,7 +71,10 @@
         "/50x.html".root = "/usr/share/nginx/html";
 
         # Roomserv
-        "/".proxyPass = "http://localhost:8007/";
+        "/" = {
+          recommendedProxySettings = true;
+          proxyPass = "http://localhost:8007";
+        };
       };
     };
     virtualHosts."hungryserv.tatooine.sumnerevans.com" = {
@@ -86,8 +90,9 @@
 
         # Hungryserv
         "/" = {
-          proxyPass = "http://localhost:8009/";
+          recommendedProxySettings = true;
           proxyWebsockets = true;
+          proxyPass = "http://localhost:8009";
         };
       };
     };
