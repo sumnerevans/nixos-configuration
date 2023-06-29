@@ -39,6 +39,9 @@
     { from = 8008; to = 8015; }
   ];
 
+  # Enable fail2ban
+  services.fail2ban.enable = true;
+
   ############
   # Websites #
   ############
