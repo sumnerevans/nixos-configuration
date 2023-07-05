@@ -12,11 +12,9 @@
     ./healthcheck.nix
     ./isso.nix
     ./journald.nix
-    ./longview.nix
     ./mumble.nix
     ./nginx.nix
     ./postgresql.nix
-    ./pr-tracker.nix
     ./restic.nix
     ./sshd.nix
     ./syncthing.nix
