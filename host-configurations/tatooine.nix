@@ -70,28 +70,9 @@
       locations = {
         "/50x.html".root = "/usr/share/nginx/html";
 
-        # Roomserv
-        "/" = {
-          recommendedProxySettings = true;
-          proxyPass = "http://localhost:8007";
-        };
-      };
-    };
-    virtualHosts."hungryserv.tatooine.sumnerevans.com" = {
-      addSSL = true;
-      enableACME = true;
-
-      extraConfig = ''
-        error_page 502 /50x.html;
-      '';
-
-      locations = {
-        "/50x.html".root = "/usr/share/nginx/html";
-
         # Hungryserv
         "/" = {
           recommendedProxySettings = true;
-          proxyWebsockets = true;
           proxyPass = "http://localhost:8009";
         };
       };
