@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: with lib; mkMerge [
   (
     mkIf config.services.postgresql.enable {
+      services.postgresql.package = pkgs.postgresql_15;
       services.postgresql.settings = {
         max_connections = 500;
         shared_buffers = "2GB";
