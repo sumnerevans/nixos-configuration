@@ -3,9 +3,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    webfortune = {
+      url = "github:sumnerevans/webfortune";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }@inputs: {
+  outputs = inputs@{ self, nixpkgs, flake-utils, webfortune }: {
     nixosConfigurations = {
       tatooine = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

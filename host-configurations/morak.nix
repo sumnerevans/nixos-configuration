@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }: with lib; {
+{ config, lib, pkgs, modulesPath, inputs, ... }: with lib; let
+  quotesfile = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
+    hash = "sha256-79oQM/7QyVRDXV+BBz6qfhp7n6dakaNgJAMvnbqGPx0=";
+  };
+in
+{
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   boot = {
@@ -123,6 +129,14 @@
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
+
+  # Webfortune
+  services.webfortune = {
+    enable = true;
+    inherit quotesfile;
+    sourceUrl = "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
+    virtualHost = "fortune.sumnerevans.com";
+  };
 
   # Add a backup service for the actual config.
   services.backup.backups.syncthing-pictures-tmp-data = {

@@ -18,6 +18,7 @@
     ./restic.nix
     ./sshd.nix
     ./syncthing.nix
+    ./webfortune.nix
     ./xandikos.nix
   ];
 
