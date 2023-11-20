@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   fonts = lib.mkIf config.programs.sway.enable {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       font-awesome_4
       iosevka-bin
       noto-fonts
