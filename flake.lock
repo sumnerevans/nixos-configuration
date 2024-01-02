@@ -57,11 +57,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1703013332,
-        "narHash": "sha256-+tFNwMvlXLbJZXiMHqYq77z/RfmpfpiI3yjL6o/Zo9M=",
+        "lastModified": 1703961334,
+        "narHash": "sha256-M1mV/Cq+pgjk0rt6VxoyyD+O8cOUiai8t9Q6Yyq4noY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "54aac082a4d9bb5bbc5c4e899603abfb76a3f6d6",
+        "rev": "b0d36bd0a420ecee3bc916c91886caca87c894e9",
         "type": "github"
       },
       "original": {
@@ -103,15 +103,16 @@
         "xc": "xc"
       },
       "locked": {
-        "lastModified": 1700556837,
-        "narHash": "sha256-795qIrNeHC0Z0oD+FIAxJvUrKT94LTX8m4Ufoq93Y20=",
+        "lastModified": 1703263828,
+        "narHash": "sha256-MkSGQZo2Zv6aCVANh2ETXoCXETkp+xk8jWAW4Wj+y2s=",
         "owner": "a-h",
         "repo": "templ",
-        "rev": "802881f56f69c01a8bf0bd75ec30c0c4b53b5567",
+        "rev": "92557cd1c50153da439fce00944519dd6038f9f4",
         "type": "github"
       },
       "original": {
         "owner": "a-h",
+        "ref": "v0.2.501",
         "repo": "templ",
         "type": "github"
       }
@@ -127,11 +128,11 @@
         "templ": "templ"
       },
       "locked": {
-        "lastModified": 1703283812,
-        "narHash": "sha256-GpjchLrmKy6C6rUe32UhvpHkofZMDciCMOimq2CIyTI=",
+        "lastModified": 1704079224,
+        "narHash": "sha256-VktsfWrPzjgcjkDa3/0qjsxZNhXHOgTK9PbfFUNeLws=",
         "owner": "sumnerevans",
         "repo": "webfortune",
-        "rev": "b7e00d64db158713b829556f69b59c88887b10f5",
+        "rev": "7ae9c01d0a22850008c672c69b77072554b51a9a",
         "type": "github"
       },
       "original": {
