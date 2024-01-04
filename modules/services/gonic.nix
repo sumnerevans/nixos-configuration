@@ -1,11 +1,11 @@
-{ config, lib, pkgs, ... }: with lib;
-let
-  cfg = config.services.gonic2;
-in
-{
+{ config, lib, pkgs, ... }:
+with lib;
+let cfg = config.services.gonic2;
+in {
   # TODO convert this to just use the upstream Gonic module
   options.services.gonic2 = {
-    enable = mkEnableOption "gonic, a Subsonic compatible music streaming server";
+    enable =
+      mkEnableOption "gonic, a Subsonic compatible music streaming server";
     home = mkOption {
       type = types.path;
       description = "The root directory for Gonic data.";
@@ -50,7 +50,8 @@ in
     };
     scanInterval = mkOption {
       type = types.nullOr types.int;
-      description = "interval (in minutes) to check for new music (automatic scanning disabled if null)";
+      description =
+        "interval (in minutes) to check for new music (automatic scanning disabled if null)";
       default = null;
     };
     jukeboxEnabled = mkOption {
@@ -60,12 +61,45 @@ in
     };
     genreSplit = mkOption {
       type = types.nullOr types.str;
-      description = "a string or character to split genre tags on for multi-genre support";
+      description =
+        "a string or character to split genre tags on for multi-genre support";
       default = null;
     };
   };
 
   config = mkIf cfg.enable {
+    nixpkgs.overlays = [
+      (final: prev: {
+        gonic = prev.gonic.overrideAttrs (old: rec {
+          pname = "gonic";
+          version = "0.16.2";
+          src = pkgs.fetchFromGitHub {
+            owner = "sentriz";
+            repo = pname;
+            rev = "v${version}";
+            hash = "sha256-0KmE1tjWMeudNM3ARK5TZGNzjmC6luqYX/7ESvv7xAY=";
+          };
+
+          vendorHash = "sha256-0M1vlTt/4OKjn9Ocub+9HpeRcXt6Wf8aGa/ZqCdHh5M=";
+
+          # TODO(Profpatsch): write a test for transcoding support,
+          # since it is prone to break
+          postPatch = ''
+            substituteInPlace \
+              transcode/transcode.go \
+              --replace \
+                '`ffmpeg' \
+                '`${lib.getBin pkgs.ffmpeg}'
+            substituteInPlace \
+              jukebox/jukebox.go \
+              --replace \
+                '"mpv"' \
+                '"${lib.getBin pkgs.mpv}"'
+          '';
+        });
+      })
+    ];
+
     systemd.services.gonic = {
       description = "Gonic service";
       after = [ "network.target" ];
