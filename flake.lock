@@ -57,11 +57,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1703961334,
-        "narHash": "sha256-M1mV/Cq+pgjk0rt6VxoyyD+O8cOUiai8t9Q6Yyq4noY=",
+        "lastModified": 1704538339,
+        "narHash": "sha256-1734d3mQuux9ySvwf6axRWZRBhtcZA9Q8eftD6EZg6U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b0d36bd0a420ecee3bc916c91886caca87c894e9",
+        "rev": "46ae0210ce163b3cba6c7da08840c1d63de9c701",
         "type": "github"
       },
       "original": {
@@ -103,16 +103,16 @@
         "xc": "xc"
       },
       "locked": {
-        "lastModified": 1703263828,
-        "narHash": "sha256-MkSGQZo2Zv6aCVANh2ETXoCXETkp+xk8jWAW4Wj+y2s=",
+        "lastModified": 1704197388,
+        "narHash": "sha256-LWvwtAX1KBK33FIyY6alkG0RBXL6Ce4fR0cklQfwaRk=",
         "owner": "a-h",
         "repo": "templ",
-        "rev": "92557cd1c50153da439fce00944519dd6038f9f4",
+        "rev": "5579e47c5f2927750e2e82dcb6bbc9f67c597720",
         "type": "github"
       },
       "original": {
         "owner": "a-h",
-        "ref": "v0.2.501",
+        "ref": "v0.2.513",
         "repo": "templ",
         "type": "github"
       }
@@ -128,11 +128,11 @@
         "templ": "templ"
       },
       "locked": {
-        "lastModified": 1704079224,
-        "narHash": "sha256-VktsfWrPzjgcjkDa3/0qjsxZNhXHOgTK9PbfFUNeLws=",
+        "lastModified": 1704817794,
+        "narHash": "sha256-2miz4Wa4otIec1cpIhEScu4i7EIxRbJjj+ZBK5stYSQ=",
         "owner": "sumnerevans",
         "repo": "webfortune",
-        "rev": "7ae9c01d0a22850008c672c69b77072554b51a9a",
+        "rev": "9439ce02a1fc127861e458ce6ade8a853778e3e3",
         "type": "github"
       },
       "original": {
@@ -151,11 +151,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1696495449,
-        "narHash": "sha256-dthZiJ2FX/eIC0l1mdfefJZXDTVLfwp7L7Arq5rsCWA=",
+        "lastModified": 1703164129,
+        "narHash": "sha256-kCcCqqwvjN07H8FPG4tXsRVRcMqT8dUNt9pwW1kKAe8=",
         "owner": "joerdav",
         "repo": "xc",
-        "rev": "c8baab14d679fb276f11c576607010283be21220",
+        "rev": "0655cccfcf036556aeaddfb8f45dc7e8dd1b3680",
         "type": "github"
       },
       "original": {
