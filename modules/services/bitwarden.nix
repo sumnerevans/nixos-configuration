@@ -21,15 +21,9 @@ lib.mkIf bitwardenCfg.enable {
   services.nginx.virtualHosts."${serverName}" = {
     forceSSL = true;
     enableACME = true;
-    locations = {
-      "/".proxyPass = "http://127.0.0.1:8222";
-      "/notifications/hub".proxyPass = "http://127.0.0.1:3012";
-      "/notifications/hub/negotiate".proxyPass = "http://127.0.0.1:8222";
-    };
+    locations = { "/".proxyPass = "http://127.0.0.1:8222"; };
   };
 
   # Add a backup service.
-  services.backup.backups.bitwarden = {
-    path = "/var/lib/bitwarden_rs";
-  };
+  services.backup.backups.bitwarden = { path = "/var/lib/bitwarden_rs"; };
 }

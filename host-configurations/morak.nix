@@ -1,6 +1,8 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }: with lib; let
+{ pkgs, modulesPath, ... }:
+let
   quotesfile = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
+    url =
+      "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
     hash = "sha256-vWv4XbMcBU9igwcVQLqOylXCH/GAHiTiwDIvr6xWCNs=";
   };
 in
@@ -9,7 +11,8 @@ in
 
   boot = {
     initrd = {
-      availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+      availableKernelModules =
+        [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
       kernelModules = [ ];
     };
     kernelModules = [ ];
@@ -29,21 +32,32 @@ in
 
   # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
   # memory, it won't crash the box.
-  swapDevices = [
-    { device = "/var/swapfile"; size = 4096; }
-  ];
+  swapDevices = [{
+    device = "/var/swapfile";
+    size = 4096;
+  }];
 
   fileSystems = {
-    "/" = { device = "/dev/disk/by-uuid/78831675-9f80-462b-b9fc-75a0efa368e5"; fsType = "ext4"; };
-    "/mnt/syncthing-data" = { device = "/dev/disk/by-uuid/930c8bdb-7b71-4bdf-b478-6e85218cad37"; fsType = "ext4"; };
-    "/mnt/syncthing-pictures-tmp" = { device = "/dev/disk/by-uuid/bfc8d39f-31e0-4261-9447-91bc7e39bb2f"; fsType = "ext4"; };
+    "/" = {
+      device = "/dev/disk/by-uuid/78831675-9f80-462b-b9fc-75a0efa368e5";
+      fsType = "ext4";
+    };
+    "/mnt/syncthing-data" = {
+      device = "/dev/disk/by-uuid/930c8bdb-7b71-4bdf-b478-6e85218cad37";
+      fsType = "ext4";
+    };
+    "/mnt/syncthing-pictures-tmp" = {
+      device = "/dev/disk/by-uuid/bfc8d39f-31e0-4261-9447-91bc7e39bb2f";
+      fsType = "ext4";
+    };
   };
 
   # Allow temporary redirects directly to the reverse proxy.
   networking.firewall.allowedTCPPorts = [ 8222 8080 ];
-  networking.firewall.allowedTCPPortRanges = [
-    { from = 8008; to = 8015; }
-  ];
+  networking.firewall.allowedTCPPortRanges = [{
+    from = 8008;
+    to = 8015;
+  }];
 
   # Enable fail2ban
   services.fail2ban.enable = true;
@@ -134,7 +148,8 @@ in
   services.webfortune = {
     enable = true;
     inherit quotesfile;
-    sourceUrl = "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
+    sourceUrl =
+      "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
     virtualHost = "fortune.sumnerevans.com";
   };
 
