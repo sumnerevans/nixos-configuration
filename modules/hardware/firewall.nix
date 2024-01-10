@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: with lib;
+{ config, lib, ... }:
+with lib;
 mkIf config.networking.firewall.enable {
   networking.firewall.allowPing = true;
 }

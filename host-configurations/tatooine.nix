@@ -1,7 +1,8 @@
-{ modulesPath, pkgs, ... }: {
+{ modulesPath, ... }: {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
@@ -12,16 +13,6 @@
   hardware.ramSize = 8;
 
   networking.interfaces.eth0.useDHCP = true;
-
-  # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
-  # memory, it won't crash the box.
-  swapDevices = [
-    { device = "/var/swapfile"; size = 4096; }
-  ];
-
-  fileSystems = {
-    "/" = { device = "/dev/disk/by-uuid/b477c98a-376a-4dd8-a46c-03e3187188d8"; fsType = "ext4"; };
-  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -45,12 +36,10 @@
       {
         job_name = "hungryserv-dev";
         scrape_interval = "15s";
-        static_configs = [
-          {
-            targets = [ "0.0.0.0:8001" ];
-            labels = { instance = "hungryserv-dev"; };
-          }
-        ];
+        static_configs = [{
+          targets = [ "0.0.0.0:8001" ];
+          labels = { instance = "hungryserv-dev"; };
+        }];
       }
     ];
   };
@@ -78,4 +67,18 @@
       };
     };
   };
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/b477c98a-376a-4dd8-a46c-03e3187188d8";
+      fsType = "ext4";
+    };
+  };
+
+  # Enable a lot of swap since we have enough disk.
+  swapDevices = [{
+    device = "/var/swapfile";
+    size = 4096;
+  }];
+
 }
