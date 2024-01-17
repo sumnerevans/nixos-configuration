@@ -15,10 +15,5 @@ in
       fsType = "tmpfs";
       options = [ "nosuid" "nodev" "size=${toString cfg.ramSize}G" ];
     };
-
-    "/home/sumner/.cache" = {
-      fsType = "tmpfs";
-      options = [ "nosuid" "nodev" "size=${toString cfg.ramSize}G" ];
-    };
   };
 }
