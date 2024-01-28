@@ -44,6 +44,14 @@
           ./host-configurations/morak.nix
         ];
       };
+      mustafar = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          ./host-configurations/mustafar.nix
+        ];
+      };
     };
   } // (flake-utils.lib.eachDefaultSystem
     (system:
