@@ -14,22 +14,17 @@ https://github.com/sumnerevans/home-manager-config/
 - **Personal Computers**
 
   - **coruscant**: custom desktop
-  - **jedha**: ThinkPad T580
+  - **scarif**: ThinkPad T14s AMD Gen 3
   - **mustafar**: Samsung Galaxy Chromebook
-  - **tatooine**: Hetzner Cloud VPS dev box (CPX41) that I use
-    [eternalterminal](https://eternalterminal.dev/) to connect to a tmux
-    session.
 
 - **Servers**
 
   - **morak**: Hetzner Cloud VPS (CPX11)
 
     - Personal Websites
-    - [Airsonic](https://airsonic.github.io)
+    - [Gonic](https://github.com/sentriz/gonic/)
     - [Isso](https://posativ.org/isso/)
-    - [Matrix Vacation Responder](https://gitlab.com/beeper/matrix-vacation-responder)
     - [Murmur for Mumble](https://www.mumble.info/)
-    - [Synapse](https://github.com/matrix-org/synapse) (sumnerevans.com)
     - [Syncthing](https://syncthing.net)
     - [vaultwarden](https://github.com/dani-garcia/vaultwarden)
     - [Xandikos](https://www.xandikos.org/)
