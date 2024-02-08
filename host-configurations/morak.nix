@@ -67,8 +67,6 @@ in
   ############
   services.nginx.enable = true;
   services.nginx.websites = [
-    { hostname = "the-evans.family"; }
-    { hostname = "qs.sumnerevans.com"; }
     {
       # sumnerevans.com
       hostname = "sumnerevans.com";
