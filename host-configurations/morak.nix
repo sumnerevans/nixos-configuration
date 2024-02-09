@@ -62,42 +62,13 @@ in {
   services.fail2ban.enable = true;
 
   ############
-  # Websites #
-  ############
-  services.nginx.enable = true;
-  services.nginx.websites = [{
-    # sumnerevans.com
-    hostname = "sumnerevans.com";
-    extraLocations = {
-      "/teaching/csci400-s19" = {
-        root = "/var/www";
-        priority = 0;
-        extraConfig = ''
-          access_log /var/log/nginx/sumnerevans.com.access.log;
-          autoindex on;
-        '';
-      };
-    };
-    excludeTerms = [
-      "/.well-known/"
-      "/dark-theme.min.js"
-      "/favicon.ico"
-      "/js/isso.min.js"
-      "/profile.jpg"
-      "/robots.txt"
-      "/style.css"
-      "/teaching/csci564-s21/_static/"
-      "/teaching/csci400-s19/_static/"
-    ];
-  }];
-
-  ############
   # Services #
   ############
   services.airsonic.enable = true;
   services.grafana.enable = true;
   services.isso.enable = true;
   services.logrotate.enable = true;
+  services.nginx.enable = true;
   services.syncthing.enable = true;
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;
