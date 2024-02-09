@@ -5,8 +5,7 @@ let
       "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
     hash = "sha256-vWv4XbMcBU9igwcVQLqOylXCH/GAHiTiwDIvr6xWCNs=";
   };
-in
-{
+in {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   boot = {
@@ -66,41 +65,39 @@ in
   # Websites #
   ############
   services.nginx.enable = true;
-  services.nginx.websites = [
-    {
-      # sumnerevans.com
-      hostname = "sumnerevans.com";
-      extraLocations = {
-        "/teaching/csci564-s21" = {
-          root = "/var/www";
-          priority = 0;
-          extraConfig = ''
-            access_log /var/log/nginx/sumnerevans.com.access.log;
-            autoindex on;
-          '';
-        };
-        "/teaching/csci400-s19" = {
-          root = "/var/www";
-          priority = 0;
-          extraConfig = ''
-            access_log /var/log/nginx/sumnerevans.com.access.log;
-            autoindex on;
-          '';
-        };
+  services.nginx.websites = [{
+    # sumnerevans.com
+    hostname = "sumnerevans.com";
+    extraLocations = {
+      "/teaching/csci564-s21" = {
+        root = "/var/www";
+        priority = 0;
+        extraConfig = ''
+          access_log /var/log/nginx/sumnerevans.com.access.log;
+          autoindex on;
+        '';
       };
-      excludeTerms = [
-        "/.well-known/"
-        "/dark-theme.min.js"
-        "/favicon.ico"
-        "/js/isso.min.js"
-        "/profile.jpg"
-        "/robots.txt"
-        "/style.css"
-        "/teaching/csci564-s21/_static/"
-        "/teaching/csci400-s19/_static/"
-      ];
-    }
-  ];
+      "/teaching/csci400-s19" = {
+        root = "/var/www";
+        priority = 0;
+        extraConfig = ''
+          access_log /var/log/nginx/sumnerevans.com.access.log;
+          autoindex on;
+        '';
+      };
+    };
+    excludeTerms = [
+      "/.well-known/"
+      "/dark-theme.min.js"
+      "/favicon.ico"
+      "/js/isso.min.js"
+      "/profile.jpg"
+      "/robots.txt"
+      "/style.css"
+      "/teaching/csci564-s21/_static/"
+      "/teaching/csci400-s19/_static/"
+    ];
+  }];
 
   ############
   # Services #

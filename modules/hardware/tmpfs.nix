@@ -1,7 +1,7 @@
-{ config, lib, ... }: with lib; let
-  cfg = config.hardware;
-in
-{
+{ config, lib, ... }:
+with lib;
+let cfg = config.hardware;
+in {
   options = {
     hardware.ramSize = mkOption {
       type = types.int;

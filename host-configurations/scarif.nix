@@ -6,7 +6,8 @@
   hardware.isPC = true;
   hardware.ramSize = 32;
   hardware.isLaptop = true;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   services.thinkfan.enable = true;
 
@@ -14,7 +15,8 @@
   boot = {
     loader.systemd-boot.enable = true;
     initrd = {
-      availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
+      availableKernelModules =
+        [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
       kernelModules = [ ];
     };
     kernelModules = [ "kvm-amd" ];

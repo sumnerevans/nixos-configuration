@@ -1,9 +1,6 @@
-{ config, lib, ... }: with lib; let
-  cfg = config.hardware;
-in
-{
+{ lib, ... }: {
   options = {
-    hardware.isLaptop = mkEnableOption "laptop-only configurations";
+    hardware.isLaptop = lib.mkEnableOption "laptop-only configurations";
   };
 
   config = {

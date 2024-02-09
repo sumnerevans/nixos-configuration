@@ -3,11 +3,9 @@ let
   certs = config.security.acme.certs;
   serverName = "voip.nevarro.space";
   certDirectory = "${certs.${serverName}.directory}";
-  port = config.services.murmur.port;
 
   murmurCfg = config.services.murmur;
-in
-lib.mkIf murmurCfg.enable {
+in lib.mkIf murmurCfg.enable {
   services.murmur = {
     registerHostname = serverName;
     registerName = "Nevarro";
@@ -44,7 +42,5 @@ lib.mkIf murmurCfg.enable {
   users.groups.murmur-cert.members = [ "murmur" "nginx" ];
 
   # Add a backup service.
-  services.backup.backups.murmur = {
-    path = config.users.users.murmur.home;
-  };
+  services.backup.backups.murmur = { path = config.users.users.murmur.home; };
 }

@@ -2,8 +2,7 @@
 let
   serverName = "bitwarden.${config.networking.domain}";
   bitwardenCfg = config.services.vaultwarden;
-in
-lib.mkIf bitwardenCfg.enable {
+in lib.mkIf bitwardenCfg.enable {
   services.vaultwarden = {
     config = {
       domain = "https://${serverName}";

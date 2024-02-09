@@ -1,8 +1,6 @@
-{ config, lib, pkgs, ... }: with lib; {
-  imports = [
-    ./fonts.nix
-    ./sway.nix
-  ];
+{ config, lib, pkgs, ... }:
+with lib; {
+  imports = [ ./fonts.nix ./sway.nix ];
 
   config = mkIf config.programs.sway.enable {
     # Add some Gnome services to make things work.

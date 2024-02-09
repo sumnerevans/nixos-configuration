@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: with lib;
+{ config, lib, pkgs, ... }:
+with lib;
 let
   healthcheckCfg = config.services.healthcheck;
   threshold = 97;
@@ -10,30 +11,34 @@ let
       --retry 2 \
       --max-time 5 \
       --ipv4 \
-      https://hc-ping.com/${healthcheckCfg.checkId}${optionalString fail "/fail"}
+      https://hc-ping.com/${healthcheckCfg.checkId}${
+        optionalString fail "/fail"
+      }
   '';
 
-  diskCheckScript = with pkgs; disk: writeShellScriptBin "diskcheck" ''
-    set -xe
-    CURRENT=$(${coreutils}/bin/df ${disk} | ${gnugrep}/bin/grep ${disk} | ${gawk}/bin/awk '{ print $5}' | ${gnused}/bin/sed 's/%//g')
+  diskCheckScript = with pkgs;
+    disk:
+    writeShellScriptBin "diskcheck" ''
+      set -xe
+      CURRENT=$(${coreutils}/bin/df ${disk} | ${gnugrep}/bin/grep ${disk} | ${gawk}/bin/awk '{ print $5}' | ${gnused}/bin/sed 's/%//g')
 
-    if [ "$CURRENT" -gt "${toString threshold}" ] ; then
-      echo "Used space on ${disk} is over ${toString threshold}%"
-      ${healthcheckCurl true}
-      exit 1
-    fi
-  '';
+      if [ "$CURRENT" -gt "${toString threshold}" ] ; then
+        echo "Used space on ${disk} is over ${toString threshold}%"
+        ${healthcheckCurl true}
+        exit 1
+      fi
+    '';
 
   healthcheckScript = pkgs.writeShellScriptBin "healthcheck" ''
     set -xe
 
-    ${concatMapStringsSep "\n" (disk: "${diskCheckScript disk}/bin/diskcheck") healthcheckCfg.disks}
+    ${concatMapStringsSep "\n" (disk: "${diskCheckScript disk}/bin/diskcheck")
+    healthcheckCfg.disks}
 
     # Everything worked, so success.
     ${healthcheckCurl false}
   '';
-in
-{
+in {
   options.services.healthcheck = {
     enable = mkEnableOption "the healthcheck ping service.";
     checkId = mkOption {

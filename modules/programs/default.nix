@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-  imports = [
-    ./tmux.nix
-  ];
+  imports = [ ./tmux.nix ];
 
   # Environment variables
   environment.homeBinInPath = true;

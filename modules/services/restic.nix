@@ -12,7 +12,9 @@
 #    This service can be set as a prerequisite for starting up other services
 #    that depend on that data.
 
-{ config, lib, pkgs, ... }: with lib; let
+{ config, lib, pkgs, ... }:
+with lib;
+let
   cfg = config.services.backup;
   bucket = "test-scarif-backup";
   repoPath = config.networking.hostName;
@@ -33,26 +35,27 @@
 
   # Scripts
   # ===========================================================================
-  resticBackupScript = paths: exclude: pkgs.writeScriptBin "restic-backup" ''
-    #!${pkgs.stdenv.shell}
-    set -xe
+  resticBackupScript = paths: exclude:
+    pkgs.writeScriptBin "restic-backup" ''
+      #!${pkgs.stdenv.shell}
+      set -xe
 
-    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckId}/start
+      ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckId}/start
 
-    # Perfrom the backup
-    ${resticCmd} backup \
-      ${concatStringsSep " " paths} \
-      ${concatMapStringsSep " " (e: "-e \"${e}\"") exclude}
+      # Perfrom the backup
+      ${resticCmd} backup \
+        ${concatStringsSep " " paths} \
+        ${concatMapStringsSep " " (e: ''-e "${e}"'') exclude}
 
-    # Make sure that the backup has time to settle before running the check.
-    sleep 10
+      # Make sure that the backup has time to settle before running the check.
+      sleep 10
 
-    # Check the validity of the repository.
-    ${resticCmd} check
+      # Check the validity of the repository.
+      ${resticCmd} check
 
-    # Ping healthcheck.io
-    ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckId}
-  '';
+      # Ping healthcheck.io
+      ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckId}
+    '';
 
   resticPruneScript = pkgs.writeScriptBin "restic-prune" ''
     #!${pkgs.stdenv.shell}
@@ -77,35 +80,37 @@
     ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckPruneId}
   '';
 
-  resticRestoreScript = path: pkgs.writeScriptBin "restic-restore" ''
-    #!${pkgs.stdenv.shell}
-    set -xe
+  resticRestoreScript = path:
+    pkgs.writeScriptBin "restic-restore" ''
+      #!${pkgs.stdenv.shell}
+      set -xe
 
-    # If the backup has already been restored, print an error and exit.
-    [[ -f ${path}/.restic-backup-restored ]] &&
-      echo "A backup has already been restored for ${path}." &&
-      echo "Remove ${path}/.restic-backup-restored if you want to force a restore." &&
-      exit 1
+      # If the backup has already been restored, print an error and exit.
+      [[ -f ${path}/.restic-backup-restored ]] &&
+        echo "A backup has already been restored for ${path}." &&
+        echo "Remove ${path}/.restic-backup-restored if you want to force a restore." &&
+        exit 1
 
-    # Perfrom the restoration.
-    ${resticCmd} restore latest --verify --target / -i ${path}
+      # Perfrom the restoration.
+      ${resticCmd} restore latest --verify --target / -i ${path}
 
-    # Create the .restic-backup-restored file to indicate that this backup has
-    # been restored.
-    touch ${path}/.restic-backup-restored
-  '';
+      # Create the .restic-backup-restored file to indicate that this backup has
+      # been restored.
+      touch ${path}/.restic-backup-restored
+    '';
 
   # Services
   # ===========================================================================
   resticBackupService = backups: exclude:
     let
       paths = mapAttrsToList (n: { path, ... }: path) backups;
-      script = resticBackupScript paths (exclude ++ [ ".restic-backup-restored" ]);
-    in
-    {
+      script =
+        resticBackupScript paths (exclude ++ [ ".restic-backup-restored" ]);
+    in {
       name = "restic-backup";
       value = {
-        description = "Backup ${concatStringsSep ", " paths} to ${resticRepository}";
+        description =
+          "Backup ${concatStringsSep ", " paths} to ${resticRepository}";
         environment = resticEnvironment;
         startAt = frequency;
         serviceConfig = {
@@ -142,11 +147,10 @@
     };
   };
 
-  resticRestoreService = name: { path, serviceName, ... }:
-    let
-      script = resticRestoreScript path;
-    in
-    {
+  resticRestoreService = name:
+    { path, serviceName, ... }:
+    let script = resticRestoreScript path;
+    in {
       name = serviceName;
       value = {
         description = "Restore ${path} from the latest restic backup.";
@@ -157,72 +161,67 @@
         };
       };
     };
-in
-{
-  options =
-    let
-      backupDirOpts = { name, ... }: {
-        options = {
-          path = mkOption {
-            type = types.str;
-            description = "The path to backup using restic.";
-          };
-          serviceName = mkOption {
-            type = types.str;
-            default = "restic-restore-${name}";
-            description = "The name of the restore service to create.";
-          };
-        };
-      };
-    in
-    {
-      services.backup = {
-        backups = mkOption {
-          type = with types; attrsOf (submodule backupDirOpts);
-          description = "List of backup configurations.";
-          default = { };
-        };
-
-        exclude = mkOption {
-          type = with types; listOf str;
-          description = ''
-            List of patterns to exclude. `.restic-backup-restored` files are
-            already ignored.
-          '';
-          default = [ ];
-          example = [ ".git/*" ];
-        };
-
-        healthcheckId = mkOption {
+in {
+  options = let
+    backupDirOpts = { name, ... }: {
+      options = {
+        path = mkOption {
           type = types.str;
-          description = ''
-            Healthcheck ID for this server's backup job.
-          '';
+          description = "The path to backup using restic.";
         };
-
-        healthcheckPruneId = mkOption {
+        serviceName = mkOption {
           type = types.str;
-          description = ''
-            Healthcheck ID for this server's prune job.
-          '';
+          default = "restic-restore-${name}";
+          description = "The name of the restore service to create.";
         };
       };
     };
+  in {
+    services.backup = {
+      backups = mkOption {
+        type = with types; attrsOf (submodule backupDirOpts);
+        description = "List of backup configurations.";
+        default = { };
+      };
+
+      exclude = mkOption {
+        type = with types; listOf str;
+        description = ''
+          List of patterns to exclude. `.restic-backup-restored` files are
+          already ignored.
+        '';
+        default = [ ];
+        example = [ ".git/*" ];
+      };
+
+      healthcheckId = mkOption {
+        type = types.str;
+        description = ''
+          Healthcheck ID for this server's backup job.
+        '';
+      };
+
+      healthcheckPruneId = mkOption {
+        type = types.str;
+        description = ''
+          Healthcheck ID for this server's prune job.
+        '';
+      };
+    };
+  };
 
   config = mkIf (cfg.backups != { }) {
-    systemd.services =
-      let
-        resticServices = [
-          # The main backup service.
-          (resticBackupService cfg.backups cfg.exclude)
+    systemd.services = let
+      resticServices = [
+        # The main backup service.
+        (resticBackupService cfg.backups cfg.exclude)
 
-          # The main prune service.
-          resticPruneService
-        ]
+        # The main prune service.
+        resticPruneService
+      ]
 
-        # The restore services.
+      # The restore services.
         ++ mapAttrsToList resticRestoreService cfg.backups;
-      in
-      listToAttrs resticServices;
+    in listToAttrs resticServices;
   };
 }

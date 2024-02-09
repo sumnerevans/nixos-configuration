@@ -1,7 +1,6 @@
-#
 # Contains modules for configuring systems.
 #
-{ pkgs, ... }: {
+{
   imports = [
     ./hardware
     ./programs

@@ -1,5 +1,4 @@
 # Contains convenience modules for configuring the hardware.
-#
 { config, pkgs, lib, ... }:
 with lib;
 let cfg = config.hardware;
