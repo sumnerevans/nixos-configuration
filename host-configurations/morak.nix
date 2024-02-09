@@ -69,14 +69,6 @@ in {
     # sumnerevans.com
     hostname = "sumnerevans.com";
     extraLocations = {
-      "/teaching/csci564-s21" = {
-        root = "/var/www";
-        priority = 0;
-        extraConfig = ''
-          access_log /var/log/nginx/sumnerevans.com.access.log;
-          autoindex on;
-        '';
-      };
       "/teaching/csci400-s19" = {
         root = "/var/www";
         priority = 0;
