@@ -11,7 +11,6 @@
     ./healthcheck.nix
     ./isso.nix
     ./journald.nix
-    ./mumble.nix
     ./nginx.nix
     ./postgresql.nix
     ./restic.nix

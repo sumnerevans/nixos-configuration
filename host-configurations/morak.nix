@@ -95,9 +95,6 @@ in {
     ];
   };
 
-  # Mumble
-  services.murmur.enable = true;
-
   # Restic backup
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
