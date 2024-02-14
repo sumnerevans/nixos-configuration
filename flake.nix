@@ -53,7 +53,6 @@
               pass
               pre-commit
               python3
-              rnix-lsp
             ];
           };
         };
