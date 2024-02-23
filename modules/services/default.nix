@@ -22,5 +22,4 @@
 
   # Enable Redis and PostgreSQL
   services.redis.servers."".enable = true;
-  services.postgresql.enable = true;
 }

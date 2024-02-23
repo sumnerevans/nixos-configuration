@@ -47,6 +47,7 @@ in {
         QUOTESFILE_SOURCE_URL = cfg.sourceUrl;
         LISTEN_ADDR = cfg.listenAddr;
         PLAUSIBLE_DOMAIN = cfg.virtualHost;
+        GOATCOUNTER_DOMAIN = "https://fortune.goatcounter.com/count";
         HOST_ROOT = "https://${cfg.virtualHost}";
       };
       serviceConfig = {
