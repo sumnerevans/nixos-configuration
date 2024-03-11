@@ -46,6 +46,9 @@
   networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = lib.mkDefault true;
 
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
   programs.sway.enable = true;
   programs.steam.enable = true;
 
@@ -80,5 +83,8 @@
     };
   };
 
-  swapDevices = [ ];
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 32 * 1024;
+  }];
 }
