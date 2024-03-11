@@ -10,6 +10,7 @@
       "docker"
       "networkmanager"
       "wheel" # Enable 'sudo' for the user.
+      "adbusers"
     ];
 
     # Allow all of my computers to SSH in.
