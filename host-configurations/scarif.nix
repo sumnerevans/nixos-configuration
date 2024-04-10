@@ -24,24 +24,6 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  # Fingerprint reader
-  services.fprintd = {
-    enable = true;
-    tod.enable = true;
-    tod.driver = pkgs.libfprint-2-tod1-vfs0090;
-  };
-  security.pam.services = {
-    # The fingerprint auth doesn't work correctly after waking from sleep
-    swaylock.fprintAuth = false;
-  };
-  security.polkit.extraConfig = ''
-    polkit.addRule(function (action, subject) {
-      if (action.id == "net.reactivated.fprint.device.enroll") {
-        return subject.user == "sumner" || subject.user == "root" ? polkit.Result.YES : polkit.Result.NO
-      }
-    })
-  '';
-
   # Set up networking.
   networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = lib.mkDefault true;
