@@ -2,7 +2,7 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # Set the hostname
-  networking.hostName = "scarif";
+  networking.hostName = "automattic";
   hardware.isPC = true;
   hardware.ramSize = 32;
   hardware.isLaptop = true;
@@ -39,27 +39,11 @@
   # Extra options for btrfs
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/55764ade-c6c9-4a6d-abb4-3112148bd596";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" ];
-    };
-    "/home" = {
-      device = "/dev/disk/by-uuid/55764ade-c6c9-4a6d-abb4-3112148bd596";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" ];
-    };
-    "/nix" = {
-      device = "/dev/disk/by-uuid/55764ade-c6c9-4a6d-abb4-3112148bd596";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
-    "/var/tmp" = {
-      device = "/dev/disk/by-uuid/55764ade-c6c9-4a6d-abb4-3112148bd596";
-      fsType = "btrfs";
-      options = [ "subvol=var/tmp" "compress=zstd" "noatime" ];
+      device = "/dev/disk/by-uuid/e5c1f6c9-4417-4da6-9df9-ebc014050fed";
+      fsType = "ext4";
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/5BEB-2294";
+      device = "/dev/disk/by-uuid/3A7A-964C";
       fsType = "vfat";
     };
   };
