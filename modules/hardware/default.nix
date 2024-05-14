@@ -65,6 +65,9 @@ in {
       virtualisation.libvirtd.enable = true;
       environment.systemPackages = [ pkgs.virt-manager ];
       users.users.sumner.extraGroups = [ "libvirtd" ];
+
+      # For flashing ErgoDox and Voyager.
+      hardware.keyboard.zsa.enable = true;
     })
 
     (mkIf cfg.isServer {
