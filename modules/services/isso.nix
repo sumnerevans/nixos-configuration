@@ -12,7 +12,7 @@ in {
       };
       moderation = {
         enabled = true;
-        purge-after = "30d";
+        purge-after = "90d";
       };
       server = { listen = "http://127.0.0.1:8888/"; };
       smtp = {
