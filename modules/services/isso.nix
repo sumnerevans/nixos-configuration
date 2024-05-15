@@ -22,8 +22,8 @@ in {
         host = "smtp.migadu.com";
         port = 587;
         security = "starttls";
-        to = "admin@sumnerevans.com";
-        from = "comments@sumnerevans.com";
+        to = "inquiries@sumnerevans.com";
+        from = "Sumner's Blog Comments <comments@sumnerevans.com>";
       };
       guard = {
         enabled = true;
