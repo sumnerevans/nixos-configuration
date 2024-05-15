@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 with lib;
 let nixCfg = config.nix;
 in {
@@ -29,7 +29,6 @@ in {
       nix.extraOptions = ''
         experimental-features = nix-command flakes
       '';
-      nix.package = pkgs.nixUnstable;
     }
   ];
 }
