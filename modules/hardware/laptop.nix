@@ -1,9 +1,9 @@
-{ lib, ... }: {
+{ config, lib, ... }: {
   options = {
     hardware.isLaptop = lib.mkEnableOption "laptop-only configurations";
   };
 
-  config = {
+  config = lib.mkIf config.hardware.isLaptop {
     # Enable TLP for power management
     services.tlp = {
       enable = true;
