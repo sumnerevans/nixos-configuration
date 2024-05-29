@@ -54,7 +54,6 @@
               cargo
               git-crypt
               gnutar
-              nodePackages.bash-language-server
               openssl
               pass
               pre-commit
