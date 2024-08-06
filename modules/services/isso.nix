@@ -10,11 +10,7 @@ in {
         reply-notifications = true;
         gravatar = true;
       };
-      moderation = {
-        enabled = true;
-        purge-after = "90d";
-      };
-      server = { listen = "http://127.0.0.1:8888/"; };
+      server.listen = "http://127.0.0.1:8888/";
       smtp = {
         username = "comments@sumnerevans.com";
         password = lib.removeSuffix "\n"
