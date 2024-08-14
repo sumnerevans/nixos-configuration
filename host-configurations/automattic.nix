@@ -36,6 +36,8 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
 
+  services.postgresql.enable = true;
+
   # Extra options for btrfs
   fileSystems = {
     "/" = {
