@@ -6,6 +6,7 @@
     ./airsonic.nix
     ./bitwarden.nix
     ./docker.nix
+    ./glance.nix
     ./gonic.nix
     ./grafana.nix
     ./healthcheck.nix

@@ -65,6 +65,7 @@ in {
   # Services #
   ############
   services.airsonic.enable = true;
+  services.glance.enable = true;
   services.grafana.enable = true;
   services.isso.enable = true;
   services.logrotate.enable = true;
