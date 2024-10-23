@@ -28,6 +28,11 @@ in
       description = "The path to the podcast directory";
       default = "/var/lib/gonic/podcasts";
     };
+    playlistsPath = mkOption {
+      type = types.path;
+      description = "The path to the playlist directory";
+      default = "/var/lib/gonic/playlists";
+    };
     cachePath = mkOption {
       type = types.path;
       description = "The path to the cache directory";
@@ -74,6 +79,7 @@ in
       environment = {
         GONIC_MUSIC_PATH = cfg.musicDir;
         GONIC_PODCAST_PATH = cfg.podcastPath;
+        GONIC_PLAYLISTS_PATH = cfg.playlistsPath;
         GONIC_CACHE_PATH = cfg.cachePath;
         GONIC_DB_PATH = cfg.dbPath;
         GONIC_LISTEN_ADDR = cfg.listenAddress;
@@ -85,6 +91,7 @@ in
       preStart = ''
         mkdir -p ${cfg.musicDir}
         mkdir -p ${cfg.podcastPath}
+        mkdir -p ${cfg.playlistsPath}
         mkdir -p ${cfg.cachePath}
       '';
       serviceConfig = {
