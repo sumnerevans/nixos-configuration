@@ -137,13 +137,17 @@ in mkIf cfg.enable {
                 markets = [
                   {
                     symbol = "VOO";
-                    symbol-link = "https://robinhood.com/stocks/VOO";
-                    chart-link = "https://robinhood.com/stocks/VOO";
+                    symbol-link =
+                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=VOO";
+                    chart-link =
+                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=VOO";
                   }
                   {
                     symbol = "STRV";
-                    symbol-link = "https://robinhood.com/stocks/STRV";
-                    chart-link = "https://robinhood.com/stocks/STRV";
+                    symbol-link =
+                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=STRV";
+                    chart-link =
+                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=STRV";
                   }
                 ];
               }
