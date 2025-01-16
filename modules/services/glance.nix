@@ -49,6 +49,10 @@ in mkIf cfg.enable {
                     title = "Financial";
                     links = [
                       {
+                        title = "Fidelity";
+                        url = "https://digital.fidelity.com";
+                      }
+                      {
                         title = "Robinhood";
                         url = "https://robinhood.com";
                       }
