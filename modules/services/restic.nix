@@ -65,16 +65,15 @@ let
 
     # Remove old backup sets. Keep hourly backups from the past week, daily
     # backups for the past 90 days, weekly backups for the last half year,
-    # monthly backups for the last two years, and yearly backups for the last
-    # two decades.
+    # monthly backups for the last 5 years, and yearly backups forever.
     ${resticCmd} forget \
       --prune \
       --group-by host \
       --keep-hourly 168 \
       --keep-daily 90 \
       --keep-weekly 26 \
-      --keep-monthly 24 \
-      --keep-yearly 20
+      --keep-monthly 60 \
+      --keep-yearly unlimited
 
     # Ping healthcheck.io
     ${pkgs.curl}/bin/curl -fsS --retry 10 https://hc-ping.com/${cfg.healthcheckPruneId}
