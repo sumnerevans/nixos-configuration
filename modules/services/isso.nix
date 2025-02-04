@@ -26,6 +26,7 @@ in {
         ratelimit = 2;
         direct-reply = 3;
         reply-to-self = false;
+        require-author = true;
       };
       markup = {
         options =
