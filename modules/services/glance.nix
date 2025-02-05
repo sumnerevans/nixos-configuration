@@ -99,6 +99,7 @@ in mkIf cfg.enable {
                 { url = "https://blog.babel.sh/rss"; }
                 { url = "https://blog.beeper.com/feed"; }
                 { url = "https://blog.danslimmon.com/feed"; }
+                { url = "https://chriskiehl.com/rss.xml"; }
                 { url = "https://chrismcdonough.substack.com/feed"; }
                 { url = "https://chrpaul.de/feed.xml"; }
                 { url = "https://dominickm.com/feed"; }
