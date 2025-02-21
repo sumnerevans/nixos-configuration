@@ -124,6 +124,7 @@ in mkIf cfg.enable {
                 { url = "https://textslashplain.com/feed/"; }
                 { url = "https://tgrcode.com/rss"; }
                 { url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
+                { url = "https://www.arp242.net/feed.xml"; }
                 { url = "https://www.joelonsoftware.com/feed/"; }
                 { url = "https://www.thedroneely.com/posts/rss.xml"; }
                 { url = "https://www.wheresyoured.at/rss/"; }
