@@ -135,25 +135,6 @@ in mkIf cfg.enable {
             size = "small";
             widgets = [
               {
-                type = "markets";
-                markets = [
-                  {
-                    symbol = "VOO";
-                    symbol-link =
-                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=VOO";
-                    chart-link =
-                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=VOO";
-                  }
-                  {
-                    symbol = "STRV";
-                    symbol-link =
-                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=STRV";
-                    chart-link =
-                      "https://digital.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=STRV";
-                  }
-                ];
-              }
-              {
                 type = "monitor";
                 title = "Services";
                 sites = [
