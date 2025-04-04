@@ -38,12 +38,6 @@
           specialArgs = { inherit inputs; };
           modules = [ ./configuration.nix ./host-configurations/mustafar.nix ];
         };
-        automattic = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules =
-            [ ./configuration.nix ./host-configurations/automattic.nix ];
-        };
       };
     } // (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { system = system; };
