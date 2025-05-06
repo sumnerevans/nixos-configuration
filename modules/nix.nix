@@ -7,11 +7,6 @@ in {
     {
       nixpkgs.config.allowUnfree = true;
       environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
-
-      nix.settings.trusted-substituters = [
-        "https://sumnerevans.cachix.org"
-        "https://nixpkgs-wayland.cachix.org"
-      ];
     }
 
     # If automatic garbage collection is enabled, delete 30 days.
