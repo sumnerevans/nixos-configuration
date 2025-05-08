@@ -12,32 +12,19 @@
 
   outputs = inputs@{ self, nixpkgs, flake-utils, webfortune }:
     {
-      nixosConfigurations = {
-        tatooine = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./host-configurations/tatooine.nix ];
-        };
-        coruscant = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./host-configurations/coruscant.nix ];
-        };
-        scarif = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./host-configurations/scarif.nix ];
-        };
-        morak = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./host-configurations/morak.nix ];
-        };
-        mustafar = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./host-configurations/mustafar.nix ];
-        };
+      nixosConfigurations = let
+        mkCfg = hostSpecific:
+          nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs; };
+            modules = [ ./configuration.nix hostSpecific ];
+          };
+      in {
+        tatooine = mkCfg ./host-configurations/tatooine.nix;
+        coruscant = mkCfg ./host-configurations/coruscant.nix;
+        scarif = mkCfg ./host-configurations/scarif.nix;
+        morak = mkCfg ./host-configurations/morak.nix;
+        mustafar = mkCfg ./host-configurations/mustafar.nix;
       };
     } // (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { system = system; };
