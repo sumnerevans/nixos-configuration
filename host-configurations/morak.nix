@@ -75,6 +75,16 @@ in {
   services.vaultwarden.enable = true;
   services.xandikos.enable = true;
 
+  # Gomuks
+  services.nginx.virtualHosts."gomuks.sumnerevans.com" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:29325";
+      proxyWebsockets = true;
+    };
+  };
+
   # Gonic
   services.gonic2 = {
     enable = true;
