@@ -38,6 +38,11 @@
     fsType = "vfat";
   };
 
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/da9b8ec9-6432-4e40-b621-433c1634b728";
+    fsType = "ext4";
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
