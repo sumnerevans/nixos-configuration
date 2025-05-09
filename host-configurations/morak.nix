@@ -84,6 +84,18 @@ in {
       proxyWebsockets = true;
     };
   };
+  systemd.services.gomuks = {
+    description = "Gomuks Web";
+    requires = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    environment.HOME = "/root";
+    serviceConfig = {
+      WorkingDirectory = "/root/gomuks";
+      ExecStart = "/root/gomuks/gomuks";
+      Restart = "on-failure";
+    };
+  };
 
   # Gonic
   services.gonic2 = {
