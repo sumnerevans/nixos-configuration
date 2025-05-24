@@ -47,9 +47,7 @@ in {
       };
 
       # Suspend on power button press instead of shutdown.
-      services.logind.extraConfig = ''
-        HandlePowerKey=suspend
-      '';
+      services.logind.settings.Login.HandlePowerKey = "suspend";
 
       # Enable Flatpak.
       services.flatpak.enable = true;
