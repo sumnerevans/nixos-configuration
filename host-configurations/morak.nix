@@ -3,7 +3,7 @@ let
   quotesfile = pkgs.fetchurl {
     url =
       "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
-    hash = "sha256-vWv4XbMcBU9igwcVQLqOylXCH/GAHiTiwDIvr6xWCNs=";
+    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAGAHiTiwDIvr6xWCNs=";
   };
 in {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
