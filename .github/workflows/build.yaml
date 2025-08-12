@@ -15,7 +15,7 @@ jobs:
           - morak.sumnerevans.com
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
