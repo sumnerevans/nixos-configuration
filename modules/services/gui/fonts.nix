@@ -4,7 +4,7 @@
       font-awesome_4
       iosevka-bin
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       open-sans
       powerline-fonts
       nerd-fonts.terminess-ttf
