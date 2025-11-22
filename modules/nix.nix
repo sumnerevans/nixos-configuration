@@ -25,5 +25,10 @@ in {
         experimental-features = nix-command flakes
       '';
     }
+
+    # Allow large downloads
+    {
+      nix.settings.download-buffer-size = 4294967296; # 4 GiB
+    }
   ];
 }
