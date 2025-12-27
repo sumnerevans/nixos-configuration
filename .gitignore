@@ -1,5 +1,5 @@
 .direnv
-hardware-configuration.nix
+/hardware-configuration.nix
 result
 
 .venv

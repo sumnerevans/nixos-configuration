@@ -1,6 +1,10 @@
 {
   description = "Sumner's NixOS configuration";
   inputs = {
+    colmena = {
+      url = "github:zhaofengli/colmena";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     webfortune = {
@@ -10,7 +14,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, webfortune }:
+  outputs = inputs@{ self, colmena, nixpkgs, flake-utils, ... }:
     {
       nixosConfigurations = let
         mkCfg = hostSpecific:
@@ -20,12 +24,15 @@
             modules = [ ./configuration.nix hostSpecific ];
           };
       in {
-        tatooine = mkCfg ./host-configurations/tatooine.nix;
-        coruscant = mkCfg ./host-configurations/coruscant.nix;
-        scarif = mkCfg ./host-configurations/scarif.nix;
-        morak = mkCfg ./host-configurations/morak.nix;
-        mustafar = mkCfg ./host-configurations/mustafar.nix;
+        coruscant = mkCfg ./host-configurations/coruscant.nix; # Desktop PC
+        morak = mkCfg ./host-configurations/morak.nix; # Hetzner Server
+        mustafar = mkCfg ./host-configurations/mustafar.nix; # Kohaku
+        scarif = mkCfg ./host-configurations/scarif.nix; # ThinkPad T14s
+        tatooine = mkCfg ./host-configurations/tatooine.nix; # ThinkPad T580
       };
+
+      colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+      colmena = import ./servers/colmena.nix inputs;
     } // (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { system = system; };
       in {
@@ -33,6 +40,7 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               cargo
+              colmena.packages.${system}.colmena
               git-crypt
               gnutar
               openssl
