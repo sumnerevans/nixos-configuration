@@ -1,5 +1,6 @@
 {
   imports = [
+    ./hardware
     ./networking.nix
     ./nix.nix
     ./programs

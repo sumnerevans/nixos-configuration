@@ -1,0 +1,60 @@
+{ config, lib, ... }:
+with lib;
+let
+  issoCfg = config.services.isso;
+in
+{
+  config = mkIf issoCfg.enable {
+    services.isso.settings = {
+      general = {
+        host = "https://sumnerevans.com";
+        notify = "smtp";
+        reply-notifications = true;
+        gravatar = true;
+      };
+      server.listen = "http://127.0.0.1:8888/";
+      smtp = {
+        username = "comments@sumnerevans.com";
+        password = "$ISSO_COMMENTS_SMTP_PASSWORD";
+        host = "smtp.migadu.com";
+        port = 587;
+        security = "starttls";
+        to = "inquiries@sumnerevans.com";
+        from = "Sumner's Blog Comments <comments@sumnerevans.com>";
+      };
+      guard = {
+        enabled = true;
+        ratelimit = 2;
+        direct-reply = 3;
+        reply-to-self = false;
+        require-author = true;
+      };
+      markup = {
+        options = "tables, fenced-code, footnotes, autolink, strikethrough, underline, math, math-explicit";
+        allowed-elements = "img";
+        allowed-attributes = "src";
+      };
+      admin = {
+        enabled = true;
+        password = "$ISSO_COMMENTS_ADMIN_PASSWORD";
+      };
+    };
+
+    systemd.services.isso = {
+      serviceConfig.EnvironmentFile = "/run/keys/isso_comments_env";
+    };
+
+    # Set up nginx to forward requests properly.
+    services.nginx.virtualHosts = {
+      "comments.sumnerevans.com" = {
+        enableACME = true;
+        forceSSL = true;
+
+        locations."/".proxyPass = "http://127.0.0.1:8888";
+      };
+    };
+
+    # Add a backup service.
+    services.backup.backups.isso.path = "/var/lib/private/isso";
+  };
+}

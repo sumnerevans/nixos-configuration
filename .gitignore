@@ -4,3 +4,4 @@ result
 
 .venv
 .restic_hostname
+secrets/

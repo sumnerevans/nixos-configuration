@@ -6,4 +6,6 @@
       StreamLocalBindUnlink = "yes";
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ 22 ];
 }

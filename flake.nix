@@ -22,57 +22,56 @@
       flake-parts,
       ...
     }:
-    {
-      nixosConfigurations =
-        let
-          mkCfg =
-            hostSpecific:
-            nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              specialArgs = { inherit inputs; };
-              modules = [
-                ./configuration.nix
-                hostSpecific
-              ];
-            };
-        in
-        {
-          coruscant = mkCfg ./host-configurations/coruscant.nix; # Desktop PC
-          morak = mkCfg ./host-configurations/morak.nix; # Hetzner Server
-          mustafar = mkCfg ./host-configurations/mustafar.nix; # Kohaku
-          scarif = mkCfg ./host-configurations/scarif.nix; # ThinkPad T14s
-          tatooine = mkCfg ./host-configurations/tatooine.nix; # ThinkPad T580
-        };
-
-      colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-      colmena = import ./servers/colmena.nix inputs;
-    }
-    //
-
-      (flake-parts.lib.mkFlake { inherit inputs; } {
-        systems = [ "x86_64-linux" ];
-        perSystem =
+    (flake-parts.lib.mkFlake { inherit inputs; } {
+      flake = {
+        nixosConfigurations =
+          let
+            mkCfg =
+              hostSpecific:
+              nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = { inherit inputs; };
+                modules = [
+                  ./configuration.nix
+                  hostSpecific
+                ];
+              };
+          in
           {
-            lib,
-            pkgs,
-            system,
-            ...
-          }:
-          {
-            _module.args.pkgs = import inputs.nixpkgs { inherit system; };
-
-            devShells.default = pkgs.mkShell {
-              packages = with pkgs; [
-                cargo
-                colmena.packages.${system}.colmena
-                git-crypt
-                gnutar
-                openssl
-                pass
-                pre-commit
-                python3
-              ];
-            };
+            coruscant = mkCfg ./host-configurations/coruscant.nix; # Desktop PC
+            morak = mkCfg ./host-configurations/morak.nix; # Hetzner Server
+            mustafar = mkCfg ./host-configurations/mustafar.nix; # Kohaku
+            scarif = mkCfg ./host-configurations/scarif.nix; # ThinkPad T14s
+            tatooine = mkCfg ./host-configurations/tatooine.nix; # ThinkPad T580
           };
-      });
+
+        colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+        colmena = import ./servers/colmena.nix inputs;
+      };
+
+      systems = [ "x86_64-linux" ];
+      perSystem =
+        {
+          lib,
+          pkgs,
+          system,
+          ...
+        }:
+        {
+          _module.args.pkgs = import inputs.nixpkgs { inherit system; };
+
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              cargo
+              colmena.packages.${system}.colmena
+              git-crypt
+              gnutar
+              openssl
+              pass
+              pre-commit
+              python3
+            ];
+          };
+        };
+    });
 }
