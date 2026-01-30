@@ -91,8 +91,7 @@ in {
     wantedBy = [ "multi-user.target" ];
     environment.HOME = "/root";
     serviceConfig = {
-      WorkingDirectory = "/root/gomuks";
-      ExecStart = "/root/gomuks/gomuks";
+      ExecStart = "${pkgs.gomuks-web}/bin/gomuks-web";
       Restart = "on-failure";
     };
   };
