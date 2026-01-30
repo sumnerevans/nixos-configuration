@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ./tmux.nix ];
 
   # Environment variables
@@ -6,6 +7,7 @@
 
   # Minimal package set to install on all machines.
   environment.systemPackages = with pkgs; [
+    android-tools
     bind
     direnv
     fd
@@ -35,7 +37,4 @@
   # Enable ZSH for the command-not-found functionality
   programs.zsh.enable = true;
   environment.pathsToLink = [ "/share/zsh" ];
-
-  # Android dev
-  programs.adb.enable = true;
 }
