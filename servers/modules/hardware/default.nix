@@ -16,7 +16,6 @@ in
     ./laptop.nix
     ./networking.nix
     ./tmpfs.nix
-    ./v4l2loopback.nix
   ];
 
   options = {
