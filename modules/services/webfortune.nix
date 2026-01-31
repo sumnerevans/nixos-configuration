@@ -1,7 +1,15 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.services.webfortune;
-in {
+let
+  cfg = config.services.webfortune;
+in
+{
   options = {
     services.webfortune = {
       enable = mkEnableOption "webfortune";
@@ -50,9 +58,7 @@ in {
         HOST_ROOT = "https://${cfg.virtualHost}";
       };
       serviceConfig = {
-        ExecStart = "${
-            inputs.webfortune.packages.${pkgs.system}.webfortune
-          }/bin/webfortune";
+        ExecStart = "${inputs.webfortune.packages.${pkgs.system}.webfortune}/bin/webfortune";
         Restart = "always";
       };
     };

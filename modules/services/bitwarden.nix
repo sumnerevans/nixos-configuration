@@ -2,7 +2,8 @@
 let
   serverName = "bitwarden.${config.networking.domain}";
   bitwardenCfg = config.services.vaultwarden;
-in lib.mkIf bitwardenCfg.enable {
+in
+lib.mkIf bitwardenCfg.enable {
   services.vaultwarden = {
     config = {
       domain = "https://${serverName}";
@@ -20,9 +21,13 @@ in lib.mkIf bitwardenCfg.enable {
   services.nginx.virtualHosts."${serverName}" = {
     forceSSL = true;
     enableACME = true;
-    locations = { "/".proxyPass = "http://127.0.0.1:8222"; };
+    locations = {
+      "/".proxyPass = "http://127.0.0.1:8222";
+    };
   };
 
   # Add a backup service.
-  services.backup.backups.bitwarden = { path = "/var/lib/bitwarden_rs"; };
+  services.backup.backups.bitwarden = {
+    path = "/var/lib/bitwarden_rs";
+  };
 }

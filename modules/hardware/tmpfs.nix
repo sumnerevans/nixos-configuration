@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.hardware;
-in {
+let
+  cfg = config.hardware;
+in
+{
   options = {
     hardware.ramSize = mkOption {
       type = types.int;
@@ -13,7 +15,11 @@ in {
     # Temporary in-RAM Filesystems.
     "/home/sumner/tmp" = {
       fsType = "tmpfs";
-      options = [ "nosuid" "nodev" "size=${toString cfg.ramSize}G" ];
+      options = [
+        "nosuid"
+        "nodev"
+        "size=${toString cfg.ramSize}G"
+      ];
     };
   };
 }

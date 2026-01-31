@@ -1,8 +1,15 @@
 # Contains convenience modules for configuring the hardware.
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.hardware;
-in {
+let
+  cfg = config.hardware;
+in
+{
   imports = [
     ./bootloader.nix
     ./firewall.nix
@@ -19,10 +26,12 @@ in {
 
   config = mkMerge [
     {
-      assertions = [{
-        assertion = cfg.isPC -> !cfg.isServer && cfg.isServer -> !cfg.isPC;
-        message = "isPC and isServer are mutually exclusive";
-      }];
+      assertions = [
+        {
+          assertion = cfg.isPC -> !cfg.isServer && cfg.isServer -> !cfg.isPC;
+          message = "isPC and isServer are mutually exclusive";
+        }
+      ];
 
       boot.kernel.sysctl."fs.inotify.max_user_instances" = 524288;
       boot.kernel.sysctl."fs.inotify.max_user_watches" = 524288;

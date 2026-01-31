@@ -1,17 +1,22 @@
 { pkgs, modulesPath, ... }:
 let
   quotesfile = pkgs.fetchurl {
-    url =
-      "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
+    url = "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
     hash = "sha256-ofne9ofJI6MoHLBErsO6izlvrOQMjawjDwUaAWM/yQc=";
   };
-in {
+in
+{
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   boot = {
     initrd = {
-      availableKernelModules =
-        [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+      availableKernelModules = [
+        "ahci"
+        "xhci_pci"
+        "virtio_pci"
+        "sd_mod"
+        "sr_mod"
+      ];
       kernelModules = [ ];
     };
     kernelModules = [ ];
@@ -31,10 +36,12 @@ in {
 
   # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
   # memory, it won't crash the box.
-  swapDevices = [{
-    device = "/var/swapfile";
-    size = 4096;
-  }];
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 4096;
+    }
+  ];
 
   fileSystems = {
     "/" = {
@@ -52,11 +59,16 @@ in {
   };
 
   # Allow temporary redirects directly to the reverse proxy.
-  networking.firewall.allowedTCPPorts = [ 8222 8080 ];
-  networking.firewall.allowedTCPPortRanges = [{
-    from = 8008;
-    to = 8015;
-  }];
+  networking.firewall.allowedTCPPorts = [
+    8222
+    8080
+  ];
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 8008;
+      to = 8015;
+    }
+  ];
 
   # Enable fail2ban
   services.fail2ban.enable = true;
@@ -126,8 +138,7 @@ in {
   services.webfortune = {
     enable = true;
     inherit quotesfile;
-    sourceUrl =
-      "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
+    sourceUrl = "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
     virtualHost = "fortune.sumnerevans.com";
   };
 

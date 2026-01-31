@@ -2,7 +2,8 @@
 let
   serverName = "airsonic.${config.networking.domain}";
   airsonicCfg = config.services.airsonic;
-in lib.mkIf airsonicCfg.enable {
+in
+lib.mkIf airsonicCfg.enable {
   # Create the airsonic service.
   services.airsonic = {
     maxMemory = 1024;

@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let issoCfg = config.services.isso;
-in {
+let
+  issoCfg = config.services.isso;
+in
+{
   config = mkIf issoCfg.enable {
     services.isso.settings = {
       general = {
@@ -13,8 +15,7 @@ in {
       server.listen = "http://127.0.0.1:8888/";
       smtp = {
         username = "comments@sumnerevans.com";
-        password = lib.removeSuffix "\n"
-          (builtins.readFile ../../secrets/isso-comments-smtp-password);
+        password = lib.removeSuffix "\n" (builtins.readFile ../../secrets/isso-comments-smtp-password);
         host = "smtp.migadu.com";
         port = 587;
         security = "starttls";
@@ -29,15 +30,13 @@ in {
         require-author = true;
       };
       markup = {
-        options =
-          "tables, fenced-code, footnotes, autolink, strikethrough, underline, math, math-explicit";
+        options = "tables, fenced-code, footnotes, autolink, strikethrough, underline, math, math-explicit";
         allowed-elements = "img";
         allowed-attributes = "src";
       };
       admin = {
         enabled = true;
-        password = lib.removeSuffix "\n"
-          (builtins.readFile ../../secrets/isso-admin-password);
+        password = lib.removeSuffix "\n" (builtins.readFile ../../secrets/isso-admin-password);
       };
     };
 

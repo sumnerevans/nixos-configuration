@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   serverName = "dav.sumnerevans.com";
   xandikosCfg = config.services.xandikos;
-in lib.mkIf xandikosCfg.enable {
+in
+lib.mkIf xandikosCfg.enable {
   services.xandikos = {
     package = pkgs.xandikos.overridePythonAttrs (old: {
       checkInputs = with pkgs.python3Packages; [ pytestCheckHook ];
@@ -30,12 +36,13 @@ in lib.mkIf xandikosCfg.enable {
       enableACME = true;
       forceSSL = true;
       basicAuth = {
-        sumner =
-          lib.removeSuffix "\n" (builtins.readFile ../../secrets/xandikos);
+        sumner = lib.removeSuffix "\n" (builtins.readFile ../../secrets/xandikos);
       };
     };
   };
 
   # Add a backup service.
-  services.backup.backups.xandikos = { path = "/var/lib/private/xandikos"; };
+  services.backup.backups.xandikos = {
+    path = "/var/lib/private/xandikos";
+  };
 }

@@ -60,6 +60,8 @@
         {
           _module.args.pkgs = import inputs.nixpkgs { inherit system; };
 
+          formatter = pkgs.nixfmt-tree;
+
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               cargo

@@ -1,5 +1,8 @@
 {
-  imports = [ ./sumner.nix ./root.nix ];
+  imports = [
+    ./sumner.nix
+    ./root.nix
+  ];
 
   users.mutableUsers = false;
 }

@@ -1,8 +1,14 @@
-{ modulesPath, ... }: {
+{ modulesPath, ... }:
+{
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules =
-    [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [
+    "ahci"
+    "xhci_pci"
+    "virtio_pci"
+    "sd_mod"
+    "sr_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
@@ -21,8 +27,14 @@
   virtualisation.docker.enable = true;
 
   # Allow the Syncthing GUI through
-  networking.firewall.allowedTCPPorts = [ 8384 2022 ];
-  networking.firewall.allowedUDPPorts = [ 8384 2022 ];
+  networking.firewall.allowedTCPPorts = [
+    8384
+    2022
+  ];
+  networking.firewall.allowedUDPPorts = [
+    8384
+    2022
+  ];
 
   # Enable mosh and et
   programs.mosh.enable = true;
@@ -36,10 +48,14 @@
       {
         job_name = "hungryserv-dev";
         scrape_interval = "15s";
-        static_configs = [{
-          targets = [ "0.0.0.0:8001" ];
-          labels = { instance = "hungryserv-dev"; };
-        }];
+        static_configs = [
+          {
+            targets = [ "0.0.0.0:8001" ];
+            labels = {
+              instance = "hungryserv-dev";
+            };
+          }
+        ];
       }
     ];
   };
@@ -76,9 +92,11 @@
   };
 
   # Enable a lot of swap since we have enough disk.
-  swapDevices = [{
-    device = "/var/swapfile";
-    size = 4096;
-  }];
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 4096;
+    }
+  ];
 
 }

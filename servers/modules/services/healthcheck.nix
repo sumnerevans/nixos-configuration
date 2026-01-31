@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   healthcheckCfg = config.services.healthcheck;
@@ -11,12 +16,11 @@ let
       --retry 2 \
       --max-time 5 \
       --ipv4 \
-      https://hc-ping.com/${healthcheckCfg.checkId}${
-        optionalString fail "/fail"
-      }
+      https://hc-ping.com/${healthcheckCfg.checkId}${optionalString fail "/fail"}
   '';
 
-  diskCheckScript = with pkgs;
+  diskCheckScript =
+    with pkgs;
     disk:
     writeShellScriptBin "diskcheck" ''
       set -xe
@@ -32,13 +36,13 @@ let
   healthcheckScript = pkgs.writeShellScriptBin "healthcheck" ''
     set -xe
 
-    ${concatMapStringsSep "\n" (disk: "${diskCheckScript disk}/bin/diskcheck")
-    healthcheckCfg.disks}
+    ${concatMapStringsSep "\n" (disk: "${diskCheckScript disk}/bin/diskcheck") healthcheckCfg.disks}
 
     # Everything worked, so success.
     ${healthcheckCurl false}
   '';
-in {
+in
+{
   options.services.healthcheck = {
     enable = mkEnableOption "the healthcheck ping service.";
     checkId = mkOption {

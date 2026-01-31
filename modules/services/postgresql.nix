@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 mkMerge [
   (mkIf config.services.postgresql.enable {
@@ -23,7 +28,9 @@ mkMerge [
     };
 
     systemd.services.postgresql = {
-      serviceConfig = { TimeoutSec = mkForce 0; };
+      serviceConfig = {
+        TimeoutSec = mkForce 0;
+      };
     };
   })
 

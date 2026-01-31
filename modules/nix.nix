@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let nixCfg = config.nix;
-in {
+let
+  nixCfg = config.nix;
+in
+{
   config = mkMerge [
     # Allow unfree software.
     {

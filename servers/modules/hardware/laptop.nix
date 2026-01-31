@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   options = {
     hardware.isLaptop = lib.mkEnableOption "laptop-only configurations";
   };

@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  hostnameDomain =
-    "syncthing.${config.networking.hostName}.${config.networking.domain}";
+  hostnameDomain = "syncthing.${config.networking.hostName}.${config.networking.domain}";
   syncthingCfg = config.services.syncthing;
-in lib.mkIf syncthingCfg.enable {
+in
+lib.mkIf syncthingCfg.enable {
   services.syncthing = {
     openDefaultPorts = true;
     guiAddress = "0.0.0.0:8384";
@@ -25,5 +25,7 @@ in lib.mkIf syncthingCfg.enable {
   };
 
   # Add a backup service for the actual data.
-  services.backup.backups.syncthing-data = { path = "/mnt/syncthing-data"; };
+  services.backup.backups.syncthing-data = {
+    path = "/mnt/syncthing-data";
+  };
 }
