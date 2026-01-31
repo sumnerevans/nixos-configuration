@@ -28,7 +28,6 @@ in
     };
 
   networking.hostName = "morak";
-  networking.domain = "sumnerevans.com";
 
   # Allow temporary redirects directly to the reverse proxy.
   networking.firewall.allowedTCPPorts = [

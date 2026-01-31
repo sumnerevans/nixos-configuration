@@ -1,5 +1,11 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
-  networking.domain = "sumnerevans.com";
-  services.fail2ban.enable = true;
+  config = {
+    networking.domain = "sumnerevans.com";
+    services.fail2ban.enable = true;
+
+    networking.firewall = lib.mkIf config.networking.firewall.enable {
+      allowPing = true;
+    };
+  };
 }

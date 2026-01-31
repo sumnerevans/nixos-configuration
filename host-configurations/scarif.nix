@@ -47,6 +47,21 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
 
+  programs.dsearch = {
+    enable = true;
+    systemd = {
+      enable = true;
+      target = "graphical-session.target"; # Only start in graphical sessions
+    };
+  };
+  programs.dms-shell.enable = true;
+  programs.niri.enable = true;
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri";
+    configHome = config.users.users.sumner.home;
+  };
+
   # Extra options for btrfs
   fileSystems = {
     "/" = {
