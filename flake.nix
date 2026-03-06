@@ -1,16 +1,34 @@
 {
   description = "Sumner's NixOS configuration";
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     colmena = {
       url = "github:zhaofengli/colmena";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
+
     webfortune = {
       url = "github:sumnerevans/webfortune";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
+    };
+
+    menucalc = {
+      url = "github:sumnerevans/menu-calc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mdf = {
+      url = "github:sumnerevans/mdf";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
