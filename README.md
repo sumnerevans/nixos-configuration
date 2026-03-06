@@ -6,8 +6,8 @@
 This repository contains the NixOS configuration for my personal computers and
 servers.
 
-You can find my Home Manager Config here:
-https://github.com/sumnerevans/home-manager-config/
+I use [Home Manager](https://github.com/nix-community/home-manager) to manage my
+home directory.
 
 ## Hosts
 
