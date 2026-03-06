@@ -39,14 +39,13 @@
           in
           {
             coruscant = mkCfg ./host-configurations/coruscant.nix; # Desktop PC
-            morak = mkCfg ./host-configurations/morak.nix; # Hetzner Server
             mustafar = mkCfg ./host-configurations/mustafar.nix; # Kohaku
             scarif = mkCfg ./host-configurations/scarif.nix; # ThinkPad T14s
             tatooine = mkCfg ./host-configurations/tatooine.nix; # ThinkPad T580
           };
 
         colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-        colmena = import ./servers/colmena.nix inputs;
+        colmena = import ./nixos/colmena.nix inputs;
       };
 
       systems = [ "x86_64-linux" ];
