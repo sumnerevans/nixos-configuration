@@ -8,7 +8,11 @@ in
 
     nixpkgs = import nixpkgs {
       inherit system;
-      config.permittedInsecurePackages = [ "olm-3.2.16" ];
+
+      config = {
+        permittedInsecurePackages = [ "olm-3.2.16" ];
+        allowUnfree = true;
+      };
 
       overlays = [
         (self: super: { inherit (webfortune.packages.${system}) webfortune; })

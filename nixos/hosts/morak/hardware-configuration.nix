@@ -15,10 +15,7 @@
     };
     kernelModules = [ ];
     extraModulePackages = [ ];
-
-    tmp.useTmpfs = true;
   };
-
 
   networking.interfaces.eth0.useDHCP = true;
 

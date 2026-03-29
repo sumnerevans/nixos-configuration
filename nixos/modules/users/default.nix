@@ -17,7 +17,7 @@
           ++ (builtins.attrValues (import ./server-pubkeys.nix));
       };
 
-      sumner = lib.mkIf (config.hostCategory == "pc") {
+      sumner = lib.mkIf (config.hostCategory == "laptop") {
         shell = pkgs.zsh;
         isNormalUser = true;
         home = "/home/sumner";

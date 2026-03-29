@@ -17,6 +17,7 @@
     htop
     iftop
     inetutils
+    jq
     lm_sensors
     mtr
     neovim

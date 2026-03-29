@@ -2,6 +2,9 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+  hostCategory = "laptop";
+  ramSize = 32;
+
   deployment.keys =
     let
       keyFor = keyname: for: {
@@ -32,27 +35,7 @@
     }
   ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  programs.sway.enable = true;
   programs.steam.enable = true;
 
-  # Enable Docker.
   virtualisation.docker.enable = true;
-
-  programs.dsearch = {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "graphical-session.target"; # Only start in graphical sessions
-    };
-  };
-  programs.dms-shell.enable = true;
-  programs.niri.enable = true;
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor.name = "niri";
-    configHome = config.users.users.sumner.home;
-  };
 }

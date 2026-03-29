@@ -61,11 +61,8 @@
   # Services #
   ############
   services.logrotate.enable = true;
-  services.nginx.enable = true;
-  services.postgresql.enable = true;
   services.syncthing.enable = true;
   services.vaultwarden.enable = true;
-  services.xandikos.enable = true;
 
   # Gomuks
   services.nginx.virtualHosts."gomuks.sumnerevans.com" = {
@@ -101,12 +98,10 @@
   };
 
   services.healthcheck = {
-    enable = true;
     checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
     disks = [
       "/"
       "/mnt/syncthing-data"
-      "/mnt/postgresql-data"
       "/mnt/syncthing-pictures-tmp"
     ];
   };

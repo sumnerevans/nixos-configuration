@@ -35,8 +35,11 @@
     };
 
     nix.settings.download-buffer-size = 4294967296; # 4 GiB
+    nix.extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
 
-    environment.defaultPackages = [ pkgs.jq ];
+    environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
     security.acme = {
       defaults.email = "admin@sumnerevans.com";

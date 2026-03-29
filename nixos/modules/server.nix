@@ -2,12 +2,14 @@
 {
   config = lib.mkIf (config.hostCategory == "server") {
     boot = {
-      kernelParams = [ "console=ttyS0,19200n8" ];
+      kernelParams = [ "console=ttyS0,19200n8" ]; # Required for LISH
       loader = {
         timeout = 10;
         grub = {
           devices = [ "/dev/sda" ];
           configurationLimit = 25;
+
+          # Enable LISH
           extraConfig = ''
             serial --speed=19200 --unit=0 --word=8 --party=no --stop=1;
             terminal_input serial;
@@ -23,16 +25,19 @@
       SystemMaxUse=2G
     '';
 
-    services.nginx.virtualHosts = {
-      "${config.networking.hostName}.${config.networking.domain}" = {
-        forceSSL = true;
-        enableACME = true;
+    services.nginx = {
+      enable = true;
+      virtualHosts = {
+        "${config.networking.hostName}.${config.networking.domain}" = {
+          forceSSL = true;
+          enableACME = true;
 
-        # Enable a status page and expose it.
-        locations."/status".extraConfig = ''
-          stub_status on;
-          access_log off;
-        '';
+          # Enable a status page and expose it.
+          locations."/status".extraConfig = ''
+            stub_status on;
+            access_log off;
+          '';
+        };
       };
     };
 
@@ -41,5 +46,7 @@
       randomizedDelaySec = "45min";
       options = "--delete-older-than 30d";
     };
+
+    services.healthcheck.enable = true;
   };
 }

@@ -8,9 +8,6 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  # hardware.isPC = true;
-  # hardware.ramSize = 32;
-  # hardware.isLaptop = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   boot = {
@@ -28,9 +25,6 @@
     extraModulePackages = [ ];
     kernelPackages = pkgs.linuxPackages_latest;
   };
-
-  # Set up networking.
-  networking.useDHCP = true;
 
   swapDevices = [
     {
@@ -79,5 +73,4 @@
       fsType = "vfat";
     };
   };
-
 }
