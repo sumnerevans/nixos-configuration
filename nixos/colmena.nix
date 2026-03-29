@@ -12,19 +12,29 @@ in
 
       overlays = [
         (self: super: { inherit (webfortune.packages.${system}) webfortune; })
+
+        # Wait until https://github.com/NixOS/nixpkgs/pull/504778 is merged
         (final: prev: {
           isso = prev.isso.overrideAttrs (old: rec {
             src = prev.fetchFromGitHub {
               owner = "isso-comments";
               repo = "isso";
-              rev = "09cddc1940c837cbd46559db49459d20f670cd16";
-              hash = "sha256-dMKfgudJBprXsers/nENnWVmyNPyJIPyNXO/fdZ6bKM=";
+              rev = "0.14.0";
+              hash = "sha256-8kXqqiMXxF0wCJ+AzYT8j0rjuhlXO3F6UJbump672b4=";
             };
 
             npmDeps = prev.fetchNpmDeps {
               inherit src;
               hash = "sha256-e3r5iZLmXlf5YBPGgeNBDkdgfbNcIZIXbRLyyoyJiTU=";
             };
+
+            propagatedBuildInputs =
+              old.propagatedBuildInputs
+              ++ (with prev.python3Packages; [
+                setuptools
+                gevent
+                mistune
+              ]);
           });
         })
       ];
@@ -50,15 +60,6 @@ in
       services.logrotate.enable = true;
     };
 
-  jedha = {
-    deployment = {
-      targetHost = "192.168.0.168";
-      tags = [ "belleview" ];
-    };
-
-    imports = [ ./hosts/jedha ];
-  };
-
   morak = {
     deployment = {
       targetHost = "morak.sumnerevans.com";
@@ -69,5 +70,17 @@ in
     };
 
     imports = [ ./hosts/morak ];
+  };
+
+  # ThinkPad T14s AMD Gen 3
+  scarif = {
+    deployment = {
+      allowLocalDeployment = true;
+      targetHost = null;
+
+      tags = [ "laptop" ];
+    };
+
+    imports = [ ./hosts/scarif ];
   };
 }

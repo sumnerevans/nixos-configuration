@@ -8,18 +8,12 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  # Set the hostname
-  networking.hostName = "scarif";
-  hardware.isPC = true;
-  hardware.ramSize = 32;
-  hardware.isLaptop = true;
+  # hardware.isPC = true;
+  # hardware.ramSize = 32;
+  # hardware.isLaptop = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  services.thinkfan.enable = true;
-
-  # Use systemd-boot
   boot = {
-    loader.systemd-boot.enable = true;
     initrd = {
       availableKernelModules = [
         "nvme"
@@ -36,33 +30,15 @@
   };
 
   # Set up networking.
-  networking.useDHCP = lib.mkDefault true;
+  networking.useDHCP = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 32 * 1024;
+    }
+  ];
 
-  programs.sway.enable = true;
-  programs.steam.enable = true;
-
-  # Enable Docker.
-  virtualisation.docker.enable = true;
-
-  programs.dsearch = {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "graphical-session.target"; # Only start in graphical sessions
-    };
-  };
-  programs.dms-shell.enable = true;
-  programs.niri.enable = true;
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor.name = "niri";
-    configHome = config.users.users.sumner.home;
-  };
-
-  # Extra options for btrfs
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/55764ade-c6c9-4a6d-abb4-3112148bd596";
@@ -104,10 +80,4 @@
     };
   };
 
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 32 * 1024;
-    }
-  ];
 }

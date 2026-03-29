@@ -1,10 +1,10 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   hostnameDomain = "syncthing.${config.networking.hostName}.${config.networking.domain}";
-  syncthingCfg = config.services.syncthing;
 in
-lib.mkIf syncthingCfg.enable {
+{
   services.syncthing = {
+    enable = true;
     openDefaultPorts = true;
     guiAddress = "0.0.0.0:8384";
   };

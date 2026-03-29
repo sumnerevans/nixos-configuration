@@ -1,10 +1,7 @@
-{ config, lib, ... }:
-with lib;
-let
-  cfg = config.services.glance;
-in
-mkIf cfg.enable {
+{ config, ... }:
+{
   services.glance = {
+    enable = true;
     settings = {
       server.port = 5678;
       pages = [
@@ -31,23 +28,6 @@ mkIf cfg.enable {
                 {
                   type = "bookmarks";
                   groups = [
-                    {
-                      title = "Beeper";
-                      links = [
-                        {
-                          title = "Linear";
-                          url = "https://linear.app";
-                        }
-                        {
-                          title = "Admin";
-                          url = "https://admin.beeper.com";
-                        }
-                        {
-                          title = "Grafana";
-                          url = "https://grafana.beeper-tools.com";
-                        }
-                      ];
-                    }
                     {
                       title = "Financial";
                       links = [
@@ -78,7 +58,7 @@ mkIf cfg.enable {
                       links = [
                         {
                           title = "GoatCounter";
-                          url = "https://sws.goatcounter.com";
+                          url = "https://stats.sumnerevans.com";
                         }
                         {
                           title = "LinkedIn";
@@ -183,8 +163,8 @@ mkIf cfg.enable {
       enableACME = true;
       locations."/".proxyPass =
         let
-          host = cfg.settings.server.host;
-          port = toString cfg.settings.server.port;
+          host = config.services.glance.settings.server.host;
+          port = toString config.services.glance.settings.server.port;
         in
         "http://${host}:${port}";
     };

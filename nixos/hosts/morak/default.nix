@@ -1,16 +1,22 @@
 {
-  config,
   pkgs,
   ...
 }:
-let
-  quotesfile = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
-    hash = "sha256-OZTCW9PfESQpik8eMNbPIbJzAlqQiNt4VxzSgYl1++8=";
-  };
-in
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+
+    # Services
+    ./airsonic.nix
+    ./glance.nix
+    ./gonic.nix
+    ./grafana.nix
+    ./isso.nix
+    ./syncthing.nix
+    ./webfortune.nix
+  ];
+
+  hostCategory = "server";
 
   deployment.keys =
     let
@@ -27,19 +33,26 @@ in
       isso_comments_env = keyFor "isso_comments_env" "root";
     };
 
-  networking.hostName = "morak";
+  networking = {
+    hostName = "morak";
+    domain = "sumnerevans.com";
 
-  # Allow temporary redirects directly to the reverse proxy.
-  networking.firewall.allowedTCPPorts = [
-    8222
-    8080
-  ];
-  networking.firewall.allowedTCPPortRanges = [
-    {
-      from = 8008;
-      to = 8015;
-    }
-  ];
+    firewall = {
+      allowPing = true;
+
+      # Allow temporary redirects directly to the reverse proxy.
+      allowedTCPPorts = [
+        8222
+        8080
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 8008;
+          to = 8015;
+        }
+      ];
+    };
+  };
 
   # Enable fail2ban
   services.fail2ban.enable = true;
@@ -47,10 +60,6 @@ in
   ############
   # Services #
   ############
-  services.airsonic.enable = true;
-  services.glance.enable = true;
-  services.grafana.enable = true;
-  services.isso.enable = true;
   services.logrotate.enable = true;
   services.nginx.enable = true;
   services.postgresql.enable = true;
@@ -92,6 +101,7 @@ in
   };
 
   services.healthcheck = {
+    enable = true;
     checkId = "e1acf12a-ebc8-456a-aac8-96336e14d974";
     disks = [
       "/"
@@ -105,15 +115,7 @@ in
   services.backup.healthcheckId = "6c9caf62-4f7b-4ef7-82ac-d858d3bcbcb5";
   services.backup.healthcheckPruneId = "f90ed04a-2596-49d0-a89d-764780a27fc6";
 
-  # Webfortune
-  services.webfortune = {
-    enable = true;
-    inherit quotesfile;
-    sourceUrl = "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
-    virtualHost = "fortune.sumnerevans.com";
-  };
-
-  # Add a backup service for the actual config.
+  # Add a backup service for the actual data.
   services.backup.backups.syncthing-pictures-tmp-data = {
     path = "/mnt/syncthing-pictures-tmp";
   };

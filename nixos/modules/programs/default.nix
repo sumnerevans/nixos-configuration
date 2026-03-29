@@ -1,13 +1,41 @@
 { pkgs, ... }:
 {
-  imports = [ ./zsh.nix ];
+  imports = [ ./tmux.nix ];
 
-  programs.htop.enable = true;
-
+  # Environment variables
   environment.homeBinInPath = true;
 
-  environment.defaultPackages = with pkgs; [
-    jq
-    vim
+  # Minimal package set to install on all machines.
+  environment.systemPackages = with pkgs; [
+    android-tools
+    bind
+    direnv
+    fd
+    git
+    git-crypt
+    gnupg
+    htop
+    iftop
+    inetutils
+    lm_sensors
+    mtr
+    neovim
+    nix-direnv
+    openssl
+    restic
+    ripgrep
+    rsync
+    sysstat
+    tree
+    unzip
+    wireguard-tools
+    zsh
   ];
+
+  # Enable ZSH for the command-not-found functionality
+  programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
+
+  programs.htop.enable = true;
+  programs.vim.enable = true;
 }

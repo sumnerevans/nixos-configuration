@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, ... }:
+{ modulesPath, ... }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
@@ -15,9 +15,10 @@
     };
     kernelModules = [ ];
     extraModulePackages = [ ];
+
+    tmp.useTmpfs = true;
   };
 
-  hardware.isServer = true;
 
   networking.interfaces.eth0.useDHCP = true;
 

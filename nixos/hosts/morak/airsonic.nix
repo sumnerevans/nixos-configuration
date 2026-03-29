@@ -1,11 +1,10 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   serverName = "airsonic.${config.networking.domain}";
-  airsonicCfg = config.services.airsonic;
 in
-lib.mkIf airsonicCfg.enable {
-  # Create the airsonic service.
+{
   services.airsonic = {
+    enable = true;
     maxMemory = 1024;
     virtualHost = serverName;
   };

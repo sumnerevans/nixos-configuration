@@ -42,26 +42,6 @@
     }:
     (flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
-        nixosConfigurations =
-          let
-            mkCfg =
-              hostSpecific:
-              nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
-                specialArgs = { inherit inputs; };
-                modules = [
-                  ./configuration.nix
-                  hostSpecific
-                ];
-              };
-          in
-          {
-            coruscant = mkCfg ./host-configurations/coruscant.nix; # Desktop PC
-            mustafar = mkCfg ./host-configurations/mustafar.nix; # Kohaku
-            scarif = mkCfg ./host-configurations/scarif.nix; # ThinkPad T14s
-            tatooine = mkCfg ./host-configurations/tatooine.nix; # ThinkPad T580
-          };
-
         colmenaHive = colmena.lib.makeHive self.outputs.colmena;
         colmena = import ./nixos/colmena.nix inputs;
       };
@@ -69,7 +49,6 @@
       systems = [ "x86_64-linux" ];
       perSystem =
         {
-          lib,
           pkgs,
           system,
           ...

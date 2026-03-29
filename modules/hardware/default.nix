@@ -13,7 +13,6 @@ in
   imports = [
     ./bootloader.nix
     ./firewall.nix
-    ./laptop.nix
     ./networking.nix
     ./tmpfs.nix
   ];

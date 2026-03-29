@@ -1,11 +1,7 @@
-{ config, lib, ... }:
-with lib;
-let
-  issoCfg = config.services.isso;
-in
 {
-  config = mkIf issoCfg.enable {
-    services.isso.settings = {
+  services.isso = {
+    enable = true;
+    settings = {
       general = {
         host = "https://sumnerevans.com";
         notify = "smtp";
@@ -39,22 +35,22 @@ in
         password = "$ISSO_COMMENTS_ADMIN_PASSWORD";
       };
     };
-
-    systemd.services.isso = {
-      serviceConfig.EnvironmentFile = "/run/keys/isso_comments_env";
-    };
-
-    # Set up nginx to forward requests properly.
-    services.nginx.virtualHosts = {
-      "comments.sumnerevans.com" = {
-        enableACME = true;
-        forceSSL = true;
-
-        locations."/".proxyPass = "http://127.0.0.1:8888";
-      };
-    };
-
-    # Add a backup service.
-    services.backup.backups.isso.path = "/var/lib/private/isso";
   };
+
+  systemd.services.isso = {
+    serviceConfig.EnvironmentFile = "/run/keys/isso_comments_env";
+  };
+
+  # Set up nginx to forward requests properly.
+  services.nginx.virtualHosts = {
+    "comments.sumnerevans.com" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/".proxyPass = "http://127.0.0.1:8888";
+    };
+  };
+
+  # Add a backup service.
+  services.backup.backups.isso.path = "/var/lib/private/isso";
 }
