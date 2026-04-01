@@ -22,7 +22,6 @@ in
     ./sway.nix
     ./swaylock.nix
     ./wayland.nix
-    ./writeping.nix
     ./xorg.nix
   ];
 
