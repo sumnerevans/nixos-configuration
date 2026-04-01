@@ -13,12 +13,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
     webfortune = {
       url = "github:sumnerevans/webfortune";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
     };
 
     menucalc = {
@@ -37,39 +34,86 @@
       self,
       colmena,
       nixpkgs,
-      flake-parts,
+      home-manager,
+      webfortune,
+      mdf,
       ...
     }:
-    (flake-parts.lib.mkFlake { inherit inputs; } {
-      flake = {
-        colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-        colmena = import ./nixos/colmena.nix inputs;
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          permittedInsecurePackages = [ "olm-3.2.16" ];
+          allowUnfree = true;
+        };
+
+        overlays = [
+          (self: super: { inherit (webfortune.packages.${system}) webfortune; })
+          (self: super: { inherit (mdf.packages.${system}) mdf; })
+
+          # Wait until https://github.com/NixOS/nixpkgs/pull/504778 is merged
+          (final: prev: {
+            isso = prev.isso.overrideAttrs (old: rec {
+              src = prev.fetchFromGitHub {
+                owner = "isso-comments";
+                repo = "isso";
+                rev = "0.14.0";
+                hash = "sha256-8kXqqiMXxF0wCJ+AzYT8j0rjuhlXO3F6UJbump672b4=";
+              };
+
+              npmDeps = prev.fetchNpmDeps {
+                inherit src;
+                hash = "sha256-e3r5iZLmXlf5YBPGgeNBDkdgfbNcIZIXbRLyyoyJiTU=";
+              };
+
+              propagatedBuildInputs =
+                old.propagatedBuildInputs
+                ++ (with prev.python3Packages; [
+                  setuptools
+                  gevent
+                  mistune
+                ]);
+            });
+          })
+        ];
+      };
+    in
+    {
+      colmenaHive = colmena.lib.makeHive (import ./nixos/colmena.nix (inputs // { inherit pkgs; }));
+
+      nixosConfigurations = {
+        scarif = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = inputs // {
+            inherit pkgs;
+          };
+          modules = [
+            ./nixos/modules
+            ./nixos/hosts/scarif
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sumner = ./home-manager/host-configurations/scarif.nix;
+            }
+          ];
+        };
       };
 
-      systems = [ "x86_64-linux" ];
-      perSystem =
-        {
-          pkgs,
-          system,
-          ...
-        }:
-        {
-          _module.args.pkgs = import inputs.nixpkgs { inherit system; };
+      formatter = pkgs.nixfmt-tree;
 
-          formatter = pkgs.nixfmt-tree;
-
-          devShells.default = pkgs.mkShell {
-            packages = with pkgs; [
-              cargo
-              colmena.packages.${system}.colmena
-              git-crypt
-              gnutar
-              openssl
-              pass
-              pre-commit
-              python3
-            ];
-          };
-        };
-    });
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          cargo
+          colmena.packages.${system}.colmena
+          git-crypt
+          gnutar
+          openssl
+          pass
+          pre-commit
+          python3
+        ];
+      };
+    };
 }

@@ -18,21 +18,6 @@
 
   hostCategory = "server";
 
-  deployment.keys =
-    let
-      keyFor = keyname: for: {
-        keyCommand = [
-          "cat"
-          "secrets/${keyname}"
-        ];
-        user = for;
-        group = for;
-      };
-    in
-    {
-      isso_comments_env = keyFor "isso_comments_env" "root";
-    };
-
   networking = {
     hostName = "morak";
     domain = "sumnerevans.com";

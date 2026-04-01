@@ -24,6 +24,8 @@
   ];
 
   config = {
+    system.stateVersion = "23.05";
+
     time.timeZone = "America/Denver";
 
     boot = {

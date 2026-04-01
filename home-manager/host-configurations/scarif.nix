@@ -21,6 +21,8 @@ let
   '';
 in
 {
+  imports = [ ../home.nix ];
+
   wayland.enable = true;
   niri.enable = true;
   laptop.enable = true;

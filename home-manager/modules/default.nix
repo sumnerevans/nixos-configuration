@@ -13,7 +13,6 @@ in
     ./gpg.nix
     ./multimedia.nix
     ./neovim
-    ./nix.nix
     ./newsboat.nix
     ./ssh.nix
     ./symlinks.nix

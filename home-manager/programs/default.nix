@@ -94,6 +94,9 @@ in
   programs.htop.enable = true;
   programs.noti.enable = true;
   programs.password-store.enable = true;
+  programs.password-store.settings = {
+    PASSWORD_STORE_DIR = "$XDG_DATA_HOME/password-store";
+  };
 
   # TODO ssh
 }

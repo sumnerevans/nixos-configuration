@@ -1,23 +1,11 @@
-{ config, ... }:
+{ config, home-manager, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   hostCategory = "laptop";
   ramSize = 32;
-
-  deployment.keys =
-    let
-      keyFor = keyname: for: {
-        keyCommand = [
-          "cat"
-          "secrets/${keyname}"
-        ];
-        user = for;
-        group = for;
-      };
-    in
-    {
-    };
 
   networking.hostName = "scarif";
 
