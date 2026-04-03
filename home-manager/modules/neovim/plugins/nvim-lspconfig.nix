@@ -35,10 +35,6 @@ in
         config = ''
           local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-          vim.lsp.config("bashls", {
-            cmd = { "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start" },
-            capabilities = capabilities,
-          })
           vim.lsp.config("clangd", {
             cmd = { "${pkgs.clang-tools}/bin/clangd" },
             capabilities = capabilities,
@@ -151,19 +147,7 @@ in
             cmd = { "${pkgs.vale-ls}/bin/vale-ls" },
             capabilities = capabilities,
           })
-          vim.lsp.config("yamlls", {
-            cmd = { "${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio" },
-            capabilities = capabilities,
-            settings = {
-              yaml = {
-                schemas = {
-                  ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-                },
-              },
-            },
-          })
 
-          vim.lsp.enable("bashls")
           vim.lsp.enable("clangd")
           vim.lsp.enable('csharp_ls')
           vim.lsp.enable("cssls")
@@ -181,7 +165,6 @@ in
           vim.lsp.enable("tinymist")
           vim.lsp.enable("ts_ls")
           vim.lsp.enable("vale_ls")
-          vim.lsp.enable("yamlls")
 
           -- F#
           require('ionide').setup {

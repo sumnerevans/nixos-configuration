@@ -19,7 +19,7 @@
             goimports = { command = "${pkgs.gotools}/bin/goimports" },
             nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
             prettier = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier",
+              command = "${pkgs.prettier}/bin/prettier",
               prepend_args = { "--trailing-comma", "es5" },
             },
           },

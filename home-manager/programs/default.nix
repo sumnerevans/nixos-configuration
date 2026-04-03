@@ -73,7 +73,6 @@ in
 
     # GUI Tools
     baobab
-    # bitwarden-desktop
     styluslabs-write-bin
     xournalpp
 

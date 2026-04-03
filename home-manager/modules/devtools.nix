@@ -58,28 +58,8 @@ in
       telemetry.mode = "on";
     };
 
-    # Claude
-    programs.claude-code = {
-      enable = true;
-      agents = {
-        code-reviewer = ''
-          ---
-          name: code-reviewer
-          description: Specialized code review agent
-          tools: Read, Edit, Grep
-          ---
-
-          You are a senior software engineer specializing in code reviews.
-          Focus on code quality, security, and maintainability.
-        '';
-      };
-      settings = {
-        permissions.defaultMode = "acceptEdits";
-        alwaysThinkingEnabled = true;
-      };
-    };
-
     # Enable developer programs
+    # programs.claude-code.enable = true;
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
     programs.jq.enable = true;

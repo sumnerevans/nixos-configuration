@@ -106,7 +106,8 @@
 
     # Printing
     services.printing.enable = true;
-    services.avahi = { # For printer discovery
+    # For printer discovery
+    services.avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
