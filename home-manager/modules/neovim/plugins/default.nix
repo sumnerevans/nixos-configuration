@@ -31,9 +31,6 @@
     # Synatx Highlighting
     ./rainbow-delimiters.nix
     ./tree-sitter.nix
-
-    # LOLs
-    ./presence.nvim.nix
   ];
 
   programs.neovim.plugins = [

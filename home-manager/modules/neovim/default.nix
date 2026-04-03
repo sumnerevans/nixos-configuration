@@ -20,7 +20,6 @@
 with lib;
 {
   imports = [
-    ./clipboard.nix
     ./plugins
     ./shortcuts.nix
     ./theme.nix
@@ -28,10 +27,14 @@ with lib;
 
   programs.neovim = {
     enable = true;
-    extraConfig = concatMapStringsSep "\n\n" builtins.readFile [
-      ./init.vim
-      ./filetype-specific-configs.vim
-    ];
+    extraConfig =
+      concatMapStringsSep "\n\n" builtins.readFile [
+        ./init.vim
+        ./filetype-specific-configs.vim
+      ]
+      + ''
+        set clipboard+=unnamed${if config.isLinux then "plus" else ""}
+      '';
 
     extraPackages = with pkgs; [
       bat
