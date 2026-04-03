@@ -24,8 +24,8 @@
 
     # Language Server, Completion, and Formatting
     ./conform.nvim.nix
+    ./lsp.nix
     ./nvim-cmp.nix
-    ./nvim-lspconfig.nix
     ./trouble.nvim.nix
     ./typst-preview.nix
 
