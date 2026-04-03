@@ -15,7 +15,6 @@
     ./barbar.nix
     ./blamer.nix
     ./gitsigns-nvim.nix
-    ./vim-lightline.nix
     ./nvim-tree-lua.nix
 
     # Editor
