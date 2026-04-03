@@ -95,8 +95,6 @@ with lib;
             fi
           fi
 
-          export TERM=xterm-256color
-
           if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
             ${builtins.readFile ./key-widgets.zsh}

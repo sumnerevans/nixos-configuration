@@ -1,15 +1,16 @@
-{ pkgs, lib, ... }:
-with lib;
+{ pkgs, ... }:
 {
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       vim-devicons
-      nightfox-nvim
+      edge
     ];
 
     extraConfig = ''
-      colorscheme carbonfox
-      set background=dark
+      autocmd OptionSet background
+
+      let g:edge_better_performance = 1
+      colorscheme edge
 
       highlight LspInlayHint ctermbg=0 cterm=italic guibg=transparent gui=italic
     '';

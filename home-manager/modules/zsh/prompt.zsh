@@ -17,14 +17,7 @@ function __lprompt {
         echo -n "%B%F{yellow}[SSH]%f%b "
     fi
 
-    lprompt_color="%F{cyan}"
-    extra_lprompt=" "
-    if [[ $BEEPER_ENV == "production" && ! -n $BEEPER_READONLY ]]; then
-        lprompt_color="%F{red}"
-        extra_lprompt=" (🚨 PRODUCTION 🚨) "
-    fi
-
-    echo "%B${lprompt_color}%~${extra_lprompt}%F{white}%# %b%f"
+    echo "%B%F{cyan}%~%f \$%b "
 }
 
 function __rprompt {

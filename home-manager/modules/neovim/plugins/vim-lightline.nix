@@ -16,8 +16,6 @@
           \   },
           \   'separator': {'left': '', 'right': ''},
           \ }
-
-        let g:lightline.colorscheme = 'one'
       '';
     }
     {
