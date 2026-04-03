@@ -40,7 +40,7 @@ in
 
       realName = mkDefault "Sumner Evans";
       userName = mkDefault address;
-      passwordCommand = mkDefault "${pkgs.coreutils}/bin/cat ${config.xdg.configHome}/home-manager/secrets/mail/${address}";
+      passwordCommand = mkDefault "${pkgs.coreutils}/bin/cat /etc/nixos/secrets/mail/${address}";
 
       mbsync = {
         enable = true;
