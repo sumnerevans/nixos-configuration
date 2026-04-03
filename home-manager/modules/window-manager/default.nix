@@ -18,7 +18,6 @@ in
     ./mako.nix
     ./niri.nix
     ./rofi.nix
-    ./wallpaper.nix
     ./sway.nix
     ./swaylock.nix
     ./wayland.nix
