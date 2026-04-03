@@ -3,7 +3,6 @@ let
 in
 {
   imports = [
-    ./alacritty.nix
     ./browsers.nix
     ./communication.nix
     ./devtools.nix

@@ -5,23 +5,11 @@
   ...
 }:
 with lib;
-let
-  terminal = "${pkgs.kitty}/bin/kitty";
-  xorgCfg = config.xorg;
-in
 {
   imports = [
-    ./autorandr.nix
-    ./i3status-rust.nix
-    ./kanshi.nix
     ./kitty.nix
-    ./mako.nix
     ./niri.nix
-    ./rofi.nix
-    ./sway.nix
-    ./swaylock.nix
     ./wayland.nix
-    ./xorg.nix
   ];
 
   options = {
@@ -43,7 +31,7 @@ in
   config = mkMerge [
     {
       home.sessionVariables = {
-        TERMINAL = "${terminal}";
+        TERMINAL = "${pkgs.kitty}/bin/kitty";
       };
 
       home.pointerCursor = {
