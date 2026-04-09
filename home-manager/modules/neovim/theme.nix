@@ -6,11 +6,10 @@
       edge
     ];
 
-    extraConfig = ''
-      let g:edge_better_performance = 1
-      colorscheme edge
-
-      highlight LspInlayHint ctermbg=0 cterm=italic guibg=transparent gui=italic
+    extraLuaConfig = ''
+      vim.g.edge_better_performance = 1
+      vim.cmd("colorscheme edge")
+      vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#888888', bg = 'NONE', italic = true })
     '';
   };
 }
