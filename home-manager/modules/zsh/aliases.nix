@@ -42,6 +42,7 @@ with lib;
       sbcl = "rlwrap sbcl";
       screen = "screen -DR";
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
+      ssh = "kitten ssh";
       tar = "${pkgs.libarchive}/bin/bsdtar";
       wdir = "watch --color -n .5 'ls -lha --color=always'";
       xelatex = "xelatex -shell-escape";
