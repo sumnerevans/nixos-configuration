@@ -34,6 +34,8 @@ in
 
         # Better Python REPL
         python3Packages.ptpython
+
+        claude-code
       ]
       ++ (
         # GUI Tools
