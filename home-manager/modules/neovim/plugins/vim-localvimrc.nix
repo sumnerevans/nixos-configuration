@@ -3,6 +3,7 @@ with pkgs;
 {
   programs.neovim.plugins = [
     {
+      type = "viml";
       plugin = vimPlugins.vim-localvimrc;
       config = ''
         let g:localvimrc_persistent = 2

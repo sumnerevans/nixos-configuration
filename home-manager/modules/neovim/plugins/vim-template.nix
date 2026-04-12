@@ -16,6 +16,7 @@ in
 {
   programs.neovim.plugins = [
     {
+      type = "viml";
       plugin = vim-template;
       config = ''
         let g:templates_no_builtin_templates = 1

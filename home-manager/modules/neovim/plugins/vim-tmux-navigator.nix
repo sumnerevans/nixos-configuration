@@ -4,6 +4,7 @@ with pkgs;
 {
   programs.neovim.plugins = [
     {
+      type = "viml";
       plugin = vimPlugins.vim-tmux-navigator;
       config = ''
         let g:tmux_navigator_no_mappings = 1

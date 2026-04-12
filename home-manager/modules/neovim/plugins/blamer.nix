@@ -3,6 +3,7 @@
 {
   programs.neovim.plugins = [
     {
+      type = "viml";
       plugin = pkgs.vimPlugins.blamer-nvim;
       config = ''
         let g:blamer_enabled = 1

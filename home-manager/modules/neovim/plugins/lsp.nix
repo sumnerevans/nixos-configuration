@@ -23,6 +23,7 @@ in
     ];
     plugins = with pkgs.vimPlugins; [
       {
+        type = "viml";
         plugin = Ionide-vim;
         config = ''
           let g:fsharp#lsp_auto_setup = 0

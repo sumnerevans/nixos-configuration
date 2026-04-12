@@ -9,6 +9,7 @@ in
 {
   programs.neovim.plugins = [
     {
+      type = "viml";
       plugin = pkgs.vimPlugins.vim-rooter;
       config = ''
         let g:rooter_patterns = [${lib.concatMapStringsSep ", " (p: "'${p}'") rooter_patterns}]

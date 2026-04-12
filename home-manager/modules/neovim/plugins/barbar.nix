@@ -3,6 +3,7 @@
   programs.neovim.plugins = with pkgs.vimPlugins; [
     nvim-web-devicons
     {
+      type = "viml";
       plugin = barbar-nvim;
       config = ''
         " Buffer navigation
