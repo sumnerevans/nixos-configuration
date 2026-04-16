@@ -8,20 +8,7 @@ with lib;
 {
   programs.zsh = {
     shellAliases = {
-      ##### Command Shortcuts #####
-      # Printing
-      alpr = "ssh isengard lpr -P bb136-printer -o coallate=true";
-      alprd = "ssh isengard lpr -P bb136-printer -o coallate=true -o Duplex=DuplexNoTumble";
-      lpr = "lpr -o coallate=true";
-      hlpr = "lpr -P HP_ENVY_4500_series";
-      hlprd = "hlpr -o Duplex=DuplexNoTumble";
-
-      # Config
-      projectlist = "vim ~st/projectlist && projectsync";
-      quotesfile = "vim ${config.xdg.configHome}/home-manager/modules/email/quotes";
-      reload = ". ~/.zshrc && echo 'ZSH Config Reloaded from ~/.zshrc'";
-      sshconf = "vim ~/.ssh/config";
-      vimrc = "realvim ~/.vim/vimrc";
+      quotesfile = "vim /etc/nixos/home-manager/modules/email/quotes";
 
       # Other aliases
       antioffice = "libreoffice --headless --convert-to pdf";
@@ -38,18 +25,10 @@ with lib;
       myip = "curl 'https://api.ipify.org?format=text' && echo";
       ohea = "echo 'You need to either wake up or go to bed!'";
       open = if config.isLinux then "(thunar &> /dev/null &)" else "open .";
-      pdflatex = "pdflatex -shell-escape";
-      sbcl = "rlwrap sbcl";
       screen = "screen -DR";
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       ssh = "kitten ssh";
       tar = "${pkgs.libarchive}/bin/bsdtar";
-      wdir = "watch --color -n .5 'ls -lha --color=always'";
-      xelatex = "xelatex -shell-escape";
-      zathura = "zathura --fork";
-
-      # Use nvim by default if it exists
-      realvim = "command vim";
     };
 
     initContent = ''
