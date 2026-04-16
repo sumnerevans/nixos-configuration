@@ -81,6 +81,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Open Launcher" { spawn-sh "dms ipc call spotlight toggle"; }
+    Mod+Space hotkey-overlay-title="Open Launcher" { spawn-sh "dms ipc call spotlight toggle"; }
     Mod+Shift+X hotkey-overlay-title="Lock Screen" { spawn-sh "dms ipc call lock lock"; }
     Mod+C hotkey-overlay-title="Open Clipboard Manager" { spawn-sh "dms ipc call clipboard open"; }
     Mod+Backslash { spawn "~/bin/mutt_helper"; }

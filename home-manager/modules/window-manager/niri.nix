@@ -22,7 +22,6 @@ in
     ];
     xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;
 
-    # TODO extract to separate file?
     programs.fuzzel = {
       enable = true;
     };
