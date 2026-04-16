@@ -52,6 +52,23 @@
           (self: super: { inherit (webfortune.packages.${system}) webfortune; })
           (self: super: { inherit (mdf.packages.${system}) mdf; })
 
+          (final: prev: {
+            niri = prev.niri.overrideAttrs (old: rec {
+              pname = "niri";
+              src = prev.fetchFromGitHub {
+                owner = "ArthurHeymans";
+                repo = "niri";
+                rev = "97f3070f9889939990f7d5ab9ae2f5f7899c058c";
+                hash = "sha256-5p0o1EJtlMNjR0frO0XqZAolgZN5hUVDb3/orduBkf4=";
+              };
+
+              cargoDeps = final.rustPlatform.fetchCargoVendor{
+                  inherit src;
+                  hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
+              };
+            });
+          })
+
           # Wait until https://github.com/NixOS/nixpkgs/pull/504778 is merged
           (final: prev: {
             isso = prev.isso.overrideAttrs (old: rec {
