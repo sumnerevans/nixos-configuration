@@ -36,7 +36,7 @@ in
       }
     ];
 
-    extraLuaConfig = ''
+    initLua = ''
       local lsps = {
         ["clangd"] = {
           cmd = { "${pkgs.clang-tools}/bin/clangd" },
