@@ -1,6 +1,8 @@
 {
-  # Import a bunch of things.
-  imports = [ ./modules ];
+  imports = [
+    ./cachix.nix
+    ./modules
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
