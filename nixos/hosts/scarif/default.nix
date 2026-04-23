@@ -1,4 +1,3 @@
-{ config, home-manager, ... }:
 {
   imports = [
     ./hardware-configuration.nix

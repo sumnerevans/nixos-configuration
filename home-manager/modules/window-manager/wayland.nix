@@ -8,14 +8,7 @@ let
   cfg = config.wayland;
 in
 {
-  options = {
-    wayland.enable = mkEnableOption "the Wayland stack";
-    wayland.extraSwayConfig = mkOption {
-      type = types.attrsOf types.anything;
-      description = "Extra config for Sway";
-      default = { };
-    };
-  };
+  options.wayland.enable = mkEnableOption "the Wayland stack";
 
   config = mkIf cfg.enable {
     programs.mpv.config = {
