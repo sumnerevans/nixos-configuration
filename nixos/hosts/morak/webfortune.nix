@@ -24,8 +24,8 @@ in
     wantedBy = [ "multi-user.target" ];
     environment = {
       QUOTESFILE = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/sumnerevans/home-manager-config/master/modules/email/quotes";
-        hash = "sha256-OZTCW9PfESQpik8eMNbPIbJzAlqQiNt4VxzSgYl1++8=";
+        url = "https://raw.githubusercontent.com/sumnerevans/nixos-configuration/refs/heads/master/home-manager/modules/email/quotes";
+        hash = "sha256-B4HrxSCEV5rO5BptTiNsncPgUUV57kQpb3AJY+wvyoE=";
       };
       QUOTESFILE_SOURCE_URL = "https://github.com/sumnerevans/home-manager-config/blob/master/modules/email/quotes";
       LISTEN_ADDR = listenAddr;
