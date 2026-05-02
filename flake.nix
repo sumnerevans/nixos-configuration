@@ -62,9 +62,9 @@
                 hash = "sha256-5p0o1EJtlMNjR0frO0XqZAolgZN5hUVDb3/orduBkf4=";
               };
 
-              cargoDeps = final.rustPlatform.fetchCargoVendor{
-                  inherit src;
-                  hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
+              cargoDeps = final.rustPlatform.fetchCargoVendor {
+                inherit src;
+                hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
               };
             });
           })
@@ -118,7 +118,7 @@
         };
       };
 
-      formatter = pkgs.nixfmt-tree;
+      formatter.${system} = pkgs.nixfmt-tree;
 
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
