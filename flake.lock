@@ -374,11 +374,11 @@
         "templ": "templ"
       },
       "locked": {
-        "lastModified": 1777695640,
-        "narHash": "sha256-xM3tx922vft3mHRpNMoGp/bTB1JgDG6Bd2j7Hhl5XXI=",
+        "lastModified": 1777732524,
+        "narHash": "sha256-HyfBSLayDltTN5qbQmwUmZFicLL2nY+bPho5WOG5N1U=",
         "owner": "sumnerevans",
         "repo": "webfortune",
-        "rev": "c800f11fd79dca8089f0856e3a2bbdf97922c4cb",
+        "rev": "d46d95bef5ac701e4eabf755f93c377640d52036",
         "type": "github"
       },
       "original": {
