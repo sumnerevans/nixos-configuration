@@ -12,7 +12,7 @@
     sessionVariables = {
       YSU_HARDCORE = 1; # Force usage of aliases
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=8";
-      ZSH_AUTOSUGGEST_STRATEGY = [ "match_prev_cmd" ];
+      ZSH_AUTOSUGGEST_STRATEGY = "match_prev_cmd";
       ZSH_AUTOSUGGEST_USE_ASYNC = "1";
     };
   };
