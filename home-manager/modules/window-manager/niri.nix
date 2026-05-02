@@ -15,18 +15,15 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      dms-shell
       niri
       swaybg
-      dms-shell
       xwayland-satellite
     ];
     xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;
 
-    programs.fuzzel = {
-      enable = true;
-    };
-
-    services.polkit-gnome.enable = true; # polkit
+    programs.fuzzel.enable = true;
+    services.polkit-gnome.enable = true;
 
     home.sessionVariables = {
       XDG_CURRENT_DESKTOP = "niri";
