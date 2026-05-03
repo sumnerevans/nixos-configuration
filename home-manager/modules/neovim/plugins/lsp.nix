@@ -23,14 +23,6 @@ in
     ];
     plugins = with pkgs.vimPlugins; [
       {
-        type = "viml";
-        plugin = Ionide-vim;
-        config = ''
-          let g:fsharp#lsp_auto_setup = 0
-          let g:fsharp#exclude_project_directories = ['paket-files']
-        '';
-      }
-      {
         type = "lua";
         plugin = nvim-lspconfig;
       }
@@ -40,9 +32,6 @@ in
       local lsps = {
         ["clangd"] = {
           cmd = { "${pkgs.clang-tools}/bin/clangd" },
-        },
-        ["csharp_ls"] = {
-          cmd = { "${pkgs.csharp-ls}/bin/csharp-ls" },
         },
         ["cssls"] = {
           cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server", "--stdio" },
@@ -143,11 +132,6 @@ in
         vim.lsp.config(name, config)
         vim.lsp.enable(name)
       end
-
-      -- F#
-      require('ionide').setup {
-        autostart = true,
-      }
 
       -- Use LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer

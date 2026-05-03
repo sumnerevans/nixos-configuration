@@ -7,14 +7,12 @@
       config = ''
         require("conform").setup({
           formatters_by_ft = {
-            cs = { "csharpier" },
             go = { "goimports" },
             markdown = { "deno_fmt" },
             nix = { "nixfmt" },
             typescript = { "prettier" },
           },
           formatters = {
-            csharpier = { command = "${pkgs.csharpier}/bin/csharpier" },
             deno_fmt = { command = "${pkgs.deno}/bin/deno" },
             goimports = { command = "${pkgs.gotools}/bin/goimports" },
             nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
