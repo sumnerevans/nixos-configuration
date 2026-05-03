@@ -7,6 +7,7 @@
 with lib;
 {
   imports = [
+    ./dms.nix
     ./kitty.nix
     ./niri.nix
     ./wayland.nix

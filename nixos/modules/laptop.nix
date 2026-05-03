@@ -1,13 +1,10 @@
 {
   config,
   lib,
-  dms-plugin-registry,
   pkgs,
   ...
 }:
 {
-  imports = [ dms-plugin-registry.modules.default ];
-
   config = lib.mkIf (config.hostCategory == "laptop") {
     environment.homeBinInPath = true;
     services.upower.enable = true;
@@ -127,14 +124,7 @@
     };
 
     # DMS + Niri
-    programs.dms-shell = {
-      enable = true;
-      plugins = {
-        dankBatteryAlerts.enable = true;
-        claudeCodeUsage.enable = true;
-        calculator.enable = true;
-      };
-    };
+    programs.gpu-screen-recorder.enable = true;
     programs.dsearch = {
       enable = true;
       systemd = {

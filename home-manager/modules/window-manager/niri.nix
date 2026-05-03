@@ -4,20 +4,17 @@
   pkgs,
   ...
 }:
-with lib;
 let
   cfg = config.niri;
 in
 {
   options = {
-    niri.enable = mkEnableOption "Niri WM";
+    niri.enable = lib.mkEnableOption "Niri WM";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      dms-shell
       niri
-      swaybg
       xwayland-satellite
     ];
     xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;

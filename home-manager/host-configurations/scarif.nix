@@ -4,6 +4,7 @@
 
   wayland.enable = true;
   niri.enable = true;
+  dms.enable = true;
 
   mdf.port = 1024;
 
