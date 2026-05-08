@@ -24,10 +24,7 @@ in
     wantedBy = [ "multi-user.target" ];
     environment = {
       COPYRIGHT = "2026 Sumner Evans";
-      QUOTESFILE = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/sumnerevans/nixos-configuration/refs/heads/master/home-manager/modules/email/quotes";
-        hash = "sha256-B4HrxSCEV5rO5BptTiNsncPgUUV57kQpb3AJY+wvyoE=";
-      };
+      QUOTESFILE = ../../../home-manager/modules/email/quotes;
       QUOTESFILE_SOURCE_URL = "https://github.com/sumnerevans/nixos-configuration/blob/master/home-manager/modules/email/quotes";
       LISTEN_ADDR = listenAddr;
       GOATCOUNTER_DOMAIN = "https://fortune.goatcounter.com/count";
