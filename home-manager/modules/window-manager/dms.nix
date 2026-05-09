@@ -47,7 +47,6 @@
           enable = true;
           settings.trigger = "=";
         };
-        claudeCodeUsage.enable = true;
         dankBatteryAlerts.enable = true;
         niriScreenshot.enable = true;
         screenRecorder.enable = true;

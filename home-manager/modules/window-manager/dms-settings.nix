@@ -435,10 +435,6 @@
           enabled = true;
         }
         {
-          id = "claudeCodeUsage";
-          enabled = true;
-        }
-        {
           id = "clipboard";
           enabled = true;
         }
