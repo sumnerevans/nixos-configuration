@@ -1,16 +1,18 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
-with lib;
 let
   cfg = config.wayland;
 in
 {
-  options.wayland.enable = mkEnableOption "the Wayland stack";
+  options.wayland.enable = lib.mkEnableOption "the Wayland stack";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.wl-clipboard ];
+
     programs.mpv.config = {
       gpu-context = "wayland";
     };

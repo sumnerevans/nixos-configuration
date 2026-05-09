@@ -23,7 +23,7 @@ let
   mailcapConfig = {
     # HTML
     "text/html" = [
-      "${pkgs.elinks}/bin/elinks -dump %s"
+      "${pkgs.lynx}/bin/lynx -dump %s"
       "copiousoutput"
     ];
 

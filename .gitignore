@@ -5,3 +5,4 @@ result
 .venv
 .restic_hostname
 secrets/
+.claude/settings.local.json

@@ -67,10 +67,6 @@ in
     ))
   ]
   ++ lib.optionals hasGui [
-    # Configuration GUIs
-    gnome-power-manager
-    networkmanagerapplet
-
     # GUI Tools
     baobab
     styluslabs-write-bin

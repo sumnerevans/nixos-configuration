@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  inputs,
   pkgs,
   ...
 }:
@@ -10,7 +9,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    elinks
     w3m
   ];
 

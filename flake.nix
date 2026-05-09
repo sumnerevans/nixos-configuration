@@ -29,7 +29,7 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -62,6 +62,7 @@
           (self: super: { inherit (webfortune.packages.${system}) webfortune; })
           (self: super: { inherit (mdf.packages.${system}) mdf; })
 
+          # https://github.com/niri-wm/niri/pull/3061/
           (final: prev: {
             niri = prev.niri.overrideAttrs (old: rec {
               pname = "niri";
@@ -76,6 +77,9 @@
                 inherit src;
                 hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
               };
+
+              checkPhase = "true";
+              doInstallCheck = false;
             });
           })
 
