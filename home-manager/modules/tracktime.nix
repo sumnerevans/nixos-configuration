@@ -1,17 +1,13 @@
 {
-  lib,
   pkgs,
   ...
 }:
-with lib;
-with pkgs;
 let
   secretsDir = "/etc/nixos/secrets";
-  tracktime = callPackage ../pkgs/tracktime.nix { };
   yamlFormat = pkgs.formats.yaml { };
 in
 {
-  home.packages = [ tracktime ];
+  home.packages = [ pkgs.tracktime ];
 
   xdg.configFile."tracktime/tracktimerc".source = yamlFormat.generate "tracktimerc" {
     fullname = "Sumner Evans";
@@ -32,7 +28,6 @@ in
     };
 
     sync_time = true;
-    tableformat = "fancy_grid";
 
     day_worked_min_threshold = 120;
 

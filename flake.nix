@@ -37,6 +37,11 @@
       url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tracktime = {
+      url = "github:sumnerevans/tracktime";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -45,8 +50,10 @@
       colmena,
       nixpkgs,
       home-manager,
-      webfortune,
+
       mdf,
+      tracktime,
+      webfortune,
       ...
     }:
     let
@@ -61,6 +68,7 @@
         overlays = [
           (self: super: { inherit (webfortune.packages.${system}) webfortune; })
           (self: super: { inherit (mdf.packages.${system}) mdf; })
+          (self: super: { inherit (tracktime.packages.${system}) tracktime; })
 
           # https://github.com/niri-wm/niri/pull/3061/
           (final: prev: {
