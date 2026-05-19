@@ -78,6 +78,12 @@
                 hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
               };
 
+              postPatch = ''
+                patchShebangs resources/niri-session
+                substituteInPlace resources/niri.service \
+                  --replace-fail '/usr/bin/niri' "$out/bin/niri"
+              '';
+
               checkPhase = "true";
               doInstallCheck = false;
             });
