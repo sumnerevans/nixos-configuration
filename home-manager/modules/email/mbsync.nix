@@ -25,5 +25,5 @@
       frequency = "*:0/10";
     };
 
-  systemd.user.timers.mbsync.Time.Persistent = true;
+  systemd.user.timers.mbsync.Timer.Persistent = true;
 }
