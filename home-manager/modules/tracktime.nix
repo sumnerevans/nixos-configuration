@@ -9,29 +9,32 @@ in
 {
   home.packages = [ pkgs.tracktime ];
 
-  xdg.configFile."tracktime/tracktimerc".source = yamlFormat.generate "tracktimerc" {
-    fullname = "Sumner Evans";
-    github = {
-      access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/github-tracktime-access-token|";
-      username = "sumnerevans";
+  xdg.configFile."tracktime/tracktimerc" = {
+    force = true;
+    source = yamlFormat.generate "tracktimerc" {
+      fullname = "Sumner Evans";
+      github = {
+        access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/github-tracktime-access-token|";
+        username = "sumnerevans";
+      };
+
+      gitlab = {
+        api_root = "https://gitlab.com/api/v4/";
+        api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/gitlab-api-key|";
+      };
+
+      sourcehut = {
+        api_root = "https://todo.sr.ht/api/";
+        access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/sourcehut-access-token|";
+        username = "~sumner";
+      };
+
+      sync_time = true;
+
+      day_worked_min_threshold = 120;
+
+      project_rates."teaching/tutoring" = 50;
     };
-
-    gitlab = {
-      api_root = "https://gitlab.com/api/v4/";
-      api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/gitlab-api-key|";
-    };
-
-    sourcehut = {
-      api_root = "https://todo.sr.ht/api/";
-      access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/sourcehut-access-token|";
-      username = "~sumner";
-    };
-
-    sync_time = true;
-
-    day_worked_min_threshold = 120;
-
-    project_rates."teaching/tutoring" = 50;
   };
 
   # Aliases
