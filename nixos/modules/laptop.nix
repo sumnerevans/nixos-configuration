@@ -30,10 +30,6 @@
     systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
     hardware.bluetooth.enable = true;
-    services.blueman = {
-      enable = true;
-      withApplet = false;
-    };
 
     # Pipewire
     services.pipewire = {
