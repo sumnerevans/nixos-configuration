@@ -3,6 +3,7 @@
   imports = [
     ./admin-accounts.nix
     ./gmail.nix
+    ./nevarro.nix
     ./personal.nix
   ];
 

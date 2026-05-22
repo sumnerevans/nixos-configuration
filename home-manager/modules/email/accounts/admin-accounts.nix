@@ -30,12 +30,6 @@ let
     color = "green";
   };
 
-  nevarroAdmin = {
-    name = "Nevarro-Admin";
-    address = "admin@nevarro.space";
-    color = "green";
-  };
-
   helper = import ./account-config-helper.nix { inherit config pkgs lib; };
 in
 {
@@ -58,12 +52,6 @@ in
     MinesHSPC-Admin = mkMerge [
       (helper.commonConfig mineshspcAdmin)
       (helper.imapnotifyConfig mineshspcAdmin)
-      { flavor = "migadu.com"; }
-    ];
-
-    Nevarro-Admin = mkMerge [
-      (helper.commonConfig nevarroAdmin)
-      (helper.imapnotifyConfig nevarroAdmin)
       { flavor = "migadu.com"; }
     ];
   };
