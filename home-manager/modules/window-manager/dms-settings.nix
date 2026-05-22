@@ -241,12 +241,12 @@
   soundVolumeChanged = true;
   soundPluggedIn = true;
   acMonitorTimeout = 600;
-  acLockTimeout = 60;
+  acLockTimeout = 180;
   acSuspendTimeout = 0;
   acSuspendBehavior = 0;
   acProfileName = "";
   batteryMonitorTimeout = 300;
-  batteryLockTimeout = 60;
+  batteryLockTimeout = 180;
   batterySuspendTimeout = 900;
   batterySuspendBehavior = 0;
   batteryProfileName = "";
