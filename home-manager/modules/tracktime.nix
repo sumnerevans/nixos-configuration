@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -29,11 +30,29 @@ in
         username = "~sumner";
       };
 
+      linear = {
+        default_org = "nevarro-space";
+        api_key = "${pkgs.coreutils}/bin/cat ${secretsDir}/linear-api-key|";
+      };
+
       sync_time = true;
 
       day_worked_min_threshold = 120;
 
       project_rates."teaching/tutoring" = 50;
+
+      logging = {
+        min_level = "debug";
+        writers = [
+          {
+            type = "file";
+            format = "json";
+            filename = "${config.xdg.stateHome}/tracktime/tracktime.log";
+            max_size = 10;
+            max_age = 90;
+          }
+        ];
+      };
     };
   };
 
