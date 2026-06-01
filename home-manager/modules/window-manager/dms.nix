@@ -65,6 +65,17 @@
             defaultEngine = "duckduckgo";
           };
         };
+        worldClock = {
+          enable = true;
+          settings = {
+            timezones = [
+              {
+                label = "UTC";
+                timezone = "UTC";
+              }
+            ];
+          };
+        };
       };
     };
   };

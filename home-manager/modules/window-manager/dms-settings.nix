@@ -431,6 +431,10 @@
       ];
       rightWidgets = [
         {
+          id = "worldClock";
+          enabled = true;
+        }
+        {
           id = "systemTray";
           enabled = true;
         }
