@@ -13,7 +13,6 @@ in
   xdg.configFile."tracktime/tracktimerc" = {
     force = true;
     source = yamlFormat.generate "tracktimerc" {
-      fullname = "Sumner Evans";
       github = {
         access_token = "${pkgs.coreutils}/bin/cat ${secretsDir}/github-tracktime-access-token|";
         username = "sumnerevans";
@@ -40,6 +39,21 @@ in
       day_worked_min_threshold = 120;
 
       project_rates."teaching/tutoring" = 50;
+
+      reporting = {
+        fullname = "Sumner Evans";
+        report_statistics = true;
+        customer_rates = {
+          "Can/Am" = 87.5;
+        };
+        customer_addresses = {
+          "Can/Am" = ''
+            8744 Kendrick Castillo Way
+            Suite 530
+            Highlands Ranch, CO 80129
+          '';
+        };
+      };
 
       logging = {
         min_level = "debug";

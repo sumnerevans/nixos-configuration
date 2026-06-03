@@ -450,11 +450,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780443280,
-        "narHash": "sha256-4pjzTfOY6esu1dPvO/8tkbTqe/eBTs71WerUy+N4EkY=",
+        "lastModified": 1780446904,
+        "narHash": "sha256-sw4TzZe/SuTJNcXP41LPPPX5c4eBoK7BhouV90nLYXU=",
         "owner": "sumnerevans",
         "repo": "tracktime",
-        "rev": "95ffdbaacaf74d925649c95d082c747ec9faa9d6",
+        "rev": "0dba05d8038d2d64f0d98371c403649da7b77a2d",
         "type": "github"
       },
       "original": {
