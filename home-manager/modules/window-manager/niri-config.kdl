@@ -73,6 +73,12 @@ window-rule {
     open-floating true
 }
 
+window-rule {
+    match app-id="^(zoom|us.zoom.Zoom)$"
+    exclude title="^.*Zoom Workplace"
+    open-floating true
+}
+
 binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
