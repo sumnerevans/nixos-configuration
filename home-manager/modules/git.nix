@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  offlinemsmtp = pkgs.callPackage ../pkgs/offlinemsmtp.nix { };
-in
 {
   home.packages = with pkgs; [
     gh
@@ -43,7 +40,7 @@ in
 
       sendemail = {
         annotate = "yes";
-        smtpserver = "${offlinemsmtp}/bin/offlinemsmtp";
+        smtpserver = "${pkgs.offlinemsmtp}/bin/offlinemsmtp";
         smtpserveroption = [
           "-a"
           "Personal"

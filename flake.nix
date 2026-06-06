@@ -2,6 +2,7 @@
   description = "Sumner's NixOS configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,6 +17,7 @@
     webfortune = {
       url = "github:sumnerevans/webfortune";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
 
     menucalc = {
@@ -41,6 +43,13 @@
     tracktime = {
       url = "github:sumnerevans/tracktime";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    offlinemsmtp = {
+      url = "github:sumnerevans/offlinemsmtp";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
   };
 
@@ -53,6 +62,7 @@
 
       mdf,
       tracktime,
+      offlinemsmtp,
       webfortune,
       ...
     }:
@@ -69,6 +79,7 @@
           (self: super: { inherit (webfortune.packages.${system}) webfortune; })
           (self: super: { inherit (mdf.packages.${system}) mdf; })
           (self: super: { inherit (tracktime.packages.${system}) tracktime; })
+          (self: super: { inherit (offlinemsmtp.packages.${system}) offlinemsmtp; })
 
           # https://github.com/niri-wm/niri/pull/3061/
           (final: prev: {

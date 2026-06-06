@@ -6,8 +6,6 @@
 }:
 with lib;
 let
-  offlinemsmtp = pkgs.callPackage ../../../pkgs/offlinemsmtp.nix { };
-
   # Create a signature script that gets a quote.
   mkSignatureScript =
     signatureLines:
@@ -53,7 +51,7 @@ in
 
       neomutt = {
         enable = true;
-        sendMailCommand = "${offlinemsmtp}/bin/offlinemsmtp -a ${name}";
+        sendMailCommand = "${pkgs.offlinemsmtp}/bin/offlinemsmtp -a ${name}";
 
         extraConfig = concatStringsSep "\n" (
           [

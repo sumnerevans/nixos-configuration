@@ -6,13 +6,13 @@
 }:
 with lib;
 let
-  offlinemsmtp = pkgs.callPackage ../../pkgs/offlinemsmtp.nix { };
   cfg = config.offlinemsmtp;
 
   args = [
     "--daemon"
-    "--loglevel DEBUG"
+    "-m debug"
     "--file ${config.xdg.configHome}/msmtp/config"
+    "--msmtp-path ${pkgs.msmtp}/bin/msmtp"
   ]
   # If headless, don't do notifications.
   ++ (optional cfg.headless "--silent")
@@ -23,7 +23,6 @@ in
   options = {
     offlinemsmtp = {
       headless = mkEnableOption "headless version of offlinemsmtp that doesn't do any notifications";
-      enableSendmailFile = mkEnableOption "a sendmail file";
 
       sendmailFile = mkOption {
         type = with types; nullOr str;
@@ -41,9 +40,7 @@ in
       };
 
       Service = {
-        ExecStart = ''
-          ${offlinemsmtp}/bin/offlinemsmtp ${concatStringsSep " " args}
-        '';
+        ExecStart = "${pkgs.offlinemsmtp}/bin/offlinemsmtp ${concatStringsSep " " args}";
         Restart = "always";
         RestartSec = 5;
       };

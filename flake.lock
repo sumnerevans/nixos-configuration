@@ -53,11 +53,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780433141,
-        "narHash": "sha256-oadTzLuDZy2zOhuASp24dygnql4ptVBAHFjvlcyfCK0=",
+        "lastModified": 1780626802,
+        "narHash": "sha256-kzdnpNc1dX+7myLb0nUo2e6Ojff/uQnjHQvGVxGG/4U=",
         "owner": "AvengeMedia",
         "repo": "dms-plugin-registry",
-        "rev": "a6ac6cb11640dccb20cc31df713674710f4cb223",
+        "rev": "fdded328772e526b2a5d31c52a2a2e15b805d7af",
         "type": "github"
       },
       "original": {
@@ -87,29 +87,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1777988971,
-        "narHash": "sha256-qIoWPDs+0/8JecyYgE3gpKQxW/4bLW/gp45vow9ioCQ=",
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "0678d8986be1661af6bb555f3489f2fdfc31f6ff",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_2": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
-      },
-      "locked": {
-        "lastModified": 1777678872,
-        "narHash": "sha256-EPIFsulyon7Z1vLQq5Fk64GR8L7cQsT+IPhcsukVbgk=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "5250617bffd85403b14dbf43c3870e7f255d2c16",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
         "type": "github"
       },
       "original": {
@@ -198,11 +180,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780408569,
-        "narHash": "sha256-s7Tv6FUQThRAvW8En8XVC6HMb0uiikzVccCcCo9u/Bg=",
+        "lastModified": 1780679734,
+        "narHash": "sha256-KmRNvpNOb7QEORa06bVgjW9kITcx0VhsI7w0vhmZyD8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f384af1bec6423a0d4ba1855917ab948f64e5808",
+        "rev": "b2b7db486e06e098711dc291bb25db82850e1d16",
         "type": "github"
       },
       "original": {
@@ -305,21 +287,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_2": {
-      "locked": {
-        "lastModified": 1777168982,
-        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1771848320,
@@ -333,6 +300,29 @@
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "offlinemsmtp": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780703267,
+        "narHash": "sha256-aCu2wO95ds93ftkuBUHXmGNSsHJSCnX9/xGU1OYrSMk=",
+        "owner": "sumnerevans",
+        "repo": "offlinemsmtp",
+        "rev": "0366c5b1c27b8421d4c3033eba5f9acf935e9543",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sumnerevans",
+        "repo": "offlinemsmtp",
         "type": "github"
       }
     },
@@ -363,10 +353,12 @@
         "colmena": "colmena",
         "dms": "dms",
         "dms-plugin-registry": "dms-plugin-registry",
+        "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "mdf": "mdf",
         "menucalc": "menucalc",
         "nixpkgs": "nixpkgs",
+        "offlinemsmtp": "offlinemsmtp",
         "tracktime": "tracktime",
         "webfortune": "webfortune"
       }
@@ -444,7 +436,9 @@
     },
     "tracktime": {
       "inputs": {
-        "flake-parts": "flake-parts",
+        "flake-parts": [
+          "flake-parts"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -488,7 +482,9 @@
     },
     "webfortune": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": [
+          "flake-parts"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
