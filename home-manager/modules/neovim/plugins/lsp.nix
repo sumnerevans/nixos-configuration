@@ -112,6 +112,14 @@ in
             },
           },
         },
+        ["rust_analyzer"] = {
+          cmd = { "${pkgs.rust-analyzer}/bin/rust-analyzer" },
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = true,
+            },
+          },
+        },
         ["templ"] = { },
         ["tinymist"] = {
           cmd = { "${pkgs.tinymist}/bin/tinymist" },
