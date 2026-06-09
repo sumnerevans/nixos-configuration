@@ -52,6 +52,7 @@ in
       neomutt = {
         enable = true;
         sendMailCommand = "${pkgs.offlinemsmtp}/bin/offlinemsmtp -- -a ${name}";
+        showDefaultMailbox = false;
 
         extraConfig = concatStringsSep "\n" (
           [

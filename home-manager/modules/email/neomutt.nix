@@ -8,7 +8,6 @@ with pkgs;
 with lib;
 let
   aliasfile = "${config.xdg.configHome}/neomutt/aliases";
-  mailboxfile = "${config.xdg.configHome}/neomutt/mailboxes";
 
   syncthingdir = "${config.home.homeDirectory}/Syncthing";
 in
@@ -35,7 +34,6 @@ in
     };
 
     home.symlinks."${aliasfile}" = "${syncthingdir}/.config/neomutt/aliases";
-    home.symlinks."${mailboxfile}" = "${syncthingdir}/.config/neomutt/mailboxes";
 
     systemd.user.services.mdf = {
       Unit.Description = "Run the mut display filter daemon for serving redirect pages.";
@@ -154,7 +152,7 @@ in
 
       extraConfig = ''
         source ${aliasfile}
-        source ${mailboxfile}
+        mailboxes `${pkgs.findutils}/bin/find ${config.home.homeDirectory}/Mail/ -type d -name cur | ${pkgs.gnused}/bin/sed -e 's:/cur/*$::' -e 's/ /\\ /g' | ${pkgs.coreutils}/bin/sort | ${pkgs.coreutils}/bin/tr '\n' ' '`
 
         set allow_ansi
         set display_filter="${pkgs.mdf}/bin/mdf --root-uri 'http://localhost:${toString config.mdf.port}/'"

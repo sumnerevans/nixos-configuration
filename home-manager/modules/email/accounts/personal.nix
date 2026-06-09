@@ -6,58 +6,24 @@
 }:
 with lib;
 let
+  oldGmailAccountConfig = {
+    address = "sumner.evans98@gmail.com";
+    name = "Gmail";
+    color = "yellow";
+    signatureLines = ''
+      Sumner Evans
+      Senior Implementation Tech Lead at Can/Am Technologies
+
+      https://sumnerevans.com | @sumner:nevarro.space
+
+      Note, this is not my main email, please update your contact information
+      for me to my new email: me@sumnerevans.com.
+    '';
+  };
+
   personalAccountConfig = {
     address = "me@sumnerevans.com";
     name = "Personal";
-    color = "green";
-    signatureLines = ''
-      Sumner Evans
-      Senior Implementation Tech Lead at Can/Am Technologies
-
-      https://sumnerevans.com | @sumner:nevarro.space
-    '';
-  };
-
-  inquiriesConfig = {
-    name = "Inquiries";
-    address = "inquiries@sumnerevans.com";
-    color = "green";
-    signatureLines = ''
-      Sumner Evans
-      Senior Implementation Tech Lead at Can/Am Technologies
-
-      https://sumnerevans.com | @sumner:nevarro.space
-    '';
-  };
-
-  financialConfig = {
-    name = "Financial";
-    address = "financial@sumnerevans.com";
-    color = "green";
-    signatureLines = ''
-      Jonathan Sumner Evans
-      Senior Implementation Tech Lead at Can/Am Technologies
-
-      https://sumnerevans.com | @sumner:nevarro.space
-    '';
-  };
-
-  teachingConfig = {
-    name = "Teaching";
-    address = "teaching@sumnerevans.com";
-    color = "green";
-    signatureLines = ''
-      Sumner Evans
-      Adjunct Professor, Colorado School of Mines
-      Senior Implementation Tech Lead at Can/Am Technologies
-
-      https://sumnerevans.com | @sumner:nevarro.space
-    '';
-  };
-
-  travelConfig = {
-    name = "Travel";
-    address = "travel@sumnerevans.com";
     color = "green";
     signatureLines = ''
       Sumner Evans
@@ -77,41 +43,29 @@ in
       (helper.signatureConfig personalAccountConfig)
       helper.gpgConfig
       {
-        flavor = "migadu.com";
+        flavor = "gmail.com";
         primary = true;
-        aliases = [ "alerts@sumnerevans.com" ];
+        folders = {
+          drafts = "[Gmail]/Drafts";
+          sent = "[Gmail]/Sent Mail";
+          trash = "[Gmail]/Trash";
+        };
       }
     ];
 
-    Inquiries = mkMerge [
-      (helper.commonConfig inquiriesConfig)
-      (helper.imapnotifyConfig inquiriesConfig)
-      (helper.signatureConfig personalAccountConfig)
-      {
-        flavor = "migadu.com";
-        aliases = [ "resume@sumnerevans.com" ];
-      }
-    ];
-
-    Financial = mkMerge [
-      (helper.commonConfig financialConfig)
-      (helper.signatureConfig financialConfig)
-      { flavor = "migadu.com"; }
-    ];
-
-    Teaching = mkMerge [
-      (helper.commonConfig teachingConfig)
-      (helper.imapnotifyConfig teachingConfig)
-      (helper.signatureConfig teachingConfig)
+    Gmail = mkMerge [
+      (helper.commonConfig oldGmailAccountConfig)
+      (helper.imapnotifyConfig oldGmailAccountConfig)
+      (helper.signatureConfig oldGmailAccountConfig)
       helper.gpgConfig
-      { flavor = "migadu.com"; }
-    ];
-
-    Travel = mkMerge [
-      (helper.commonConfig travelConfig)
-      (helper.imapnotifyConfig travelConfig)
-      (helper.signatureConfig travelConfig)
-      { flavor = "migadu.com"; }
+      {
+        flavor = "gmail.com";
+        folders = {
+          drafts = "[Gmail]/Drafts";
+          sent = "[Gmail]/Sent Mail";
+          trash = "[Gmail]/Trash";
+        };
+      }
     ];
   };
 }
