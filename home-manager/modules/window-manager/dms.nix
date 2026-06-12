@@ -48,7 +48,7 @@
           settings.trigger = "=";
         };
         dankBatteryAlerts.enable = true;
-        niriScreenshot.enable = true;
+        dmsScreenshot.enable = true;
         screenRecorder.enable = true;
         webSearch = {
           enable = true;

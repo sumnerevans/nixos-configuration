@@ -8,6 +8,7 @@ with lib;
 {
   imports = [
     ./dms.nix
+    ./hyprland.nix
     ./kitty.nix
     ./niri.nix
     ./wayland.nix

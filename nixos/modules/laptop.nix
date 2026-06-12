@@ -46,10 +46,14 @@
     services.flatpak.enable = true;
     xdg.portal = {
       enable = true;
-      configPackages = [ pkgs.niri ];
+      configPackages = with pkgs; [
+        niri
+        xdg-desktop-portal-hyprland
+      ];
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
       ];
     };
 
@@ -126,7 +130,7 @@
       isSystem = true;
     };
 
-    # DMS + Niri
+    # DMS + Niri/Hyprland
     programs.gpu-screen-recorder.enable = true;
     programs.dsearch = {
       enable = true;
@@ -136,9 +140,10 @@
       };
     };
     programs.niri.enable = true;
+    programs.hyprland.enable = true;
     services.displayManager.dms-greeter = {
       enable = true;
-      compositor.name = "niri";
+      compositor.name = "hyprland";
       configHome = config.users.users.sumner.home;
     };
   };
