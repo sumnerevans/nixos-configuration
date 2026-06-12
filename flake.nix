@@ -51,6 +51,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
+
+    mailnotify = {
+      url = "github:sumnerevans/mailnotify";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs =
@@ -64,6 +70,7 @@
       tracktime,
       offlinemsmtp,
       webfortune,
+      mailnotify,
       ...
     }:
     let
@@ -76,10 +83,11 @@
         };
 
         overlays = [
-          (self: super: { inherit (webfortune.packages.${system}) webfortune; })
+          (self: super: { inherit (mailnotify.packages.${system}) mailnotify; })
           (self: super: { inherit (mdf.packages.${system}) mdf; })
-          (self: super: { inherit (tracktime.packages.${system}) tracktime; })
           (self: super: { inherit (offlinemsmtp.packages.${system}) offlinemsmtp; })
+          (self: super: { inherit (tracktime.packages.${system}) tracktime; })
+          (self: super: { inherit (webfortune.packages.${system}) webfortune; })
 
           # https://github.com/niri-wm/niri/pull/3061/
           (final: prev: {

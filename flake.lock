@@ -193,6 +193,29 @@
         "type": "github"
       }
     },
+    "mailnotify": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781296056,
+        "narHash": "sha256-Hi0PvWE6EtBdgH9Lrek2ZvuKKw+3hkWj2JjkaYbH+pU=",
+        "owner": "sumnerevans",
+        "repo": "mailnotify",
+        "rev": "33aea179d9374e8acb235c82da7544101d669ebb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sumnerevans",
+        "repo": "mailnotify",
+        "type": "github"
+      }
+    },
     "mdf": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -313,11 +336,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780707744,
-        "narHash": "sha256-hBVIziZIJNKzwOAVydQTdqUiyAwPuRuRPC0hK2k8hZQ=",
+        "lastModified": 1781295831,
+        "narHash": "sha256-19NsrAQtr0ANiuDFJcWY9lE1VBr+NeuP68QZd+k3tRo=",
         "owner": "sumnerevans",
         "repo": "offlinemsmtp",
-        "rev": "5c723ed30802dbf6d52b82344970a89f2da7d1be",
+        "rev": "77f7d905796f1e92dc028f4822d520a4e45ffd7e",
         "type": "github"
       },
       "original": {
@@ -355,6 +378,7 @@
         "dms-plugin-registry": "dms-plugin-registry",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "mailnotify": "mailnotify",
         "mdf": "mdf",
         "menucalc": "menucalc",
         "nixpkgs": "nixpkgs",
