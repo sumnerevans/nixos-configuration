@@ -10,7 +10,7 @@
   };
 
   imports = [
-    inputs.dms-plugin-registry.modules.default
+    inputs.dms-plugin-registry.nixosModules.default
     inputs.dms.homeModules.dank-material-shell
   ];
 
