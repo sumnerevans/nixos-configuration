@@ -41,16 +41,10 @@ in
         # GUI Tools
         optionals hasGui [
           d-spy
-          rars
-          remmina
           sqlitebrowser
-          wireshark
 
           # GTK Development
           icon-library
-
-          # Android
-          android-studio
         ]
       );
 
