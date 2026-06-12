@@ -26,10 +26,8 @@ let
   frequency = "0/6:0"; # Run backup every six hours
   pruneFrequency = "Sun *-*-* 02:00"; # Run prune every Sunday at 02:00
 
-  # TODO use keys for this
-
-  resticPasswordFile = "/etc/nixos/secrets/restic-password";
-  resticEnvironmentFile = "/etc/nixos/secrets/restic-environment-variables";
+  resticPasswordFile = "/run/keys/restic-password";
+  resticEnvironmentFile = "/run/keys/restic-environment-variables";
   resticRepository = "b2:${bucket}:${repoPath}";
   # TODO be able to restore from a different repo path
 
