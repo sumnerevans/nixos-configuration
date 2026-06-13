@@ -101,12 +101,6 @@ with lib;
             ${builtins.readFile ./prompt.zsh}
             ${builtins.readFile ./git-repo-nav.zsh}
 
-            # Colors
-            autoload colors zsh/terminfo
-            colors
-            ${optionalString config.isLinux "eval $(dircolors -b)"}
-            ${optionalString config.isMacOS "export CLICOLOR=1"}
-
             setopt appendhistory
             setopt extendedglob
             setopt autopushd
