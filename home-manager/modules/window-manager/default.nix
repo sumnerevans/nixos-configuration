@@ -32,6 +32,10 @@ with lib;
 
   config = mkMerge [
     {
+      home.packages = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+
       home.sessionVariables = {
         TERMINAL = "${pkgs.kitty}/bin/kitty";
       };

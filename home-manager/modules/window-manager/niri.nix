@@ -23,6 +23,7 @@ in
 
     xdg.portal.config.niri = {
       "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
     };
 
     # gnome portal must start after niri registers org.gnome.Mutter.ScreenCast on D-Bus
