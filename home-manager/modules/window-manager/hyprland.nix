@@ -467,7 +467,26 @@ in
                 (lua "hl.dsp.window.move({ workspace = ${toString i}, follow = false })")
               ];
             }
-          ]) (lib.range 1 9);
+          ]) (lib.range 1 9)
+          ++ builtins.concatMap ({ ws, key }: [
+            # Workspaces 10–12
+            {
+              _args = [
+                (mod key)
+                (lua "hl.dsp.focus({ workspace = ${toString ws} })")
+              ];
+            }
+            {
+              _args = [
+                (mod "SHIFT + ${key}")
+                (lua "hl.dsp.window.move({ workspace = ${toString ws}, follow = false })")
+              ];
+            }
+          ]) [
+            { ws = 10; key = "0"; }
+            { ws = 11; key = "minus"; }
+            { ws = 12; key = "equal"; }
+          ];
 
         curve = {
           _args = [
