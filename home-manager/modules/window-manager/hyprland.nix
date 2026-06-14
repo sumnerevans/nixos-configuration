@@ -425,14 +425,14 @@ in
             {
               _args = [
                 "XF86MonBrightnessUp"
-                (lua ''hl.dsp.exec_cmd("dms ipc call brightness increment 10")'')
+                (lua ''hl.dsp.exec_cmd("dms ipc call brightness increment 10 '''")'')
                 { locked = true; }
               ];
             }
             {
               _args = [
                 "XF86MonBrightnessDown"
-                (lua ''hl.dsp.exec_cmd("dms ipc call brightness decrement 10")'')
+                (lua ''hl.dsp.exec_cmd("dms ipc call brightness decrement 10 '''")'')
                 { locked = true; }
               ];
             }
