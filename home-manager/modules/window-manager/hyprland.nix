@@ -468,25 +468,37 @@ in
               ];
             }
           ]) (lib.range 1 9)
-          ++ builtins.concatMap ({ ws, key }: [
-            # Workspaces 10–12
-            {
-              _args = [
-                (mod key)
-                (lua "hl.dsp.focus({ workspace = ${toString ws} })")
+          ++
+            builtins.concatMap
+              ({ ws, key }: [
+                # Workspaces 10–12
+                {
+                  _args = [
+                    (mod key)
+                    (lua "hl.dsp.focus({ workspace = ${toString ws} })")
+                  ];
+                }
+                {
+                  _args = [
+                    (mod "SHIFT + ${key}")
+                    (lua "hl.dsp.window.move({ workspace = ${toString ws}, follow = false })")
+                  ];
+                }
+              ])
+              [
+                {
+                  ws = 10;
+                  key = "0";
+                }
+                {
+                  ws = 11;
+                  key = "minus";
+                }
+                {
+                  ws = 12;
+                  key = "equal";
+                }
               ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + ${key}")
-                (lua "hl.dsp.window.move({ workspace = ${toString ws}, follow = false })")
-              ];
-            }
-          ]) [
-            { ws = 10; key = "0"; }
-            { ws = 11; key = "minus"; }
-            { ws = 12; key = "equal"; }
-          ];
 
         curve = {
           _args = [
@@ -571,8 +583,8 @@ in
             natural_scroll = true;
             resolve_binds_by_sym = true;
             touchpad = {
-              disable_while_typing = true;
               natural_scroll = true;
+              tap_to_click = false;
               clickfinger_behavior = true;
             };
           };
