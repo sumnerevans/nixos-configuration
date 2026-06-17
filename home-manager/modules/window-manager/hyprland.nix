@@ -610,6 +610,26 @@ in
             focus_on_activate = true;
           };
         };
+        window_rule = [
+          {
+            _args = [
+              {
+                name = "no-opacity-mpv";
+                match.class = "mpv";
+                opacity = "1.0 override";
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                name = "no-opacity-feh";
+                match.class = "feh";
+                opacity = "1.0 override";
+              }
+            ];
+          }
+        ];
       };
 
     };
