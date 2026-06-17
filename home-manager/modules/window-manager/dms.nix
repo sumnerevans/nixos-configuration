@@ -48,7 +48,13 @@
           settings.trigger = "=";
         };
         dankBatteryAlerts.enable = true;
-        dmsScreenshot.enable = true;
+        dmsScreenshot = {
+          enable = true;
+          settings = {
+            customPath = "${config.home.homeDirectory}/tmp";
+            filename = "screenshot-%Y-%m-%d_%H%M%S.png";
+          };
+        };
         screenRecorder.enable = true;
         webSearch = {
           enable = true;

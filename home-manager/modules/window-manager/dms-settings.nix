@@ -109,7 +109,7 @@
       width = 50;
     }
     {
-      id = "plugin_niriScreenshot";
+      id = "plugin_dmsScreenshot";
       enabled = true;
       width = 50;
     }
