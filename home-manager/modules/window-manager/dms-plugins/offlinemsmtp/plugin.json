@@ -1,0 +1,12 @@
+{
+    "id": "offlinemsmtp",
+    "name": "Offline MSMTP Send Toggle",
+    "description": "Shows whether offlinemsmtp email sending is enabled and toggles it",
+    "version": "1.0.0",
+    "author": "Sumner Evans",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./OfflineMsmtpWidget.qml",
+    "icon": "send",
+    "permissions": ["process"]
+}

@@ -451,6 +451,10 @@
           enabled = true;
         }
         {
+          id = "offlinemsmtp";
+          enabled = true;
+        }
+        {
           id = "notificationButton";
           enabled = true;
         }

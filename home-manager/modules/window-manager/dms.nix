@@ -43,6 +43,10 @@
       };
 
       plugins = {
+        offlinemsmtp = {
+          enable = true;
+          src = ./dms-plugins/offlinemsmtp;
+        };
         calculator = {
           enable = true;
           settings.trigger = "=";
