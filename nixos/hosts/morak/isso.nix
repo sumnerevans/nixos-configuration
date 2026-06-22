@@ -10,9 +10,9 @@
       };
       server.listen = "http://127.0.0.1:8888/";
       smtp = {
-        username = "comments@sumnerevans.com";
+        username = "me@sumnerevans.com";
         password = "$ISSO_COMMENTS_SMTP_PASSWORD";
-        host = "smtp.migadu.com";
+        host = "smtp.gmail.com";
         port = 587;
         security = "starttls";
         to = "inquiries@sumnerevans.com";
