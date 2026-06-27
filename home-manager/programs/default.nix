@@ -75,6 +75,8 @@ in
     # Virtual Machine Client
     virt-manager
 
+    ytmdesktop
+
     (thunar.override {
       thunarPlugins = [
         thunar-archive-plugin
