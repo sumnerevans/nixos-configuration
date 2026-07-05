@@ -74,7 +74,7 @@ with lib;
 
       qt = {
         enable = true;
-        platformTheme.name = "gtk";
+        platformTheme.name = "gtk3";
       };
     }
     (mkIf config.wayland.windowManager.sway.enable {
