@@ -115,31 +115,6 @@
               doInstallCheck = false;
             });
           })
-
-          # Wait until https://github.com/NixOS/nixpkgs/pull/504778 is merged
-          (final: prev: {
-            isso = prev.isso.overrideAttrs (old: rec {
-              src = prev.fetchFromGitHub {
-                owner = "isso-comments";
-                repo = "isso";
-                rev = "0.14.0";
-                hash = "sha256-8kXqqiMXxF0wCJ+AzYT8j0rjuhlXO3F6UJbump672b4=";
-              };
-
-              npmDeps = prev.fetchNpmDeps {
-                inherit src;
-                hash = "sha256-e3r5iZLmXlf5YBPGgeNBDkdgfbNcIZIXbRLyyoyJiTU=";
-              };
-
-              propagatedBuildInputs =
-                old.propagatedBuildInputs
-                ++ (with prev.python3Packages; [
-                  setuptools
-                  gevent
-                  mistune
-                ]);
-            });
-          })
         ];
       };
     in
