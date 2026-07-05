@@ -42,7 +42,6 @@ in
     imports = [ ./hosts/morak ];
 
     deployment.keys = {
-      isso_comments_env = keyFor "isso_comments_env" "root";
       restic-password = keyFor "restic-password" "root";
       restic-environment-variables = keyFor "restic-environment-variables" "root";
     };

@@ -11,7 +11,6 @@
     ./glance.nix
     ./gonic.nix
     ./grafana.nix
-    ./isso.nix
     ./syncthing.nix
     ./webfortune.nix
   ];

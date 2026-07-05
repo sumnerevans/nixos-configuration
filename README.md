@@ -23,7 +23,6 @@ home directory.
 
     - Personal Websites
     - [Gonic](https://github.com/sentriz/gonic/)
-    - [Isso](https://posativ.org/isso/)
     - [Murmur for Mumble](https://www.mumble.info/)
     - [Syncthing](https://syncthing.net)
     - [vaultwarden](https://github.com/dani-garcia/vaultwarden)
