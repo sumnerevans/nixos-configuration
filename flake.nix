@@ -140,6 +140,24 @@
             }
           ];
         };
+        mustafar = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = inputs // {
+            inherit pkgs;
+          };
+          modules = [
+            ./nixos/modules
+            ./nixos/hosts/mustafar
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.backupFileExtension = ".bak";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sumner = ./home-manager/host-configurations/mustafar.nix;
+            }
+          ];
+        };
       };
 
       formatter.${system} = pkgs.nixfmt-tree;

@@ -1,12 +1,82 @@
-rec {
-  wayland.enable = true;
-  laptop.enable = true;
-  networking.interfaces = [ "wlp0s20f3" ];
-  windowManager.modKey = "Mod1"; # use Alt as modifier on mustafar
+{ lib, pkgs, ... }:
+{
+  imports = [ ../home.nix ];
 
-  programs.alacritty.settings.font.size = 11;
+  # windowManager.modKey = "Mod1"; # use Alt as modifier on mustafar
+  wayland.enable = true;
+  niri.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    mainMod = "ALT";
+    monitorScale = 1.67;
+    settings = {
+      config.input.kb_variant = lib.mkForce "3l-cros";
+
+      bind =
+        let
+          lua = lib.generators.mkLuaInline;
+          mod = s: lua ''mainMod .. " + ${s}"'';
+        in
+        [
+          {
+            _args = [
+              (mod "F6")
+              (lua ''hl.dsp.exec_cmd("dms ipc call brightness decrement 10 '''")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              (mod "F7")
+              (lua ''hl.dsp.exec_cmd("dms ipc call brightness increment 10 '''")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              (mod "SHIFT + F6")
+              (lua ''hl.dsp.exec_cmd("dms ipc call brightness decrement 10 leds:chromeos::kbd_backlight")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              (mod "SHIFT + F7")
+              (lua ''hl.dsp.exec_cmd("dms ipc call brightness increment 10 leds:chromeos::kbd_backlight")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "F8"
+              (lua ''hl.dsp.exec_cmd("dms ipc call audio mute")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "F9"
+              (lua ''hl.dsp.exec_cmd("dms ipc call audio decrement 5")'')
+              { locked = true; }
+            ];
+          }
+          {
+            _args = [
+              "F10"
+              (lua ''hl.dsp.exec_cmd("dms ipc call audio increment 5")'')
+              { locked = true; }
+            ];
+          }
+        ];
+    };
+  };
+  dms.enable = true;
 
   mdf.port = 1024;
+
+  home.packages = [ pkgs.pulseaudio ];
+
+  programs.alacritty.settings.font.size = 11;
 
   home.symlinks =
     let
@@ -24,31 +94,4 @@ rec {
         value = "/mnt/data/${dirName}";
       }) links
     );
-
-  wayland.extraSwayConfig.config = {
-    # Scale to 1.8 instead of 2.
-    output.eDP-1.scale = "1.75";
-    input = {
-      "1:1:AT_Translated_Set_2_keyboard" = {
-        xkb_layout = "us";
-        xkb_variant = "3l-cros";
-      };
-
-      # Don't scroll so fast
-      "1739:52731:Synaptics_TM3579-001".scroll_factor = "0.75";
-
-      # Map the inputs so rotation works.
-      "11551:157:WCOM50C1:00_2D1F:009D".map_to_output = "eDP-1";
-      "0:0:Elan_Touchscreen".map_to_output = "eDP-1";
-    };
-
-    keybindings = {
-      # F6/F7 are the brightness up/down keys. Without mod, change screen
-      # brightness. With mod, change the keyboard.
-      "${windowManager.modKey}+F6" = "exec brightnessctl s 5%-";
-      "${windowManager.modKey}+F7" = "exec brightnessctl s 5%+";
-      "${windowManager.modKey}+Shift+F6" = "exec brightnessctl -d chromeos::kbd_backlight s 1%-";
-      "${windowManager.modKey}+Shift+F7" = "exec brightnessctl -d chromeos::kbd_backlight s 1%+";
-    };
-  };
 }

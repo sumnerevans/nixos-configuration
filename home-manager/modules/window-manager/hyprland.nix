@@ -8,6 +8,19 @@ let
   cfg = config.wayland.windowManager.hyprland;
 in
 {
+  options.wayland.windowManager.hyprland = {
+    mainMod = lib.mkOption {
+      type = lib.types.str;
+      description = "The main modifier for Hyprland";
+      default = "SUPER";
+    };
+    monitorScale = lib.mkOption {
+      type = lib.types.number;
+      description = "The scale for the internal display";
+      default = 1;
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [ grimblast ];
 
@@ -28,7 +41,7 @@ in
 
       settings = {
         mainMod = {
-          _var = "SUPER";
+          _var = cfg.mainMod;
         };
 
         bind =
@@ -561,7 +574,7 @@ in
             output = "eDP-1";
             mode = "preferred";
             position = "0x0";
-            scale = 1;
+            scale = cfg.monitorScale;
           }
         ];
 

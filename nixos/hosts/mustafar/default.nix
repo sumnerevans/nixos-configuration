@@ -2,10 +2,9 @@
 {
   # Set the hostname
   networking.hostName = "mustafar";
-  hardware.isPC = true;
-  hardware.ramSize = 8;
-  hardware.isLaptop = true;
-  programs.sway.enable = true;
+
+  hostCategory = "laptop";
+  ramSize = 8;
 
   virtualisation.docker.enable = true;
 
