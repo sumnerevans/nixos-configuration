@@ -48,21 +48,21 @@
           }
           {
             _args = [
-              "F8"
+              (mod "F8")
               (lua ''hl.dsp.exec_cmd("dms ipc call audio mute")'')
               { locked = true; }
             ];
           }
           {
             _args = [
-              "F9"
+              (mod "F9")
               (lua ''hl.dsp.exec_cmd("dms ipc call audio decrement 5")'')
               { locked = true; }
             ];
           }
           {
             _args = [
-              "F10"
+              (mod "F10")
               (lua ''hl.dsp.exec_cmd("dms ipc call audio increment 5")'')
               { locked = true; }
             ];

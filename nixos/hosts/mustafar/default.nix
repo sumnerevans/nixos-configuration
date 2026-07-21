@@ -1,4 +1,35 @@
-{ lib, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
+let
+  # This is a Google Kohaku board (Samsung Galaxy Chromebook). Its sound
+  # card (sof-cmlda7219max, an Intel SOF/DA7219/MAX98357A setup) is detected
+  # fine by the kernel, but nixpkgs' alsa-ucm-conf doesn't ship a UCM profile
+  # for it, so PipeWire falls back to the generic ACP profile, which only
+  # exposes a non-functional "Dummy Output"/"Pro Audio" device. Chrultrabook's
+  # chromebook-linux-audio project (https://github.com/WeirdTreeThing/chromebook-linux-audio)
+  # solves this on other distros by overlaying downstream UCM profiles from
+  # https://github.com/WeirdTreeThing/alsa-ucm-conf-cros on top of the
+  # system's UCM configuration. Replicate that here by merging those profiles
+  # on top of pkgs.alsa-ucm-conf and pointing PipeWire/WirePlumber at the result.
+  alsaUcmConfCros = pkgs.fetchFromGitHub {
+    owner = "WeirdTreeThing";
+    repo = "alsa-ucm-conf-cros";
+    rev = "4828c1ddb1c2d8a54d031f682ca08c5af20b1870"; # standalone branch
+    hash = "sha256-T3X5GqFq924CcZ5WL7hE/ciRi7HplF99vatEjDJik3U=";
+  };
+
+  alsaUcmConfChromebook = pkgs.runCommand "alsa-ucm-conf-chromebook" { } ''
+    mkdir -p $out/share/alsa/ucm2
+    cp -r ${pkgs.alsa-ucm-conf}/share/alsa/ucm2/. $out/share/alsa/ucm2/
+    chmod -R u+w $out/share/alsa/ucm2
+    cp -r ${alsaUcmConfCros}/ucm2/. $out/share/alsa/ucm2/
+    cp -r ${alsaUcmConfCros}/overrides/. $out/share/alsa/ucm2/conf.d/
+  '';
+  alsaConfigUcm2 = "${alsaUcmConfChromebook}/share/alsa/ucm2";
+in
 {
   # Set the hostname
   networking.hostName = "mustafar";
@@ -12,9 +43,36 @@
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
 
+  # Point ALSA/PipeWire/WirePlumber at the merged UCM profiles (see
+  # alsaUcmConfChromebook above) so the sof-cmlda7219max card gets a real
+  # HiFi profile instead of falling back to ACP's "Dummy Output".
+  environment.sessionVariables.ALSA_CONFIG_UCM2 = alsaConfigUcm2;
+  systemd.user.services.pipewire.environment.ALSA_CONFIG_UCM2 = alsaConfigUcm2;
+  systemd.user.services.wireplumber.environment.ALSA_CONFIG_UCM2 = alsaConfigUcm2;
+
+  # Recommended alongside the UCM fix above: increases ALSA headroom, which
+  # chromebook-linux-audio applies to fix instability/crashes on these SOF
+  # sound cards.
+  services.pipewire.wireplumber.extraConfig."51-increase-headroom" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [ { "node.name" = "~alsa_output.*"; } ];
+        actions.update-props."api.alsa.headroom" = 2048;
+      }
+    ];
+  };
+
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
   boot.kernelParams = [ "mem_sleep_default=deep" ];
+
+  # The touchpad (i2c-PNP0C50:00) is enabled as an S3 wakeup source by
+  # default, and its wake IRQ fires spuriously right after suspend,
+  # immediately waking the machine back up. Disable it so only the lid
+  # switch can wake the system.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="i2c", KERNELS=="i2c-PNP0C50:00", ATTR{power/wakeup}="disabled"
+  '';
 
   # Orientation and ambient light
   hardware.sensor.iio.enable = true;
