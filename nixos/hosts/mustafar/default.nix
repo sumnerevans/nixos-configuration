@@ -27,6 +27,20 @@ let
     chmod -R u+w $out/share/alsa/ucm2
     cp -r ${alsaUcmConfCros}/ucm2/. $out/share/alsa/ucm2/
     cp -r ${alsaUcmConfCros}/overrides/. $out/share/alsa/ucm2/conf.d/
+    chmod -R u+w $out/share/alsa/ucm2
+
+    # The ported "Headphones" device only flips the jack/headphone-amp
+    # switches, leaving the DA7219's DAC digital mute and its output-filter
+    # mixer switches off, so no audio actually reaches the jack (only a
+    # faint whine from the charge pump). Enable them alongside the switches
+    # it already sets, and restore the mute on disable.
+    hifiConf=$out/share/alsa/ucm2/conf.d/sof-cmlda7219ma/HiFi.conf
+    sed -i \
+      -e "s/cset \"name='Headphone Switch' on\"/cset \"name='Headphone Switch' on\"\n\t\tcset \"name='Playback Digital Switch' on,on\"\n\t\tcset \"name='Mixer Out FilterL DACL Switch' on\"\n\t\tcset \"name='Mixer Out FilterR DACR Switch' on\"/" \
+      -e "s/cset \"name='Headphone Switch' off\"/cset \"name='Headphone Switch' off\"\n\t\tcset \"name='Playback Digital Switch' off,off\"\n\t\tcset \"name='Mixer Out FilterL DACL Switch' off\"\n\t\tcset \"name='Mixer Out FilterR DACR Switch' off\"/" \
+      "$hifiConf"
+    grep -q "Mixer Out FilterL DACL Switch' on" "$hifiConf"
+    grep -q "Mixer Out FilterL DACL Switch' off" "$hifiConf"
   '';
   alsaConfigUcm2 = "${alsaUcmConfChromebook}/share/alsa/ucm2";
 in
