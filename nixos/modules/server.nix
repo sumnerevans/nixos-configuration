@@ -23,6 +23,7 @@
 
     services.journald.extraConfig = ''
       SystemMaxUse=2G
+      MaxRetentionSec=1week
     '';
 
     services.nginx = {
