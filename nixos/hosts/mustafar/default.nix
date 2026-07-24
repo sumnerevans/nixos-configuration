@@ -53,6 +53,11 @@ in
 
   virtualisation.docker.enable = true;
 
+  # This machine has no fan, so let thermald throttle the CPU proactively
+  # based on the board's thermal zones instead of relying on emergency
+  # kernel throttling once it's already too hot.
+  services.thermald.enable = true;
+
   # Get sound working
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
