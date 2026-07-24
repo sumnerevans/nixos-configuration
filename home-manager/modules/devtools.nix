@@ -62,6 +62,39 @@ in
         permissions.allow = [
           "WebSearch"
           "WebFetch"
+          "Read"
+          "Grep"
+          "Glob"
+
+          # Read-only git commands
+          "Bash(git status:*)"
+          "Bash(git diff:*)"
+          "Bash(git log:*)"
+          "Bash(git show:*)"
+          "Bash(git blame:*)"
+          "Bash(git remote -v)"
+          "Bash(git remote show:*)"
+          "Bash(git ls-files:*)"
+          "Bash(git rev-parse:*)"
+          "Bash(git describe:*)"
+          "Bash(git stash list:*)"
+
+          # Read-only filesystem/shell commands
+          "Bash(ls:*)"
+          "Bash(find:*)"
+          "Bash(pwd)"
+          "Bash(cat:*)"
+          "Bash(head:*)"
+          "Bash(tail:*)"
+          "Bash(wc:*)"
+          "Bash(file:*)"
+          "Bash(which:*)"
+
+          # Read-only nix commands
+          "Bash(nix flake check:*)"
+          "Bash(nix flake show:*)"
+          "Bash(nix eval:*)"
+          "Bash(nixos-rebuild build:*)"
         ];
       };
     };
