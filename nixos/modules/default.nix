@@ -21,6 +21,7 @@
     ./server.nix
     ./services
     ./users
+    ./virtualisation.nix
   ];
 
   config = {

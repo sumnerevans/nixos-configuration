@@ -25,4 +25,5 @@
   programs.steam.enable = true;
 
   virtualisation.docker.enable = true;
+  enableVirtualisation = true;
 }

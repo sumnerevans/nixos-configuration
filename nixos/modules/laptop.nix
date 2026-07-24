@@ -63,16 +63,11 @@
     # Enable firmware updating
     services.fwupd.enable = true;
 
-    # Enable libvirtd and virt-manager
-    virtualisation.libvirtd.enable = true;
-    users.users.sumner.extraGroups = [ "libvirtd" ];
-
     # For flashing ErgoDox and Voyager.
     hardware.keyboard.zsa.enable = true;
 
     # Extra programs for laptops
     environment.systemPackages = with pkgs; [
-      virt-manager
       android-tools
       lm_sensors
     ];
