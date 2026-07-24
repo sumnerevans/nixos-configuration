@@ -7,10 +7,8 @@
     ./hardware-configuration.nix
 
     # Services
-    ./airsonic.nix
     ./glance.nix
     ./gonic.nix
-    ./grafana.nix
     ./syncthing.nix
     ./webfortune.nix
   ];

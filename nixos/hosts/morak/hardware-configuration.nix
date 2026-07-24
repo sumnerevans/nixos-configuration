@@ -19,12 +19,15 @@
 
   networking.interfaces.eth0.useDHCP = true;
 
-  # Enable a lot of swap since we have enough disk. This way, if Airsonic eats
-  # memory, it won't crash the box.
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
   swapDevices = [
     {
       device = "/var/swapfile";
-      size = 4096;
+      size = 2048;
     }
   ];
 
