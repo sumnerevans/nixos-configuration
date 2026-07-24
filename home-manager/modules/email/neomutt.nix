@@ -172,46 +172,49 @@ in
         lists .*@lists.sr.ht
 
         # ====== COLORS ======
-        color attachment        yellow          black
-        color prompt            yellow          black
-        color message           white           black
-        color error             red             black
+        # Use "default" instead of hardcoded black/white so neomutt follows
+        # the terminal's current fg/bg, which kitty/DMS already keep in sync
+        # with the light/dark theme.
+        color attachment        yellow          default
+        color prompt            yellow          default
+        color message           default         default
+        color error             red             default
         color indicator         black           yellow
         color status            brightwhite     blue
-        color tree              magenta         black
-        color normal            white           black
-        color markers           brightyellow    black
-        color search            white           black
+        color tree              magenta         default
+        color normal            default         default
+        color markers           brightyellow    default
+        color search            black           yellow
 
         # Index
-        color index             brightwhite     black   ~N # unread
-        color index             white           black   ~O # read
-        color index             brightgreen     black   ~F # flagged
-        color index             red             black   ~D # deleted
+        color index             brightcyan      default ~N # unread
+        color index             default         default ~O # read
+        color index             brightgreen     default ~F # flagged
+        color index             red             default ~D # deleted
 
         # Header
-        color hdrdefault        white           black
-        color header            brightgreen     black   (^Subject\:)
+        color hdrdefault        default         default
+        color header            brightgreen     default (^Subject\:)
 
         # Color Links blue
-        color body              brightblue      black "(ftp|http|https)://[^ ]+"
-        color body              brightblue      black [-a-z_0-9.]+@[-a-z_0-9.]+
+        color body              brightblue      default "(ftp|http|https)://[^ ]+"
+        color body              brightblue      default [-a-z_0-9.]+@[-a-z_0-9.]+
 
         # Color signature verification
-        color body              brightgreen     black "^(gpg: )?Good signature"
-        color body              brightgreen     black "^(gpg: )?Encrypted"
-        color body              brightred       black "^(gpg: )?Bad signature"
-        color body              red             black "^(gpg: )?Problem signature from:.*"
-        color body              red             black "^(gpg: )?warning:"
-        color body              red             black "^(gpg: ).*failed:"
+        color body              brightgreen     default "^(gpg: )?Good signature"
+        color body              brightgreen     default "^(gpg: )?Encrypted"
+        color body              brightred       default "^(gpg: )?Bad signature"
+        color body              red             default "^(gpg: )?Problem signature from:.*"
+        color body              red             default "^(gpg: )?warning:"
+        color body              red             default "^(gpg: ).*failed:"
 
         # Body
-        color quoted            cyan            black
-        color signature         cyan            black
+        color quoted             cyan           default
+        color signature          cyan           default
 
         # Sidebar
-        color sidebar_highlight white           color8
-        color sidebar_new       cyan            black
+        color sidebar_highlight default         color8
+        color sidebar_new       cyan            default
       '';
     };
   };
