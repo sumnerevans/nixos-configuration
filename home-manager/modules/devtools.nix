@@ -34,8 +34,6 @@ in
 
         # Better Python REPL
         python3Packages.ptpython
-
-        claude-code
       ]
       ++ (
         # GUI Tools
@@ -55,7 +53,18 @@ in
     };
 
     # Enable developer programs
-    # programs.claude-code.enable = true;
+    programs.claude-code = {
+      enable = true;
+      settings = {
+        tui = "fullscreen";
+        theme = "auto";
+        editorMode = "vim";
+        permissions.allow = [
+          "WebSearch"
+          "WebFetch"
+        ];
+      };
+    };
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
     programs.jq.enable = true;
