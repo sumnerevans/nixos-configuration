@@ -6,7 +6,7 @@ let
       isort
       mypy
       pyls-isort
-      python-lsp-black
+      # python-lsp-black
       python-lsp-server
     ]
   );
