@@ -26,47 +26,10 @@
                 }
                 { type = "calendar"; }
                 {
-                  type = "bookmarks";
-                  groups = [
-                    {
-                      title = "Financial";
-                      links = [
-                        {
-                          title = "Fidelity";
-                          url = "https://digital.fidelity.com";
-                        }
-                        {
-                          title = "Robinhood";
-                          url = "https://robinhood.com";
-                        }
-                        {
-                          title = "CapitalOne";
-                          url = "https://capitalone.com";
-                        }
-                        {
-                          title = "Chase";
-                          url = "https://chase.com";
-                        }
-                        {
-                          title = "Discover";
-                          url = "https://discover.com";
-                        }
-                      ];
-                    }
-                    {
-                      title = "Vanity";
-                      links = [
-                        {
-                          title = "GoatCounter";
-                          url = "https://stats.sumnerevans.com";
-                        }
-                        {
-                          title = "LinkedIn";
-                          url = "https://linkedin.com";
-                        }
-                      ];
-                    }
-                  ];
+                  type = "weather";
+                  units = "imperial";
+                  hour-format = "24h";
+                  location = "Denver, Colorado, United States";
                 }
               ];
             }
@@ -121,38 +84,6 @@
                 }
               ];
             }
-            {
-              size = "small";
-              widgets = [
-                {
-                  type = "monitor";
-                  title = "Services";
-                  sites = [
-                    {
-                      title = "sumnerevans.com";
-                      url = "https://sumnerevans.com";
-                      icon = "https://sumnerevans.com/profile_hu10331672011849843701.webp";
-                    }
-                    {
-                      title = "nevarro.space";
-                      url = "https://nevarro.space";
-                      icon = "https://nevarro.space/n1-square.jpg";
-                    }
-                    {
-                      title = "Matrix";
-                      url = "https://matrix.nevarro.space/_matrix/client/versions";
-                      icon = "si:matrix";
-                    }
-                  ];
-                }
-                {
-                  type = "weather";
-                  units = "imperial";
-                  hour-format = "24h";
-                  location = "Denver, Colorado, United States";
-                }
-              ];
-            }
           ];
           name = "Home";
         }
@@ -167,11 +98,7 @@
       forceSSL = true;
       enableACME = true;
       locations."/".proxyPass =
-        let
-          host = config.services.glance.settings.server.host;
-          port = toString config.services.glance.settings.server.port;
-        in
-        "http://${host}:${port}";
+        "http://${config.services.glance.settings.server.host}:${toString config.services.glance.settings.server.port}";
     };
   };
 }
