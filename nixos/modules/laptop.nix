@@ -42,8 +42,6 @@
     # Suspend on power button press instead of shutdown.
     services.logind.settings.Login.HandlePowerKey = "suspend";
 
-    # Enable Flatpak.
-    services.flatpak.enable = true;
     xdg.portal = {
       enable = true;
       configPackages = with pkgs; [
