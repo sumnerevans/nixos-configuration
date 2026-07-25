@@ -7,6 +7,7 @@
       config = ''
         require("conform").setup({
           formatters_by_ft = {
+            ledger = { "hledger-fmt" },
             go = { "goimports" },
             markdown = { "deno_fmt" },
             nix = { "nixfmt" },
@@ -15,6 +16,10 @@
           formatters = {
             deno_fmt = { command = "${pkgs.deno}/bin/deno" },
             goimports = { command = "${pkgs.gotools}/bin/goimports" },
+            ["hledger-fmt"] = {
+              command = "${pkgs.hledger-fmt}/bin/hledger-fmt",
+              args = { "--no-diff", "--exit-zero-on-changes", "-" },
+            },
             nixfmt = { command = "${pkgs.nixfmt}/bin/nixfmt" },
             prettier = {
               command = "${pkgs.prettier}/bin/prettier",
