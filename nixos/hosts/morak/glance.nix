@@ -8,32 +8,6 @@
         {
           columns = [
             {
-              size = "small";
-              widgets = [
-                {
-                  type = "clock";
-                  hour-format = "24h";
-                  timezones = [
-                    {
-                      timezone = "Etc/UTC";
-                      label = "UTC";
-                    }
-                    {
-                      timezone = "Europe/Helsinki";
-                      label = "Helsinki";
-                    }
-                  ];
-                }
-                { type = "calendar"; }
-                {
-                  type = "weather";
-                  units = "imperial";
-                  hour-format = "24h";
-                  location = "Denver, Colorado, United States";
-                }
-              ];
-            }
-            {
               size = "full";
               widgets = [
                 {
@@ -81,6 +55,32 @@
                     { url = "https://www.thedroneely.com/posts/rss.xml"; }
                     { url = "https://www.wheresyoured.at/rss/"; }
                   ];
+                }
+              ];
+            }
+            {
+              size = "small";
+              widgets = [
+                {
+                  type = "clock";
+                  hour-format = "24h";
+                  timezones = [
+                    {
+                      timezone = "Etc/UTC";
+                      label = "UTC";
+                    }
+                    {
+                      timezone = "Europe/Helsinki";
+                      label = "Helsinki";
+                    }
+                  ];
+                }
+                { type = "calendar"; }
+                {
+                  type = "weather";
+                  units = "imperial";
+                  hour-format = "24h";
+                  location = "Denver, Colorado, United States";
                 }
               ];
             }
