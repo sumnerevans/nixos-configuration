@@ -16,7 +16,7 @@ in
 
     Service = {
       ExecStart = ''
-        ${pkgs.mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath} ${pkgs.gnome-icon-theme}/share/icons/gnome/48x48/status/mail-unread.png
+        ${pkgs.mailnotify}/bin/mailnotify ${config.accounts.email.maildirBasePath} ${pkgs.papirus-icon-theme}/Papirus/64x64/apps/gmail-notify-icon.svg
       '';
       Restart = "always";
       RestartSec = 5;
