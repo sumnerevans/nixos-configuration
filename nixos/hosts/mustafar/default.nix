@@ -81,6 +81,11 @@ in
     ];
   };
 
+  # The greeter runs its own Hyprland instance; use the ChromeOS variant of
+  # the 3l layout to match this machine's built-in keyboard (see laptop.nix
+  # for the default).
+  dmsGreeterKeyboardVariant = "3l-cros";
+
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;
   boot.kernelParams = [ "mem_sleep_default=deep" ];

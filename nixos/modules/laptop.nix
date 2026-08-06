@@ -5,6 +5,17 @@
   ...
 }:
 {
+  options.dmsGreeterKeyboardVariant = lib.mkOption {
+    type = lib.types.str;
+    default = "3l";
+    description = ''
+      The Hyprland `kb_variant` (us layout) to use for the dms-greeter's
+      standalone Hyprland instance, which does not otherwise inherit the
+      user's session keyboard layout. Override per-host to match the
+      machine's keyboard.
+    '';
+  };
+
   config = lib.mkIf (config.hostCategory == "laptop") {
     environment.homeBinInPath = true;
     services.upower.enable = true;
@@ -132,6 +143,22 @@
       enable = true;
       compositor.name = "hyprland";
       configHome = config.users.users.sumner.home;
+      # dms-greeter runs its own Hyprland instance that knows nothing about
+      # the user's session config (home-manager/modules/window-manager/hyprland.nix),
+      # so without this it falls back to a plain "us" layout at the login
+      # screen. Mirror the default kb_layout/kb_variant here.
+      compositor.customConfig = ''
+        env = DMS_RUN_GREETER,1
+
+        misc {
+            disable_hyprland_logo = true
+        }
+
+        input {
+            kb_layout = us
+            kb_variant = ${config.dmsGreeterKeyboardVariant}
+        }
+      '';
     };
   };
 }
