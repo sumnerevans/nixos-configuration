@@ -34,6 +34,7 @@ with lib;
     {
       home.packages = with pkgs; [
         xdg-desktop-portal-gtk
+        gsettings-desktop-schemas
       ];
 
       home.sessionVariables = {
