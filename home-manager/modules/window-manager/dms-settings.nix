@@ -200,16 +200,18 @@
   useAutoLocation = true;
   weatherEnabled = true;
   networkPreference = "wifi";
-  iconTheme = "System Default";
+  iconThemeDark = "Papirus-Dark";
+  iconThemeLight = "Papirus";
+  iconThemePerMode = true;
   cursorSettings = {
     theme = "System Default";
     size = 24;
     niri = {
-      hideWhenTyping = false;
+      hideWhenTyping = true;
       hideAfterInactiveMs = 0;
     };
     hyprland = {
-      hideOnKeyPress = false;
+      hideOnKeyPress = true;
       hideOnTouch = false;
       inactiveTimeout = 0;
     };
