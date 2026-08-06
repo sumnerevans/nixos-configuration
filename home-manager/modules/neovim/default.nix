@@ -33,7 +33,7 @@ with lib;
         ./filetype-specific-configs.vim
       ]
       + ''
-        set clipboard+=unnamed${if config.isLinux then "plus" else ""}
+        set clipboard+=unnamedplus
       '';
 
     extraPackages = with pkgs; [

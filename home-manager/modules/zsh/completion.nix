@@ -2,10 +2,11 @@
   programs.zsh = {
     autosuggestion.enable = true;
     enableCompletion = true;
-    completionInit = ''
+    setOptions = [
       # Auto-Correction
-      setopt correct
-
+      "correct"
+    ];
+    completionInit = ''
       # Really fancy tab completion
       zstyle ':completion:*' rehash true
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

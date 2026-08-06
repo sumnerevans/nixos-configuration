@@ -15,10 +15,6 @@ with lib;
   ];
 
   options = {
-    isLinux = mkEnableOption "Linux support" // {
-      default = true;
-    };
-    isMacOS = mkEnableOption "macOS support";
     autoAddSSHKeysToAgent = mkEnableOption "automatically add SSH keys to the SSH agent" // {
       default = true;
     };
@@ -108,12 +104,12 @@ with lib;
 
             ${opensshAdd}
 
-            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+            echo "$(${tput} bold)========================================================================$(${tput} sgr 0)"
 
             # Show a quote
             ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
-            echo "$(${tput} bold)======================================================================$(${tput} sgr 0)"
+            echo "$(${tput} bold)========================================================================$(${tput} sgr 0)"
           fi
         '';
     };
@@ -121,6 +117,7 @@ with lib;
     programs.direnv.enableZshIntegration = true;
     programs.fzf.enableZshIntegration = true;
     programs.opam.enableZshIntegration = true;
+    programs.zsh.fastSyntaxHighlighting.enable = true;
 
     home.sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
