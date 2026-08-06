@@ -4,7 +4,7 @@
 
   # windowManager.modKey = "Mod1"; # use Alt as modifier on mustafar
   wayland.enable = true;
-  niri.enable = true;
+  # niri.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     mainMod = "ALT";
