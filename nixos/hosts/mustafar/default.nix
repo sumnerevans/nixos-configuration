@@ -90,6 +90,18 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.kernelParams = [ "mem_sleep_default=deep" ];
 
+  # This board's firmware (coreboot/EDK II) is inconsistent about resolving
+  # the ESP's device path: it usually resolves to the real partition, but
+  # occasionally reports an all-zero disk GUID/partition/size instead. When
+  # that happens, bootctl doesn't recognize its existing "Linux Boot
+  # Manager" NVRAM entry as already installed and adds a new, broken
+  # duplicate at the front of the boot order, causing "verify it contains a
+  # 64-bit UEFI OS" firmware errors before falling through to the still-good
+  # entry. A correct entry is already installed and first in the firmware's
+  # boot menu, so stop nixos-rebuild from touching NVRAM on every
+  # switch/boot to prevent the duplicates from reaccumulating.
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
+
   # The touchpad (i2c-PNP0C50:00) is enabled as an S3 wakeup source by
   # default, and its wake IRQ fires spuriously right after suspend,
   # immediately waking the machine back up. Disable it so only the lid
