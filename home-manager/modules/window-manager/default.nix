@@ -41,6 +41,7 @@ with lib;
       };
 
       home.pointerCursor = {
+        enable = true;
         package = pkgs.phinger-cursors;
         name = "phinger-cursors-light";
         size = 32;
@@ -51,25 +52,22 @@ with lib;
       gtk = {
         enable = true;
         iconTheme = {
-          package = pkgs.arc-icon-theme;
-          name = "Arc";
+          package = pkgs.papirus-icon-theme;
+          name = "Papirus-Dark";
         };
 
         theme = {
-          package = pkgs.arc-theme;
-          name = "Arc-Dark";
+          name = "adw-gtk3";
+          package = pkgs.adw-gtk3;
         };
-
-        gtk3.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
-          gtk-toolbar-style = "GTK_TOOLBAR_ICONS";
-          gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
-        };
+        gtk3.extraCss = ''
+          @import url("dank-colors.css");
+        '';
 
         gtk4.theme = config.gtk.theme;
-        gtk4.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
-        };
+        gtk4.extraCss = ''
+          @import url("dank-colors.css");
+        '';
       };
 
       qt = {

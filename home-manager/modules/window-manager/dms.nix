@@ -12,9 +12,12 @@
   imports = [
     inputs.dms-plugin-registry.nixosModules.default
     inputs.dms.homeModules.dank-material-shell
+    inputs.dcal.homeModules.dank-calendar
   ];
 
   config = lib.mkIf config.dms.enable {
+    programs.dank-calendar.enable = true;
+
     programs.dank-material-shell = {
       enable = true;
 

@@ -1,9 +1,9 @@
 {
-  currentThemeName = "blue";
-  currentThemeCategory = "generic";
+  currentThemeName = "dynamic";
+  currentThemeCategory = "dynamic";
   customThemeFile = "";
   registryThemeVariants = { };
-  matugenScheme = "scheme-fidelity";
+  matugenScheme = "scheme-fruit-salad";
   runUserMatugenTemplates = true;
   matugenTargetMonitor = "";
   popupTransparency = 1;
@@ -163,8 +163,8 @@
   runningAppsCurrentMonitor = false;
   appIdSubstitutions = [ ];
   centeringMode = "index";
-  clockDateFormat = "dddd, dd MMMM yyyy (yyyy-MM-dd)";
-  lockDateFormat = "dddd, dd MMMM yyyy";
+  clockDateFormat = "dddd, d MMMM yyyy (yyyy-MM-dd)";
+  lockDateFormat = "dddd, d MMMM yyyy";
   greeterRememberLastSession = true;
   greeterRememberLastUser = true;
   greeterEnableFprint = false;

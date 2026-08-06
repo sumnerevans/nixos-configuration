@@ -44,14 +44,9 @@
 
     xdg.portal = {
       enable = true;
-      configPackages = with pkgs; [
-        niri
-        xdg-desktop-portal-hyprland
-      ];
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
       ];
     };
 
@@ -132,7 +127,6 @@
         target = "graphical-session.target"; # Only start in graphical sessions
       };
     };
-    programs.niri.enable = true;
     programs.hyprland.enable = true;
     services.displayManager.dms-greeter = {
       enable = true;

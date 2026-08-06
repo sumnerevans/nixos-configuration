@@ -26,6 +26,15 @@ in
 
     services.polkit-gnome.enable = true;
 
+    xdg.portal = {
+      configPackages = with pkgs; [
+        xdg-desktop-portal-hyprland
+      ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+      ];
+    };
+
     xdg.portal.config.hyprland = {
       "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
