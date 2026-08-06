@@ -13,10 +13,10 @@ in
   ];
 
   programs.google-chrome.enable = hasGui;
-  programs.brave = {
-    enable = hasGui;
-    commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ];
-  };
+  # programs.brave = {
+  #   enable = hasGui;
+  #   commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ];
+  # };
   programs.chromium.enable = hasGui;
   programs.firefox.enable = hasGui;
 
