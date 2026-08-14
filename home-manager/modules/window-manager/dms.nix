@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -91,5 +92,18 @@
         };
       };
     };
+
+    # DMS syncs its dark/light mode to the freedesktop Settings portal by
+    # shelling out to `gsettings set org.gnome.desktop.interface
+    # color-scheme ...` (see Services/PortalService.qml). Because of
+    # https://github.com/nix-community/home-manager/issues/5542, systemd
+    # user services don't reliably see home-manager's session-wide
+    # XDG_DATA_DIRS additions, so that call silently fails to find the
+    # org.gnome.desktop.interface schema and the dconf key never gets
+    # written. Set GSETTINGS_SCHEMA_DIR directly on the unit so it doesn't
+    # depend on that.
+    systemd.user.services.dms.Service.Environment = [
+      "GSETTINGS_SCHEMA_DIR=${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas"
+    ];
   };
 }

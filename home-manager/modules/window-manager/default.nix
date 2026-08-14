@@ -37,6 +37,18 @@ with lib;
         gsettings-desktop-schemas
       ];
 
+      # gsettings-desktop-schemas ships its schemas under an isolated
+      # share/gsettings-schemas/<name> directory (the same one nixpkgs
+      # bakes into wrapped apps like Firefox and xdg-desktop-portal-gtk at
+      # build time), not the usual share/glib-2.0/schemas. Without this,
+      # plain `gsettings`/`dconf` calls from unwrapped tools (e.g. DMS's
+      # portal color-scheme sync in dms.service) can't find
+      # org.gnome.desktop.interface at all. This wires it into
+      # XDG_DATA_DIRS for both login shells and the systemd user session.
+      xdg.systemDirs.data = [
+        "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+      ];
+
       home.sessionVariables = {
         TERMINAL = "${pkgs.kitty}/bin/kitty";
       };

@@ -1,6 +1,6 @@
 {
-  currentThemeName = "blue";
-  currentThemeCategory = "generic";
+  currentThemeName = "dynamic";
+  currentThemeCategory = "dynamic";
   customThemeFile = "";
   registryThemeVariants = { };
   matugenScheme = "scheme-fruit-salad";
