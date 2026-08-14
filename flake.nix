@@ -30,6 +30,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -70,6 +75,7 @@
       colmena,
       nixpkgs,
       home-manager,
+      nur,
 
       mdf,
       tracktime,
@@ -93,6 +99,7 @@
           (self: super: { inherit (offlinemsmtp.packages.${system}) offlinemsmtp; })
           (self: super: { inherit (tracktime.packages.${system}) tracktime; })
           (self: super: { inherit (webfortune.packages.${system}) webfortune; })
+          nur.overlays.default
 
           # https://github.com/niri-wm/niri/pull/3061/
           (final: prev: {
