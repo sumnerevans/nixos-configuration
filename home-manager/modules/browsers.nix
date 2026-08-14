@@ -6,6 +6,20 @@
 }:
 let
   hasGui = config.wayland.enable || config.xorg.enable;
+
+  # https://danklinux.com/docs/dankmaterialshell/application-themes#option-1-material-fox-chrome-like-with-dynamic-colors
+  # theme-material-blue.css is replaced with a symlink to DMS's matugen-generated
+  # firefox.css so the theme's colors follow the system theme dynamically.
+  materialFoxChrome = pkgs.runCommand "material-fox-chrome" { } ''
+    cp -r ${
+      pkgs.fetchzip {
+        url = "https://github.com/edelvarden/material-fox-updated/releases/download/v2.0.0/chrome.zip";
+        hash = "sha256-0o1kCjX5Z1bO78/6Qx94WdXv93YLsATeritw5gcQ2jo=";
+      }
+    } $out
+    chmod -R u+w $out
+    ln -sf ${config.home.homeDirectory}/.config/DankMaterialShell/firefox.css $out/theme-material-blue.css
+  '';
 in
 {
   home.packages = with pkgs; [
@@ -34,6 +48,11 @@ in
         "browser.download.folderList" = 2;
         "browser.toolbars.bookmarks.visibility" = "always";
         "devtools.toolbox.host" = "right";
+
+        # Material Fox (Chrome-like theme with dynamic Material You colors)
+        "toolkit.legacyuserprofilecustomizations.stylesheets" = true;
+        "svg.context-properties.content.enabled" = true;
+        "userChrome.theme-material" = true;
       };
 
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -44,6 +63,12 @@ in
         return-youtube-dislikes
       ];
     };
+  };
+
+  home.file.".mozilla/firefox/default/chrome" = lib.mkIf hasGui {
+    source = materialFoxChrome;
+    recursive = true;
+    force = true;
   };
 
   home.sessionVariables = lib.mkIf hasGui {
