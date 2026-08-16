@@ -59,6 +59,7 @@ in
         tui = "fullscreen";
         theme = "auto";
         editorMode = "vim";
+        permissions.defaultMode = "manual";
         permissions.allow = [
           "WebSearch"
           "WebFetch"
