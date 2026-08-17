@@ -148,16 +148,17 @@
       # so without this it falls back to a plain "us" layout at the login
       # screen. Mirror the default kb_layout/kb_variant here.
       compositor.customConfig = ''
-        env = DMS_RUN_GREETER,1
+        hl.env("DMS_RUN_GREETER", "1")
 
-        misc {
-            disable_hyprland_logo = true
-        }
-
-        input {
-            kb_layout = us
-            kb_variant = ${config.dmsGreeterKeyboardVariant}
-        }
+        hl.config({
+            misc = {
+                disable_hyprland_logo = true,
+            },
+            input = {
+                kb_layout = "us",
+                kb_variant = "${config.dmsGreeterKeyboardVariant}",
+            },
+        })
       '';
     };
   };
