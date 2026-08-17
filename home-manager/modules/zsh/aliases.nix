@@ -1,10 +1,8 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
-with lib;
 {
   programs.zsh = {
     shellAliases = {
@@ -17,7 +15,7 @@ with lib;
       grep = "grep --color -n";
       hostdir = "python -m http.server";
       iftop = "sudo iftop -i any";
-      journal = "vim ${config.home.homeDirectory}/Documents/journal/$(date +%Y-%m-%d).rst";
+      journal = "vim ${config.home.homeDirectory}/Documents/journal/$(date +%Y-%m-%d).md";
       la = "ls -a";
       ll = "ls -lah";
       ls = "ls --color -F";
