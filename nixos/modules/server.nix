@@ -21,10 +21,10 @@
 
     networking.usePredictableInterfaceNames = false;
 
-    services.journald.extraConfig = ''
-      SystemMaxUse=2G
-      MaxRetentionSec=1week
-    '';
+    services.journald.settings.Journal = {
+      SystemMaxUse = "2G";
+      MaxRetentionSec = "1week";
+    };
 
     services.nginx = {
       enable = true;

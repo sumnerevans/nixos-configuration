@@ -105,7 +105,7 @@
     programs.dconf.enable = true;
     services.dbus.packages = with pkgs; [
       dconf
-      gcr
+      gcr_4
     ];
     services.gnome.at-spi2-core.enable = true;
     services.gnome.gnome-keyring.enable = true;
