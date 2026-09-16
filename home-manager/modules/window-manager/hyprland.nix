@@ -653,6 +653,15 @@ in
               }
             ];
           }
+          {
+            _args = [
+              {
+                name = "float-bitwarden";
+                match.class = "chrome-nngceckbapebfimnlniiiahkandclblb-Default";
+                float = true;
+              }
+            ];
+          }
         ];
       };
 
