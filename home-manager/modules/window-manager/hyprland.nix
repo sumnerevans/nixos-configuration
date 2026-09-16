@@ -22,8 +22,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ grimblast ];
-
     services.polkit-gnome.enable = true;
 
     xdg.portal = {
@@ -349,19 +347,31 @@ in
             {
               _args = [
                 "Print"
-                (lua ''hl.dsp.exec_cmd("grimblast --notify copy area")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot")'')
               ];
             }
             {
               _args = [
                 "CTRL + Print"
-                (lua ''hl.dsp.exec_cmd("grimblast --notify copy screen")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot full")'')
               ];
             }
             {
               _args = [
                 "ALT + Print"
-                (lua ''hl.dsp.exec_cmd("grimblast --notify copy active")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot window")'')
+              ];
+            }
+            {
+              _args = [
+                (mod "SHIFT + C")
+                (lua ''hl.dsp.exec_cmd("dms screenshot")'')
+              ];
+            }
+            {
+              _args = [
+                (mod "SHIFT + CTRL + C")
+                (lua ''hl.dsp.exec_cmd("dms screenshot full")'')
               ];
             }
 
