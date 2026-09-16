@@ -345,14 +345,6 @@ in
               ];
             }
 
-            # Power
-            {
-              _args = [
-                (mod "SHIFT + P")
-                (lua ''hl.dsp.dpms({ state = "off" })'')
-              ];
-            }
-
             # Screenshots
             {
               _args = [
