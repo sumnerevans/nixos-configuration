@@ -86,48 +86,49 @@
     }:
     let
       system = "x86_64-linux";
+      nixpkgsConfig = {
+        permittedInsecurePackages = [ "olm-3.2.16" ];
+        allowUnfree = true;
+      };
+
+      overlays = [
+        (self: super: { inherit (mailnotify.packages.${system}) mailnotify; })
+        (self: super: { inherit (mdf.packages.${system}) mdf; })
+        (self: super: { inherit (offlinemsmtp.packages.${system}) offlinemsmtp; })
+        (self: super: { inherit (tracktime.packages.${system}) tracktime; })
+        (self: super: { inherit (webfortune.packages.${system}) webfortune; })
+        nur.overlays.default
+
+        # https://github.com/niri-wm/niri/pull/3061/
+        (final: prev: {
+          niri = prev.niri.overrideAttrs (old: rec {
+            pname = "niri";
+            src = prev.fetchFromGitHub {
+              owner = "ArthurHeymans";
+              repo = "niri";
+              rev = "97f3070f9889939990f7d5ab9ae2f5f7899c058c";
+              hash = "sha256-5p0o1EJtlMNjR0frO0XqZAolgZN5hUVDb3/orduBkf4=";
+            };
+
+            cargoDeps = final.rustPlatform.fetchCargoVendor {
+              inherit src;
+              hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
+            };
+
+            postPatch = ''
+              patchShebangs resources/niri-session
+              substituteInPlace resources/niri.service \
+                --replace-fail '/usr/bin/niri' "$out/bin/niri"
+            '';
+
+            checkPhase = "true";
+            doInstallCheck = false;
+          });
+        })
+      ];
       pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          permittedInsecurePackages = [ "olm-3.2.16" ];
-          allowUnfree = true;
-        };
-
-        overlays = [
-          (self: super: { inherit (mailnotify.packages.${system}) mailnotify; })
-          (self: super: { inherit (mdf.packages.${system}) mdf; })
-          (self: super: { inherit (offlinemsmtp.packages.${system}) offlinemsmtp; })
-          (self: super: { inherit (tracktime.packages.${system}) tracktime; })
-          (self: super: { inherit (webfortune.packages.${system}) webfortune; })
-          nur.overlays.default
-
-          # https://github.com/niri-wm/niri/pull/3061/
-          (final: prev: {
-            niri = prev.niri.overrideAttrs (old: rec {
-              pname = "niri";
-              src = prev.fetchFromGitHub {
-                owner = "ArthurHeymans";
-                repo = "niri";
-                rev = "97f3070f9889939990f7d5ab9ae2f5f7899c058c";
-                hash = "sha256-5p0o1EJtlMNjR0frO0XqZAolgZN5hUVDb3/orduBkf4=";
-              };
-
-              cargoDeps = final.rustPlatform.fetchCargoVendor {
-                inherit src;
-                hash = "sha256-uKbCm7aW8uZNoJmiLrea8wH/ziwcu3l9AfXLY3g9x5Q=";
-              };
-
-              postPatch = ''
-                patchShebangs resources/niri-session
-                substituteInPlace resources/niri.service \
-                  --replace-fail '/usr/bin/niri' "$out/bin/niri"
-              '';
-
-              checkPhase = "true";
-              doInstallCheck = false;
-            });
-          })
-        ];
+        inherit system overlays;
+        config = nixpkgsConfig;
       };
     in
     {
@@ -136,10 +137,9 @@
       nixosConfigurations = {
         scarif = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = inputs // {
-            inherit pkgs;
-          };
+          specialArgs = inputs;
           modules = [
+            { nixpkgs.config = nixpkgsConfig; nixpkgs.overlays = overlays; }
             ./nixos/modules
             ./nixos/hosts/scarif
             home-manager.nixosModules.home-manager
@@ -154,10 +154,9 @@
         };
         mustafar = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = inputs // {
-            inherit pkgs;
-          };
+          specialArgs = inputs;
           modules = [
+            { nixpkgs.config = nixpkgsConfig; nixpkgs.overlays = overlays; }
             ./nixos/modules
             ./nixos/hosts/mustafar
             home-manager.nixosModules.home-manager
