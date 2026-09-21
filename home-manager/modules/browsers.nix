@@ -35,6 +35,7 @@ in
 
   programs.firefox = lib.mkIf hasGui {
     enable = true;
+    configPath = ".mozilla/firefox";
     profiles.default = {
       id = 0;
       isDefault = true;
