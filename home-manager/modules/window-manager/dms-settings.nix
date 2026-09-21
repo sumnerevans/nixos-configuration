@@ -253,6 +253,7 @@
   batterySuspendBehavior = 0;
   batteryProfileName = "";
   batteryChargeLimit = 100;
+  batteryNotifyLow = true;
   lockBeforeSuspend = true;
   loginctlLockIntegration = true;
   fadeToLockEnabled = true;

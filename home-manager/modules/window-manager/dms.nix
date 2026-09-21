@@ -56,7 +56,6 @@
           enable = true;
           settings.trigger = "=";
         };
-        dankBatteryAlerts.enable = true;
         dmsScreenshot = {
           enable = true;
           settings = {
