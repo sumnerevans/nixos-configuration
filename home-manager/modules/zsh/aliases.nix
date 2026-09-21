@@ -9,7 +9,6 @@
       quotesfile = "vim /etc/nixos/home-manager/modules/email/quotes";
 
       # Other aliases
-      antioffice = "libreoffice --headless --convert-to pdf";
       feh = "feh -.";
       getquote = "fortune ${config.xdg.dataHome}/fortune/quotes";
       grep = "grep --color -n";
@@ -32,22 +31,14 @@
     initContent = ''
       # File Type Associations
       alias -s cpp=$EDITOR
-      alias -s doc=$OFFICE
-      alias -s docx=$OFFICE
       alias -s exe=$WINE
       alias -s h=$EDITOR
       alias -s md=$EDITOR
       alias -s mp4=$VIDEOVIEWER
       alias -s mkv=$VIDEOVIEWER
-      alias -s ods=$OFFICE
-      alias -s odt=$OFFICE
       alias -s pdf=zathura
-      alias -s ppt=$OFFICE
-      alias -s pptx=$OFFICE
       alias -s tex=$EDITOR
       alias -s txt=$EDITOR
-      alias -s xls=$OFFICE
-      alias -s xlsx=$OFFICE
 
       # Making GNU fileutils more verbose
       for c in cp mv rm chmod chown rename; do

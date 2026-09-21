@@ -27,7 +27,6 @@ with lib;
       dotDir = "${config.xdg.configHome}/zsh";
 
       localVariables = {
-        OFFICE = "libreoffice";
         VIDEOVIEWER = "mpv";
         WINE = "wine";
       };

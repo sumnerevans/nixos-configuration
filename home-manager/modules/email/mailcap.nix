@@ -7,7 +7,6 @@
 with lib;
 let
   feh = "${pkgs.feh}/bin/feh";
-  libreoffice = "${pkgs.libreoffice}/bin/libreoffice";
   icalviewScript = pkgs.writeScript "icalview" (builtins.readFile ./icalview.py);
   hasGui = config.wayland.enable || config.xorg.enable;
 
@@ -59,19 +58,7 @@ let
       "application/calendar"
       "application/ics"
     ]
-  )
-
-  # Office Suites
-  // (optionalAttrs hasGui (
-    programSection
-      [ "${libreoffice} %s" ]
-      [
-        "application/msword"
-        "application/vnd.ms-word.document.12"
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        "application/vnd.oasis.opendocument.text"
-      ]
-  ));
+  );
 in
 {
   xdg.configFile."neomutt/mailcap".text = concatStringsSep "\n" (

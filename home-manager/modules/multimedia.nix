@@ -29,9 +29,6 @@ in
         gimp
         imagemagick
         inkscape
-        # kdePackages.kdenlive
-        # libreoffice
-        # spotify
         pear-desktop
       ]
     );
