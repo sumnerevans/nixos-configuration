@@ -2,6 +2,8 @@
   programs.kitty = {
     enable = true;
     settings = {
+      # Let the compositor tile new windows instead of restoring a maximized state.
+      remember_window_size = false;
       scrollback_lines = 100000;
       enable_audio_bell = false;
       update_check_interval = 0;
