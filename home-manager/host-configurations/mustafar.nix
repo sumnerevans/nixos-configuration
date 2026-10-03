@@ -11,6 +11,7 @@
     monitorScale = 1.67;
     settings = {
       config.input.kb_variant = lib.mkForce "3l-cros";
+      config.input.kb_options = "altwin:alt_win";
 
       bind =
         let
