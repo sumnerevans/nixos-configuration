@@ -347,31 +347,31 @@ in
             {
               _args = [
                 "Print"
-                (lua ''hl.dsp.exec_cmd("dms screenshot")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot --dir ${config.home.homeDirectory}/tmp")'')
               ];
             }
             {
               _args = [
                 "CTRL + Print"
-                (lua ''hl.dsp.exec_cmd("dms screenshot full")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot full --dir ${config.home.homeDirectory}/tmp")'')
               ];
             }
             {
               _args = [
                 "ALT + Print"
-                (lua ''hl.dsp.exec_cmd("dms screenshot window")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot window --dir ${config.home.homeDirectory}/tmp")'')
               ];
             }
             {
               _args = [
                 (mod "SHIFT + C")
-                (lua ''hl.dsp.exec_cmd("dms screenshot")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot --dir ${config.home.homeDirectory}/tmp")'')
               ];
             }
             {
               _args = [
                 (mod "SHIFT + CTRL + C")
-                (lua ''hl.dsp.exec_cmd("dms screenshot full")'')
+                (lua ''hl.dsp.exec_cmd("dms screenshot full --dir ${config.home.homeDirectory}/tmp")'')
               ];
             }
 
