@@ -44,9 +44,6 @@ in
       ytdl-format = "bestvideo+bestaudio";
     };
 
-    programs.obs-studio.enable = hasGui;
-    programs.obs-studio.plugins = with pkgs; [ obs-studio-plugins.wlrobs ];
-
     programs.zathura.enable = hasGui;
   };
 }

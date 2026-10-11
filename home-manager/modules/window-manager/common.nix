@@ -223,7 +223,6 @@ with lib;
           )
           // {
             "${modifier}+34" = "exec ${config.home.homeDirectory}/bin/mutt_helper"; # Launch mutt
-            "${modifier}+35" = "exec ${pkgs.element-desktop}/bin/element-desktop"; # Launch Element
           };
 
         modes = {

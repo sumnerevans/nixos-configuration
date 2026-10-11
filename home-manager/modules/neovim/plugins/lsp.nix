@@ -18,7 +18,6 @@ in
   programs.neovim = {
     extraPackages = with pkgs; [
       ocamlPackages.ocamlformat
-      fantomas
       gopls # needed for templ
     ];
     plugins = with pkgs.vimPlugins; [
@@ -84,9 +83,6 @@ in
         },
         ["jsonls"] = {
           cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server", "--stdio" },
-        },
-        ["kotlin_language_server"] = {
-          cmd = { "${pkgs.kotlin-language-server}/bin/kotlin-language-server" },
         },
         ["nil_ls"] = {
           cmd = { "${pkgs.nil}/bin/nil" },

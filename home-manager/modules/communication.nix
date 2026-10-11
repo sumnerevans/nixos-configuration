@@ -10,9 +10,7 @@
       with pkgs;
       [
         discord
-        element-desktop
         mumble
-        zoom-us
       ]
     )
   );

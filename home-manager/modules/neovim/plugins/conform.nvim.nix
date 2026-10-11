@@ -25,7 +25,6 @@
               command = "${pkgs.prettier}/bin/prettier",
               prepend_args = { "--trailing-comma", "es5" },
             },
-            rust = { command = "${pkgs.rustfmt}/bin/rustfmt" },
           },
         })
         vim.keymap.set('n', '<C-f>', function()
