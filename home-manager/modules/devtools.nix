@@ -22,8 +22,6 @@ in
       with pkgs;
       [
         # Shell Utilities
-        eternal-terminal
-        mosh
         tree-sitter
         watchexec
 
