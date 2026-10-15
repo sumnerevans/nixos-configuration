@@ -520,16 +520,16 @@
         "version": "version"
       },
       "locked": {
-        "lastModified": 1772282016,
-        "narHash": "sha256-146QxN+osvlzp8NTGm5TN2yvbu3cOodXfIVeIKsS+7I=",
+        "lastModified": 1778403673,
+        "narHash": "sha256-wv7qKZfnavz8lxfaOaIJJySNsXsjke1ADJuv2kgQOHE=",
         "owner": "a-h",
         "repo": "templ",
-        "rev": "5ddd784440b232930161d76c7ca85d922fdcf183",
+        "rev": "09d6b02946f54492f3d3dcb9729f5b792f220b40",
         "type": "github"
       },
       "original": {
         "owner": "a-h",
-        "ref": "v0.3.1001",
+        "ref": "v0.3.1020",
         "repo": "templ",
         "type": "github"
       }
@@ -591,11 +591,11 @@
         "templ": "templ"
       },
       "locked": {
-        "lastModified": 1787937050,
-        "narHash": "sha256-r+vTEAvhkBByb0+ASvPPkz35LIY8NJxOIKHd133PkIo=",
+        "lastModified": 1792089144,
+        "narHash": "sha256-RQ5gbV1f/FqKn/5+oHyZLFnonTVjR2/GgLthBsJvPS4=",
         "owner": "sumnerevans",
         "repo": "webfortune",
-        "rev": "6004061f65839a2108f08e7af68619a9c79c0172",
+        "rev": "3f51d18a5963b4012e5f2d0f7a4eb46679153e53",
         "type": "github"
       },
       "original": {
