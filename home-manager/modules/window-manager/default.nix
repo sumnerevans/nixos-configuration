@@ -53,6 +53,8 @@ with lib;
         TERMINAL = "${pkgs.kitty}/bin/kitty";
       };
 
+      dconf.settings."org/gnome/desktop/interface".gtk-enable-primary-paste = true;
+
       home.pointerCursor = {
         enable = true;
         package = pkgs.phinger-cursors;
