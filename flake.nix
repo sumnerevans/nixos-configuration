@@ -141,7 +141,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = ".bak";
+              home-manager.backupFileExtension = "bak";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.sumner = ./home-manager/host-configurations/scarif.nix;
@@ -162,7 +162,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = ".bak";
+              home-manager.backupFileExtension = "bak";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.sumner = ./home-manager/host-configurations/mustafar.nix;
