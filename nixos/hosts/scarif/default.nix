@@ -4,7 +4,10 @@
   ];
 
   hostCategory = "laptop";
-  ramSize = 32;
+  ramSize = 16;
+
+  # The Framework kernel module currently fails to build with linuxPackages_latest.
+  hardware.framework.enableKmod = false;
 
   networking.hostName = "scarif";
 
@@ -26,4 +29,6 @@
 
   virtualisation.docker.enable = true;
   enableVirtualisation = true;
+
+  zramSwap.enable = true;
 }

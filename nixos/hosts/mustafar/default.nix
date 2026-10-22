@@ -146,10 +146,7 @@ in
   # disk-backed backstop for when zram fills up, so systemd-oomd's
   # memory-pressure signal degrades gracefully instead of triggering a kill
   # (usually Firefox, as the biggest memory consumer) the moment RAM is tight.
-  zramSwap = {
-    enable = true;
-    memoryPercent = 50;
-  };
+  zramSwap.enable = true;
 
   swapDevices = [
     {
