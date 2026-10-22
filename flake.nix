@@ -131,6 +131,20 @@
             doInstallCheck = false;
           });
         })
+
+        # https://github.com/NixOS/nixpkgs/pull/576662
+        (final: prev: {
+          khal = prev.khal.overrideAttrs (_: {
+            sphinxBuilders = [ "html man" ];
+          });
+        })
+
+        # The upstream keyring tests fail in Nix builds; see https://github.com/NixOS/nixpkgs/issues/576985
+        (final: prev: {
+          udiskie = prev.udiskie.overrideAttrs (_: {
+            doCheck = false;
+          });
+        })
       ];
       pkgs = import nixpkgs {
         inherit system overlays;
