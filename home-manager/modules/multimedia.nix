@@ -24,6 +24,8 @@ in
         pavucontrol
         playerctl
 
+        gradia # Annotate images
+
         # Multimedia
         fbida
         gimp
