@@ -73,13 +73,12 @@ explicitly calls for a reviewed state migration; they are not dependency version
 
 ## Desktop details worth checking before editing
 
-Both active laptops enable Hyprland and DankMaterialShell (DMS). Only Scarif
-explicitly enables niri.
+Both active laptops enable Hyprland and DankMaterialShell (DMS).
 
 Within `home-manager/modules/window-manager/`:
 
-- `hyprland.nix`, `niri.nix`, and `wayland.nix` configure compositors and session
-  integration. `niri-config.kdl` supplies the niri configuration.
+- `hyprland.nix` and `wayland.nix` configure the compositor and session
+  integration.
 - `dms.nix` imports the upstream shell, calendar, and plugin modules.
   `dms-settings.nix` supplies shell settings; `dms-plugins/offlinemsmtp/`
   contains a local widget.
@@ -87,10 +86,6 @@ Within `home-manager/modules/window-manager/`:
   GTK CSS imports DMS-generated `dank-colors.css`; `dms.nix` also sets
   `GSETTINGS_SCHEMA_DIR` on the user service. Read the comments and relevant git
   history before changing theme synchronization or session environment handling.
-
-The `niri` package is overridden in `flake.nix` to a pinned upstream PR commit
-with custom source/vendor hashes and build adjustments. Inspect that overlay
-before assuming behavior matches the nixpkgs package.
 
 `nixpkgs` follows `nixos-unstable`, DMS follows `stable`, and `dcal` and
 `dms-plugin-registry` do not specify branches. Several inputs are the author's

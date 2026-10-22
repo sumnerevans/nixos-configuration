@@ -242,7 +242,6 @@
   controlCenterTileColorMode = "primary";
   buttonColorMode = "primary";
   cornerRadius = 12;
-  niriLayoutGapsOverride = -1;
   layoutRadiusOverride = -1;
   layoutBorderSize = -1;
   use24HourClock = true;
@@ -467,12 +466,10 @@
   filePickerUsageHistory = { };
   sortAppsAlphabetically = false;
   appLauncherGridColumns = 4;
-  spotlightCloseNiriOverview = true;
   spotlightSectionViewModes = {
     plugin_webSearch = "list";
   };
   appDrawerSectionViewModes = { };
-  niriOverviewOverlayEnabled = true;
   dankLauncherV2Size = "compact";
   dankLauncherV2BorderEnabled = false;
   dankLauncherV2BorderThickness = 2;
@@ -488,10 +485,6 @@
   cursorSettings = {
     theme = "System Default";
     size = 24;
-    niri = {
-      hideWhenTyping = true;
-      hideAfterInactiveMs = 0;
-    };
     hyprland = {
       hideOnKeyPress = true;
       hideOnTouch = false;
@@ -570,7 +563,6 @@
   terminalsAlwaysDark = false;
   runDmsMatugenTemplates = true;
   matugenTemplateGtk = true;
-  matugenTemplateNiri = true;
   matugenTemplateHyprland = true;
   matugenTemplateMangowc = true;
   matugenTemplateQt5ct = true;
@@ -692,7 +684,6 @@
     ];
   };
   showOnLastDisplay = { };
-  niriOutputSettings = { };
   hyprlandOutputSettings = { };
   displayProfiles = { };
   activeDisplayProfile = { };

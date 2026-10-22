@@ -129,7 +129,7 @@
       isSystem = true;
     };
 
-    # DMS + Niri/Hyprland
+    # DMS + Hyprland
     programs.gpu-screen-recorder.enable = true;
     programs.dsearch = {
       enable = true;
