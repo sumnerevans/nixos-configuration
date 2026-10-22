@@ -3,8 +3,10 @@
   imports = [ ../home.nix ];
 
   wayland.enable = true;
-  niri.enable = true;
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    monitorScale = 1.5;
+  };
   dms.enable = true;
 
   mdf.port = 1024;
@@ -13,5 +15,4 @@
 
   programs.obs-studio.enable = true;
   programs.obs-studio.plugins = with pkgs; [ obs-studio-plugins.wlrobs ];
-
 }

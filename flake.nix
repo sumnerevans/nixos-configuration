@@ -67,6 +67,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -82,6 +87,7 @@
       offlinemsmtp,
       webfortune,
       mailnotify,
+      nixos-hardware,
       ...
     }:
     let
@@ -139,7 +145,10 @@
           inherit system;
           specialArgs = inputs;
           modules = [
-            { nixpkgs.config = nixpkgsConfig; nixpkgs.overlays = overlays; }
+            {
+              nixpkgs.config = nixpkgsConfig;
+              nixpkgs.overlays = overlays;
+            }
             ./nixos/modules
             ./nixos/hosts/scarif
             home-manager.nixosModules.home-manager
@@ -150,13 +159,17 @@
               home-manager.useUserPackages = true;
               home-manager.users.sumner = ./home-manager/host-configurations/scarif.nix;
             }
+            nixos-hardware.nixosModules.framework-intel-core-ultra-series3
           ];
         };
         mustafar = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = inputs;
           modules = [
-            { nixpkgs.config = nixpkgsConfig; nixpkgs.overlays = overlays; }
+            {
+              nixpkgs.config = nixpkgsConfig;
+              nixpkgs.overlays = overlays;
+            }
             ./nixos/modules
             ./nixos/hosts/mustafar
             home-manager.nixosModules.home-manager
