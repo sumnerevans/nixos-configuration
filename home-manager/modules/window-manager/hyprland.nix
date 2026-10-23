@@ -38,10 +38,6 @@ in
       "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
     };
 
-    systemd.user.services.dms = {
-      Unit.After = [ "hyprland-session.target" ];
-    };
-
     wayland.windowManager.hyprland = {
       systemd.enable = true;
       configType = "lua";

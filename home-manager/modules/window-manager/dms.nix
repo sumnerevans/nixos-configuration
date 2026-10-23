@@ -19,6 +19,8 @@
   config = lib.mkIf config.dms.enable {
     programs.dank-calendar.enable = true;
 
+    systemd.user.services.dms.Unit.Wants = [ config.programs.dank-material-shell.systemd.target ];
+
     programs.dank-material-shell = {
       enable = true;
 
