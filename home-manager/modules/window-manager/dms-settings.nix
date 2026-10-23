@@ -526,7 +526,7 @@
   batteryLockTimeout = 180;
   batterySuspendTimeout = 900;
   batterySuspendBehavior = 0;
-  batteryProfileName = "";
+  batteryProfileName = "0";
   batteryChargeLimit = 100;
   batteryLowThreshold = 15;
   batteryCriticalThreshold = 5;
