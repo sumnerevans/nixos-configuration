@@ -1,14 +1,10 @@
 {
-  config,
-  lib,
   pkgs,
   modulesPath,
   ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   boot = {
     initrd = {
@@ -21,7 +17,7 @@
       ];
       kernelModules = [ ];
     };
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ ];
     extraModulePackages = [ ];
     kernelPackages = pkgs.linuxPackages_latest;
   };
