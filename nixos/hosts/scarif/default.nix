@@ -29,4 +29,6 @@
   enableVirtualisation = true;
 
   zramSwap.enable = true;
+
+  services.fprintd.enable = true; # Enable the fingerprint scanner
 }
