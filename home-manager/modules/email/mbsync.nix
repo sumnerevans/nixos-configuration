@@ -26,4 +26,8 @@
     };
 
   systemd.user.timers.mbsync.Timer.Persistent = true;
+  systemd.user.services.mbsync.Service = {
+    Nice = 10;
+    CPUWeight = 20;
+  };
 }

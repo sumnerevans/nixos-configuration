@@ -14,4 +14,8 @@
     ];
     PartOf = [ "graphical-session.target" ];
   };
+  systemd.user.services.syncthing.Service = {
+    Nice = 10;
+    CPUWeight = 20;
+  };
 }

@@ -140,6 +140,10 @@
         target = "graphical-session.target"; # Only start in graphical sessions
       };
     };
+    systemd.user.services.dsearch.serviceConfig = {
+      Nice = 10;
+      CPUWeight = 20;
+    };
     programs.hyprland.enable = true;
     services.displayManager.dms-greeter = {
       enable = true;
