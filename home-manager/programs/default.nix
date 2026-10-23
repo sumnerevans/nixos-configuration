@@ -76,13 +76,6 @@ in
     virt-manager
 
     ytmdesktop
-
-    (thunar.override {
-      thunarPlugins = [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    })
   ];
 
   programs.bat.enable = true;

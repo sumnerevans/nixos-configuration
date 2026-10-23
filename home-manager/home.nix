@@ -1,8 +1,12 @@
+{ inputs, ... }:
 {
   imports = [
     ./modules
     ./programs
+    inputs.dfiles.homeModules.dux-files
   ];
+
+  programs.dux-files.enable = true;
 
   home = {
     stateVersion = "21.03";
