@@ -11,8 +11,6 @@
 
   networking.hostName = "scarif";
 
-  services.thinkfan.enable = true;
-
   # Allow temporary redirects directly to the reverse proxy.
   networking.firewall.allowedTCPPorts = [
     8222
