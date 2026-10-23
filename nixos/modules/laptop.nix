@@ -16,6 +16,15 @@
     '';
   };
 
+  options.dmsGreeterMonitorScale = lib.mkOption {
+    type = lib.types.number;
+    default = 1;
+    description = ''
+      The scale for the internal display in the dms-greeter's standalone
+      Hyprland instance. Set this to match the user's Hyprland monitor scale.
+    '';
+  };
+
   config = lib.mkIf (config.hostCategory == "laptop") {
     environment.homeBinInPath = true;
     services.upower.enable = true;
@@ -163,6 +172,14 @@
             input = {
                 kb_layout = "us",
                 kb_variant = "${config.dmsGreeterKeyboardVariant}",
+            },
+            monitor = {
+                {
+                    output = "eDP-1",
+                    mode = "preferred",
+                    position = "0x0",
+                    scale = ${toString config.dmsGreeterMonitorScale},
+                },
             },
         })
       '';

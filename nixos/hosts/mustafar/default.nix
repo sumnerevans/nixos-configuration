@@ -85,6 +85,7 @@ in
   # the 3l layout to match this machine's built-in keyboard (see laptop.nix
   # for the default).
   dmsGreeterKeyboardVariant = "3l-cros";
+  dmsGreeterMonitorScale = 1.67;
 
   # Use systemd-boot
   boot.loader.systemd-boot.enable = true;

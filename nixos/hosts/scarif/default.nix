@@ -5,6 +5,7 @@
 
   hostCategory = "laptop";
   ramSize = 16;
+  dmsGreeterMonitorScale = 1.5;
 
   # The Framework kernel module currently fails to build with linuxPackages_latest.
   hardware.framework.enableKmod = false;
