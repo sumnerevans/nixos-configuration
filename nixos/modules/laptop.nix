@@ -167,5 +167,12 @@
         })
       '';
     };
+    security.pam.services.dms-greeter.fprintAuth = lib.mkIf config.services.fprintd.enable true;
+    security.pam.services.greetd.rules.auth.fprintd = {
+      enable = config.services.fprintd.enable;
+      control = "sufficient";
+      modulePath = "${config.services.fprintd.package}/lib/security/pam_fprintd.so";
+      order = 10000;
+    };
   };
 }

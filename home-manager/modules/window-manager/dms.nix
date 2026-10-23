@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  osConfig,
   pkgs,
   ...
 }:
@@ -37,7 +38,10 @@
       enableCalendarEvents = true; # Calendar integration (khal)
       enableClipboardPaste = true; # Pasting items from the clipboard (wtype)
 
-      settings = import ./dms-settings.nix;
+      settings = (import ./dms-settings.nix) // {
+        enableFprint = osConfig.services.fprintd.enable;
+        greeterEnableFprint = osConfig.services.fprintd.enable;
+      };
 
       clipboardSettings = {
         maxHistory = 1000;
