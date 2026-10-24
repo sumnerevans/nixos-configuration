@@ -144,7 +144,7 @@
 
     # DMS + Hyprland
     programs.gpu-screen-recorder.enable = true;
-    programs.dsearch = {
+    programs.dux-search = {
       enable = true;
       systemd = {
         enable = true;
@@ -156,7 +156,7 @@
       CPUWeight = 20;
     };
     programs.hyprland.enable = true;
-    services.displayManager.dms-greeter = {
+    services.displayManager.dux-greeter = {
       enable = true;
       compositor.name = "hyprland";
       configHome = config.users.users.sumner.home;
