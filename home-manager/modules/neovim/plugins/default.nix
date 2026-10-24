@@ -15,7 +15,7 @@
     ./barbar.nix
     ./blamer.nix
     ./gitsigns-nvim.nix
-    ./nvim-tree-lua.nix
+    ./oil.nvim.nix
 
     # Editor
     ./copilot.nix
