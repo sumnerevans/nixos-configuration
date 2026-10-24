@@ -5,22 +5,12 @@ in
 {
   programs.zsh.dirHashes = rec {
     dl = "${home}/Downloads";
-    pass = "${home}/.local/share/password-store";
+    doc = "${home}/Documents";
     pics = "${home}/Pictures";
-    st = "${home}/Syncthing";
     scratch = "${home}/scratch";
+    st = "${home}/Syncthing";
     tmp = "${home}/tmp";
     vid = "${home}/Videos";
-
-    # Documents
-    doc = "${home}/Documents";
-    ch = "${doc}/cheatsheets";
-    no = "${doc}/notes";
-    pres = "${doc}/presentations";
-
-    # Teaching
-    sch = "${home}/school";
-    tea = "${sch}/teaching";
 
     # NixOS config
     cfg = "/etc/nixos";
@@ -32,10 +22,9 @@ in
     aoc = "${gh}/sumnerevans/advent-of-code";
     hm = "${gh}/nix-community/home-manager";
     hspc = "${gh}/ColoradoSchoolOfMines/hspc-problems";
-    kattis = "${gh}/sumnerevans/kattis";
+    pres = "${gh}/sumnerevans/presentations";
     res = "${gh}/sumnerevans/resume";
     sws = "${gh}/sumnerevans/sumnerevans.com";
     tt = "${gh}/sumnerevans/tracktime";
-    yt = "${gh}/sumnerevans/youtube-content";
   };
 }
