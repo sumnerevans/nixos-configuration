@@ -18,6 +18,7 @@
     ./nvim-tree-lua.nix
 
     # Editor
+    ./copilot.nix
     ./vim-template.nix
 
     # Language Server, Completion, and Formatting
