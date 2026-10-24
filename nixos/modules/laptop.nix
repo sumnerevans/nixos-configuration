@@ -61,8 +61,10 @@
       pulse.enable = true;
     };
 
-    # Suspend on power button press instead of shutdown.
-    services.logind.settings.Login.HandlePowerKey = "suspend";
+    services.logind.settings.Login = {
+      HandlePowerKey = "ignore";
+      HandlePowerKeyLongPress = "suspend";
+    };
 
     xdg.portal = {
       enable = true;
