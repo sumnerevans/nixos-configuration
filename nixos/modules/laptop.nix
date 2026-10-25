@@ -27,6 +27,7 @@
 
   config = lib.mkIf (config.hostCategory == "laptop") {
     environment.homeBinInPath = true;
+    services.udisks2.enable = true;
     services.upower.enable = true;
     # DMS uses power-profiles-daemon to apply its automatic battery saver.
     services.power-profiles-daemon.enable = true;
