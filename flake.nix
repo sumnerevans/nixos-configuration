@@ -110,13 +110,6 @@
         (self: super: { inherit (webfortune.packages.${system}) webfortune; })
         nur.overlays.default
 
-        # https://github.com/NixOS/nixpkgs/pull/576662
-        (final: prev: {
-          khal = prev.khal.overrideAttrs (_: {
-            sphinxBuilders = [ "html man" ];
-          });
-        })
-
         # The upstream keyring tests fail in Nix builds; see https://github.com/NixOS/nixpkgs/issues/576985
         (final: prev: {
           udiskie = prev.udiskie.overrideAttrs (_: {
