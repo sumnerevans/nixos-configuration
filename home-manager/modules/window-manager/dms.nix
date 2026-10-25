@@ -111,5 +111,28 @@
     systemd.user.services.dms.Service.Environment = [
       "GSETTINGS_SCHEMA_DIR=${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas"
     ];
+
+    programs.dux-files = {
+      enable = true;
+      settings = {
+        themeMode = "dark";
+        colorSource = "auto";
+      };
+
+      # Keep a resident instance so windows open fast and the portal answers at once
+      systemd = {
+        enable = true;
+        target = "graphical-session.target";
+        restartIfChanged = true;
+      };
+
+      # Serve other apps' open and save dialogs
+      portal = {
+        enable = true; # register the dfiles backend with xdg-desktop-portal
+        preferred = true; # prefer it for org.freedesktop.impl.portal.FileChooser
+        desktop = "hyprland"; # which xdg.portal.config entry gets the preference, "common" by default
+      };
+    };
+
   };
 }

@@ -6,8 +6,6 @@
     inputs.dfiles.homeModules.dux-files
   ];
 
-  programs.dux-files.enable = true;
-
   home = {
     stateVersion = "21.03";
     username = "sumner";

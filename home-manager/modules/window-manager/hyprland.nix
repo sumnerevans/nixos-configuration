@@ -34,7 +34,6 @@ in
     };
 
     xdg.portal.config.hyprland = {
-      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
     };
 
