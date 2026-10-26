@@ -774,6 +774,10 @@
           enabled = true;
         }
         {
+          id = "voxtype";
+          enabled = true;
+        }
+        {
           id = "notificationButton";
           enabled = true;
         }

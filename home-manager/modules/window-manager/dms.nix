@@ -57,6 +57,7 @@
           enable = true;
           src = ./dms-plugins/offlinemsmtp;
         };
+        voxtype.enable = true;
         emojiLauncher.enable = true;
         calculator = {
           enable = true;

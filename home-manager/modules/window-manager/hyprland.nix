@@ -73,6 +73,19 @@ in
             }
             {
               _args = [
+                "F12"
+                (lua ''hl.dsp.exec_cmd("voxtype record start")'')
+              ];
+            }
+            {
+              _args = [
+                "F12"
+                (lua ''hl.dsp.exec_cmd("voxtype record stop")'')
+                { release = true; }
+              ];
+            }
+            {
+              _args = [
                 (mod "SHIFT + X")
                 (lua ''hl.dsp.exec_cmd("dms ipc call lock lock")'')
               ];
