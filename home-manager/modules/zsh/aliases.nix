@@ -21,7 +21,7 @@
       man = "MANWIDTH=80 man --nh --nj";
       myip = "curl 'https://api.ipify.org?format=text' && echo";
       ohea = "echo 'You need to either wake up or go to bed!'";
-      open = "dfiles open -n $(pwd) &> /dev/null";
+      open = ''dfiles open -n "$(pwd)" &> /dev/null'';
       screen = "screen -DR";
       soviet = "${pkgs.pamixer}/bin/pamixer --set-volume 50 && mpv --quiet -vo caca 'https://www.youtube.com/watch?v=U06jlgpMtQs'";
       ssh = "kitten ssh";
