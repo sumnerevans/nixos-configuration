@@ -31,7 +31,6 @@ in
     nox
     openssl
     pciutils
-    pcre
     pwgen
     ranger
     restic
