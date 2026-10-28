@@ -27,6 +27,15 @@
 
   programs.steam.enable = true;
 
+  # Run local language models on demand. Keep the API bound to localhost;
+  # models can be downloaded separately with `ollama pull`.
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-vulkan;
+    # Ollama skips integrated GPUs unless explicitly enabled.
+    environmentVariables.OLLAMA_IGPU_ENABLE = "1";
+  };
+
   virtualisation.docker.enable = true;
   enableVirtualisation = true;
 
