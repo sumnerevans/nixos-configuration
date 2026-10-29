@@ -27,6 +27,7 @@ in
     mimeApps = {
       enable = true;
       defaultApplications = lib.genAttrs imageMimeTypes (_: "feh.desktop") // {
+        "application/pdf" = "org.pwmt.zathura.desktop";
         "inode/directory" = "dev.duxlabs.files.desktop";
         "application/x-extension-htm" = "firefox.desktop";
         "application/x-extension-html" = "firefox.desktop";
