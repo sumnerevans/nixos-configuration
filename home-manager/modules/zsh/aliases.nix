@@ -29,17 +29,6 @@
     };
 
     initContent = ''
-      # File Type Associations
-      alias -s cpp=$EDITOR
-      alias -s exe=$WINE
-      alias -s h=$EDITOR
-      alias -s md=$EDITOR
-      alias -s mp4=$VIDEOVIEWER
-      alias -s mkv=$VIDEOVIEWER
-      alias -s pdf=zathura
-      alias -s tex=$EDITOR
-      alias -s txt=$EDITOR
-
       # Making GNU fileutils more verbose
       for c in cp mv rm chmod chown rename; do
           alias $c="$c -v"
