@@ -444,22 +444,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1771848320,
-        "narHash": "sha256-0MAd+0mun3K/Ns8JATeHT1sX28faLII5hVLq0L3BdZU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2fc6539b481e1d2569f25f8799236694180c0993",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -608,20 +592,19 @@
           "webfortune",
           "nixpkgs"
         ],
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "version": "version"
       },
       "locked": {
-        "lastModified": 1778403673,
-        "narHash": "sha256-wv7qKZfnavz8lxfaOaIJJySNsXsjke1ADJuv2kgQOHE=",
+        "lastModified": 1793004651,
+        "narHash": "sha256-QViQAMtCqaXS4GodlSCW/nE4Sox+EF49sbb7h9RBIS0=",
         "owner": "a-h",
         "repo": "templ",
-        "rev": "09d6b02946f54492f3d3dcb9729f5b792f220b40",
+        "rev": "ed4e7663123ae9169ff5b378b055a99012ba5f5a",
         "type": "github"
       },
       "original": {
         "owner": "a-h",
-        "ref": "v0.3.1020",
+        "ref": "v0.3.1100",
         "repo": "templ",
         "type": "github"
       }
@@ -658,16 +641,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1749991223,
-        "narHash": "sha256-K6OM2m+Bdkbq7MvTIwI1t0aPIwmkLUDeUfev5VHpiwg=",
+        "lastModified": 1785656599,
+        "narHash": "sha256-8uEQBbupqXo3MH0Kufz544tVNnwM5Wfsp7m1sbF2Q0M=",
         "owner": "a-h",
         "repo": "version",
-        "rev": "da721166410c6e7e2bea37cf3dee3948b5d0c83f",
+        "rev": "913277d49bdedfcfb02abff1481155ec50000d4b",
         "type": "github"
       },
       "original": {
         "owner": "a-h",
-        "ref": "0.0.10",
         "repo": "version",
         "type": "github"
       }
@@ -705,11 +687,11 @@
         "templ": "templ"
       },
       "locked": {
-        "lastModified": 1792170305,
-        "narHash": "sha256-e4tRzrFBlVv5onSs4LSttY3TXgy9H/y/QCGPzmy/HEM=",
+        "lastModified": 1793721763,
+        "narHash": "sha256-0Ac8tXt44+x3mU2M1us1nEBvJw1gA9UkYopnB1xOVHI=",
         "owner": "sumnerevans",
         "repo": "webfortune",
-        "rev": "9305d25f210a10a491197003ab500773f31198a3",
+        "rev": "28221bc44279dee7293655c2b1ccae6eb1e1e6ee",
         "type": "github"
       },
       "original": {
