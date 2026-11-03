@@ -43,6 +43,7 @@
         pre_type_delay_ms = 100;
         notifications.on_transcription = false;
       };
+      text.spoken_punctuation = true;
     };
   };
 }
