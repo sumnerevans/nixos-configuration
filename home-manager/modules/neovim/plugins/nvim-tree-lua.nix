@@ -40,7 +40,7 @@
 
         require("nvim-tree").setup {
           view = {
-            width = 45,
+            width = 40,
           },
           trash = {
             cmd = "rm -rf",
