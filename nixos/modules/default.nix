@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   options = {
     hostCategory = lib.mkOption {
@@ -68,6 +68,19 @@
       enable = true;
       useRoutingFeatures = "both";
       openFirewall = true;
+    };
+
+    # Neovim never rotates its LSP log. Keep about 90 days of it.
+    services.logrotate.settings.nvim-lsp = {
+      files = "/home/sumner/.local/state/nvim/lsp.log";
+      su = "sumner users";
+      frequency = "weekly";
+      rotate = 13;
+      # Neovim keeps the log open in append mode.
+      copytruncate = true;
+      compress = true;
+      missingok = true;
+      notifempty = true;
     };
   };
 }
