@@ -632,6 +632,7 @@ in
             inactive_opacity = 0.8;
           };
           animations.enabled = true;
+          cursor.warp_on_change_workspace = 1;
           dwindle = {
             preserve_split = true;
             force_split = 2;
