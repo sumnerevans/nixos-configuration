@@ -110,12 +110,6 @@ in
                 (lua "hl.dsp.window.close()")
               ];
             }
-            {
-              _args = [
-                "ALT + F4"
-                (lua "hl.dsp.window.close()")
-              ];
-            }
 
             # Focus
             {
@@ -139,30 +133,6 @@ in
             {
               _args = [
                 (mod "L")
-                (lua ''hl.dsp.focus({ direction = "right" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "left")
-                (lua ''hl.dsp.focus({ direction = "left" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "down")
-                (lua ''hl.dsp.focus({ direction = "down" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "up")
-                (lua ''hl.dsp.focus({ direction = "up" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "right")
                 (lua ''hl.dsp.focus({ direction = "right" })'')
               ];
             }
@@ -192,30 +162,6 @@ in
                 (lua ''hl.dsp.window.move({ direction = "right" })'')
               ];
             }
-            {
-              _args = [
-                (mod "SHIFT + left")
-                (lua ''hl.dsp.window.move({ direction = "left" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + down")
-                (lua ''hl.dsp.window.move({ direction = "down" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + up")
-                (lua ''hl.dsp.window.move({ direction = "up" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + right")
-                (lua ''hl.dsp.window.move({ direction = "right" })'')
-              ];
-            }
 
             # Focus monitor
             {
@@ -242,30 +188,6 @@ in
                 (lua ''hl.dsp.focus({ monitor = "r" })'')
               ];
             }
-            {
-              _args = [
-                (mod "CTRL + left")
-                (lua ''hl.dsp.focus({ monitor = "l" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "CTRL + down")
-                (lua ''hl.dsp.focus({ monitor = "d" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "CTRL + up")
-                (lua ''hl.dsp.focus({ monitor = "u" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "CTRL + right")
-                (lua ''hl.dsp.focus({ monitor = "r" })'')
-              ];
-            }
 
             # Move workspace to monitor
             {
@@ -289,30 +211,6 @@ in
             {
               _args = [
                 (mod "SHIFT + CTRL + L")
-                (lua ''hl.dsp.workspace.move({ monitor = "r" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + CTRL + left")
-                (lua ''hl.dsp.workspace.move({ monitor = "l" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + CTRL + down")
-                (lua ''hl.dsp.workspace.move({ monitor = "d" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + CTRL + up")
-                (lua ''hl.dsp.workspace.move({ monitor = "u" })'')
-              ];
-            }
-            {
-              _args = [
-                (mod "SHIFT + CTRL + right")
                 (lua ''hl.dsp.workspace.move({ monitor = "r" })'')
               ];
             }
@@ -380,20 +278,6 @@ in
               _args = [
                 (mod "SHIFT + CTRL + C")
                 (lua ''hl.dsp.exec_cmd("dms screenshot full --dir ${config.home.homeDirectory}/tmp")'')
-              ];
-            }
-
-            # Session
-            {
-              _args = [
-                (mod "SHIFT + E")
-                (lua "hl.dsp.exit()")
-              ];
-            }
-            {
-              _args = [
-                "CTRL + ALT + Delete"
-                (lua "hl.dsp.exit()")
               ];
             }
 
@@ -643,6 +527,7 @@ in
             focus_on_activate = true;
           };
         };
+
         window_rule = [
           {
             _args = [
@@ -673,7 +558,6 @@ in
           }
         ];
       };
-
     };
   };
 }
