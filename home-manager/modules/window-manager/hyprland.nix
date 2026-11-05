@@ -353,6 +353,15 @@ in
               ];
             }
 
+              # Settings
+              {
+              _args = [
+                "XF86AudioMedia"
+                (lua ''hl.dsp.exec_cmd("dms ipc call settings toggle")'')
+                { locked = true; }
+              ];
+              }
+
             # Mouse bindings
             {
               _args = [
