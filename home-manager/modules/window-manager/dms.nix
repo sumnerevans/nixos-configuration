@@ -35,7 +35,7 @@
       enableCalendarEvents = true; # Calendar integration (khal)
       enableClipboardPaste = true; # Pasting items from the clipboard (wtype)
 
-      settings = (import ./dms-settings.nix) // {
+      settings = (builtins.fromJSON (builtins.readFile ./dms-settings.json)) // {
         enableFprint = osConfig.services.fprintd.enable;
         greeterEnableFprint = osConfig.services.fprintd.enable;
       };
