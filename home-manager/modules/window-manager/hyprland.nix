@@ -335,13 +335,13 @@ in
             {
               _args = [
                 (mod "F")
-                (lua "hl.dsp.window.fullscreen({ mode = 1 })")
+                (lua "hl.dsp.window.fullscreen({ mode = 0 })")
               ];
             }
             {
               _args = [
                 (mod "SHIFT + F")
-                (lua "hl.dsp.window.fullscreen({ mode = 0 })")
+                (lua "hl.dsp.window.fullscreen({ mode = 1 })")
               ];
             }
             {
