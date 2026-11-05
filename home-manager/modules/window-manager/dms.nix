@@ -14,12 +14,9 @@
   imports = [
     inputs.dms-plugin-registry.nixosModules.default
     inputs.dms.homeModules.dank-material-shell
-    inputs.dcal.homeModules.dank-calendar
   ];
 
   config = lib.mkIf config.dms.enable {
-    programs.dank-calendar.enable = true;
-
     systemd.user.services.dms.Unit.Wants = [ config.programs.dank-material-shell.systemd.target ];
 
     programs.dank-material-shell = {

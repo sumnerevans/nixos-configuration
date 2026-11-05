@@ -41,17 +41,12 @@
     };
 
     dms = {
-      url = "github:duxlabs-dev/dux-shell";
+      url = "github:duxlabs-dev/dux-shell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     dfiles = {
       url = "github:duxlabs-dev/dux-files";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    dcal = {
-      url = "github:duxlabs-dev/dux-calendar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

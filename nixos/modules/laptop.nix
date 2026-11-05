@@ -156,7 +156,10 @@
       Nice = 10;
       CPUWeight = 20;
     };
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
     services.displayManager.dux-greeter = {
       enable = true;
       compositor.name = "hyprland";
