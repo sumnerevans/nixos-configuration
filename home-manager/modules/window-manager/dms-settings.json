@@ -189,7 +189,7 @@
   "useFahrenheit": true,
   "enableRippleEffects": true,
   "wallpaperFillMode": "Fill",
-  "lockDateFormat": "dddd, d MMMM yyyy",
+  "lockDateFormat": "dddd, MMMM d",
   "greeterRememberLastSession": true,
   "greeterRememberLastUser": true,
   "greeterEnableFprint": true,
@@ -304,6 +304,7 @@
   "syncComponentAnimationSpeeds": true,
   "blurredWallpaperLayer": false,
   "blurWallpaperOnOverview": true,
+  "systemTrayIconTintMode": "none",
   "controlCenterWidgets": [
     {
       "enabled": true,
@@ -415,7 +416,7 @@
   "audioWheelScrollAmount": 5,
   "appIdSubstitutions": [],
   "centeringMode": "index",
-  "clockDateFormat": "dddd, d MMMM yyyy (yyyy-MM-dd)",
+  "clockDateFormat": "dddd, MMMM d",
   "browserPickerViewMode": "grid",
   "appPickerViewMode": "grid",
   "sortAppsAlphabetically": false,
@@ -603,7 +604,7 @@
       "islandNotch": false,
       "islandNotificationBadgeClearOnOpen": true,
       "islandNotificationExpand": false,
-      "islandNotificationPopups": false,
+      "islandNotificationPopups": true,
       "islandOuterGap": 4,
       "islandPlacement": "edge",
       "islandReserveThickness": 40,
@@ -670,11 +671,16 @@
         },
         {
           "enabled": true,
-          "id": "cpuUsage"
+          "id": "cpuUsage",
+          "overflowMode": "section",
+          "minimumWidth": false
         },
         {
           "enabled": true,
-          "id": "memUsage"
+          "id": "memUsage",
+          "showSwap": false,
+          "showInGb": true,
+          "minimumWidth": false
         },
         {
           "enabled": true,
@@ -686,7 +692,12 @@
         },
         {
           "enabled": true,
-          "id": "battery"
+          "id": "battery",
+          "showBatteryTime": false,
+          "showBatteryPowerCharging": false,
+          "showBatteryPowerDischarging": false,
+          "showBatteryPercentOnlyOnBattery": false,
+          "batteryStyle": "icon"
         },
         {
           "enabled": true,
@@ -728,7 +739,8 @@
       "widgetOutlineThickness": 1,
       "widgetPadding": 8,
       "widgetStyle": "pills",
-      "widgetTransparency": 1
+      "widgetTransparency": 1,
+      "batteryColorMode": "theme"
     }
   ],
   "desktopWidgetInstances": [],
