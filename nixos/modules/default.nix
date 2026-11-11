@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   options = {
     hostCategory = lib.mkOption {
@@ -37,10 +37,22 @@
       };
     };
 
-    nix.settings.download-buffer-size = 4294967296; # 4 GiB
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    nix = {
+      settings = {
+        download-buffer-size = 4294967296; # 4 GiB
+        extra-substituters = [ "https://colmena.cachix.org" ];
+        extra-trusted-public-keys = [
+          "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+        ];
+        trusted-users = [
+          "root"
+          "sumner"
+        ];
+      };
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
+    };
 
     environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
