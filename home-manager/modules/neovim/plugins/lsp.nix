@@ -78,6 +78,18 @@ in
             }
           },
         },
+        ["hledger-lsp"] = {
+          cmd = { "/home/sumner/repositories/github.com/juev/hledger-lsp/hledger-lsp" },
+          filetypes = { 'ledger' },
+          root_markers = { '.git' },
+          settings = {
+            hledger = {
+              inlayHints = {
+                runningBalances = true,
+              },
+            },
+          },
+        },
         ["html"] = {
           cmd = { "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server", "--stdio" },
         },
