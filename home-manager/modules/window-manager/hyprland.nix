@@ -41,6 +41,16 @@ in
       systemd.enable = true;
       configType = "lua";
 
+      # Use the DMS (matugen) border colors so they follow the light/dark theme.
+      # Without this, Hyprland's default white active border disappears against
+      # light windows while the dark inactive border stands out.
+      #
+      # DMS window rules float its own windows and keep them opaque.
+      extraConfig = ''
+        pcall(require, "dms.colors")
+        pcall(require, "dms.windowrules")
+      '';
+
       settings = {
         mainMod = {
           _var = cfg.mainMod;
