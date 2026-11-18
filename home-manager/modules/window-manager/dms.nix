@@ -112,10 +112,6 @@
 
     programs.dux-files = {
       enable = true;
-      settings = {
-        themeMode = "dark";
-        colorSource = "auto";
-      };
 
       # Keep a resident instance so windows open fast and the portal answers at once
       systemd = {
