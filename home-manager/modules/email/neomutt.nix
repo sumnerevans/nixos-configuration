@@ -171,6 +171,11 @@ in
 
         lists .*@lists.sr.ht
 
+        # Always show X-Original-From (e.g. from mailing lists that rewrite
+        # From) right after From when it exists.
+        unignore x-original-from
+        hdr_order date from x-original-from to cc subject
+
         # ====== COLORS ======
         # Use "default" instead of hardcoded black/white so neomutt follows
         # the terminal's current fg/bg, which kitty/DMS already keep in sync
