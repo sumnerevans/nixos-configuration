@@ -38,9 +38,6 @@ with lib;
         # Pipenv
         PIPENV_MAX_DEPTH = 10000; # basically infinite
         PIPENV_VENV_IN_PROJECT = 1; # store the virtual environment in .venv in the project directory
-
-        # Use colors!
-        TERM = "xterm-256color";
       };
 
       history = {
