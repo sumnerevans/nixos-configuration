@@ -26,11 +26,6 @@ with lib;
       defaultKeymap = "viins";
       dotDir = "${config.xdg.configHome}/zsh";
 
-      localVariables = {
-        VIDEOVIEWER = "mpv";
-        WINE = "wine";
-      };
-
       sessionVariables = {
         # Make Rust blow up verbosely
         RUST_BACKTRACE = 1;
@@ -40,11 +35,19 @@ with lib;
         PIPENV_VENV_IN_PROJECT = 1; # store the virtual environment in .venv in the project directory
       };
 
+      setOptions = [
+        "extendedglob"
+        "autopushd"
+        "nobeep" # Don't beep ever
+      ];
+
       history = {
-        expireDuplicatesFirst = true;
         ignoreAllDups = true;
         extended = true;
         path = "${config.home.homeDirectory}/.histfile";
+        # The default of 10000 silently truncates the history file.
+        size = 100000;
+        save = 100000;
 
         ignorePatterns = [
           "clear"
@@ -67,7 +70,6 @@ with lib;
 
       initContent =
         let
-          tput = "${pkgs.ncurses}/bin/tput";
           opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
             # Add my key to the ssh-agent if necessary
             ${pkgs.openssh}/bin/ssh-add -l | \
@@ -93,19 +95,14 @@ with lib;
             ${builtins.readFile ./prompt.zsh}
             ${builtins.readFile ./git-repo-nav.zsh}
 
-            setopt appendhistory
-            setopt extendedglob
-            setopt autopushd
-            setopt nobeep  # Don't beep ever
-
             ${opensshAdd}
 
-            echo "$(${tput} bold)========================================================================$(${tput} sgr 0)"
+            print -P "%B========================================================================%b"
 
             # Show a quote
             ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
-            echo "$(${tput} bold)========================================================================$(${tput} sgr 0)"
+            print -P "%B========================================================================%b"
           fi
         '';
     };
