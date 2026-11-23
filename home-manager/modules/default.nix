@@ -3,6 +3,7 @@ let
 in
 {
   imports = [
+    ./atuin.nix
     ./browsers.nix
     ./communication.nix
     ./devtools.nix
