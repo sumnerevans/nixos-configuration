@@ -6,10 +6,11 @@
       # Auto-Correction
       "correct"
     ];
+    # compinit itself is run by the NixOS-level /etc/zshrc, so this replaces
+    # Home Manager's default (a second compinit) with just the zstyles.
     completionInit = ''
       # Really fancy tab completion
       zstyle ':completion:*' rehash true
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
       zstyle ':completion:*:approximate:' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3 )) numeric)'
       zstyle ':completion:*' auto-description 'specify: %d'
       zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -21,7 +22,6 @@
       zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
       zstyle ':completion:*' matcher-list "" 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
       zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-      zstyle ':completion:*' use-compctl false
       zstyle ':completion:*' verbose true
 
       zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
