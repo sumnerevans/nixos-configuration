@@ -56,9 +56,8 @@ bindkey -M vicmd "s" prepend-sudo
 bindkey -M vicmd "v" prepend-vim
 bindkey "." append-dir-up
 bindkey "^?" delete-dir-up
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
+bindkey "^[[3~" delete-char # Delete
+bindkey "^[[3;5~" delete-char # Ctrl+Delete
 
 # Up arrow search
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
