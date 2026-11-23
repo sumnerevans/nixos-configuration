@@ -2,10 +2,11 @@
   programs.fzf = {
     enable = true;
     changeDirWidget.options = [ "--preview 'tree -C {} | head -200'" ];
-    defaultCommand = "fd --type f --hidden --follow --exclude '.git'";
+    defaultCommand = "fd --type f --hidden --follow --exclude .git --exclude .direnv --exclude node_modules";
     defaultOptions = [
       "--border"
       "--height 40%"
+      "--walker-skip=.git,node_modules,.direnv"
     ];
     fileWidget.options = [ "--preview 'bat --style=numbers --color=always --line-range :500 {}'" ];
     colors = {

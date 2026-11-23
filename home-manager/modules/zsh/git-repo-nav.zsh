@@ -2,7 +2,7 @@
 # the available repositories.
 fzf-git-repo-nav() {
   local root=~/repositories
-  local cmd="fd --unrestricted -t d '^\.git$' $root | command grep -v $root/.git | sed 's/\/\.git\/$//' | sed \"s|$root/||\" | sort"
+  local cmd="fd --unrestricted --exclude .direnv -t d '^\.git$' $root | command grep -v $root/.git | sed 's/\/\.git\/$//' | sed \"s|$root/||\" | sort"
   setopt localoptions pipefail no_aliases 2> /dev/null
   local dir="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_G_OPTS-}" $(__fzfcmd) +m)"
   if [[ -z "$dir" ]]; then
