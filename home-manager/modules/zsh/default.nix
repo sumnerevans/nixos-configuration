@@ -14,12 +14,6 @@ with lib;
     ./plugins.nix
   ];
 
-  options = {
-    autoAddSSHKeysToAgent = mkEnableOption "automatically add SSH keys to the SSH agent" // {
-      default = true;
-    };
-  };
-
   config = {
     programs.zsh = {
       enable = true;
@@ -68,43 +62,32 @@ with lib;
         ];
       };
 
-      initContent =
-        let
-          opensshAdd = optionalString config.autoAddSSHKeysToAgent ''
-            # Add my key to the ssh-agent if necessary
-            ${pkgs.openssh}/bin/ssh-add -l | \
-              ${pkgs.gnugrep}/bin/grep "The agent has no identities" && \
-              ${pkgs.openssh}/bin/ssh-add
-          '';
-        in
-        lib.mkBefore ''
-          # If inside of an SSH session, run tmux.
-          if [[ -n $SSH_CONNECTION ]]; then
-            if command -v tmux &> /dev/null &&
-               [ -n "$PS1" ] &&
-               [[ ! "$TERM" =~ screen ]] &&
-               [[ ! "$TERM" =~ tmux ]] &&
-               [ -z "$TMUX" ]; then
-              exec tmux attach && exit
-            fi
+      initContent = lib.mkBefore ''
+        # If inside of an SSH session, run tmux.
+        if [[ -n $SSH_CONNECTION ]]; then
+          if command -v tmux &> /dev/null &&
+             [ -n "$PS1" ] &&
+             [[ ! "$TERM" =~ screen ]] &&
+             [[ ! "$TERM" =~ tmux ]] &&
+             [ -z "$TMUX" ]; then
+            exec tmux attach && exit
           fi
+        fi
 
-          if [[ $FOR_MUTT_HELPER != 1 ]]; then
+        if [[ $FOR_MUTT_HELPER != 1 ]]; then
 
-            ${builtins.readFile ./key-widgets.zsh}
-            ${builtins.readFile ./prompt.zsh}
-            ${builtins.readFile ./git-repo-nav.zsh}
+          ${builtins.readFile ./key-widgets.zsh}
+          ${builtins.readFile ./prompt.zsh}
+          ${builtins.readFile ./git-repo-nav.zsh}
 
-            ${opensshAdd}
+          print -P "%B========================================================================%b"
 
-            print -P "%B========================================================================%b"
+          # Show a quote
+          ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
 
-            # Show a quote
-            ${pkgs.fortune}/bin/fortune ${config.xdg.dataHome}/fortune/quotes
-
-            print -P "%B========================================================================%b"
-          fi
-        '';
+          print -P "%B========================================================================%b"
+        fi
+      '';
     };
 
     programs.direnv.enableZshIntegration = true;
