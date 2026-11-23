@@ -23,32 +23,33 @@ with lib;
           chpwd_just_happened = "__zsh_chpwd_just_happened";
         in
         {
-          # Things to perform after a directory change.
-          chpwd = ''
+          # Things to perform after a directory change (chpwd hook).
+          __on_chpwd = ''
             emulate -L zsh
 
             # Fetch if this is a Git repo.
-            [[ -d .git ]] || ${git} rev-parse --git-dir > /dev/null 2>&1
-            if [[ "$?" == "0" ]]; then
-                echo -e "Fetching from git in the background..."
-                (${git} fetch 2&>/dev/null &)
+            if [[ -d .git ]] || ${git} rev-parse --git-dir &> /dev/null; then
+                echo "Fetching from git in the background..."
+                ${git} fetch &> /dev/null &!
             fi
 
-            export ${chpwd_just_happened}=1
+            typeset -g ${chpwd_just_happened}=1
           '';
 
-          # Run right before the prompt.
-          precmd = ''
+          # Run right before the prompt (precmd hook).
+          __on_precmd = ''
             # If the cd just happend...
-            if [[ "''$${chpwd_just_happened}" == "1" ]]; then
+            if (( ''${+${chpwd_just_happened}} )); then
+              unset ${chpwd_just_happened}
+
               # Automatically list directory contents.
               ${ls} --color -Fa
 
-              if [ -f .pre-commit-config.yaml ]; then
+              # Install the pre-commit hooks if they aren't already.
+              if [[ -f .pre-commit-config.yaml && ! -e "$(${git} rev-parse --git-path hooks/pre-commit 2> /dev/null)" ]]; then
                 ${pkgs.pre-commit}/bin/pre-commit install --install-hooks
               fi
             fi
-            unset ${chpwd_just_happened}
           '';
 
           # "delete" files (use ~/tmp as a recycle bin)
@@ -73,5 +74,11 @@ with lib;
           '';
         };
     in
-    concatStringsSep "\n\n" (mapAttrsToList fnToStr fns);
+    concatStringsSep "\n\n" (mapAttrsToList fnToStr fns)
+    + ''
+
+      autoload -Uz add-zsh-hook
+      add-zsh-hook chpwd __on_chpwd
+      add-zsh-hook precmd __on_precmd
+    '';
 }
