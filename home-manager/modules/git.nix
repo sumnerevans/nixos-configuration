@@ -78,7 +78,6 @@
     gc = "git commit --signoff";
     gca = "gc -a";
     gcaa = "gca --amend";
-    gcan = "gc --amend --no-edit";
     gcaan = "gcaa --no-edit";
     gch = "git checkout";
     gd = "git diff";
@@ -89,7 +88,6 @@
     gpush = "git push";
     grhh = "git reset --hard HEAD";
     gs = "git status";
-    gsh = "git show --ext-diff";
     gst = "git stash";
   };
 }

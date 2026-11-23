@@ -64,14 +64,6 @@ with lib;
             if [[ -z "$2" ]]; then; lang="en_GB"; else; lang="$2"; fi
             echo "$1" | ${pkgs.aspell}/bin/aspell -a -l "$lang"
           '';
-
-          # Use the https://gitignore.io API to retrieve gitignores
-          wgitignore = ''
-            ignores=$(printf ",%s" "$*[@]")
-            ignores=''${ignores:1}
-            set -xe
-            ${pkgs.curl}/bin/curl "https://www.toptal.com/developers/gitignore/api/$ignores" >> .gitignore
-          '';
         };
     in
     concatStringsSep "\n\n" (mapAttrsToList fnToStr fns)
