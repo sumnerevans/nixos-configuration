@@ -42,10 +42,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dfiles = {
-      url = "github:duxlabs-dev/dux-files";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    dfiles.url = "github:duxlabs-dev/dux-files";
 
     dms-plugin-registry = {
       url = "github:duxlabs-dev/dux-plugin-registry";
