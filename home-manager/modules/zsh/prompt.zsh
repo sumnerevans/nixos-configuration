@@ -2,113 +2,92 @@
 ##### Custom Prompt #####
 #########################
 
-autoload -Uz promptinit && promptinit
 setopt prompt_subst
+autoload -Uz add-zsh-hook
 
 # Keep track of when the command started for the timer in the prompt.
-function preexec() {
-    cmd_start=$SECONDS
+function __prompt_preexec {
+    __prompt_cmd_start=$SECONDS
 }
+add-zsh-hook preexec __prompt_preexec
 
-# Just a modified version of adam1
-function __lprompt {
-    # If we are in a non-TMUX SSH connection, show yellow "[SSH]".
-    if [[ -n $SSH_CONNECTION && ! -n $TMUX ]]; then
-        echo -n "%B%F{yellow}[SSH]%f%b "
+# Compute the dynamic parts of the right prompt. RPROMPT only expands the
+# resulting variables.
+function __prompt_precmd {
+    # Show how long the last command took. Pressing enter on an empty line
+    # keeps the previous value.
+    if (( ${+__prompt_cmd_start} )); then
+        __prompt_timer="[%F{cyan}$(( SECONDS - __prompt_cmd_start ))s%f]"
+        unset __prompt_cmd_start
     fi
-
-    echo "%B%F{cyan}%~%f \$%b "
-}
-
-function __rprompt {
-    # Capture result of last command. This is displayed at the end of the
-    # prompt.
-    if [[ $? -eq 0 ]]; then
-        RESULT="[%F{green}%?%f]"
-    else
-        RESULT="[%F{red}%B%?%b%f]"
-    fi
-
-    if [ $cmd_start ]; then
-        timer_show=$(($SECONDS - $cmd_start))
-        echo -n "[%F{cyan}${timer_show}s%f]"
-    fi
-
-    # Local variables for color
-    local YELLOW="%F{yellow}"
-    local GREEN="%F{green}"
-    local RED="%F{red}"
-    local RESET="%f"
 
     # If we are in a Python virtual environment, show its name.
+    __prompt_venv=
     if [[ -n $VIRTUAL_ENV ]]; then
-        echo -n "["
-        echo -n $GREEN
-        echo -n "VE: "
-        if [[ $(basename $VIRTUAL_ENV) == ".venv" ]]; then
-            echo -n "$(basename $(dirname $VIRTUAL_ENV))/.venv"
-        else
-            echo -n "$(basename $VIRTUAL_ENV)"
-        fi
-        echo -n $RESET
-        echo -n "]"
+        local venv=${VIRTUAL_ENV:t}
+        [[ $venv == .venv ]] && venv=${VIRTUAL_ENV:h:t}/.venv
+        __prompt_venv="[%F{green}VE: ${venv//\%/%%}%f]"
     fi
 
     # If we are in a Git repo, show the branch and the status, as well as
-    # whether we need to push/pull.
-    git rev-parse --git-dir >& /dev/null  # Detect git repo
-    if [[ $? == 0 ]]; then
-        echo -n "["
+    # whether we need to push/pull. Everything comes from a single
+    # `git status` call.
+    __prompt_git=
+    local -a lines ab
+    local line branch oid
+    integer untracked=0 changed=0 staged=0 ahead=0 behind=0
+    lines=("${(@f)$(git status --porcelain=v2 --branch --untracked-files=all 2>/dev/null)}") || return 0
+    for line in $lines; do
+        case $line in
+            ('# branch.oid '*) oid=${line#\# branch.oid } ;;
+            ('# branch.head '*) branch=${line#\# branch.head } ;;
+            ('# branch.ab '*)
+                ab=(${=line#\# branch.ab })
+                ahead=${ab[1]#+}
+                behind=${ab[2]#-}
+                ;;
+            ('#'*) ;;
+            ('? '*) (( untracked++ )) ;;
+            (*)
+                (( changed++ ))
+                # Count entries whose staged (index) status is "modified".
+                [[ $line == 1' M'* ]] && (( staged++ ))
+                ;;
+        esac
+    done
 
-        if [[ $(git ls-files --others --exclude-standard | wc -l) != 0 ]]; then
-            # Untracked files
-            echo -n "${RED}U$(git ls-files --others --exclude-standard | wc -l) "
-        else
-            if [[ $(git status --porcelain | wc -l) != 0 ]]; then
-                # Files have been modified, dirty.
-                echo -n $YELLOW
-
-                staged=$(git status --porcelain | grep '^M' | wc -l)
-
-                # If files have been staged for commit, add a "+"
-                [[ $staged != 0 ]] && echo -n "+$staged "
-            else
-                echo -n $GREEN
-            fi
-        fi
-
-        # Show the branch name.
-        branch_name=$(git branch | command grep '* ' | sed 's/\* \(.*\)/\1/')
-        if [[ $branch_name == "" ]]; then
-            echo -n 'No Branch'
-        else
-            echo -n $branch_name
-
-            # Determine if need to pull or not
-            UPSTREAM=${1:-'@{u}'}
-            LOCAL=$(git rev-parse @ 2&>/dev/null)
-            REMOTE=$(git rev-parse "$UPSTREAM" 2&>/dev/null)
-            BASE=$(git merge-base @ "$UPSTREAM" 2&>/dev/null)
-
-            if [[ $LOCAL != $REMOTE && $REMOTE != "" ]]; then
-                echo -n " ("
-                if [ $LOCAL = $BASE ]; then
-                    echo -n "v" # Need to pull
-                elif [ $REMOTE = $BASE ]; then
-                    echo -n "^" # Need to push
-                else
-                    echo -n "^v" # Diverged
-                fi
-                echo -n ")"
-            fi
-        fi
-        echo -n $RESET
-        echo -n "]"
+    __prompt_git="["
+    if (( untracked )); then
+        __prompt_git+="%F{red}U$untracked "
+    elif (( changed )); then
+        __prompt_git+="%F{yellow}"
+        (( staged )) && __prompt_git+="+$staged "
+    else
+        __prompt_git+="%F{green}"
     fi
 
-    # Echo the result of the previous call.
-    echo -n $RESULT
+    if [[ $oid == '(initial)' ]]; then
+        __prompt_git+='No Branch'
+    else
+        [[ $branch == '(detached)' ]] && branch="(HEAD detached at ${oid[1,7]})"
+        __prompt_git+=${branch//\%/%%}
+        if (( ahead && behind )); then
+            __prompt_git+=" (^v)" # Diverged
+        elif (( ahead )); then
+            __prompt_git+=" (^)" # Need to push
+        elif (( behind )); then
+            __prompt_git+=" (v)" # Need to pull
+        fi
+    fi
+    __prompt_git+="%f]"
 }
+add-zsh-hook precmd __prompt_precmd
 
-export PROMPT='$(__lprompt)'
-export RPS1='$(__rprompt)'
+PROMPT='%B%F{cyan}%~%f $%b '
+# If we are in a non-TMUX SSH connection, show yellow "[SSH]".
+if [[ -n $SSH_CONNECTION && -z $TMUX ]]; then
+    PROMPT="%B%F{yellow}[SSH]%f%b $PROMPT"
+fi
+
+# The exit status of the last command goes at the end.
+RPROMPT='${__prompt_timer}${__prompt_venv}${__prompt_git}%(?.[%F{green}%?%f].[%F{red}%B%?%b%f])'
