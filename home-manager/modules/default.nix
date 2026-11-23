@@ -18,6 +18,7 @@ in
     ./syncthing.nix
     ./tmux.nix
     ./tracktime.nix
+    ./tts.nix
     ./udiskie.nix
     ./window-manager
     ./xdg.nix
